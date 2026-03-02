@@ -1,0 +1,150 @@
+# NHS Alpha — Copilot Workshop Template
+
+A pre-configured GitHub repository template for building NHS Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
+
+## What's in this repo
+
+This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build an NHS service from scratch using AI-assisted development.
+
+```
+.github/
+  agents/             11 custom Copilot agents (7 engineering + 4 NHS)
+  instructions/       7 auto-applied coding instruction files
+  skills/             8 agent skills (SKILL.md folders)
+  workflows/          GitHub Actions (Copilot Coding Agent setup)
+docs/
+  workshop/           Workshop guides and Day 2 issue templates
+AGENTS.md             Copilot Coding Agent context file
+```
+
+## Workshop guides
+
+- **[discovery-guide.md](discovery-guide.md)** — Pre-workshop: Discovery using the product-dev-copilot toolkit
+- **[day1-guide.md](day1-guide.md)** — Day 1: Design and Build with Copilot Agent Mode in VS Code
+- **[day2-guide.md](day2-guide.md)** — Day 2: Complete the Alpha with Copilot Coding Agent on GitHub
+- **[day2-issues/](day2-issues/)** — Issue templates to create and assign to `@copilot` on Day 2
+
+## Quick start
+
+### Prerequisites
+
+Each participant needs:
+
+- [VS Code Insiders](https://code.visualstudio.com/insiders/) with GitHub Copilot Chat
+- Python 3.12+
+- Node.js 20 LTS
+- [Terraform CLI](https://developer.hashicorp.com/terraform/install)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (`az`)
+- Azure subscription with Contributor access to UK South
+- GitHub account with Copilot seat
+- Access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery)
+
+### Pre-Workshop — Discovery
+
+Complete discovery **before the workshop** using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit:
+- Define the scenario and problem statement
+- Generate personas using M365 Copilot Researcher
+- Map 5–8 detailed user journeys
+- See [discovery-guide.md](discovery-guide.md) for the full process
+
+### Day 1 — Design and Build with Copilot Agent Mode
+
+| Phase | Duration | Activities |
+|---|---|---|
+| Setup | 30 min | Clone repo, copy discovery artefacts, verify prerequisites, Azure login |
+| Architecture | 1 hour | NHS Architect agent: clarify tech stack, design architecture, write ADR, generate draw.io diagram |
+| Scaffold & Deploy | 1.5 hours | NHS Service Builder agent: scaffold app + infra, deploy |
+| Build User Stories | 4+ hours | Implement user stories from discovery journeys iteratively |
+
+1. **Use this template** to create a new repo for your team
+2. Copy your discovery artefacts (scenarios, personas, user journeys) into the repo
+3. **Design the architecture** using the NHS Architect agent — it asks questions, presents options, and updates the tech stack
+4. **Scaffold and deploy** using the NHS Service Builder agent
+5. **Build user stories**: work through as many stories from your user journeys as possible
+6. See [day1-guide.md](day1-guide.md) for the full facilitation guide
+
+### Day 2 — Complete the Alpha with Copilot Coding Agent
+
+1. Create GitHub Issues from the templates in [day2-issues/](day2-issues/)
+2. Assign issues to `@copilot` — the Coding Agent picks them up and creates PRs
+3. Review and merge PRs: tests, security, accessibility, CI/CD, GDS evidence, clinical safety, DPIA
+4. See [day2-guide.md](day2-guide.md) for the full facilitation guide
+
+## Tech stack
+
+See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructions/tech-stack.instructions.md) for the current stack. Summary:
+
+| Layer | Technology |
+|---|---|
+| Backend | Python 3.12, FastAPI, Uvicorn |
+| Frontend | React 18, Vite, TypeScript, [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-components) |
+| Design System | [NHS.UK Frontend](https://service-manual.nhs.uk/design-system) |
+| Testing | pytest + httpx, Vitest, Playwright, k6 |
+| Infrastructure | Terraform (`azurerm`), Azure App Service (UK South) |
+| Secrets | Azure Key Vault with Managed Identity |
+| CI/CD | GitHub Actions |
+
+## Agents
+
+| Agent | Purpose |
+|---|---|
+| **NHS Architect** | Architecture design — analyses discovery, clarifies tech stack, writes ADRs, generates draw.io diagrams. Run first. |
+| **NHS Service Builder** | Day 1 primary — scaffolds full-stack app, deploys to cloud. Run after Architect. |
+| **Testing** | Backend + frontend unit/integration tests — 80% coverage target |
+| **Playwright E2E** | Browser tests for NHS user journeys with accessibility assertions |
+| **Security Reviewer** | OWASP Top 10 audit, security headers, secrets, dependencies |
+| **Performance** | Load tests, Core Web Vitals, p95/p99 targets |
+| **NHS Clinical Safety** | DCB0129 hazard logs and Clinical Safety Case Reports |
+| **NHS DPIA Advisor** | Data Protection Impact Assessments for health data |
+| **NHS GDS Assessor** | GDS Service Standard 14-point evidence mapping |
+| **Accessibility Auditor** | WCAG 2.2 AA audits, axe-core scans, keyboard testing, accessibility statements |
+| **NHS Content Designer** | Reviews and writes user-facing copy against NHS content style guide |
+| **CI/CD Pipeline Builder** | GitHub Actions workflows for lint, test, build, deploy |
+
+## Skills
+
+Skills are auto-selected by Copilot based on the task context:
+
+| Skill | Triggered When |
+|---|---|
+| `fastapi-react-azure` | Scaffolding or building the service (current tech stack) |
+| `azure-nhs-deploy` | Deploying to Azure, configuring Terraform |
+| `dcb0129-hazard-log` | Generating clinical safety documentation |
+| `nhs-dpia` | Drafting Data Protection Impact Assessments |
+| `gds-service-standard` | Assessing against GDS 14 points |
+| `nhs-user-stories` | Writing user stories and acceptance criteria |
+| `nhs-adr-writer` | Documenting architectural decisions for GDS assessment evidence |
+| `nhs-synthetic-data` | Generating synthetic NHS numbers, patient data, and test fixtures |
+
+## Azure naming convention
+
+Resources use `var.app_name` so multiple Alpha services can share one subscription:
+
+```
+rg-{app_name}-{env}        Resource Group
+asp-{app_name}-{env}       App Service Plan
+app-{app_name}-{env}       Web App
+kv-{app_name}-{env}        Key Vault
+ai-{app_name}-{env}        Application Insights
+```
+
+## NHS constraints
+
+- **No real patient data** — use synthetic NHS numbers (e.g. `943 476 5919`)
+- **Azure UK South only** — data sovereignty
+- **Managed Identity** — no service principal secrets
+- **WCAG 2.2 AA** — mandatory accessibility standard
+- **NHS Design System** — all user-facing pages must use nhsuk components
+
+## References
+
+- [How the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works)
+- [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works)
+- [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points)
+- [product-dev-copilot toolkit](https://github.com/marrobi/product-dev-copilot) — discovery prompts for scenarios, personas, and user journeys
+- [NHS Design System](https://service-manual.nhs.uk/design-system)
+- [NHS Content Style Guide](https://service-manual.nhs.uk/content)
+- [NHS Accessibility Guidance](https://service-manual.nhs.uk/accessibility)
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [DCB0129 Clinical Safety](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems)
+- [ICO DPIA Guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/)
