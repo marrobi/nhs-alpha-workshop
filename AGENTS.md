@@ -15,22 +15,22 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 ## Repository Structure
 
 ```
-├── app/                    # FastAPI backend
-│   ├── routers/            # FastAPI route modules
-│   ├── middleware/          # FastAPI middleware
-│   └── main.py             # FastAPI app entrypoint
-├── frontend/               # React application
+├── app/                    # Backend application (see tech-stack.instructions.md)
+│   ├── routers/            # API route modules
+│   ├── middleware/          # Application middleware
+│   └── main.py             # App entrypoint
+├── frontend/               # Frontend application (see tech-stack.instructions.md)
 │   ├── src/
-│   │   ├── components/     # React components (nhsuk-react-components)
+│   │   ├── components/     # UI components (NHS Design System)
 │   │   ├── pages/          # Page components
 │   │   └── App.tsx         # Root component
 │   ├── package.json
 │   └── vite.config.ts
 ├── tests/
-│   ├── unit/               # pytest unit tests (backend)
-│   ├── integration/        # httpx API integration tests
-│   ├── e2e/                # Playwright browser tests
-│   └── performance/        # k6 load tests
+│   ├── unit/               # Backend unit tests
+│   ├── integration/        # API integration tests
+│   ├── e2e/                # Browser tests
+│   └── performance/        # Load tests
 ├── infra/                  # Terraform configuration
 │   ├── main.tf
 │   ├── variables.tf
@@ -46,7 +46,7 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context
-├── requirements.txt        # Python backend dependencies
+├── requirements.txt        # Backend dependencies
 └── .gitignore
 ```
 
