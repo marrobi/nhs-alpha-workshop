@@ -61,6 +61,7 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 09 | DPIA | NHS DPIA Advisor | Data protection considered |
 | 10 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
 | 11 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 12 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -89,3 +90,38 @@ Use the **NHS GDS Assessor** agent (Issue 10) to generate the full evidence repo
 - **Iterate on PRs** — request changes via review comments, Copilot will update
 - **Check the workflow logs** — if setup-steps fails, the agent can't build/test
 - **Link back to discovery** — Day 1 artefacts (scenarios, personas, journeys) are key evidence for GDS points 1, 2, and 3
+
+---
+
+## When All Done — MKDocs Documentation Site
+
+Once all issues are merged, use the **NHS Documentation** agent to build a single MKDocs site that pulls every alpha artefact together into one browsable, shareable site.
+
+**Agent**: NHS Documentation
+
+> Build the MKDocs documentation site for this service. Read the codebase, user stories, ADRs, clinical safety, DPIA, and GDS evidence artefacts to generate all pages. Use NHS blue branding. Verify with `mkdocs build`.
+
+The agent will:
+
+1. Install `mkdocs-material` and scaffold `mkdocs.yml`
+2. Generate pages from existing artefacts — no content is invented:
+   - **Home** — project overview from `README.md`
+   - **Architecture** — from `docs/adr/001-architecture.md` and the draw.io diagram
+   - **API Reference** — scanned from `app/routers/` with all endpoints documented
+   - **User Guide** — user-facing flows from `user_journeys/` and `frontend/src/pages/`
+   - **Deployment** — from `infra/` and build commands in `AGENTS.md`
+   - **Testing** — test structure, how to run, and coverage targets
+   - **Security** — security measures derived from the security hardening PR
+   - **Accessibility** — WCAG 2.2 AA audit results
+   - **Clinical Safety** — from `docs/clinical-safety/`
+   - **DPIA** — from `docs/dpia/`
+   - **ADRs** — index of all records in `docs/adr/`
+3. Apply NHS blue (`#005eb8`) theming
+4. Run `mkdocs build` to verify no broken links
+
+Preview locally with:
+```bash
+mkdocs serve
+```
+
+The site provides a single artefact you can share with assessors, stakeholders, and the wider team as evidence of a complete NHS Alpha.
