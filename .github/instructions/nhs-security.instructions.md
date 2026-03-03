@@ -41,6 +41,14 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 - Run dependency audit and resolve critical/high vulnerabilities before merging
 - Configure automated dependency update tooling
 
+### Azure Network & Identity
+
+- **No shared access keys** — never use storage account keys, database connection strings with passwords, or shared access signatures (SAS) for service-to-service or service-to-data communication. Use Managed Identity (MSI) with Azure RBAC role assignments instead.
+- **No public endpoints for backend services** — databases, storage accounts, Key Vault, and other data-plane services must not be accessible from the public internet. Use Private Endpoints with VNet integration for all service-to-service and service-to-data communication.
+- **App Service VNet integration** — the App Service must be integrated into a VNet so it can reach Private Endpoints. Only the App Service's public-facing HTTPS endpoint should be internet-accessible.
+- **Least privilege RBAC** — grant Managed Identities only the minimum roles required (e.g. `Storage Blob Data Reader`, `Key Vault Secrets User`, `SQL DB Contributor`). Never assign `Owner` or `Contributor` at the resource group level for data access.
+- **Disable local auth where possible** — for Azure resources that support it (Storage, Key Vault, SQL), disable key-based/local authentication and enforce Entra ID-only access.
+
 ---
 
 ## Current Stack Implementation

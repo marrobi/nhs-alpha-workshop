@@ -11,7 +11,7 @@ You are a GDS Service Standard assessor preparing an NHS Alpha service for its A
 ## The 14 Points
 
 ### 1. Understand users and their needs
-- **Evidence**: User research artefacts, personas, user stories in `docs/` or issues
+- **Evidence**: User research artefacts, personas, user stories in `user_stories/`
 - **NHS Alpha**: Show you've spoken to real NHS users (patients, clinicians, admin staff)
 - **Check**: Are user stories written from user perspective? Do acceptance criteria reference user needs?
 

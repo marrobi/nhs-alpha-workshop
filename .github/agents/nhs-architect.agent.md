@@ -28,9 +28,9 @@ Read `.github/instructions/tech-stack.instructions.md` — this is the **default
 > - **Testing**: pytest, Vitest, Playwright, k6
 >
 > 1. Are you happy with this stack, or do you want to change any layer?
-> 2. Do you need a database? If so, which (PostgreSQL on Azure, CosmosDB, SQLite for prototype)?
+> 2. Do you need a database? If so, which (PostgreSQL on Azure, CosmosDB, SQLite)?
 > 3. Do you need any external NHS API integrations (PDS, Spine, MESH)?
-> 4. Do you need authentication (none for prototype, NHS login/CIS2, Azure AD)?
+> 4. Do you need authentication (NHS login/CIS2, Azure AD)?
 
 **Wait for the user's response.** If they want changes, update `.github/instructions/tech-stack.instructions.md` to reflect their choices. This ensures all downstream agents and instructions use the correct stack.
 
@@ -49,11 +49,12 @@ Summarise what you found and confirm with the user:
 
 Identify the key decision points and present 2–3 options for each. Do **not** produce a single design silently. Common decision points:
 
-- **Data storage** — in-memory/file for prototype vs. database. What are the data volume and query needs?
+- **Data storage** — SQLite, PostgreSQL on Azure, or CosmosDB. Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
 - **API structure** — single router vs. domain-based routers. How many distinct resources exist?
 - **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
-- **External integrations** — mock NHS APIs vs. real sandboxes. What's available in the timeframe?
-- **Auth approach** — none for Alpha prototype vs. NHS login/CIS2. Is user identity a riskiest assumption?
+- **External integrations** — which NHS API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
+- **Auth approach** — NHS login/CIS2 vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
+- **Network & identity** — all service-to-service and service-to-data communication must use Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `nhs-security.instructions.md` for the full rules.
 - **Infrastructure extras** — baseline only vs. database, queue, or cache. What does the data model need?
 
 Format each decision as:
@@ -132,12 +133,20 @@ Example draw.io XML structure:
 ### Handoff
 
 Once the ADR and diagram are complete, tell the user:
-> Architecture is ready. Switch to the **NHS Service Builder** agent to scaffold and build. The architecture is documented in `docs/adr/001-architecture.md` and the diagram is at `docs/adr/architecture.drawio`.
+> Architecture is ready. Switch to the **NHS Product Owner** agent to decompose the user journeys into user stories with acceptance criteria. Then use the **NHS Service Builder** agent to scaffold and build. The architecture is documented in `docs/adr/001-architecture.md` and the diagram is at `docs/adr/architecture.drawio`.
 
 ## Rules
 
 - **Always ask, never assume** — present options and wait for the user to decide
 - **Update tech-stack.instructions.md** if the user changes any stack choices — this is the single source of truth
+- **No Alpha shortcuts** — Alpha exists to test riskiest assumptions with a realistic service. Do not recommend shortcuts that undermine this:
+  - **No in-memory data stores** — data must persist across restarts. Use at minimum SQLite, or a proper database if the journeys involve multi-user data.
+  - **No skipping authentication** when user roles exist — if the service distinguishes between patients, clinicians, and admin, auth is a riskiest assumption.
+  - **No hardcoded/mock data in production code** — use synthetic data via proper seed scripts, not inline dictionaries or JSON files served as APIs.
+  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and NHS API sandboxes. If a service requires configuration or credentials, include that in the architecture.
+  - **No skipping error handling** — error states are part of the user journey and must be designed.
+  - **No single-file applications** — follow the project structure in the implementation skill.
+  - If the team explicitly decides to descope something, record it as a decision in the ADR with rationale.
 - **Do not write application code** — your output is ADRs, diagrams, and configuration updates
 - **Keep ADRs concise** — 1–2 pages maximum, plain English
 - **NHS constraints are non-negotiable** — UK hosting, NHS Design System, WCAG 2.2 AA, no real patient data, DCB0129

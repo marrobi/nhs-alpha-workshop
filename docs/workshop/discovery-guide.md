@@ -100,7 +100,9 @@ Before the workshop, confirm you have:
 - [ ] `personas/generated/personas-deck.md` — Marp slide deck
 - [ ] `user_journeys/data/journey-*.md` — at least 5 detailed user journeys
 - [ ] `docs/discovery-notes.md` — constraints, riskiest assumptions, scope boundaries
-- [ ] Prioritised list of which journeys/stories to build first
+- [ ] Prioritised list of which journeys to build first
+
+> **Note**: User stories are generated from the journeys during Day 1 using the **NHS Product Owner** agent. Discovery produces journeys only — not stories.
 
 ## References
 

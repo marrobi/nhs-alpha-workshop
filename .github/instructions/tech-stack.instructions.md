@@ -33,5 +33,5 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | Tech agents | `nhs-service-builder`, `testing`, `playwright-e2e`, `performance`, `security-reviewer`, `cicd-pipeline-builder`, `accessibility-auditor` |
 | Tech instructions | `nhsuk-frontend`, `performance`, `terraform-azure-nhs`, `testing`, `nhs-api` (framework section), `nhs-security` (framework section) |
 | Tech skills | `fastapi-react-azure`, `azure-nhs-deploy`, `nhs-synthetic-data` (code examples) |
-| Domain agents (no change needed) | `nhs-architect`, `nhs-clinical-safety`, `nhs-dpia-advisor`, `nhs-gds-assessor`, `nhs-content-designer` |
+| Domain agents (no change needed) | `nhs-architect`, `nhs-product-owner`, `day2-issue-generator`, `nhs-clinical-safety`, `nhs-dpia-advisor`, `nhs-gds-assessor`, `nhs-content-designer` |
 | Domain skills (no change needed) | `dcb0129-hazard-log`, `nhs-dpia`, `nhs-user-stories`, `gds-service-standard`, `nhs-adr-writer` |

@@ -26,6 +26,8 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   │   └── App.tsx         # Root component
 │   ├── package.json
 │   └── vite.config.ts
+├── user_stories/           # User stories generated from journeys (Day 1)
+│   └── story-NNN-slug.md   # One file per story with acceptance criteria
 ├── tests/
 │   ├── unit/               # Backend unit tests
 │   ├── integration/        # API integration tests

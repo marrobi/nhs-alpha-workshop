@@ -33,7 +33,7 @@ See `tech-stack.instructions.md` for the current backend framework. The NHS rule
 ### FHIR UK Core
 
 - When integrating with NHS services, use FHIR R4 UK Core profiles
-- For Alpha stubs, return valid FHIR JSON structure with synthetic data
+- Return valid FHIR JSON structure with synthetic data
 - Use FHIR resource types: Patient, Appointment, Encounter, Observation
 - Base URL pattern for FHIR: `/fhir/R4/<ResourceType>`
 

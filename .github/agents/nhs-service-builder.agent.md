@@ -1,6 +1,6 @@
 ---
 name: 'NHS Service Builder'
-description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from an agreed architecture. Run after the NHS Architect agent. Uses the current tech stack from tech-stack.instructions.md.'
+description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
 model: Claude Opus 4.6 (copilot)
 tools: ['changes', 'codebase', 'edit/editFiles', 'extensions', 'web/fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTasks', 'runTests', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure', 'usages', 'vscodeAPI']
 ---
@@ -19,7 +19,9 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ## Prerequisites
 
-Before using this agent, the architecture must already be designed. Run the **NHS Architect** agent first — it produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design.
+Before using this agent, the architecture must be designed and user stories must be written. Run these agents first:
+1. **NHS Architect** — produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design
+2. **NHS Product Owner** — produces `user_stories/story-*.md` with prioritised user stories and acceptance criteria decomposed from the user journeys
 
 ## Build Sequence
 
@@ -38,14 +40,27 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 
 ### Build All User Stories
 
-After the scaffold is deployed, read all user journey files in `user_journeys/data/` and implement **every** user story across all journeys. For each story:
-1. Create the API endpoint with input validation
-2. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
-3. Wire up routing and navigation between pages
-4. Write unit/integration tests for both backend and frontend
-5. Write a Playwright E2E test that walks through the user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited.
+After the scaffold is deployed, read all user story files in `user_stories/story-*.md` and implement **every** story. Each story file contains the persona, action, benefit, and acceptance criteria across four categories (Functional, Accessibility, Clinical Safety, Data Protection). For each story:
+1. Read the story's acceptance criteria — these define what to build and test
+2. Create the API endpoint with input validation
+3. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
+4. Wire up routing and navigation between pages
+5. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
+6. Write a Playwright E2E test that walks through the parent user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited. Use `user_journeys/data/` for the journey flow context.
+7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
+8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
-Work through stories in priority order (riskiest assumption first), but build them **all** in a single session. Once all stories are implemented and tests pass, re-deploy and verify the live URL.
+Work through stories in priority order (riskiest assumption first), but build them **all** in a single session.
+
+### Fill Implementation Gaps
+
+After all stories are built, cross-reference the original user journeys in `user_journeys/data/` against the implemented stories. Look for gaps that fall between stories:
+- Navigation flows and page transitions that connect stories within a journey
+- Shared components, layouts, or state that multiple stories depend on
+- Error handling, edge cases, or fallback paths not captured in individual stories
+- Cross-journey functionality (e.g. common dashboard, shared data)
+
+Implement any gaps found, then re-run all tests. Once all stories and gaps are implemented and tests pass, re-deploy and verify the live URL.
 
 ## NHS Design System
 
@@ -65,3 +80,15 @@ Follow the IaC instructions auto-applied to infrastructure files. Key: UK region
 - If tests fail, fix the code (not the test) unless the test is wrong
 - If the deployment fails, check platform logs
 - Always verify live by hitting the deployed URL
+
+## No Alpha Shortcuts
+
+Alpha exists to test riskiest assumptions with a realistic service. Do not take shortcuts that undermine this, even under time pressure:
+- **No in-memory data stores** (Python dicts, global lists) — use the database specified in the ADR. Data must persist across restarts.
+- **No hardcoded/mock data as API responses** — use proper seed scripts with synthetic data via the `nhs-synthetic-data` skill. APIs must read from and write to the data store.
+- **No mocks or stubs for service integrations** — integrate with real Azure services (Entra ID, Azure Monitor, Key Vault) using real SDKs and configuration. If a story requires an NHS API, use the real sandbox environment or implement real FHIR endpoints with synthetic data. Never substitute a real service with a local mock.
+- **No skipping input validation** — every API endpoint must validate input using Pydantic models.
+- **No skipping error handling** — implement proper error responses (400, 404, 422, 500) with user-friendly messages. Error states are part of the user journey.
+- **No placeholder pages** — every page must use real NHS Design System components with real (synthetic) content, not "coming soon" or lorem ipsum.
+- **No skipping tests** — every story must have unit/integration tests for its functional acceptance criteria and a Playwright E2E test.
+- If something from the ADR or user stories seems too complex for the time available, flag it to the user rather than silently simplifying it.

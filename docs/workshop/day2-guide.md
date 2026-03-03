@@ -19,28 +19,42 @@ At the end of Day 2, your service should have evidence for:
 1. Ensure all Day 1 code is committed and pushed
 2. Enable Copilot Coding Agent on your repository (Settings → Copilot → Coding Agent)
 3. Verify the `copilot-setup-steps.yml` workflow runs successfully
-4. Configure repository secrets for Azure OIDC: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`
 
-## Creating Issues
+## Generate Day 2 Issues (15 minutes)
 
-Create GitHub Issues using the templates in `docs/workshop/day2-issues/`. For each issue:
+Day 2 issues are generated from your actual tech stack and codebase — not from static templates.
 
-1. Copy the template content into a new GitHub Issue
-2. Assign to `@copilot`
-3. Copilot will create a PR with the implementation
+1. In VS Code, switch to the **Day 2 Issue Generator** agent
+2. Ask it to generate the Day 2 issues
+3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in `docs/workshop/day2-issues/`
+4. Review the generated files and confirm
+5. The agent creates the issues on GitHub using `gh` CLI and assigns them to `@copilot`
+
+> **Prerequisite**: Ensure `gh auth login` has been run in the terminal before starting.
+
+## Working Through Issues
+
+The issue generator creates the issues on GitHub but does **not** assign them — you must assign Copilot with the correct **custom agent** for each issue:
+
+1. Open the first issue on GitHub
+2. Click **"Assign Copilot"** and select the custom agent from the dropdown (the generator tells you which one)
+3. Copilot creates a PR using that agent's expertise
 4. Review the PR, request changes if needed, then merge
+5. Move to the next issue — assign one at a time
+
+> **Important**: Assign issues one at a time. Copilot works on one issue per repo. Wait for the PR to be merged before assigning the next.
 
 ## Recommended Issue Order
 
-Start with quality and security, then move to documentation and GDS evidence.
+Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence.
 
-| # | Issue | Agent/Skill Used | Alpha Evidence |
+| # | Issue | Custom Agent | Alpha Evidence |
 |---|---|---|---|
-| 01 | Unit & Integration Tests | Testing | Technical quality |
-| 02 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
-| 03 | Security Hardening | Security Reviewer | Threat awareness |
-| 04 | CI/CD Pipeline | NHS Service Builder | Operational reliability |
-| 05 | Accessibility Audit | Playwright E2E | WCAG 2.2 AA / everyone can use it |
+| 01 | CI/CD Pipeline | CI/CD Pipeline Builder | Operational reliability |
+| 02 | Unit & Integration Tests | Testing | Technical quality |
+| 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
+| 04 | Security Hardening | Security Reviewer | Threat awareness |
+| 05 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
 | 06 | Performance Load Tests | Performance | Service can handle expected load |
 | 07 | ADRs | NHS GDS Assessor | Technology choices documented |
 | 08 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
@@ -61,7 +75,7 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 7. Use agile ways of working | Issues, PRs, iterative delivery |
 | 9. Create a secure service | Security audit, OWASP checklist |
 | 10. Define what success looks like | Performance metrics, k6 thresholds |
-| 11. Choose the right tools and technology | ADRs for FastAPI, React, Azure, Terraform |
+| 11. Choose the right tools and technology | ADRs documenting technology choices |
 | 12. Make new source code open | Public repo, open source licence |
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, runbook |

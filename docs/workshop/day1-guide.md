@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 1 assumes **discovery has already been completed** using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture and then building as many user stories as possible.
+Day 1 assumes **discovery has already been completed** using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, and then building as many stories as possible.
 
 > **Prerequisites**: Complete discovery before the workshop using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You need:
 > - `scenarios/scenario.md` — scenario overview and problem statement
@@ -58,11 +58,39 @@ Walk through as a team:
 - **ADR** — does the architecture make sense given the constraints?
 - **Diagram** — open `docs/adr/architecture.drawio` in VS Code to review visually
 
-Agree the architecture before moving to build.
+Agree the architecture before moving to user stories.
 
 ---
 
-## Phase 2 — Scaffold & Deploy (1.5 hours)
+## Phase 2 — Generate User Stories (30 minutes)
+
+Before building, decompose the user journeys into implementable user stories with acceptance criteria. This phase uses the **NHS Product Owner** agent.
+
+**Agent**: NHS Product Owner
+
+> Read the discovery artefacts in `scenarios/`, `personas/`, and `user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
+
+The agent will:
+
+1. **Read all discovery artefacts and the ADR** — understands the journeys, personas, and technical design
+2. **Decompose each journey into discrete user stories** — typically 3–8 stories per journey
+3. **Write acceptance criteria** in four categories: Functional (Given/When/Then), Accessibility, Clinical Safety, Data Protection
+4. **Present stories for review** — you approve, adjust, or add stories before they are saved
+5. **Save each story** as a separate file in `user_stories/story-NNN-short-slug.md`
+
+### Review the Stories (10 minutes)
+
+Walk through as a team:
+- Are any stories missing from the journeys?
+- Should any be split further or merged?
+- Is the priority order correct (riskiest assumption first)?
+- Are the acceptance criteria testable?
+
+Approve the stories before moving to scaffold.
+
+---
+
+## Phase 3 — Scaffold & Deploy (1.5 hours)
 
 ### Iteration 0 — Scaffold the Service
 
@@ -79,15 +107,15 @@ The agent will:
 
 ---
 
-## Phase 3 — Build User Stories (4+ hours)
+## Phase 4 — Build User Stories (3.5+ hours)
 
-This is the core of Day 1. The agent will build all user stories from your discovery journeys in a single session.
+This is the core of Day 1. The agent will build all user stories from `user_stories/` in a single session.
 
 **Agent**: NHS Service Builder
 
-> Build all the user stories from the user journeys in `user_journeys/data/`. Implement every story: API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+> Build all the user stories from `user_stories/`. Implement every story: API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-The agent will work through all stories, creating API endpoints, frontend pages, tests, and E2E tests for each. Monitor progress and provide guidance if it asks questions.
+The agent reads each story's acceptance criteria to drive implementation and testing. It uses `user_journeys/data/` for E2E test flow context. Monitor progress and provide guidance if it asks questions.
 
 ### While the Agent Works
 

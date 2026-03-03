@@ -26,9 +26,21 @@ All resource names must include `var.app_name` so multiple Alpha services can co
 ## Identity & Secrets
 
 - Use `azurerm_user_assigned_identity` — never service principal client secrets
-- Grant Key Vault access via RBAC or access policies with least privilege
+- **Never use shared access keys** for storage accounts, databases, or any Azure service — use Managed Identity with RBAC role assignments
+- Grant Key Vault access via RBAC (`Key Vault Secrets User` role) — not access policies
 - Reference secrets in App Service via `@Microsoft.KeyVault(SecretUri=...)`
 - Mark sensitive outputs with `sensitive = true`
+- Assign least-privilege RBAC roles to the Managed Identity for each resource (e.g. `Storage Blob Data Contributor`, `SQL DB Contributor`)
+- Where supported, disable local/key-based authentication on Azure resources (e.g. `shared_access_key_enabled = false` on storage accounts)
+
+## Network Isolation
+
+- **No public endpoints for data services** — databases, storage accounts, Key Vault, and other backend services must use Private Endpoints
+- Create a VNet with at least two subnets: one for App Service VNet integration, one for Private Endpoints
+- Use `azurerm_private_endpoint` for each data service and register Private DNS zones
+- Configure `azurerm_app_service_virtual_network_swift_connection` (or `virtual_network_subnet_id` on the web app) for outbound VNet integration
+- Only the App Service HTTPS endpoint should be publicly accessible — all service-to-service and service-to-data traffic routes through the VNet
+- Use Network Security Groups (NSGs) on subnets to restrict traffic to required ports and protocols
 
 ## App Service
 
