@@ -84,7 +84,7 @@ Present the priority order and confirm with the user.
 
 ### Step 6 — Write the Architecture ADR
 
-Read the `nhs-adr-writer` skill (`.github/skills/nhs-adr-writer/SKILL.md`) for the ADR template and rules.
+Read the `nhs-adr-writer` skill (`.github/skills/nhs-adr-writer/SKILL.md`) for the ADR template and rules. The skill is a **reference only** — do **not** edit it. Create new files under `docs/adr/`.
 
 Create `docs/adr/001-architecture.md` containing:
 - Tech stack decisions (with rationale)

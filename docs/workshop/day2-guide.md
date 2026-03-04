@@ -18,7 +18,7 @@ At the end of Day 2, your service should have evidence for:
 
 1. Ensure all Day 1 code is committed and pushed
 2. Enable Copilot Coding Agent on your repository (Settings → Copilot → Coding Agent)
-3. Verify the `copilot-setup-steps.yml` workflow runs successfully
+3. Verify the `copilot-setup-steps.yml` workflow runs successfully (created by the NHS Service Builder during Day 1 scaffolding)
 
 ## Generate Day 2 Issues (15 minutes)
 
@@ -53,15 +53,16 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 01 | CI/CD Pipeline | CI/CD Pipeline Builder | Operational reliability |
 | 02 | Unit & Integration Tests | Testing | Technical quality |
 | 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
-| 04 | Security Hardening | Security Reviewer | Threat awareness |
-| 05 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
-| 06 | Performance Load Tests | Performance | Service can handle expected load |
-| 07 | ADRs | NHS GDS Assessor | Technology choices documented |
-| 08 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 09 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 10 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 11 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 12 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 04 | Visual QA | Visual QA | Pages render correctly, journeys work, data matches |
+| 05 | Security Hardening | Security Reviewer | Threat awareness |
+| 06 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
+| 07 | Performance Load Tests | Performance | Service can handle expected load |
+| 08 | ADRs | NHS GDS Assessor | Technology choices documented |
+| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
+| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
+| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
+| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 

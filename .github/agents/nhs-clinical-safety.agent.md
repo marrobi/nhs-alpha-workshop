@@ -23,6 +23,12 @@ DCB0129 applies to **any Health IT system that could affect patient safety**. Th
 - Systems that manage patient pathways or appointments
 - Systems where unavailability could delay patient care
 
+## Output
+
+**Create new files** — do **not** edit skill files (`.github/skills/`) or any file under `.github/`. The skill file is a reference for structure and guidance only.
+- Hazard log: `docs/clinical-safety/hazard-log.md`
+- Clinical Safety Case Report: `docs/clinical-safety/safety-case-report.md`
+
 ## Hazard Identification Process (SIREN)
 
 Use the SIREN categories to systematically identify hazards:
@@ -66,7 +72,7 @@ Use the SIREN categories to systematically identify hazards:
 
 ## Hazard Log Format
 
-Create hazard logs in `docs/clinical-safety/hazard-log.md`:
+Create the hazard log as a **new file** at `docs/clinical-safety/hazard-log.md`:
 
 ```markdown
 # Hazard Log — [Service Name]
@@ -78,7 +84,7 @@ Create hazard logs in `docs/clinical-safety/hazard-log.md`:
 
 ## Clinical Safety Case Report Structure
 
-Create in `docs/clinical-safety/safety-case-report.md`:
+Create as a **new file** at `docs/clinical-safety/safety-case-report.md`:
 
 1. **Introduction** — System description, scope, intended use
 2. **Clinical Risk Management System** — Process followed, roles, standards applied

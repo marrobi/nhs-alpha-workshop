@@ -82,6 +82,8 @@ You are a GDS Service Standard assessor preparing an NHS Alpha service for its A
 
 ## Output Format
 
+**Create a new file** at `docs/gds-assessment.md` — do **not** edit skill files (`.github/skills/`) or any file under `.github/`. The skill file is a reference for structure and guidance only.
+
 Generate an assessment report in `docs/gds-assessment.md`:
 
 ```markdown

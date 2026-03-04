@@ -16,7 +16,7 @@ This skill generates Architectural Decision Records (ADRs) for NHS digital servi
 
 ## ADR Format
 
-Use the MADR (Markdown Any Decision Records) format. Store ADRs in `docs/adr/` with sequential numbering:
+Use the MADR (Markdown Any Decision Records) format. Store ADRs as **new files** in `docs/adr/` with sequential numbering. Do **not** edit this skill file — it is a reference, not a template to fill in.
 
 ```
 docs/adr/

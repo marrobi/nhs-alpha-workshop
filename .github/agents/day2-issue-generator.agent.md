@@ -1,6 +1,6 @@
 ---
 name: 'Day 2 Issue Generator'
-description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, security, CI/CD, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
+description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, security, CI/CD, visual QA, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
 tools: ['codebase', 'edit/editFiles', 'new', 'runCommands', 'search', 'terminalLastCommand', 'web/fetch']
 ---
 
@@ -43,35 +43,11 @@ Summarise what you found:
 
 ### Step 2 — Generate Issues
 
-Generate all 11 issues, saving each as a separate file in `docs/workshop/day2-issues/`. Each issue must reference the **actual** tools, commands, file paths, and frameworks from the tech stack — not generic placeholders.
+Generate all 12 issues, saving each as a separate file in `docs/workshop/day2-issues/`. Each issue must reference the **actual** tools, commands, file paths, and frameworks from the tech stack — not generic placeholders.
 
 For each issue, read the relevant agent file and instruction files to understand what the assigned agent expects, then write acceptance criteria that match.
 
-#### Issue 01 — Unit & Integration Tests
-
-Read `.github/instructions/testing.instructions.md` and `.github/agents/testing.agent.md`.
-- The issue Context section must reference both of these files
-- Reference the actual test runner, coverage tool, and test client from the tech stack
-- Reference actual router modules and endpoints from the codebase
-- Include the exact coverage command for the tech stack
-
-#### Issue 02 — Playwright E2E Tests
-
-Read `.github/agents/playwright-e2e.agent.md`.
-- The issue Context section must reference this agent file and `.github/instructions/testing.instructions.md`
-- Reference the actual user journeys from `user_stories/`
-- Reference the actual pages and forms from the frontend code
-- Include the exact E2E test command from the tech stack
-
-#### Issue 03 — Security Hardening
-
-Read `.github/instructions/nhs-security.instructions.md` and `.github/agents/security-reviewer.agent.md`.
-- The issue Context section must reference both of these files
-- Reference the actual input validation framework from the tech stack
-- Reference the actual dependency audit command for the package manager
-- Reference the actual middleware/security header approach for the backend framework
-
-#### Issue 04 — CI/CD Pipeline
+#### Issue 01 — CI/CD Pipeline
 
 Read `.github/agents/cicd-pipeline-builder.agent.md` and `.github/instructions/nhs-security.instructions.md`.
 - The issue Context section must reference both of these files
@@ -81,7 +57,40 @@ Read `.github/agents/cicd-pipeline-builder.agent.md` and `.github/instructions/n
 - **CI must include security checks**: dependency audit (e.g. `pip audit`, `npm audit`), secret scanning (reject commits containing keys/tokens), SAST/linting for security issues, and container image scanning if Docker is used
 - **CD must enforce security gates**: CI must pass (including security checks) before deployment; IaC validation must pass; deployment must use OIDC — no long-lived credentials in secrets
 
-#### Issue 05 — Accessibility Audit
+#### Issue 02 — Unit & Integration Tests
+
+Read `.github/instructions/testing.instructions.md` and `.github/agents/testing.agent.md`.
+- The issue Context section must reference both of these files
+- Reference the actual test runner, coverage tool, and test client from the tech stack
+- Reference actual router modules and endpoints from the codebase
+- Include the exact coverage command for the tech stack
+
+#### Issue 03 — Playwright E2E Tests
+
+Read `.github/agents/playwright-e2e.agent.md`.
+- The issue Context section must reference this agent file and `.github/instructions/testing.instructions.md`
+- Reference the actual user journeys from `user_stories/`
+- Reference the actual pages and forms from the frontend code
+- Include the exact E2E test command from the tech stack
+
+#### Issue 04 — Visual QA
+
+Read `.github/agents/visual-qa.agent.md`.
+- The issue Context section must reference this agent file
+- Reference the actual pages and user journeys from the frontend code and `user_stories/`
+- Include both desktop (1280×720) and mobile (375×667) viewport testing
+- Acceptance criteria must cover: visual inspection of all pages, functional walkthrough of user journeys, data verification (API vs rendered content), content quality check
+- This issue must be completed **before** the Accessibility Audit — visual/functional issues should be fixed before accessibility scanning
+
+#### Issue 05 — Security Hardening
+
+Read `.github/instructions/nhs-security.instructions.md` and `.github/agents/security-reviewer.agent.md`.
+- The issue Context section must reference both of these files
+- Reference the actual input validation framework from the tech stack
+- Reference the actual dependency audit command for the package manager
+- Reference the actual middleware/security header approach for the backend framework
+
+#### Issue 06 — Accessibility Audit
 
 Read `.github/agents/accessibility-auditor.agent.md`.
 - The issue Context section must reference this agent file and `.github/instructions/nhsuk-frontend.instructions.md`
@@ -89,42 +98,42 @@ Read `.github/agents/accessibility-auditor.agent.md`.
 - Reference WCAG 2.2 Level AA requirements
 - Reference the actual pages from the frontend code
 
-#### Issue 06 — Performance Load Tests
+#### Issue 07 — Performance Load Tests
 
 Read `.github/instructions/performance.instructions.md` and `.github/agents/performance.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual API endpoints from the codebase
 - Reference the actual performance testing tool from the tech stack
 
-#### Issue 07 — Architectural Decision Records
+#### Issue 08 — Architectural Decision Records
 
 Read `.github/skills/nhs-adr-writer/SKILL.md`.
 - The issue Context section must reference this skill file
 - Generate ADR topics based on the **actual decisions made** in `docs/adr/001-architecture.md`
 - Reference the actual technologies chosen, not hardcoded ones
 
-#### Issue 08 — DCB0129 Clinical Safety
+#### Issue 09 — DCB0129 Clinical Safety
 
 Read `.github/skills/dcb0129-hazard-log/SKILL.md` and `.github/agents/nhs-clinical-safety.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual clinical context from the scenario and user stories
 - This is domain-specific, not tech-specific
 
-#### Issue 09 — DPIA
+#### Issue 10 — DPIA
 
 Read `.github/skills/nhs-dpia/SKILL.md` and `.github/agents/nhs-dpia-advisor.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual data types and data flows from the architecture and stories
 - This is domain-specific, not tech-specific
 
-#### Issue 10 — GDS Assessment Evidence
+#### Issue 11 — GDS Assessment Evidence
 
 Read `.github/skills/gds-service-standard/SKILL.md` and `.github/agents/nhs-gds-assessor.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual tech stack and infrastructure for technology-related points
 - Reference the actual user research artefacts and stories for user-related points
 
-#### Issue 11 — Runbook & Deployment Documentation
+#### Issue 12 — Runbook & Deployment Documentation
 
 Read the IaC files, deployment configuration, and `.github/agents/nhs-service-builder.agent.md`.
 - The issue Context section must reference the service builder agent and the IaC instruction file
@@ -167,18 +176,19 @@ The custom agent mapping is:
 | 01 CI/CD Pipeline | **CI/CD Pipeline Builder** |
 | 02 Unit & Integration Tests | **Testing** |
 | 03 Playwright E2E Tests | **Playwright E2E** |
-| 04 Security Hardening | **Security Reviewer** |
-| 05 Accessibility Audit | **Accessibility Auditor** |
-| 06 Performance Load Tests | **Performance** |
-| 07 ADRs | **NHS GDS Assessor** |
-| 08 DCB0129 Clinical Safety | **NHS Clinical Safety** |
-| 09 DPIA | **NHS DPIA Advisor** |
-| 10 GDS Assessment Evidence | **NHS GDS Assessor** |
-| 11 Runbook & Deployment Docs | **NHS Service Builder** |
+| 04 Visual QA | **Visual QA** |
+| 05 Security Hardening | **Security Reviewer** |
+| 06 Accessibility Audit | **Accessibility Auditor** |
+| 07 Performance Load Tests | **Performance** |
+| 08 ADRs | **NHS GDS Assessor** |
+| 09 DCB0129 Clinical Safety | **NHS Clinical Safety** |
+| 10 DPIA | **NHS DPIA Advisor** |
+| 11 GDS Assessment Evidence | **NHS GDS Assessor** |
+| 12 Runbook & Deployment Docs | **NHS Service Builder** |
 
 Format:
 
-> I've generated **11** Day 2 issues in `docs/workshop/day2-issues/`. Here's the summary:
+> I've generated **12** Day 2 issues in `docs/workshop/day2-issues/`. Here's the summary:
 >
 > | # | Issue | Custom Agent |
 > |---|---|---|
@@ -202,14 +212,14 @@ gh issue create \
 ```
 
 **Important:**
-- Create issues **one at a time** in the recommended order (01–11)
+- Create issues **one at a time** in the recommended order (01–12)
 - After creating each issue, report the issue number and URL
 - If `gh auth status` fails, ask the user to run `gh auth login` first
 - Do **not** use `--assignee` — the user must assign Copilot via the GitHub web UI to select the correct custom agent for each issue
 
 Present the results with the agent assignment instructions:
 
-> All **11** issues created:
+> All **12** issues created:
 >
 > | # | Issue | URL | Assign with Custom Agent |
 > |---|---|---|---|

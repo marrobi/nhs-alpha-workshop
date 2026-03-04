@@ -30,13 +30,15 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 ### Iteration 0 — Scaffold & Deploy
 
 1. Read the implementation skill for current project structure and scaffold steps
-2. Create the backend API with a health endpoint
-3. Scaffold the frontend with NHS Design System components
-4. Write tests for the health endpoint
-5. Write IaC configuration and validate
-6. Build the frontend for production
-7. Deploy infrastructure and application
-8. Verify the health endpoint returns 200 on the live URL
+2. Install backend dependencies file with pinned versions (as specified in the implementation skill)
+3. Create the backend API with a health endpoint
+4. Scaffold the frontend with NHS Design System components
+5. Write tests for the health endpoint
+6. Write IaC configuration and validate
+7. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet.
+8. Build the frontend for production
+9. Deploy infrastructure and application
+10. Verify the health endpoint returns 200 on the live URL
 
 ### Build All User Stories
 
@@ -48,7 +50,13 @@ After the scaffold is deployed, read all user story files in `user_stories/story
 5. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
 6. Write a Playwright E2E test that walks through the parent user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited. Use `user_journeys/data/` for the journey flow context.
 7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
-8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
+8. **Visual QA check** — before deploying, open each page affected by this story in the browser (at desktop 1280×720 and mobile 375×667 viewports) and verify:
+   - NHS Design System components render correctly (no broken layouts, overlapping elements, or missing assets)
+   - The page content matches the story requirements and API data
+   - Forms work: valid input succeeds, invalid input shows NHS error summary
+   - Navigation between pages works (links, back buttons, breadcrumbs)
+   - Fix any visual, functional, or data issues before proceeding to deploy
+9. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
 Work through stories in priority order (riskiest assumption first), but build them **all** in a single session.
 
@@ -60,7 +68,19 @@ After all stories are built, cross-reference the original user journeys in `user
 - Error handling, edge cases, or fallback paths not captured in individual stories
 - Cross-journey functionality (e.g. common dashboard, shared data)
 
-Implement any gaps found, then re-run all tests. Once all stories and gaps are implemented and tests pass, re-deploy and verify the live URL.
+Implement any gaps found, then re-run all tests.
+
+### Final Visual QA Sweep
+
+After all stories are built and gaps are filled, do a full visual QA pass across the **entire** application before final deployment:
+
+1. Discover all routes from the codebase (frontend router, navigation components, backend page routes)
+2. Open every page in the browser at both desktop (1280×720) and mobile (375×667) viewports
+3. Verify: NHS components render correctly, layouts are clean, no placeholder content, no broken navigation
+4. Walk through every user journey end-to-end: click through forms, submit data, verify confirmations
+5. Call API endpoints and verify rendered data matches API responses
+6. Fix any issues found, rebuild, and re-verify
+7. Once clean, re-deploy and verify the live URL
 
 ## NHS Design System
 

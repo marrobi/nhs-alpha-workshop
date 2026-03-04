@@ -14,115 +14,49 @@ You audit code, run automated scans (axe-core), review component usage against t
 
 ## Audit Scope
 
+### CRITICAL: Discover ALL routes first
+
+Before writing any tests, you must discover **every route/page** in the application by reading the codebase:
+- Frontend router configuration (e.g. React Router routes in `App.tsx`, Next.js pages, Razor pages)
+- Backend API routes that serve pages
+- Navigation components that link to pages
+- Any routes referenced in existing E2E tests
+
+Build a **single, complete list of ALL pages** (both static and dynamic). This list must be used consistently by every test category below — do not test a subset of pages for any check. If a page requires navigation to reach (e.g. clicking a link from a list to reach a detail page), include it as a dynamic page with explicit navigation steps.
+
+### No silent skips
+
+**Never use conditional guards that silently pass when a page element isn't found.** If a test expects to navigate to a page and the navigation element isn't present, that must be a **test failure**, not a silent skip. For example:
+- BAD: `if (await link.isVisible()) { /* test */ }` — silently passes if link missing
+- GOOD: `await expect(link).toBeVisible(); await link.click();` — fails if link missing
+
 ### 1. Automated Scanning — axe-core
 
-Run axe-core against every page in the application:
-
-```python
-from axe_playwright_python.sync_playwright import Axe
-
-def audit_page(page, url: str) -> list:
-    """Run axe-core audit on a single page and return violations."""
-    page.goto(url)
-    axe = Axe()
-    results = axe.run(page)
-    return results.response.get("violations", [])
-```
-
-Create a full-site sweep that audits every route:
-
-```python
-import pytest
-from playwright.sync_api import Page
-
-ROUTES = ["/", "/appointments", "/results"]  # Add all routes
-
-@pytest.mark.parametrize("route", ROUTES)
-def test_page_accessibility(page: Page, route: str):
-    page.goto(route)
-    axe = Axe()
-    results = axe.run(page)
-    violations = results.response.get("violations", [])
-    assert len(violations) == 0, format_violations(violations)
-
-def format_violations(violations: list) -> str:
-    lines = []
-    for v in violations:
-        impact = v.get("impact", "unknown")
-        desc = v.get("description", "")
-        nodes = len(v.get("nodes", []))
-        lines.append(f"[{impact}] {desc} ({nodes} elements)")
-    return "\n".join(lines)
-```
+Run axe-core against **every page** in the complete route list. Use parameterised tests so each page is a separate test case. For dynamic pages that require navigation (detail, edit, confirm), write individual test cases with explicit navigation steps that **fail** if the page can't be reached.
 
 ### 2. Keyboard Navigation
 
-Verify every interactive element is reachable and operable by keyboard:
-
-- **Tab**: Moves focus to the next interactive element
-- **Shift+Tab**: Moves focus to the previous element
+Verify keyboard operability on **every page** — not just the home page:
+- **Tab/Shift+Tab**: Focus moves through all interactive elements in logical order
 - **Enter/Space**: Activates buttons and links
 - **Escape**: Closes modals, dropdowns, and dismissible components
 - **Arrow keys**: Navigates within radio groups, tabs, and menus
 
-```python
-def test_tab_order(page: Page):
-    """Verify focus order follows visual layout."""
-    page.goto("/")
-    page.keyboard.press("Tab")  # Skip link should be first
-    skip_link = page.locator(":focus")
-    assert "skip" in skip_link.text_content().lower()
-```
-
 ### 3. Skip Link
 
-Every NHS page must have a skip link as the first focusable element:
-
-```python
-def test_skip_link_is_first_focusable(page: Page):
-    page.goto("/")
-    page.keyboard.press("Tab")
-    focused = page.locator(":focus")
-    assert focused.get_attribute("href") == "#maincontent"
-    assert "Skip to main content" in focused.text_content()
-```
+Test the skip link on **every page**, not just the home page. Every NHS page must have a skip link as the first focusable element pointing to `#maincontent`.
 
 ### 4. Heading Hierarchy
 
-Headings must not skip levels (e.g., `h1` → `h3` without `h2`):
-
-```python
-def test_heading_hierarchy(page: Page):
-    page.goto("/")
-    headings = page.locator("h1, h2, h3, h4, h5, h6").all()
-    levels = [int(h.evaluate("el => el.tagName[1]")) for h in headings]
-    for i in range(1, len(levels)):
-        assert levels[i] <= levels[i-1] + 1, (
-            f"Heading level skipped: h{levels[i-1]} → h{levels[i]}"
-        )
-```
+Verify headings do not skip levels on **every page** — not just selected pages. Headings must not jump (e.g. `h1` → `h3` without `h2`).
 
 ### 5. Form Accessibility
 
-Every form input must have:
+Test form labels on **every page that contains a form** — not just one form page. Every form input must have:
 - An associated `<label>` element (or `aria-label`/`aria-labelledby`)
 - Visible error messages linked via `aria-describedby`
 - NHS error summary component at the top of the page on validation failure
 - Focus moved to the error summary when it appears
-
-```python
-def test_form_labels(page: Page):
-    page.goto("/register")  # Replace with form route
-    inputs = page.locator("input:not([type='hidden']), select, textarea").all()
-    for input_el in inputs:
-        input_id = input_el.get_attribute("id")
-        has_label = page.locator(f"label[for='{input_id}']").count() > 0
-        has_aria = (
-            input_el.get_attribute("aria-label") is not None
-            or input_el.get_attribute("aria-labelledby") is not None
-        )
-        assert has_label or has_aria, f"Input '{input_id}' has no label"
-```
 
 ### 6. Colour Contrast
 
@@ -141,20 +75,18 @@ axe-core detects most contrast failures automatically.
 
 ### 8. ARIA Landmarks
 
-Every NHS page should have these landmarks:
+Test landmarks on **every page** — not just a subset. Every NHS page should have:
 - `<header>` with NHS header component
 - `<nav>` for navigation
 - `<main>` with `id="maincontent"` (skip link target)
 - `<footer>` with NHS footer component
 
-```python
-def test_landmarks(page: Page):
-    page.goto("/")
-    assert page.locator("header").count() >= 1
-    assert page.locator("main").count() == 1
-    assert page.locator("footer").count() >= 1
-    assert page.locator("main").get_attribute("id") == "maincontent"
-```
+### 9. Data Tables
+
+Test **every page that contains a table**:
+- Column headers use `<th scope="col">`
+- Row headers use `<th scope="row">` where applicable
+- Tables have a caption or `aria-label`
 
 ## Accessibility Statement
 
@@ -214,9 +146,20 @@ We will continue to monitor and improve accessibility as the service develops.
 This statement was prepared on [date].
 ```
 
+## Audit Workflow
+
+Follow this iterative process — do not save the final report until all fixable issues are resolved:
+
+1. **Initial audit** — run the full audit scope (axe-core, keyboard, forms, headings, landmarks, etc.) across all pages. Record all findings.
+2. **Fix violations** — fix all critical and serious violations directly in the codebase. Fix moderate violations where feasible.
+3. **Re-audit** — re-run the full audit scope after fixes. New passes confirm the fixes; new findings may surface from changed code.
+4. **Repeat** — continue the fix → re-audit cycle until no critical or serious violations remain. At least **two full audit passes** are required (initial + one re-audit after fixes).
+5. **Save final report** — only after the last clean (or best-achievable) audit pass, save the report to `docs/accessibility-audit.md`. The report must reflect the **final** state, not the initial findings. Include a "Resolved Issues" section listing what was found and fixed.
+6. **Save accessibility statement** — generate `docs/accessibility-statement.md` reflecting the final audit results.
+
 ## Audit Report
 
-Generate the full audit report at `docs/accessibility-audit.md`:
+Generate the full audit report at `docs/accessibility-audit.md` **after all fix cycles are complete**:
 
 ```markdown
 # Accessibility Audit Report
@@ -236,19 +179,43 @@ Generate the full audit report at `docs/accessibility-audit.md`:
 | Heading hierarchy | [n] | [n] | [n] |
 | ARIA landmarks | [n] | [n] | [n] |
 
-## Findings
+## Audit Passes
+
+| Pass | Date | Critical | Serious | Moderate | Minor |
+|---|---|---|---|---|---|
+| 1 (initial) | [date] | [n] | [n] | [n] | [n] |
+| 2 (after fixes) | [date] | [n] | [n] | [n] | [n] |
+
+## Resolved Issues
+
+Issues found during earlier passes that have been fixed:
+
+### [Resolved finding title]
+- **Impact**: Critical / Serious / Moderate / Minor
+- **WCAG criteria**: [e.g. 1.1.1 Non-text Content]
+- **Page**: [route]
+- **Description**: [what was wrong]
+- **Fix applied**: [what was changed]
+- **Resolved in pass**: [pass number]
+
+## Remaining Findings
+
+Issues still present after all audit passes (with justification if not fixed):
 
 ### [Finding title]
 - **Impact**: Critical / Serious / Moderate / Minor
 - **WCAG criteria**: [e.g. 1.1.1 Non-text Content]
 - **Page**: [route]
 - **Description**: [what's wrong]
-- **Fix**: [what to do]
+- **Reason not fixed**: [justification]
 ```
 
 ## Rules
 
 - Fix critical and serious violations immediately — don't just report them
+- Run at least **two full audit passes** — never save the report based only on the initial scan
+- Continue fix → re-audit cycles until no critical or serious violations remain
+- Save the report and accessibility statement only after the final audit pass
 - Every page navigation in E2E tests should include an axe-core scan
 - NHS Design System components are pre-tested for accessibility — prefer them over custom components
 - Never suppress axe-core rules without documenting the reason

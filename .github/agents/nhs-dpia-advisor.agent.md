@@ -20,6 +20,10 @@ For NHS Alpha services — **always do a DPIA**. It's cheaper to do one and find
 
 ## ICO 8-Step DPIA Process
 
+## Output
+
+**Create a new file** at `docs/dpia/dpia.md` — do **not** edit the skill file (`.github/skills/nhs-dpia/SKILL.md`) or any file under `.github/`. The skill file is a reference for structure and guidance only.
+
 Create the DPIA in `docs/dpia/dpia.md` following these steps:
 
 ### Step 1 — Identify the Need for a DPIA
@@ -57,11 +61,11 @@ Create the DPIA in `docs/dpia/dpia.md` following these steps:
 
 | Risk | Likelihood | Severity | Overall | Mitigation |
 |---|---|---|---|---|
-| Unauthorised access to health records | [L/M/H] | [L/M/H] | [L/M/H] | Managed identity, secrets vault, RBAC, audit logging (see `tech-stack.instructions.md` for platform) |
-| Data breach during transit | [L/M/H] | [L/M/H] | [L/M/H] | TLS 1.2+, HTTPS only, encrypted at rest |
-| PII in application logs | [L/M/H] | [L/M/H] | [L/M/H] | Structured logging, PII filter middleware, log audit |
-| Excessive data retention | [L/M/H] | [L/M/H] | [L/M/H] | Automated retention policy, data deletion scripts |
-| Re-identification from pseudonymised data | [L/M/H] | [L/M/H] | [L/M/H] | k-anonymity assessment, access controls |
+| Unauthorised access to health records | [L/M/H] | [L/M/H] | [L/M/H] | [Search codebase for actual controls — do not assume] |
+| Data breach during transit | [L/M/H] | [L/M/H] | [L/M/H] | [Search codebase for actual controls — do not assume] |
+| PII in application logs | [L/M/H] | [L/M/H] | [L/M/H] | [Search codebase for actual controls — do not assume] |
+| Excessive data retention | [L/M/H] | [L/M/H] | [L/M/H] | [Search codebase for actual controls — do not assume] |
+| Re-identification from pseudonymised data | [L/M/H] | [L/M/H] | [L/M/H] | [Search codebase for actual controls — do not assume] |
 
 ### Step 6 — Identify Measures to Mitigate Risks
 
@@ -69,6 +73,46 @@ For each risk in Step 5, document:
 - Technical measures (encryption, access control, monitoring)
 - Organisational measures (training, policies, audits)
 - Whether measures reduce, eliminate, or accept the risk
+
+### Step 6a — Verify Implementation Status
+
+**CRITICAL**: For every technical measure listed in Step 6, you must **search the actual codebase** to verify whether it is implemented, not just planned. Do not rely on the architecture ADR, tech stack instructions, or intended design — these describe what *should* exist, not what *does* exist.
+
+For each measure, search for concrete evidence:
+
+| Claim | Where to verify |
+|---|---|
+| Managed Identity | Terraform files: look for `identity { type = "SystemAssigned" }` on the deployed resource |
+| Secrets in Key Vault | Terraform: Key Vault resource + access policy. App code: `os.environ` or Key Vault SDK usage, **not** hardcoded values |
+| RBAC role assignments | Terraform: `azurerm_role_assignment` resources with least-privilege roles |
+| Encryption at rest | Terraform: database/storage encryption config. Not just "Azure does this by default" — verify it's not disabled |
+| TLS/HTTPS only | Terraform: `https_only = true` on App Service. Middleware: HSTS header |
+| PII logging filter | App code: search middleware for PII scrubbing/filtering. Check structured logging config excludes NHS numbers, names, DOB |
+| Rate limiting | App code: search for rate limiting middleware (e.g. `slowapi`) |
+| Input validation | App code: Pydantic models on route handlers, no raw string concatenation in queries |
+| CSRF protection | App code: CSRF middleware on state-changing routes |
+| Audit logging | App code: search for audit log entries on data access/modification |
+| Retention policy | Database migrations or scheduled jobs that enforce retention periods |
+| Private Endpoints | Terraform: `azurerm_private_endpoint` resources for database/storage/Key Vault |
+
+Mark each measure with one of:
+- **✅ Implemented** — code evidence found (cite the file and line)
+- **⚠️ Partially implemented** — some evidence but incomplete (explain what's missing)
+- **❌ Not implemented** — no code evidence found (this is a gap to flag)
+- **📋 Organisational** — cannot be verified in code (policy/training measures)
+
+Include the verification results in the DPIA output as a table:
+
+```markdown
+## Technical Controls — Verification
+
+| Control | Status | Evidence | Notes |
+|---|---|---|---|
+| Managed Identity | ✅ Implemented | `infra/main.tf` line 45 | SystemAssigned on App Service |
+| PII logging filter | ❌ Not implemented | No middleware found | **Gap: needs implementation** |
+```
+
+**Never mark a control as implemented based on the ADR, tech stack file, or instructions alone.** These describe intent. Only running code counts as evidence.
 
 ### Step 7 — Sign Off and Record Outcomes
 
@@ -108,4 +152,6 @@ Use Mermaid syntax for the diagram.
 - Assume health data is Art. 9 special category until proven otherwise
 - Document lawful basis for **both** Art. 6 (general) and Art. 9 (special category)
 - Reference NHS-specific guidance: Caldicott Principles, NHS Code of Confidentiality
+- **Never mark a technical control as "implemented" without searching the codebase for evidence** — architecture docs and instruction files describe intent, not reality. Only code, Terraform, and config files count as evidence.
+- **Distinguish between "designed" and "implemented"** — if a control is in the ADR but not in the code, mark it as a gap
 - This is a living document — update when data processing changes
