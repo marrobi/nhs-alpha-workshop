@@ -54,15 +54,17 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 02 | Unit & Integration Tests | Testing | Technical quality |
 | 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
 | 04 | Visual QA | Visual QA | Pages render correctly, journeys work, data matches |
-| 05 | Security Hardening | Security Reviewer | Threat awareness |
-| 06 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
-| 07 | Performance Load Tests | Performance | Service can handle expected load |
-| 08 | ADRs | NHS GDS Assessor | Technology choices documented |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 05 | Code Quality Review | Code Quality Reviewer | Code standards, type safety, test coverage |
+| 06 | Security Hardening | Security Reviewer | Threat awareness |
+| 07 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
+| 08 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
+| 09 | Performance Load Tests | Performance | Service can handle expected load |
+| 10 | ADRs | NHS GDS Assessor | Technology choices documented |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
+| 12 | DPIA | NHS DPIA Advisor | Data protection considered |
+| 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
+| 14 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 15 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -82,7 +84,7 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, runbook |
 
-Use the **NHS GDS Assessor** agent (Issue 10) to generate the full evidence report.
+Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence report.
 
 ## Tips
 

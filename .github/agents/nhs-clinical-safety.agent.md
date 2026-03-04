@@ -77,10 +77,32 @@ Create the hazard log as a **new file** at `docs/clinical-safety/hazard-log.md`:
 ```markdown
 # Hazard Log — [Service Name]
 
-| ID | Hazard Description | SIREN Category | Cause | Effect | Severity | Likelihood | Risk Score | Risk Level | Mitigation | Residual Risk |
-|---|---|---|---|---|---|---|---|---|---|---|
-| HAZ-001 | [Description] | [S/I/R/E/N] | [Root cause] | [Clinical effect] | [1-5] | [1-5] | [S×L] | [Level] | [Mitigation measures] | [Residual score] |
+| ID | Hazard Description | SIREN Category | Cause | Effect | Severity | Likelihood | Risk Score | Risk Level | Mitigation | Mitigation Status | Residual Risk |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| HAZ-001 | [Description] | [S/I/R/E/N] | [Root cause] | [Clinical effect] | [1-5] | [1-5] | [S×L] | [Level] | [Mitigation measures] | [✅/⚠️/❌] | [Residual score] |
 ```
+
+### Mitigation Verification
+
+**CRITICAL**: For every mitigation listed in the hazard log, you must **search the actual codebase** to verify whether it is implemented. Do not rely on the architecture ADR, tech stack instructions, or intended design — these describe what *should* exist, not what *does* exist.
+
+For each mitigation, mark its status:
+- **✅ Implemented** — code evidence found (cite the file and line in the Mitigation column)
+- **⚠️ Partially implemented** — some evidence but incomplete (explain what's missing)
+- **❌ Not implemented** — no code evidence found (flag as an open risk)
+
+Examples of what to search for:
+
+| Mitigation claim | Where to verify |
+|---|---|
+| Input validation prevents invalid data | Route handlers: Pydantic models with field constraints |
+| Error messages prevent misinterpretation | Frontend: NHS error summary components, clear error text |
+| System unavailability shows maintenance page | App code: error handling middleware, custom error pages |
+| Data validation prevents incorrect display | Backend: response serialisation, type checking |
+| Audit logging tracks data changes | App code: audit log entries on create/update/delete |
+| Access controls prevent unauthorised access | Terraform: RBAC. App code: auth middleware |
+
+**Never mark a mitigation as implemented based on the ADR, instruction files, or design documents alone.** Only running code counts as evidence. If a mitigation is designed but not built, mark it ❌ and flag it as an open risk — this is more valuable to a clinical safety review than a false ✅.
 
 ## Clinical Safety Case Report Structure
 
@@ -91,7 +113,7 @@ Create as a **new file** at `docs/clinical-safety/safety-case-report.md`:
 3. **Hazard Identification** — SIREN analysis, workshops conducted
 4. **Hazard Assessment** — Risk matrix applied, scoring rationale
 5. **Risk Evaluation** — Acceptable/tolerable/undesirable/unacceptable classification
-6. **Risk Control** — Mitigations implemented, test evidence
+6. **Risk Control** — Mitigations implemented, test evidence. **For every mitigation, cite the specific file and line in the codebase that implements it.** If a mitigation is not yet implemented, state this clearly rather than implying it exists.
 7. **Residual Risk Assessment** — Post-mitigation risk levels
 8. **Clinical Safety Conclusions** — Overall safety recommendation
 9. **Appendices** — Full hazard log, test evidence, sign-off
@@ -101,5 +123,7 @@ Create as a **new file** at `docs/clinical-safety/safety-case-report.md`:
 - Always use the SIREN methodology — don't skip categories
 - Score conservatively — when in doubt, use the higher severity
 - Every hazard must have at least one mitigation
-- Residual risk must be reassessed after mitigation
+- **Every mitigation must be verified against the actual codebase** — search for evidence before marking it as implemented. Architecture docs and instruction files describe intent, not reality.
+- **Distinguish between "designed" and "implemented"** — an unimplemented mitigation is an open risk, not a false assurance
+- Residual risk must be reassessed after mitigation — but only for mitigations that are actually implemented. Unimplemented mitigations do not reduce residual risk.
 - This is a living document — update the hazard log when features change

@@ -35,10 +35,11 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 4. Scaffold the frontend with NHS Design System components
 5. Write tests for the health endpoint
 6. Write IaC configuration and validate
-7. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet.
-8. Build the frontend for production
-9. Deploy infrastructure and application
-10. Verify the health endpoint returns 200 on the live URL
+7. **Quick infrastructure review** — before deploying, check the IaC configuration against `.github/instructions/terraform-azure-nhs.instructions.md`: naming convention uses `var.app_name`, managed identity created (not service principal), HTTPS-only and TLS 1.2 on App Service, all resources tagged, provider version pinned. Fix any violations.
+8. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet.
+9. Build the frontend for production
+10. Deploy infrastructure and application
+11. Verify the health endpoint returns 200 on the live URL
 
 ### Build All User Stories
 
@@ -56,7 +57,8 @@ After the scaffold is deployed, read all user story files in `user_stories/story
    - Forms work: valid input succeeds, invalid input shows NHS error summary
    - Navigation between pages works (links, back buttons, breadcrumbs)
    - Fix any visual, functional, or data issues before proceeding to deploy
-9. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
+9. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
+10. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
 Work through stories in priority order (riskiest assumption first), but build them **all** in a single session.
 

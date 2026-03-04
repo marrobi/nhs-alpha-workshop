@@ -1,6 +1,6 @@
 ---
 name: 'Day 2 Issue Generator'
-description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, security, CI/CD, visual QA, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
+description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, visual QA, infrastructure review, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
 tools: ['codebase', 'edit/editFiles', 'new', 'runCommands', 'search', 'terminalLastCommand', 'web/fetch']
 ---
 
@@ -43,7 +43,7 @@ Summarise what you found:
 
 ### Step 2 — Generate Issues
 
-Generate all 12 issues, saving each as a separate file in `docs/workshop/day2-issues/`. Each issue must reference the **actual** tools, commands, file paths, and frameworks from the tech stack — not generic placeholders.
+Generate all 14 issues, saving each as a separate file in `docs/workshop/day2-issues/`. Each issue must reference the **actual** tools, commands, file paths, and frameworks from the tech stack — not generic placeholders.
 
 For each issue, read the relevant agent file and instruction files to understand what the assigned agent expects, then write acceptance criteria that match.
 
@@ -82,7 +82,16 @@ Read `.github/agents/visual-qa.agent.md`.
 - Acceptance criteria must cover: visual inspection of all pages, functional walkthrough of user journeys, data verification (API vs rendered content), content quality check
 - This issue must be completed **before** the Accessibility Audit — visual/functional issues should be fixed before accessibility scanning
 
-#### Issue 05 — Security Hardening
+#### Issue 05 — Code Quality Review
+
+Read `.github/agents/code-quality-reviewer.agent.md` and `.github/copilot-instructions.md`.
+- The issue Context section must reference both of these files
+- Reference the actual backend modules, frontend components, and test files from the codebase
+- Reference the actual linter, test runner, and coverage command from the tech stack
+- Acceptance criteria must cover: code structure (SRP, naming, DRY), type safety (type hints, Pydantic models), error handling (proper status codes, NHS error summary), NHS conventions (Design System components, content style guide, synthetic data), API quality, frontend quality, test coverage (80% target), and security basics
+- This issue must be completed **before** Security Hardening — code quality issues should be fixed before the security audit
+
+#### Issue 06 — Security Hardening
 
 Read `.github/instructions/nhs-security.instructions.md` and `.github/agents/security-reviewer.agent.md`.
 - The issue Context section must reference both of these files
@@ -90,7 +99,15 @@ Read `.github/instructions/nhs-security.instructions.md` and `.github/agents/sec
 - Reference the actual dependency audit command for the package manager
 - Reference the actual middleware/security header approach for the backend framework
 
-#### Issue 06 — Accessibility Audit
+#### Issue 07 — Azure Infra Security Review
+
+Read `.github/agents/azure-infra-reviewer.agent.md` and `.github/instructions/terraform-azure-nhs.instructions.md`.
+- The issue Context section must reference both of these files and `.github/instructions/nhs-security.instructions.md` (Azure Network & Identity section)
+- Reference the actual IaC files from the codebase (e.g. `infra/*.tf`)
+- Acceptance criteria must cover: identity & authentication (managed identity, no shared keys), network isolation (private endpoints, VNet, NSGs), RBAC least privilege, encryption & transport (HTTPS-only, TLS 1.2), secrets management (Key Vault references), Terraform quality (provider pinned, naming convention, tags), monitoring (Application Insights), and compliance verification against the instruction files
+- This issue must be completed **after** Security Hardening — app-level security should be fixed before the deep infrastructure review
+
+#### Issue 08 — Accessibility Audit
 
 Read `.github/agents/accessibility-auditor.agent.md`.
 - The issue Context section must reference this agent file and `.github/instructions/nhsuk-frontend.instructions.md`
@@ -98,42 +115,42 @@ Read `.github/agents/accessibility-auditor.agent.md`.
 - Reference WCAG 2.2 Level AA requirements
 - Reference the actual pages from the frontend code
 
-#### Issue 07 — Performance Load Tests
+#### Issue 09 — Performance Load Tests
 
 Read `.github/instructions/performance.instructions.md` and `.github/agents/performance.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual API endpoints from the codebase
 - Reference the actual performance testing tool from the tech stack
 
-#### Issue 08 — Architectural Decision Records
+#### Issue 10 — Architectural Decision Records
 
 Read `.github/skills/nhs-adr-writer/SKILL.md`.
 - The issue Context section must reference this skill file
 - Generate ADR topics based on the **actual decisions made** in `docs/adr/001-architecture.md`
 - Reference the actual technologies chosen, not hardcoded ones
 
-#### Issue 09 — DCB0129 Clinical Safety
+#### Issue 11 — DCB0129 Clinical Safety
 
 Read `.github/skills/dcb0129-hazard-log/SKILL.md` and `.github/agents/nhs-clinical-safety.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual clinical context from the scenario and user stories
 - This is domain-specific, not tech-specific
 
-#### Issue 10 — DPIA
+#### Issue 12 — DPIA
 
 Read `.github/skills/nhs-dpia/SKILL.md` and `.github/agents/nhs-dpia-advisor.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual data types and data flows from the architecture and stories
 - This is domain-specific, not tech-specific
 
-#### Issue 11 — GDS Assessment Evidence
+#### Issue 13 — GDS Assessment Evidence
 
 Read `.github/skills/gds-service-standard/SKILL.md` and `.github/agents/nhs-gds-assessor.agent.md`.
 - The issue Context section must reference both of these files
 - Reference the actual tech stack and infrastructure for technology-related points
 - Reference the actual user research artefacts and stories for user-related points
 
-#### Issue 12 — Runbook & Deployment Documentation
+#### Issue 14 — Runbook & Deployment Documentation
 
 Read the IaC files, deployment configuration, and `.github/agents/nhs-service-builder.agent.md`.
 - The issue Context section must reference the service builder agent and the IaC instruction file
@@ -177,18 +194,20 @@ The custom agent mapping is:
 | 02 Unit & Integration Tests | **Testing** |
 | 03 Playwright E2E Tests | **Playwright E2E** |
 | 04 Visual QA | **Visual QA** |
-| 05 Security Hardening | **Security Reviewer** |
-| 06 Accessibility Audit | **Accessibility Auditor** |
-| 07 Performance Load Tests | **Performance** |
-| 08 ADRs | **NHS GDS Assessor** |
-| 09 DCB0129 Clinical Safety | **NHS Clinical Safety** |
-| 10 DPIA | **NHS DPIA Advisor** |
-| 11 GDS Assessment Evidence | **NHS GDS Assessor** |
-| 12 Runbook & Deployment Docs | **NHS Service Builder** |
+| 05 Code Quality Review | **Code Quality Reviewer** |
+| 06 Security Hardening | **Security Reviewer** |
+| 07 Azure Infra Security Review | **Azure Infra Security Reviewer** |
+| 08 Accessibility Audit | **Accessibility Auditor** |
+| 09 Performance Load Tests | **Performance** |
+| 10 ADRs | **NHS GDS Assessor** |
+| 11 DCB0129 Clinical Safety | **NHS Clinical Safety** |
+| 12 DPIA | **NHS DPIA Advisor** |
+| 13 GDS Assessment Evidence | **NHS GDS Assessor** |
+| 14 Runbook & Deployment Docs | **NHS Service Builder** |
 
 Format:
 
-> I've generated **12** Day 2 issues in `docs/workshop/day2-issues/`. Here's the summary:
+> I've generated **14** Day 2 issues in `docs/workshop/day2-issues/`. Here's the summary:
 >
 > | # | Issue | Custom Agent |
 > |---|---|---|
@@ -212,14 +231,14 @@ gh issue create \
 ```
 
 **Important:**
-- Create issues **one at a time** in the recommended order (01–12)
+- Create issues **one at a time** in the recommended order (01–14)
 - After creating each issue, report the issue number and URL
 - If `gh auth status` fails, ask the user to run `gh auth login` first
 - Do **not** use `--assignee` — the user must assign Copilot via the GitHub web UI to select the correct custom agent for each issue
 
 Present the results with the agent assignment instructions:
 
-> All **12** issues created:
+> All **14** issues created:
 >
 > | # | Issue | URL | Assign with Custom Agent |
 > |---|---|---|---|
