@@ -111,7 +111,7 @@ The agent will:
    - **Home** — project overview from `README.md`
    - **Architecture** — from `docs/adr/001-architecture.md` and the draw.io diagram
    - **API Reference** — scanned from `app/routers/` with all endpoints documented
-   - **User Guide** — user-facing flows from `user_journeys/` and `frontend/src/pages/`
+   - **User Guide** — user-facing flows from `discovery/user_journeys/` and `frontend/src/pages/`
    - **Deployment** — from `infra/` and build commands in `AGENTS.md`
    - **Testing** — test structure, how to run, and coverage targets
    - **Security** — security measures derived from the security hardening PR

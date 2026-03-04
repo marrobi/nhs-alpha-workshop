@@ -1,0 +1,31 @@
+{
+  "name": "Sarah Mitchell",
+  "jobTitle": "Community Midwife - Band 6",
+  "slideTitle": "COMMUNITY MIDWIFE",
+  "experience": "12 years as a registered midwife",
+  "location": "Greater Manchester NHS",
+  "department": "Community Maternity Services",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of an experienced midwife (late 30s, professional), NHS uniform, warm smile, soft lighting, neutral background",
+  "background": [
+    "Band 6 Community Midwife conducting antenatal care",
+    "BSc Midwifery, NMC registered since 2012",
+    "Specializes in high-risk pregnancies",
+    "Advocates for woman-centered care"
+  ],
+  "goals": [
+    "Ensure every pregnant woman receives optimal coordinated care",
+    "Eliminate delays in specialist involvement",
+    "Reduce administrative burden to focus on clinical care"
+  ],
+  "wants": [
+    "Automated notifications to specialists upon pregnancy registration",
+    "Real-time access to patient records with specialist updates",
+    "Integration with existing maternity systems"
+  ],
+  "painPoints": [
+    "Manual letter writing causes significant delays",
+    "Uncertainty about whether notifications reached specialists",
+    "Time-consuming admin reduces clinical care time"
+  ]
+}

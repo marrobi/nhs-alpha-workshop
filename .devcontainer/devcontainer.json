@@ -30,6 +30,10 @@
         "hashicorp.terraform",
         "marp-team.marp-vscode",
         "bierner.markdown-mermaid",
+        "bierner.markdown-preview-github-styles",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint"
       ],
       "settings": {
@@ -37,7 +41,8 @@
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff",
           "editor.formatOnSave": true
-        }
+        },
+        "markdown.marp.html": "all"
       }
     }
   },

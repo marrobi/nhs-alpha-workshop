@@ -37,9 +37,9 @@ Read `.github/instructions/tech-stack.instructions.md` — this is the **default
 ### Step 2 — Analyse Discovery Artefacts
 
 Read the discovery artefacts:
-1. `scenarios/scenario.md` — identify the core problem and scope boundaries
-2. `personas/persona-report.md` — identify primary and secondary users
-3. `user_journeys/data/journey-*.md` — these drive the entire technical design
+1. `discovery/scenarios/scenario.md` — identify the core problem and scope boundaries
+2. `discovery/personas/persona-report.md` — identify primary and secondary users
+3. `discovery/user_journeys/data/journey-*.md` — these drive the entire technical design
 4. Identify **constraints**: data sovereignty, NHS network, UK GDPR Art. 9, DCB0129, NHS Design System
 
 Summarise what you found and confirm with the user:

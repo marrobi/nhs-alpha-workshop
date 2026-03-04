@@ -52,7 +52,7 @@ Generate documentation by reading existing code and artefacts — do not invent 
 | Home (`index.md`) | `README.md`, project description |
 | Architecture (`architecture.md`) | `docs/adr/001-architecture.md`, `docs/adr/architecture.drawio` |
 | API Reference (`api.md`) | Scan `app/routers/` — document every endpoint with method, path, request/response schemas, and status codes |
-| User Guide (`user-guide.md`) | Scan `user_journeys/data/` and `frontend/src/pages/` — document user-facing flows with screenshots if available |
+| User Guide (`user-guide.md`) | Scan `discovery/user_journeys/data/` and `frontend/src/pages/` — document user-facing flows with screenshots if available |
 | Deployment (`deployment.md`) | Scan `infra/` and `AGENTS.md` build commands — document how to deploy from scratch |
 | Testing (`testing.md`) | Scan `tests/` — document test structure, how to run, coverage targets |
 | Security (`security.md`) | `.github/instructions/nhs-security.instructions.md` — document security measures in place |

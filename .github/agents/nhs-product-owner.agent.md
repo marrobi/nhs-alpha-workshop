@@ -16,7 +16,7 @@ You can read files, create files, edit files, and search the codebase. You produ
 
 Before using this agent, the architecture must already be designed. Run the **NHS Architect** agent first — it produces:
 - `docs/adr/001-architecture.md` — agreed architecture with API endpoints, data models, frontend pages, and journey priority order
-- Discovery artefacts: `scenarios/scenario.md`, `personas/persona-report.md`, `user_journeys/data/journey-*.md`
+- Discovery artefacts: `discovery/scenarios/scenario.md`, `discovery/personas/persona-report.md`, `discovery/user_journeys/data/journey-*.md`
 
 ## User Story Standards
 
@@ -27,9 +27,9 @@ Read `.github/skills/nhs-user-stories/SKILL.md` for the story format, NHS person
 ### Step 1 — Read Discovery and Architecture
 
 Read all input artefacts:
-1. `scenarios/scenario.md` — problem statement and scope
-2. `personas/persona-report.md` — the personas this service is for
-3. `user_journeys/data/journey-*.md` — the journeys to decompose
+1. `discovery/scenarios/scenario.md` — problem statement and scope
+2. `discovery/personas/persona-report.md` — the personas this service is for
+3. `discovery/user_journeys/data/journey-*.md` — the journeys to decompose
 4. `docs/adr/001-architecture.md` — API endpoints, data models, frontend pages, and priority order
 
 Summarise what you found and confirm with the user:
@@ -136,6 +136,6 @@ Once the user confirms the stories, tell them:
 
 - **Save first, then summarise** — never type out full stories in the chat; save to files and present only titles
 - **One file per story** — each story must be independently referenceable
-- **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `personas/persona-report.md`
+- **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `discovery/personas/persona-report.md`
 - **All four acceptance criteria categories are mandatory** — use "N/A" for Clinical Safety only if the story genuinely has no clinical data
 - **Priority order comes from the ADR** — the Architect has already prioritised journeys by riskiest assumption; stories inherit that priority

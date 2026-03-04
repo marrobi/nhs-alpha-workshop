@@ -49,7 +49,7 @@ For every page at both viewports:
 
 ### 2. Functional Walkthrough
 
-For every user journey (read from `user_stories/story-*.md` and `user_journeys/data/` if it exists):
+For every user journey (read from `user_stories/story-*.md` and `discovery/user_journeys/data/` if it exists):
 - Walk through the complete journey step by step: click links, fill forms, submit, navigate
 - Verify each step produces the expected result (correct page, correct content, correct state change)
 - Verify navigation: back links, breadcrumbs, skip links, menu items all go to the right place

@@ -2,29 +2,21 @@
 
 ## Overview
 
-Day 1 assumes **discovery has already been completed** using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, and then building as many stories as possible.
+Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, and then building as many stories as possible.
 
-> **Prerequisites**: Complete discovery before the workshop using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You need:
-> - `scenarios/scenario.md` — scenario overview and problem statement
-> - `personas/persona-report.md` — researched NHS personas
-> - `user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
+> **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
+> - `discovery/scenarios/scenario.md` — scenario overview and problem statement
+> - `discovery/personas/persona-report.md` — researched NHS personas
+> - `discovery/user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
 >
-> See the [discovery guide](discovery-guide.md) for how to produce these artefacts.
+> See the [discovery guide](../../discovery/README.md) for how to produce these artefacts.
 
 ## Setup (30 minutes)
 
-1. Create a new repo from this template
-2. Clone and open in VS Code Insiders
-3. Copy your discovery artefacts (`scenarios/`, `personas/`, `user_journeys/`) into the repo
-4. Verify prerequisites:
-   ```bash
-   python --version    # 3.12+
-   node --version      # 20+
-   terraform --version
-   az --version
-   az login
-   ```
-5. Set your Azure subscription: `az account set --subscription <id>`
+1. Open your repo in GitHub Codespaces or VS Code with the provided Dev Container (all prerequisites are pre-installed)
+2. Verify your discovery artefacts are in `discovery/` (`scenarios/`, `personas/`, `user_journeys/`)
+3. Log in to Azure: `az login`
+4. Set your Azure subscription: `az account set --subscription <id>`
 
 ---
 
@@ -36,7 +28,7 @@ Before writing any code, design the technical architecture informed by your disc
 
 **Agent**: NHS Architect
 
-> Read the discovery artefacts in `scenarios/`, `personas/`, and `user_journeys/data/`. Design the architecture for this service.
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`. Design the architecture for this service.
 
 The agent will:
 
@@ -68,7 +60,7 @@ Before building, decompose the user journeys into implementable user stories wit
 
 **Agent**: NHS Product Owner
 
-> Read the discovery artefacts in `scenarios/`, `personas/`, and `user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
 
 The agent will:
 
@@ -115,7 +107,7 @@ This is the core of Day 1. The agent will build all user stories from `user_stor
 
 > Build all the user stories from `user_stories/`. Implement every story: API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-The agent reads each story's acceptance criteria to drive implementation and testing. It uses `user_journeys/data/` for E2E test flow context. Monitor progress and provide guidance if it asks questions.
+The agent reads each story's acceptance criteria to drive implementation and testing. It uses `discovery/user_journeys/data/` for E2E test flow context. Monitor progress and provide guidance if it asks questions.
 
 ### While the Agent Works
 

@@ -49,7 +49,7 @@ After the scaffold is deployed, read all user story files in `user_stories/story
 3. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
 4. Wire up routing and navigation between pages
 5. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
-6. Write a Playwright E2E test that walks through the parent user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited. Use `user_journeys/data/` for the journey flow context.
+6. Write a Playwright E2E test that walks through the parent user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited. Use `discovery/user_journeys/data/` for the journey flow context.
 7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
 8. **Visual QA check** — before deploying, open each page affected by this story in the browser (at desktop 1280×720 and mobile 375×667 viewports) and verify:
    - NHS Design System components render correctly (no broken layouts, overlapping elements, or missing assets)
@@ -64,7 +64,7 @@ Work through stories in priority order (riskiest assumption first), but build th
 
 ### Fill Implementation Gaps
 
-After all stories are built, cross-reference the original user journeys in `user_journeys/data/` against the implemented stories. Look for gaps that fall between stories:
+After all stories are built, cross-reference the original user journeys in `discovery/user_journeys/data/` against the implemented stories. Look for gaps that fall between stories:
 - Navigation flows and page transitions that connect stories within a journey
 - Shared components, layouts, or state that multiple stories depend on
 - Error handling, edge cases, or fallback paths not captured in individual stories
