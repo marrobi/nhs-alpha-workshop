@@ -80,6 +80,11 @@ Once the user selects journeys to develop, create detailed documentation for eac
    - `timeline` for long-duration journeys
    - Place diagrams in relevant sections (e.g., "Sequence Diagram: Actor Interactions", "Process Flow: Decision Logic")
 
+## Mermaid Diagram Rules
+
+- **Never use parentheses `(` `)` in Mermaid diagram node labels or text** — they break rendering. Use square brackets `[ ]` or curly braces `{ }` instead for node definitions (e.g. `A[My Label]` not `A(My Label)`).
+- **Never use semicolons `;` in Mermaid diagram message text or labels** — they act as statement terminators and split a single message into two invalid statements. Use commas `,` or dashes `—` instead.
+
 ## Important Guidance
 
 - **Context-aware:** Journeys should be realistic to NHS operations

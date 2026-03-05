@@ -49,7 +49,7 @@ Summarise what you found and confirm with the user:
 
 Identify the key decision points and present 2–3 options for each. Do **not** produce a single design silently. Common decision points:
 
-- **Data storage** — SQLite, PostgreSQL on Azure, or CosmosDB. Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
+- **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
 - **API structure** — single router vs. domain-based routers. How many distinct resources exist?
 - **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
 - **External integrations** — which NHS API sandboxes and Azure services are needed? Define real integration patterns, not mocks.

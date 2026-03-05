@@ -15,6 +15,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **Backend** | Python 3.12 / FastAPI / Uvicorn |
 | **Frontend** | React 18 / Vite / TypeScript / nhsuk-react-components |
 | **Design System** | NHS.UK Frontend (`nhsuk-frontend` CSS + `nhsuk-react-components`) |
+| **Database** |  PostgreSQL, SQL Server, CosmosDB, also consider Azure HDS FHIR when storing health data. |
 | **Backend Testing** | pytest + httpx (unit/integration) |
 | **Frontend Testing** | Vitest |
 | **E2E Testing** | Playwright (Python) + axe-playwright-python |
