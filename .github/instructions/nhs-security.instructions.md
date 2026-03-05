@@ -45,6 +45,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 ### Dependencies
 
 - Pin exact dependency versions — no loose ranges for production dependencies
+- Docker images must use specific version tags — never use `latest`
 - Run dependency audit and resolve critical/high vulnerabilities before merging
 - Configure automated dependency update tooling
 

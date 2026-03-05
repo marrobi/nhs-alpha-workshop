@@ -17,6 +17,7 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 - Use synthetic NHS data only (e.g. NHS number `943 476 5919`)
 - All API routes must have at least one happy-path test
 - Error paths must be tested (invalid input, missing resource)
+- After making code changes, rebuild and restart the application before running tests — always verify tests run against the latest code, not a stale build
 
 ## E2E Tests
 
