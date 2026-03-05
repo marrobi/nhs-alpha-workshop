@@ -4,7 +4,7 @@ applyTo: "**/routers/**,**/api/**"
 
 # NHS API Standards
 
-See `tech-stack.instructions.md` for the current backend framework. The NHS rules below are framework-agnostic; the implementation section is specific to the current stack.
+See `tech-stack.instructions.md` for the current backend framework and implementation details. The rules below are framework-agnostic.
 
 ---
 
@@ -50,16 +50,9 @@ See `tech-stack.instructions.md` for the current backend framework. The NHS rule
 - Stricter limits for auth endpoints: 10 per 15 minutes
 - Exclude `/health` from rate limiting
 
----
+### Frontend/Backend Field Contract
 
-## FastAPI Implementation (current stack)
+- Frontend type definitions for API responses MUST use the exact field names from the corresponding backend response model
+- Do not rename, alias, or case-convert fields between backend and frontend without an explicit serialisation layer
 
-### Route Structure
-
-- Define routers in `app/routers/` using `APIRouter(prefix="/...", tags=["..."])`
-- Use Pydantic models for all request/response schemas
-- Use `async def` for route handlers — FastAPI is async-first
-- Include routers in `app/main.py` with `app.include_router()`
-- Use Pydantic models for input validation — FastAPI returns 422 automatically for invalid input
-- Use a Pydantic validator for NHS number check digit validation
-- Apply `slowapi` rate limiting to all API endpoints
+> See `tech-stack.instructions.md` for framework-specific API implementation details.

@@ -44,10 +44,9 @@ All resource names must include `var.app_name` so multiple Alpha services can co
 
 ## App Service
 
-- `azurerm_linux_web_app` with Python 3.12 runtime stack
+- `azurerm_linux_web_app` — see `tech-stack.instructions.md` for the runtime stack and startup command
 - Set `https_only = true`
 - Set minimum TLS version to 1.2
-- Configure startup command: `uvicorn app.main:app --host 0.0.0.0 --port 8000`
 - Enable Application Insights via `app_settings`
 
 ## State

@@ -33,6 +33,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and the projec
 - [ ] Session secrets loaded from environment variables, never hardcoded
 - [ ] CSRF protection on all state-changing forms
 - [ ] No sensitive data in URL query parameters
+- [ ] Data-access endpoints enforce **authorization**, not just authentication — a logged-in user should only access their own records or records matching their role. Flag any endpoint where any authenticated user can read any other user's data as **Critical** (OWASP A01 — Broken Access Control)
 
 ### 4. Secrets Management
 

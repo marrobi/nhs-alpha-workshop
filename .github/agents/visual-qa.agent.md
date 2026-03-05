@@ -63,6 +63,8 @@ For every user journey (read from `user_stories/story-*.md` and `discovery/user_
 For every page that displays data from the API:
 - Call the underlying API endpoint directly (via `curl` or the test client) and capture the response
 - Compare the API response data to what's rendered on the page
+- Verify every displayed field has a non-empty value — flag undefined, null, or blank fields as bugs
+- Cross-check that frontend property names used in rendering match the API response JSON keys exactly
 - Verify counts match (e.g. number of items in a list matches API response)
 - Verify key fields are displayed correctly (names, dates, statuses, reference numbers)
 - Verify sorting and filtering work correctly if present

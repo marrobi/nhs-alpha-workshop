@@ -34,3 +34,4 @@ One test file per journey, one Page Object per page. Happy path + decision branc
 - Role-based selectors only — never CSS or XPath
 - Must work headless in CI (Chromium)
 - Synthetic NHS data only (NHS number `943 476 5919`)
+- Every test step that displays dynamic data MUST include a content assertion verifying expected values are present and correct — screenshots without content assertions are evidence, not tests

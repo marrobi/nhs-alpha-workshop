@@ -4,7 +4,7 @@ applyTo: "**"
 
 # NHS Security Standards
 
-Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all security decisions. See `tech-stack.instructions.md` for the current stack. The principles below are universal; the implementation section is for the current stack.
+Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all security decisions. See `tech-stack.instructions.md` for the current stack. The principles below are universal.
 
 ---
 
@@ -22,6 +22,13 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 - Never concatenate user input into SQL queries — use parameterised queries only
 - Never pass user input to dynamic code execution or shell commands
 - Never render unsanitised user input as raw HTML in the frontend
+
+### Authorization
+
+- Data-access endpoints MUST enforce authorization, not just authentication
+- An authenticated user must only access data they are authorised to see
+- Authentication confirms identity; authorization confirms permission — both are required
+- For alpha/prototype mock auth, document any relaxed authorization as a risk
 
 ### Sessions & Cookies
 
@@ -49,31 +56,4 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 - **Least privilege RBAC** — grant Managed Identities only the minimum roles required (e.g. `Storage Blob Data Reader`, `Key Vault Secrets User`, `SQL DB Contributor`). Never assign `Owner` or `Contributor` at the resource group level for data access.
 - **Disable local auth where possible** — for Azure resources that support it (Storage, Key Vault, SQL), disable key-based/local authentication and enforce Entra ID-only access.
 
----
-
-## Current Stack Implementation
-
-### Middleware (FastAPI)
-
-- Apply security headers middleware before any route handlers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options)
-- Configure strict Content Security Policy: `default-src 'self'`; allowlist only `nhsuk-frontend` CDN assets if used
-- Apply `slowapi` rate limiting to all public-facing routes
-- Enable CSRF protection on all state-changing routes (POST, PUT, DELETE)
-
-### Secrets (Python / Azure)
-
-- Use `os.environ["VARIABLE_NAME"]` for local development
-- Use Azure Key Vault references for production: `@Microsoft.KeyVault(SecretUri=...)`
-- Terraform outputs containing secrets must use `sensitive = true`
-
-### Input Validation (FastAPI / React)
-
-- Validate all user input at the route handler boundary using Pydantic models
-- Never pass user input to `eval()`, `exec()`, `subprocess.run(shell=True)`, or f-string interpolation in queries
-- Never use `dangerouslySetInnerHTML` with user-supplied content in React components
-
-### Dependencies (Python)
-
-- Pin exact versions in `requirements.txt` — no `>=` or `~=` ranges
-- Run `pip audit` and resolve critical/high vulnerabilities before merging
-- Configure Dependabot for automated security updates
+> See `tech-stack.instructions.md` for framework-specific security implementation details (middleware, secrets, input validation, dependencies).

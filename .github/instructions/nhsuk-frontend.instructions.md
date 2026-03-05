@@ -2,27 +2,20 @@
 applyTo: "**/*.tsx,**/*.jsx,**/frontend/**"
 ---
 
-# NHS.UK Frontend — React Component Standards
+# NHS.UK Frontend Standards
 
-Use [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-components) for all NHS Design System components. Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) for patterns and the [NHS content style guide](https://service-manual.nhs.uk/content) for content standards.
+Use the [NHS Design System](https://service-manual.nhs.uk/design-system) for all user-facing pages. Follow the [NHS content style guide](https://service-manual.nhs.uk/content) for content standards. See `tech-stack.instructions.md` for the current frontend framework, component library setup, and implementation details.
 
-## Setup
+## Design System
 
-- Install: `npm install nhsuk-react-components nhsuk-frontend`
-- Import CSS in entry point: `import 'nhsuk-frontend/dist/nhsuk.css'`
-- Import components individually: `import { Header, Footer, Button } from 'nhsuk-react-components'`
-
-## Component Usage
-
-- Always use `nhsuk-react-components` — never hand-code components that exist in the design system
-- See [component list](https://github.com/NHSDigital/nhsuk-react-components#components) for available components
-- Follow the prop patterns from the nhsuk-react-components docs, which mirror the [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
+- Always use the NHS Design System component library — never hand-code components that exist in the design system
+- Follow the component patterns from the [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
 
 ## Layout
 
-- Wrap pages in `<Header>` and `<Footer>` from nhsuk-react-components
-- Set service name in the Header component
-- Use NHS grid: `<Container>`, `<Row>`, `<Col width="two-thirds">`
+- Pages must include NHS header and footer
+- Set service name in the header
+- Use the NHS grid system for layout
 - Include a skip link as the first element
 
 ## Typography
@@ -33,15 +26,20 @@ Use [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-component
 ## Forms
 
 - One question per page ([GDS question protocol](https://design-system.service.gov.uk/patterns/question-pages/))
-- Use `<Input>`, `<Radios>`, `<DateInput>`, `<Select>` components from nhsuk-react-components
-- Use `<ErrorSummary>` at the top of the page on validation failure
-- Use `error` prop on form components for inline error messages
+- Use NHS Design System form components (input, radios, date input, select)
+- Show error summary at the top of the page on validation failure
+- Show inline error messages on individual form fields
 
 ## Navigation
 
-- NHS `<Header>` with service name
-- `<Breadcrumb>` for page hierarchy (except on the start page)
-- `<BackLink>` on question pages
+- NHS header with service name
+- Breadcrumbs for page hierarchy (except on the start page)
+- Back link on question pages
+
+## API Data Consumption
+
+- When consuming API data, frontend interface field names must match the backend response model exactly
+- If unsure of field names, check the backend schema — do not guess field names
 
 ## Accessibility
 

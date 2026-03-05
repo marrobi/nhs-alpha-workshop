@@ -44,6 +44,9 @@ Role-based only: `get_by_role`, `get_by_label`, `get_by_text`. Never CSS or XPat
 | **Check answers** | Summary list with "Change" links |
 | **Confirmation** | Panel with reference number |
 | **Error pages** | Error summary at top, inline field errors, focus moves to summary |
+| **Data display** | Assert expected data values appear in page text — do not rely on element visibility alone |
+| **Success pages** | Assert error summary component is NOT present |
+| **Summary list / data table** | Assert every value cell is non-empty |
 
 ## Consuming User Journeys
 

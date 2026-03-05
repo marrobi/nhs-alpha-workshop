@@ -27,6 +27,7 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 - [ ] API request/response validation at route boundaries using the framework's validation layer
 - [ ] No `Any` types in TypeScript — strict typing throughout frontend code
 - [ ] Generic types used appropriately (not overly broad `dict`/`object`/`any`)
+- [ ] Cross-reference frontend type definitions for API responses against backend response models — field names must match exactly. Flag any mismatch as **High** severity
 
 ### 3. Error Handling
 
