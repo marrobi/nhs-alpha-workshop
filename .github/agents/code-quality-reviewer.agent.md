@@ -23,10 +23,10 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ### 2. Type Safety
 
-- [ ] Type hints on **all** function signatures (parameters and return types) in backend code
-- [ ] Pydantic models used for all API request/response validation at route boundaries
+- [ ] Type annotations on **all** function signatures (parameters and return types) in backend code
+- [ ] API request/response validation at route boundaries using the framework's validation layer
 - [ ] No `Any` types in TypeScript — strict typing throughout frontend code
-- [ ] Generic types used appropriately (not overly broad `dict` or `object`)
+- [ ] Generic types used appropriately (not overly broad `dict`/`object`/`any`)
 
 ### 3. Error Handling
 

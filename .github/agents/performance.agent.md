@@ -77,31 +77,13 @@ k6 run -e BASE_URL=https://app-nhs-alpha-dev.azurewebsites.net tests/performance
 
 ## Core Web Vitals via Playwright
 
-Use Python Playwright for CWV checks:
+Use the E2E testing language from `tech-stack.instructions.md` to write Playwright-based CWV checks. Measure using the browser's Performance API:
 
-```python
-from playwright.sync_api import sync_playwright
+- **TTFB**: `performance.getEntriesByType('navigation')[0].responseStart - requestStart` — target < 200ms
+- **CLS**: Use `PerformanceObserver` for `layout-shift` entries — target < 0.1
+- **LCP**: Use `PerformanceObserver` for `largest-contentful-paint` — target < 2500ms
 
-def test_start_page_meets_core_web_vitals(page):
-    page.goto("/")
-
-    metrics = page.evaluate("""() => {
-        const nav = performance.getEntriesByType('navigation')[0];
-        return { ttfb: nav.responseStart - nav.requestStart };
-    }""")
-
-    assert metrics["ttfb"] < 200, f"TTFB {metrics['ttfb']}ms exceeds 200ms target"
-
-    cls = page.evaluate("""() => new Promise(resolve => {
-        let clsValue = 0;
-        new PerformanceObserver(list => {
-            for (const entry of list.getEntries()) clsValue += entry.value;
-        }).observe({ type: 'layout-shift', buffered: true });
-        setTimeout(() => resolve(clsValue), 3000);
-    })""")
-
-    assert cls < 0.1, f"CLS {cls} exceeds 0.1 threshold"
-```
+Write assertions that fail the test if thresholds are exceeded. Run against all key pages (start page, question pages, confirmation).
 
 ## CI Integration
 

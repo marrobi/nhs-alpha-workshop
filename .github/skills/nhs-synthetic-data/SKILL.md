@@ -25,69 +25,7 @@ NHS numbers are 10 digits with a Modulus 11 check digit. The algorithm:
 4. Check digit = 11 - remainder
 5. If check digit is 11, use 0. If check digit is 10, the number is invalid — regenerate
 
-### Python Implementation
-
-```python
-def generate_nhs_number(seed_digits: str = "943476591") -> str:
-    """Generate a valid synthetic NHS number with correct check digit.
-
-    Args:
-        seed_digits: First 9 digits. Default produces the standard
-                     synthetic NHS number 943 476 5919.
-
-    Returns:
-        A 10-digit NHS number string with valid check digit.
-
-    Raises:
-        ValueError: If the seed produces an invalid check digit (remainder 10).
-    """
-    if len(seed_digits) != 9 or not seed_digits.isdigit():
-        raise ValueError("seed_digits must be exactly 9 digits")
-
-    total = sum(int(d) * (11 - i) for i, d in enumerate(seed_digits, 1))
-    remainder = total % 11
-    check = 11 - remainder
-
-    if check == 11:
-        check = 0
-    if check == 10:
-        raise ValueError(f"Seed {seed_digits} produces invalid check digit")
-
-    return seed_digits + str(check)
-
-
-def format_nhs_number(nhs_number: str) -> str:
-    """Format NHS number in standard 3-3-4 display format.
-
-    Example: '9434765919' → '943 476 5919'
-    """
-    return f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
-
-
-def validate_nhs_number(nhs_number: str) -> bool:
-    """Validate an NHS number using the Modulus 11 algorithm.
-
-    Args:
-        nhs_number: 10-digit NHS number string (spaces are stripped).
-
-    Returns:
-        True if the check digit is valid.
-    """
-    cleaned = nhs_number.replace(" ", "")
-    if len(cleaned) != 10 or not cleaned.isdigit():
-        return False
-
-    total = sum(int(d) * (11 - i) for i, d in enumerate(cleaned[:9], 1))
-    remainder = total % 11
-    check = 11 - remainder
-
-    if check == 11:
-        check = 0
-    if check == 10:
-        return False
-
-    return int(cleaned[9]) == check
-```
+Implement `generate`, `format` (3-3-4 with spaces), and `validate` functions in the backend language from `tech-stack.instructions.md`.
 
 ### Pre-validated Synthetic NHS Numbers
 
@@ -107,91 +45,21 @@ These numbers pass the Modulus 11 check and are designated for testing:
 
 Use these synthetic personas consistently across the service:
 
-```python
-SYNTHETIC_PATIENTS = [
-    {
-        "nhs_number": "943 476 5919",
-        "given_name": "Sarah",
-        "family_name": "Thompson",
-        "date_of_birth": "1991-03-15",
-        "postcode": "LS1 4AP",
-        "gp_surgery": "Kirkstall Health Centre",
-        "gender": "female",
-    },
-    {
-        "nhs_number": "911 111 1124",
-        "given_name": "James",
-        "family_name": "Wilson",
-        "date_of_birth": "1954-08-22",
-        "postcode": "M1 2WD",
-        "gp_surgery": "Manchester Medical Practice",
-        "gender": "male",
-    },
-    {
-        "nhs_number": "922 222 2228",
-        "given_name": "Priya",
-        "family_name": "Patel",
-        "date_of_birth": "1985-11-30",
-        "postcode": "B1 1BB",
-        "gp_surgery": "City Centre Surgery",
-        "gender": "female",
-    },
-    {
-        "nhs_number": "987 654 3210",
-        "given_name": "David",
-        "family_name": "Roberts",
-        "date_of_birth": "1968-06-10",
-        "postcode": "SW1A 1AA",
-        "gp_surgery": "Westminster Health Practice",
-        "gender": "male",
-    },
-    {
-        "nhs_number": "900 000 0009",
-        "given_name": "Fatima",
-        "family_name": "Khan",
-        "date_of_birth": "2000-01-25",
-        "postcode": "LS2 9JT",
-        "gp_surgery": "University Health Service",
-        "gender": "female",
-    },
-]
-```
+| NHS Number | Given Name | Family Name | DOB | Postcode | GP Surgery | Gender |
+|---|---|---|---|---|---|---|
+| 943 476 5919 | Sarah | Thompson | 1991-03-15 | LS1 4AP | Kirkstall Health Centre | female |
+| 911 111 1124 | James | Wilson | 1954-08-22 | M1 2WD | Manchester Medical Practice | male |
+| 922 222 2228 | Priya | Patel | 1985-11-30 | B1 1BB | City Centre Surgery | female |
+| 987 654 3210 | David | Roberts | 1968-06-10 | SW1A 1AA | Westminster Health Practice | male |
+| 900 000 0009 | Fatima | Khan | 2000-01-25 | LS2 9JT | University Health Service | female |
 
 ### Synthetic Appointments
 
-```python
-from datetime import date, time
-
-SYNTHETIC_APPOINTMENTS = [
-    {
-        "patient_nhs_number": "943 476 5919",
-        "date": date(2026, 3, 15),
-        "time": time(9, 30),
-        "type": "GP appointment",
-        "clinician": "Dr. Ahmed",
-        "location": "Kirkstall Health Centre",
-        "status": "booked",
-    },
-    {
-        "patient_nhs_number": "943 476 5919",
-        "date": date(2026, 3, 22),
-        "time": time(14, 0),
-        "type": "Blood test",
-        "clinician": "Nurse Williams",
-        "location": "Kirkstall Health Centre",
-        "status": "booked",
-    },
-    {
-        "patient_nhs_number": "911 111 1124",
-        "date": date(2026, 3, 10),
-        "time": time(10, 15),
-        "type": "Annual health check",
-        "clinician": "Dr. Chen",
-        "location": "Manchester Medical Practice",
-        "status": "completed",
-    },
-]
-```
+| Patient NHS Number | Date | Time | Type | Clinician | Location | Status |
+|---|---|---|---|---|---|---|
+| 943 476 5919 | 2026-03-15 | 09:30 | GP appointment | Dr. Ahmed | Kirkstall Health Centre | booked |
+| 943 476 5919 | 2026-03-22 | 14:00 | Blood test | Nurse Williams | Kirkstall Health Centre | booked |
+| 911 111 1124 | 2026-03-10 | 10:15 | Annual health check | Dr. Chen | Manchester Medical Practice | completed |
 
 ### Synthetic Clinical Codes (SNOMED CT)
 
@@ -208,50 +76,9 @@ Use real SNOMED CT concept IDs with synthetic patient associations:
 | 182531007 | Paracetamol (medication) | Prescription |
 | 318475005 | Amoxicillin (medication) | Prescription |
 
-## pytest Fixtures
+## Test Fixtures
 
-### `conftest.py` fixture for synthetic data
-
-```python
-import pytest
-
-@pytest.fixture
-def synthetic_patient():
-    """A single synthetic patient for unit tests."""
-    return {
-        "nhs_number": "943 476 5919",
-        "given_name": "Sarah",
-        "family_name": "Thompson",
-        "date_of_birth": "1991-03-15",
-    }
-
-@pytest.fixture
-def synthetic_patients():
-    """All synthetic patients for integration tests."""
-    return SYNTHETIC_PATIENTS  # From the list above
-```
-
-### TypeScript fixtures for Vitest/Playwright
-
-```typescript
-export const syntheticPatient = {
-  nhsNumber: '943 476 5919',
-  givenName: 'Sarah',
-  familyName: 'Thompson',
-  dateOfBirth: '1991-03-15',
-}
-
-export const syntheticPatients = [
-  syntheticPatient,
-  {
-    nhsNumber: '911 111 1124',
-    givenName: 'James',
-    familyName: 'Wilson',
-    dateOfBirth: '1954-08-22',
-  },
-  // ... additional patients
-]
-```
+Create test fixtures from the patient and appointment data above, using the test framework from `tech-stack.instructions.md`. Provide both single-patient and all-patients fixtures for unit and integration tests respectively.
 
 ## Rules
 

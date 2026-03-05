@@ -15,7 +15,7 @@ You can scaffold applications, write code, run terminal commands, execute tests,
 
 ## Tech Stack & Implementation Detail
 
-Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures.
+Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Read `.github/skills/playwright-nhs-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and NHS-specific conventions.
 
 ## Prerequisites
 
@@ -34,12 +34,13 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 3. Create the backend API with a health endpoint
 4. Scaffold the frontend with NHS Design System components
 5. Write tests for the health endpoint
-6. Write IaC configuration and validate
-7. **Quick infrastructure review** — before deploying, check the IaC configuration against `.github/instructions/terraform-azure-nhs.instructions.md`: naming convention uses `var.app_name`, managed identity created (not service principal), HTTPS-only and TLS 1.2 on App Service, all resources tagged, provider version pinned. Fix any violations.
-8. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet.
-9. Build the frontend for production
-10. Deploy infrastructure and application
-11. Verify the health endpoint returns 200 on the live URL
+6. **Scaffold E2E test infrastructure** — read `.github/skills/playwright-nhs-e2e/SKILL.md` and install the Playwright test dependencies for the E2E language in `tech-stack.instructions.md`. Pin versions in the dependency file. Run `playwright install --with-deps chromium`. Create the directory structure and shared configuration from the skill.
+7. Write IaC configuration and validate
+8. **Quick infrastructure review** — before deploying, check the IaC configuration against `.github/instructions/terraform-azure-nhs.instructions.md`: naming convention uses `var.app_name`, managed identity created (not service principal), HTTPS-only and TLS 1.2 on App Service, all resources tagged, provider version pinned. Fix any violations.
+9. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet.
+10. Build the frontend for production
+11. Deploy infrastructure and application
+12. Verify the health endpoint returns 200 on the live URL
 
 ### Build All User Stories
 
@@ -49,16 +50,17 @@ After the scaffold is deployed, read all user story files in `user_stories/story
 3. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
 4. Wire up routing and navigation between pages
 5. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
-6. Write a Playwright E2E test that walks through the parent user journey end-to-end — verify page layout renders correctly, NHS components are present, and the full user flow works (form submissions, navigation, expected content). Include an axe accessibility check on each page visited. Use `discovery/user_journeys/data/` for the journey flow context.
-7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
-8. **Visual QA check** — before deploying, open each page affected by this story in the browser (at desktop 1280×720 and mobile 375×667 viewports) and verify:
+6. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
+
+**After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
+7. **Visual QA check** — before deploying, open each page affected by this story in the browser (at desktop 1280×720 and mobile 375×667 viewports) and verify:
    - NHS Design System components render correctly (no broken layouts, overlapping elements, or missing assets)
    - The page content matches the story requirements and API data
    - Forms work: valid input succeeds, invalid input shows NHS error summary
    - Navigation between pages works (links, back buttons, breadcrumbs)
    - Fix any visual, functional, or data issues before proceeding to deploy
-9. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
-10. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
+8. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
+9. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
 Work through stories in priority order (riskiest assumption first), but build them **all** in a single session.
 
@@ -112,5 +114,5 @@ Alpha exists to test riskiest assumptions with a realistic service. Do not take 
 - **No skipping input validation** — every API endpoint must validate input using Pydantic models.
 - **No skipping error handling** — implement proper error responses (400, 404, 422, 500) with user-friendly messages. Error states are part of the user journey.
 - **No placeholder pages** — every page must use real NHS Design System components with real (synthetic) content, not "coming soon" or lorem ipsum.
-- **No skipping tests** — every story must have unit/integration tests for its functional acceptance criteria and a Playwright E2E test.
+- **No skipping tests** — every story must have unit/integration tests for its functional acceptance criteria. Every user journey must have a Playwright E2E test (see `.github/skills/playwright-nhs-e2e/SKILL.md`).
 - If something from the ADR or user stories seems too complex for the time available, flag it to the user rather than silently simplifying it.
