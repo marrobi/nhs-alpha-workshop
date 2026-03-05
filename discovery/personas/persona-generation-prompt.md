@@ -11,7 +11,9 @@ Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to gene
 ### Objective
 Research and create detailed user personas for every role involved in the described system, using real-world UK NHS job titles and organizational context. Include both NHS staff roles and non-NHS roles (such as patients, carers, family members, external partners, and other stakeholders).
 
-**Important**: Each persona should be written as if describing a specific individual person, not a generalized role. Use concrete details, specific behaviors, and personal context to make each persona feel real and relatable. Limit each persona to one page, a maximum of 10 personas, and provide the output in Markdown format.
+**Important**: Each persona should be written as if describing a specific individual person, not a generalized role. Use concrete details, specific behaviors, and personal context to make each persona feel real and relatable. Keep each persona to one page. Include enough personas to cover every distinct user type, framework level, and interaction pattern — but no more. If a role doesn't add a meaningfully different perspective, merge it with a similar persona. Provide the output in Markdown format.
+
+> Follow [GDS guidance: Understanding users and their context](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works#understanding-users-and-their-context) — learn what users are trying to achieve, understand the wider journey, and consider accessibility, digital skills, and offline channels.
 
 ### Persona Requirements
 
@@ -45,13 +47,21 @@ For each identified role, create a comprehensive persona using the following tem
    - Time-consuming tasks they wish were automated
    - Specific gaps in current solutions that impact their work
 
-5. **Additional Context**
+5. **Wider Journey & Touchpoints**
+   - Where this person's interaction sits within a bigger process or user journey
+   - Other services, teams, or organisations they interact with (NHS and non-NHS)
+   - Offline channels they use (phone, paper, face-to-face, post)
+   - Handoff points where they depend on or pass work to others
+
+6. **Additional Context**
    - A typical day-in-the-life for this specific person
    - Their technical proficiency level (with examples)
+   - Their digital access — devices, connectivity, confidence online, assisted digital needs
+   - Accessibility needs (for all personas, not just patients — staff may also have disabilities or access needs)
    - Their key stakeholder relationships
    - Their decision-making authority (if applicable)
    - Regulatory/compliance considerations they deal with (for staff roles)
-   - Personal circumstances and accessibility needs (for patients/carers)
+   - Personal circumstances (for patients/carers)
    - Their specific workload and time constraints
    - Cultural, linguistic, or socioeconomic factors relevant to them
 

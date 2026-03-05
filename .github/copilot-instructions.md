@@ -32,3 +32,7 @@ Follow `.github/instructions/nhs-security.instructions.md` (auto-applied to all 
 ## Infrastructure
 
 Follow `.github/instructions/terraform-azure-nhs.instructions.md` (auto-applied to `infra/` and `.tf` files) for Terraform, Azure UK South, Managed Identity, and Key Vault standards.
+
+## Mermaid Diagrams
+
+- **Never use parentheses `(` `)` in Mermaid diagram node labels or text** — they break rendering. Use square brackets `[ ]` or curly braces `{ }` instead for node definitions (e.g. `A[My Label]` not `A(My Label)`).

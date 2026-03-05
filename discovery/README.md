@@ -11,7 +11,7 @@ Discovery **must be completed before the workshop**. The goal is to understand t
 | Scenario & problem statement | `discovery/scenarios/scenario.md` | `/generate_scenario_and_problem_statement` prompt |
 | Persona report | `discovery/personas/persona-report.md` | M365 Copilot Researcher agent |
 | Persona slides | `discovery/personas/generated/personas-deck.md` | `/generate_persona_slides_from_report` prompt |
-| User journeys (5–8) | `discovery/user_journeys/data/journey-*.md` | `/generate_user_journeys` prompt |
+| User journeys | `discovery/user_journeys/data/journey-*.md` | `/generate_user_journeys` prompt |
 | Constraints & assumptions | `docs/discovery-notes.md` | Team discussion |
 
 ## Step-by-step
@@ -60,7 +60,7 @@ Generate user journeys from your scenario and personas:
 
 > `/generate_user_journeys` with your scenario and personas
 
-Copilot will suggest 5–8 user journeys. **Develop all of them in detail** — the more journeys you have, the more user stories you can build during the workshop. Save detailed journeys to `discovery/user_journeys/data/`.
+Copilot will suggest user journeys covering each primary persona and key workflow. **Develop all distinct journeys in detail** — the more journeys you have, the more user stories you can build during the workshop. Save detailed journeys to `discovery/user_journeys/data/`.
 
 Each journey file should include:
 - Step-by-step interactions (happy path and edge cases)
@@ -90,7 +90,7 @@ Before the workshop, confirm you have:
 - [ ] `discovery/scenarios/scenario.md` — scenario overview and problem statement
 - [ ] `discovery/personas/persona-report.md` — researched NHS personas (up to 10)
 - [ ] `discovery/personas/generated/personas-deck.md` — Marp slide deck
-- [ ] `discovery/user_journeys/data/journey-*.md` — at least 5 detailed user journeys
+- [ ] `discovery/user_journeys/data/journey-*.md` — detailed user journeys covering each primary user type
 - [ ] `docs/discovery-notes.md` — constraints, riskiest assumptions, scope boundaries
 - [ ] Prioritised list of which journeys to build first
 - [ ] Discovery branch merged to main

@@ -32,10 +32,10 @@ AGENTS.md             Copilot Coding Agent context file
 
 ### 2. Prerequisites
 
-Each participant needs:
+Each team needs:
 
 - GitHub account with Copilot seat
-- Azure subscription with Contributor access to UK South
+- Azure subscription with Contributor access to UK South (or another region if acceptable for development)
 - Access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery)
 
 All other tools (Python, Node.js, Terraform, Azure CLI) are pre-installed in the Dev Container.
