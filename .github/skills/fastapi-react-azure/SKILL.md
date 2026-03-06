@@ -55,8 +55,10 @@ infra/
 ### Copilot Setup Workflow
 
 1. Create `.github/workflows/copilot-setup-steps.yml` with:
+   - `permissions: contents: read` — grants the workflow read access to the repository
    - `on: workflow_dispatch`
    - Steps: checkout, setup Python 3.12, `pip install -r requirements.txt`, setup Node 20, conditional `npm ci` (only if `frontend/` exists), setup Terraform
+   - Add `continue-on-error: true` to install steps (Python deps, frontend deps, Terraform) so the workflow does not fail when optional directories or files do not yet exist
    - This workflow configures the Copilot Coding Agent environment — it is **not** CI/CD
 
 ### Backend — FastAPI
