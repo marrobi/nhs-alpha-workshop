@@ -102,9 +102,9 @@ For each point:
 
 ## Rules
 
-- Be honest — don't mark a standard as "Met" without concrete evidence in the repo
-- **Search the actual codebase for evidence** — do not rely on architecture docs, instruction files, or tech stack descriptions. These describe intent, not implementation. Only code, tests, config, and Terraform files count as evidence.
-- Link to specific files and line numbers, not vague references
-- If evidence exists only in design docs (ADR, instructions) but not in code, mark the standard as **⚠️ Partial** with a note that implementation is pending
-- An Alpha assessment accepts that standards are partially met — the point is to show awareness and a plan
-- Always check for both the GDS standard AND the NHS-specific angle (clinical safety, IG, NHS design system)
+- Be honest — don't mark a standard as “Met” without concrete evidence
+- Follow verification rules from `.github/instructions/review-agent-pattern.instructions.md` — only code, tests, config, and Terraform count as evidence
+- If evidence exists only in design docs but not in code, mark **⚠️ Partial**
+- Link to specific files and line numbers
+- An Alpha assessment accepts partial — show awareness and a plan
+- Check both GDS standard and NHS-specific angle (clinical safety, IG, NHS Design System)

@@ -40,10 +40,10 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ### 4. NHS Conventions
 
-- [ ] All user-facing pages use [NHS Design System components](https://service-manual.nhs.uk/design-system/components) — no custom components where NHS equivalents exist
-- [ ] User-facing text follows the [NHS content style guide](https://service-manual.nhs.uk/content): plain English, short sentences, active voice
-- [ ] Only synthetic NHS data used — no real patient data anywhere (check seed scripts, fixtures, tests, comments)
-- [ ] Synthetic NHS numbers follow the valid format (e.g. `943 476 5919`) — not obviously fake like `000 000 0000`
+- [ ] All user-facing pages use [NHS Design System components](https://service-manual.nhs.uk/design-system/components) — no custom where NHS equivalents exist
+- [ ] User-facing text follows [NHS content style guide](https://service-manual.nhs.uk/content): plain English, short sentences, active voice
+- [ ] Only synthetic NHS data — no real patient data anywhere (seed scripts, fixtures, tests, comments)
+- [ ] NHS Number rules followed per `nhs-number.instructions.md` (auto-applied): valid format, 3-3-4 display, modulus 11 validation
 
 ### 5. API Quality
 
@@ -85,93 +85,24 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ## How to Review
 
-### CRITICAL: Read the full codebase first
+Read the full codebase first — understand structure, patterns, tech stack, and existing code before writing findings.
 
-Before writing any findings, read the entire codebase to understand:
-- Project structure and file organisation
-- Existing patterns and conventions
-- Tech stack and frameworks in use
-- Which routes, pages, and components exist
+Follow the iterative review workflow from `.github/instructions/review-agent-pattern.instructions.md` (workflow, severity levels, report template).
 
-### Review Workflow
+**Report path**: `docs/code-review.md`
 
-Follow this iterative process — do not save the final report until all fixable issues are resolved:
+Add `Test Coverage: [percentage]` to the report header.
 
-1. **Initial review** — read all code and run automated checks (linter, type checker, test suite with coverage). Record all findings against the 8-section checklist.
-2. **Fix issues** — fix all critical and high issues directly in the codebase. Fix medium issues where the fix is clear and safe.
-3. **Re-review** — re-run linters, type checks, and tests after fixes. Verify fixes are correct and check for regressions.
-4. **Repeat** — continue the fix → re-review cycle until no critical or high issues remain. At least **two full review passes** are required (initial + one re-review after fixes).
-5. **Save final report** — only after the last clean (or best-achievable) pass, save the report to `docs/code-review.md`. The report must reflect the **final** state, not the initial findings. Include a "Resolved Issues" section listing what was found and fixed.
-
-## Severity Levels
-
-- **Critical**: Security basics violations (eval with user input, SQL concat, hardcoded secrets), data integrity issues → fix immediately
-- **High**: Missing input validation, swallowed errors, missing type hints on public API, failing tests → fix before deployment
-- **Medium**: Naming issues, code duplication, missing edge-case tests, structural improvements → fix in review
-- **Low**: Style preferences, minor readability improvements, optional type narrowing → document only
-
-## Code Review Report
-
-Save the report to `docs/code-review.md` **after all fix cycles are complete**:
-
-```markdown
-# Code Quality Review Report
-
-**Service**: [name]
-**Date**: [date]
-**Tech Stack**: [from tech-stack.instructions.md]
-**Test Coverage**: [percentage]
-
-## Summary
-
-| Category | Issues Found | Fixed | Remaining |
-|---|---|---|---|
-| Code Structure | [n] | [n] | [n] |
-| Type Safety | [n] | [n] | [n] |
-| Error Handling | [n] | [n] | [n] |
-| NHS Conventions | [n] | [n] | [n] |
-| API Quality | [n] | [n] | [n] |
-| Frontend Quality | [n] | [n] | [n] |
-| Test Coverage | [n] | [n] | [n] |
-| Security Basics | [n] | [n] | [n] |
-
-## Review Passes
-
-| Pass | Date | Critical | High | Medium | Low |
-|---|---|---|---|---|---|
-| 1 (initial) | [date] | [n] | [n] | [n] | [n] |
-| 2 (after fixes) | [date] | [n] | [n] | [n] | [n] |
-
-## Resolved Issues
-
-Issues found during earlier passes that have been fixed:
-
-### [Resolved finding title]
-- **Severity**: Critical / High / Medium / Low
-- **Category**: [checklist section]
-- **File**: [path]
-- **Description**: [what was wrong]
-- **Fix applied**: [what was changed]
-- **Resolved in pass**: [pass number]
-
-## Remaining Issues
-
-Issues still present after all review passes (with justification if not fixed):
-
-### [Finding title]
-- **Severity**: Critical / High / Medium / Low
-- **Category**: [checklist section]
-- **File**: [path]
-- **Description**: [what's wrong]
-- **Reason not fixed**: [justification — e.g. requires architectural change, team decision needed]
-```
+**Severity examples**:
+- **Critical**: Security basics violations (eval with user input, SQL concat, hardcoded secrets), data integrity
+- **High**: Missing input validation, swallowed errors, missing type hints on public API, failing tests
+- **Medium**: Naming, code duplication, missing edge-case tests, structural improvements
+- **Low**: Style preferences, minor readability, optional type narrowing
 
 ## Rules
 
 - **Fix issues, don't just report them** — you are a review agent that fixes, not just audits
-- Run at least **two full review passes** — never save the report based only on the initial scan
 - **Read `tech-stack.instructions.md`** — never hardcode framework-specific commands or patterns
 - Follow existing codebase patterns before introducing new ones
 - Security basics (section 8) is a lightweight check — do not duplicate the Security Reviewer's full OWASP audit
-- Save the report only after the final review pass
 - All tests must pass after your fixes — run the full suite before saving the report

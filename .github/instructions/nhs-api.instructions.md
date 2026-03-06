@@ -25,10 +25,10 @@ See `tech-stack.instructions.md` for the current backend framework and implement
 
 ### NHS Number
 
-See `nhs-number.instructions.md` for the full ISB 0149 NHS Number standard — storage, display (3-3-4 format), input, validation (modulus 11 check digit), search, and electronic transmission rules. Key API rules:
+See `nhs-number.instructions.md` (auto-applied) for full ISB 0149 rules. Key API rules:
 
-- Validate format and check digit on all inbound NHS numbers
-- Never accept NHS numbers via GET query parameters — use POST with request body
+- Validate format + modulus 11 check digit on all inbound NHS numbers
+- Never accept NHS numbers via GET query parameters — POST only
 
 ### FHIR UK Core
 
