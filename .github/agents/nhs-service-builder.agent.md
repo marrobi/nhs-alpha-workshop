@@ -94,6 +94,10 @@ Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) fo
 
 Follow `.github/instructions/nhs-security.instructions.md` (auto-applied). Key: security headers on every response, never log PII, never hardcode secrets, validate all input.
 
+## NHS Number
+
+Follow `.github/instructions/nhs-number.instructions.md` (auto-applied). Key: store as 10-digit string, display in 3-3-4 format on every patient screen, validate format and modulus 11 check digit on all input, support search by NHS Number alone and without it.
+
 ## Infrastructure
 
 Follow the IaC instructions auto-applied to infrastructure files. Key: UK region, app-name-based naming, managed identity, secrets vault.

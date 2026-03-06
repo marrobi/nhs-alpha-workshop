@@ -72,8 +72,8 @@ Format each decision as:
 
 Using the agreed decisions, map each user journey to:
 - **API endpoints** — routes, HTTP methods, request/response shapes
-- **Data models** — entities, fields, types, validation rules, relationships
-- **Frontend pages** — NHS Design System pages/components for each journey step
+- **Data models** — entities, fields, types, validation rules, relationships. Any entity storing patient data MUST include the NHS Number as a 10-digit string field with modulus 11 validation — see `.github/instructions/nhs-number.instructions.md` for the full ISB 0149 requirements (storage, display, search, validation, transmission)
+- **Frontend pages** — NHS Design System pages/components for each journey step. Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149 Req 07/09)
 - **Infrastructure** — cloud resources required beyond the baseline
 
 ### Step 5 — Prioritise by Riskiest Assumption

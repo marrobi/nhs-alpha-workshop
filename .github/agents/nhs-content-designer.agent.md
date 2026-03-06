@@ -48,9 +48,15 @@ You review UI components, page templates, error messages, and form labels for co
 
 ### NHS number formatting
 
-Always format NHS numbers in 3-digit groups with spaces: `943 476 5919`
+See `.github/instructions/nhs-number.instructions.md` for the full ISB 0149 NHS Number standard. Key content rules:
+
+Always format NHS numbers in 3-3-4 groups with spaces: `943 476 5919`
+
+The NHS Number MUST be displayed on every screen showing patient-identifiable data (ISB 0149 Req 07).
 
 Never display full NHS numbers unless strictly necessary. Where possible, show only the last 3 digits: `*** *** 5919`
+
+Label the field as "NHS number" (lowercase "number") in user-facing text.
 
 ### Dates and times
 

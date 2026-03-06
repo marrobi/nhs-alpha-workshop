@@ -22,6 +22,8 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and the projec
 ### 2. Input Validation & Injection
 
 - [ ] All user input validated at the API boundary using the framework's validation layer
+- [ ] NHS Number fields validate format (10 digits) and modulus 11 check digit per `nhs-number.instructions.md`
+- [ ] NHS Numbers displayed in 3-3-4 format on all patient-facing screens, never as raw 10-digit strings
 - [ ] No string concatenation in database queries — parameterised queries only
 - [ ] No dynamic code execution (`eval`, `exec`, shell injection) with user input
 - [ ] Frontend components never render unsanitised user input as raw HTML

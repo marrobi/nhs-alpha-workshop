@@ -23,12 +23,12 @@ See `tech-stack.instructions.md` for the current backend framework and implement
 - Use standard HTTP status codes: 200, 201, 400, 401, 403, 404, 422, 500
 - Include `X-Request-ID` header in all responses for distributed tracing
 
-### NHS Number Validation
+### NHS Number
 
-- NHS numbers are 10 digits with a modulus 11 check digit
-- Display format: 3-3-4 groups (e.g. `943 476 5919`)
-- Validate inbound NHS numbers with the check digit algorithm
-- Never accept NHS numbers via GET query parameters
+See `nhs-number.instructions.md` for the full ISB 0149 NHS Number standard — storage, display (3-3-4 format), input, validation (modulus 11 check digit), search, and electronic transmission rules. Key API rules:
+
+- Validate format and check digit on all inbound NHS numbers
+- Never accept NHS numbers via GET query parameters — use POST with request body
 
 ### FHIR UK Core
 
