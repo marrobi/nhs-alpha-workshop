@@ -33,7 +33,10 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 6. **Scaffold E2E test infrastructure** — read `.github/skills/playwright-nhs-e2e/SKILL.md` and install the Playwright test dependencies for the E2E language in `tech-stack.instructions.md`. Pin versions in the dependency file. Run `playwright install --with-deps chromium`. Create the directory structure and shared configuration from the skill.
 7. Write IaC configuration and validate
 8. **Quick infrastructure review** — before deploying, check the IaC configuration against `.github/instructions/terraform-azure-nhs.instructions.md`: naming convention uses `var.app_name`, managed identity created (not service principal), HTTPS-only and TLS 1.2 on App Service, all resources tagged, provider version pinned. Fix any violations.
-9. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool). Use conditional checks for directories that may not exist yet. Note: conditional directory checks are acceptable **only** in this CI setup workflow where directories are created incrementally — never use this pattern in application runtime code.
+9. Create `.github/workflows/copilot-setup-steps.yml` — the Copilot Coding Agent environment setup workflow. Base the steps on the current tech stack in `tech-stack.instructions.md` (backend runtime, frontend tooling, IaC tool).
+   - The workflow **must** include `permissions: contents: read` at the top level so it has repository access.
+   - Add `continue-on-error: true` to all dependency install steps (e.g. pip install, npm ci, Terraform setup) so the workflow does not fail when optional files or directories do not yet exist.
+   - Use conditional checks for directories that may not exist yet. Note: conditional directory checks are acceptable **only** in this CI setup workflow where directories are created incrementally — never use this pattern in application runtime code.
 10. Build the frontend for production
 11. Deploy infrastructure and application
 12. Verify the health endpoint returns 200 on the live URL
