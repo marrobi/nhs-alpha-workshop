@@ -33,7 +33,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 ### Sessions & Cookies
 
 - Session cookies: httponly, secure, samesite strict
-- Session secrets loaded from environment variables, never hardcoded
+- Session secrets loaded from environment variables, never hardcoded. Use `os.environ["VAR"]` (bracket notation — raises `KeyError` if missing) for secrets and required configuration. Never use `os.environ.get()` with a fallback value for secrets or required config — missing dependencies must fail loudly
 
 ### Logging — PII Rules
 

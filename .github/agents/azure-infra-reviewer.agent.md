@@ -46,7 +46,7 @@ This agent reviews **only** Terraform and infrastructure configuration. Applicat
 
 - [ ] App Service has `https_only = true`
 - [ ] Minimum TLS version set to `1.2` on App Service
-- [ ] Storage accounts enforce HTTPS (`enable_https_traffic_only = true` or default)
+- [ ] Storage accounts enforce HTTPS — explicitly set `enable_https_traffic_only = true` (do not rely on provider defaults)
 - [ ] Database connections use encrypted transport (TLS/SSL)
 - [ ] No insecure protocols allowed (HTTP, TLS 1.0, TLS 1.1)
 
@@ -66,7 +66,7 @@ This agent reviews **only** Terraform and infrastructure configuration. Applicat
 - [ ] Naming convention follows `terraform-azure-nhs.instructions.md` patterns: `rg-${var.app_name}-${var.environment}`, `asp-${var.app_name}-${var.environment}`, etc.
 - [ ] All resources tagged with `project = var.app_name` and `environment = var.environment`
 - [ ] Required variable `var.app_name` is defined with description and type
-- [ ] Environment variable `var.environment` has default `"dev"`
+- [ ] Environment variable `var.environment` has default `"dev"` for local development, and CI/CD pipelines explicitly set `-var='environment=...'` for every target environment — never rely on the default for staging or production
 - [ ] `terraform validate` passes with no errors
 - [ ] `terraform plan` produces no unexpected changes on clean state
 

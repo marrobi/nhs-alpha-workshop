@@ -51,7 +51,8 @@ export const options = {
 }
 
 export default function () {
-  const res = http.get(`${__ENV.BASE_URL || 'http://localhost:3000'}/`)
+  if (!__ENV.BASE_URL) throw new Error('BASE_URL environment variable is required — set it with -e BASE_URL=...');
+  const res = http.get(`${__ENV.BASE_URL}/`)
   check(res, {
     'status is 200': (r) => r.status === 200,
     'response time < 200ms': (r) => r.timings.duration < 200,
@@ -68,11 +69,11 @@ export default function () {
 brew install grafana/k6/k6
 # or: sudo apt-get install k6
 
-# Smoke test (local)
-k6 run tests/performance/smoke.k6.js
+# Smoke test (local — BASE_URL must be set explicitly)
+k6 run -e BASE_URL=http://localhost:3000 tests/performance/smoke.k6.js
 
-# Load test against Azure
-k6 run -e BASE_URL=https://app-nhs-alpha-dev.azurewebsites.net tests/performance/load.k6.js
+# Load test against Azure (replace $BASE_URL with the actual deployment URL)
+k6 run -e BASE_URL=$BASE_URL tests/performance/load.k6.js
 ```
 
 ## Core Web Vitals via Playwright
@@ -92,7 +93,9 @@ Add to GitHub Actions workflow:
 ```yaml
 - name: Run k6 smoke test
   run: |
-    k6 run -e BASE_URL=http://localhost:3000 tests/performance/smoke.k6.js
+    k6 run -e BASE_URL=${{ env.BASE_URL }} tests/performance/smoke.k6.js
+  env:
+    BASE_URL: http://localhost:3000  # Set explicitly — k6 scripts will throw if BASE_URL is missing
 ```
 
 ## Rules

@@ -143,7 +143,7 @@ Once the ADR and diagram are complete, tell the user:
   - **No in-memory data stores** — data must persist across restarts. Use at minimum SQLite, or a proper database if the journeys involve multi-user data.
   - **No skipping authentication** when user roles exist — if the service distinguishes between patients, clinicians, and admin, auth is a riskiest assumption.
   - **No hardcoded/mock data in production code** — use synthetic data via proper seed scripts, not inline dictionaries or JSON files served as APIs.
-  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and NHS API sandboxes. If a service requires configuration or credentials, include that in the architecture.
+  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and NHS API sandboxes. If a service requires configuration or credentials, include that in the architecture. Only create a mock/stub if there is an explicit user story requesting it — record the decision and rationale in the ADR.
   - **No skipping error handling** — error states are part of the user journey and must be designed.
   - **No single-file applications** — follow the project structure in the implementation skill.
   - If the team explicitly decides to descope something, record it as a decision in the ADR with rationale.

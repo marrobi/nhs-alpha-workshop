@@ -52,6 +52,7 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 - [ ] Input validation on every endpoint that accepts user data
 - [ ] Meaningful error responses with field-level details on validation failures
 - [ ] No hardcoded/mock data as API responses — endpoints read from the data store
+- [ ] No mock/stub implementations of Azure services or NHS APIs in application code — unless backed by an explicit user story and documented in an ADR
 - [ ] Async/await used for I/O-bound operations
 
 ### 6. Frontend Quality

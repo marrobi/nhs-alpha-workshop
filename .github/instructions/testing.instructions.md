@@ -19,6 +19,14 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 - Error paths must be tested (invalid input, missing resource)
 - After making code changes, rebuild and restart the application before running tests — always verify tests run against the latest code, not a stale build
 
+## Mocking Boundary
+
+- **Unit tests**: MAY mock external dependencies (databases, APIs, file systems) using `unittest.mock.patch` or `pytest-mock` — this is standard isolation practice
+- **Integration tests**: MUST use real services or real test instances (e.g. test database, Azure sandbox). Do not substitute with in-memory fakes unless there is an explicit user story for that mock
+- **E2E tests**: MUST hit the real running application and its real backing services — no service mocking at this layer
+- **Application code**: MUST never contain mock/stub implementations of external services. If a service client is needed, integrate with the real SDK and real configuration. If the real service is unavailable, the code must fail — not silently degrade
+- Do not create mock service implementations unless an explicit user story requests it, with the decision recorded in an ADR
+
 ## E2E Tests
 
 - E2E tests must assert content correctness, not just element visibility

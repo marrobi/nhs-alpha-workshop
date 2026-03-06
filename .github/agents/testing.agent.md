@@ -31,7 +31,7 @@ Use the test client for the backend framework (e.g. `httpx.AsyncClient` for Fast
 
 - Use shared configuration file for fixtures (test client, mock data, database setup)
 - Use async test support if the backend framework is async
-- Mock external dependencies using the standard mocking library for the language
+- Mock external dependencies using the standard mocking library for the language. This applies to **unit tests only** — integration and E2E tests must use real services or real sandbox environments. Do not create mock service implementations (e.g. fake Azure Key Vault, in-memory database substitutes) unless an explicit user story requests it.
 
 ### What to Test
 

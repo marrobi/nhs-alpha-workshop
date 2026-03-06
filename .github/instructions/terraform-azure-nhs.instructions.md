@@ -58,5 +58,5 @@ All resource names must include `var.app_name` so multiple Alpha services can co
 
 - Use `variable` blocks with `description`, `type`, and `default` where appropriate
 - Required variable: `var.app_name` — the service name, used in all resource names
-- Environment variable: `var.environment` (default: `"dev"`)
+- Environment variable: `var.environment` (default: `"dev"` for local development). CI/CD pipelines must explicitly pass `-var='environment=...'` — never rely on the default for non-development deployments
 - Never parameterise the region — hardcode `uksouth`
