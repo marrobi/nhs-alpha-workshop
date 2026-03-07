@@ -41,9 +41,9 @@ Read `docs/adr/001-architecture.md` for the agreed design, then follow this iter
 11. Deploy infrastructure and application
 12. Verify the health endpoint returns 200 on the live URL
 
-### Build All User Stories
+### Build User Stories
 
-After the scaffold is deployed, read all user story files in `user_stories/story-*.md` and implement **every** story. Each story file contains the persona, action, benefit, and acceptance criteria across four categories (Functional, Accessibility, Clinical Safety, Data Protection). For each story:
+After the scaffold is deployed, read the user story files in `user_stories/story-*.md` assigned to this batch and implement them. Each story file contains the persona, action, benefit, and acceptance criteria across four categories (Functional, Accessibility, Clinical Safety, Data Protection). For each story:
 1. Read the story's acceptance criteria — these define what to build and test
 2. Create the API endpoint with input validation
 3. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
@@ -52,16 +52,10 @@ After the scaffold is deployed, read all user story files in `user_stories/story
 6. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
 
 **After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
-7. **Visual QA check** — before deploying, open each page affected by this story in the browser (at desktop 1280×720 and mobile 375×667 viewports) and verify:
-   - NHS Design System components render correctly (no broken layouts, overlapping elements, or missing assets)
-   - The page content matches the story requirements and API data
-   - Forms work: valid input succeeds, invalid input shows NHS error summary
-   - Navigation between pages works (links, back buttons, breadcrumbs)
-   - Fix any visual, functional, or data issues before proceeding to deploy
-8. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
-9. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
+7. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
+8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
-Work through stories in priority order (riskiest assumption first), but build them **all** in a single session.
+Work through stories in priority order (riskiest assumption first).
 
 ### Fill Implementation Gaps
 
@@ -72,18 +66,6 @@ After all stories are built, cross-reference the original user journeys in `disc
 - Cross-journey functionality (e.g. common dashboard, shared data)
 
 Implement any gaps found, then re-run all tests.
-
-### Final Visual QA Sweep
-
-After all stories are built and gaps are filled, do a full visual QA pass across the **entire** application before final deployment:
-
-1. Discover all routes from the codebase (frontend router, navigation components, backend page routes)
-2. Open every page in the browser at both desktop (1280×720) and mobile (375×667) viewports
-3. Verify: NHS components render correctly, layouts are clean, no placeholder content, no broken navigation
-4. Walk through every user journey end-to-end: click through forms, submit data, verify confirmations
-5. Call API endpoints and verify rendered data matches API responses
-6. Fix any issues found, rebuild, and re-verify
-7. Once clean, re-deploy and verify the live URL
 
 ## NHS Design System
 
