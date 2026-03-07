@@ -101,20 +101,34 @@ The agent will:
 
 ## Phase 4 — Build User Stories (3.5+ hours)
 
-This is the core of Day 1. The agent will build all user stories from `user_stories/` in a single session.
+This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-**Agent**: NHS Service Builder
+### Build → QA → Repeat
 
-> Build all the user stories from `user_stories/`. Implement every story: API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+For each batch:
 
-The agent reads each story's acceptance criteria to drive implementation and testing. It uses `discovery/user_journeys/data/` for E2E test flow context. Monitor progress and provide guidance if it asks questions.
+1. **Build** — use the **NHS Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
 
-### While the Agent Works
+   **Agent**: NHS Service Builder
 
-- Watch for questions — the agent may need clarification on specific stories
+   > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+
+2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
+
+   **Agent**: Visual QA
+
+   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+
+3. **Fix** — if the Visual QA agent finds issues, switch back to the **NHS Service Builder** to fix them, then re-run Visual QA until clean.
+
+4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
+
+### While the Agents Work
+
+- Watch for questions — the agents may need clarification on specific stories
 - Review the code as it's created — catch design issues early
 - If you spot problems, steer the agent in the chat
-- Switch agents mid-session if needed (e.g. **Security Reviewer** for a quick audit)
+- Group related stories into batches — stories from the same journey or that share pages/components work best together
 
 ### End of Day — Review & Commit (15 minutes)
 
@@ -128,7 +142,7 @@ The agent reads each story's acceptance criteria to drive implementation and tes
 
 - **Arrive with discovery done** — the workshop is for building, not researching
 - **Architecture first** — do not scaffold until the architecture is agreed
-- **Let the agent do the work** — it will build all stories in one session
+- **Build in batches** — 2–5 connected stories at a time, then Visual QA, then repeat
 - **Switch agents** — use the right agent for the right job
 - **Verify on the live URL** — always check the deployed service after deployment
 - **Commit frequently** — the agent can run `git commit` for you
