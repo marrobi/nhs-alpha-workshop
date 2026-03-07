@@ -119,7 +119,7 @@ For each batch:
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
-3. **Fix** — if the Visual QA agent finds issues, switch back to the **NHS Service Builder** to fix them, then re-run Visual QA until clean.
+3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
 4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
 
