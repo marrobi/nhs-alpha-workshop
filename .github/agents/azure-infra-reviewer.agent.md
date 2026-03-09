@@ -1,7 +1,6 @@
 ---
 name: 'Azure Infra Security Reviewer'
 description: 'Infrastructure security agent — audits Terraform and Azure configuration against NHS network isolation, managed identity, RBAC, encryption, and Key Vault standards. Fixes issues iteratively until compliant.'
-tools: ['codebase', 'edit/editFiles', 'new', 'problems', 'runCommands', 'search', 'terminalLastCommand', 'terminalSelection', 'web/fetch']
 ---
 
 # Azure Infra Security Reviewer

@@ -1,7 +1,6 @@
 ---
 name: 'Code Quality Reviewer'
 description: 'Code quality agent — reviews code patterns, type safety, error handling, NHS conventions, test coverage, and API quality. Fixes issues iteratively until clean.'
-tools: ['codebase', 'edit/editFiles', 'findTestFiles', 'new', 'problems', 'runCommands', 'runTests', 'search', 'terminalLastCommand', 'terminalSelection', 'testFailure']
 ---
 
 # Code Quality Reviewer

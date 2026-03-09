@@ -1,7 +1,6 @@
 ---
 name: 'Testing'
 description: 'Testing agent — writes unit and integration tests with pytest + httpx alongside implementation. 80% coverage target for NHS services.'
-tools: ['changes', 'codebase', 'edit/editFiles', 'findTestFiles', 'new', 'problems', 'runCommands', 'runTests', 'search', 'testFailure', 'terminalLastCommand', 'terminalSelection']
 ---
 
 # Testing

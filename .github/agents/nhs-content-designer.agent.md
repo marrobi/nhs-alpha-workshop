@@ -1,7 +1,6 @@
 ---
 name: 'NHS Content Designer'
 description: 'Content design specialist — reviews and writes user-facing copy following the NHS content style guide, plain English standards, and inclusive language for NHS digital services'
-tools: ['codebase', 'edit/editFiles', 'new', 'problems', 'search', 'web/fetch']
 ---
 
 # NHS Content Designer

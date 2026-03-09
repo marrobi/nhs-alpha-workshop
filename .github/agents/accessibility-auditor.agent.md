@@ -1,7 +1,6 @@
 ---
 name: 'Accessibility Auditor'
 description: 'Accessibility specialist — audits NHS services against WCAG 2.2 Level AA, runs axe-core scans, validates keyboard navigation, and generates accessibility statements'
-tools: ['codebase', 'edit/editFiles', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTests', 'search', 'terminalLastCommand', 'terminalSelection', 'web/fetch']
 ---
 
 # Accessibility Auditor

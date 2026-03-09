@@ -1,7 +1,6 @@
 ---
 name: 'Playwright E2E'
 description: 'E2E testing agent — adds Playwright test coverage, debugs failures, extends journey tests, and runs accessibility audits. Uses the playwright-nhs-e2e skill.'
-tools: ['changes', 'codebase', 'edit/editFiles', 'findTestFiles', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTests', 'search', 'testFailure', 'terminalLastCommand', 'terminalSelection']
 ---
 
 # Playwright E2E Testing

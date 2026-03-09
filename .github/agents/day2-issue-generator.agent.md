@@ -1,7 +1,6 @@
 ---
 name: 'Day 2 Issue Generator'
 description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, visual QA, infrastructure review, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
-tools: ['codebase', 'edit/editFiles', 'new', 'runCommands', 'search', 'terminalLastCommand', 'web/fetch']
 ---
 
 # Day 2 Issue Generator

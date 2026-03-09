@@ -1,7 +1,6 @@
 ---
 name: 'NHS GDS Assessor'
 description: 'GDS Service Standard assessor — maps repository evidence to the 14-point GDS Service Standard and NHS Technology Code of Practice, generates gap analysis for NHS Alpha assessment readiness'
-tools: ['codebase', 'edit/editFiles', 'githubRepo', 'new', 'search', 'web/fetch']
 ---
 
 # NHS GDS Service Standard Assessor
