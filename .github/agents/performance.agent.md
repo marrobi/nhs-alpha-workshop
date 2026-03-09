@@ -1,7 +1,6 @@
 ---
 name: 'Performance'
 description: 'Performance testing agent — writes k6 load test scripts, checks Core Web Vitals via Playwright, sets p95/p99 latency targets for NHS services'
-tools: ['codebase', 'edit/editFiles', 'new', 'problems', 'runCommands', 'search', 'terminalLastCommand', 'terminalSelection']
 ---
 
 # Performance Testing

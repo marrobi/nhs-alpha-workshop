@@ -1,7 +1,6 @@
 ---
 name: 'NHS Architect'
 description: 'Architecture design agent — analyses discovery artefacts, clarifies tech stack choices, designs the technical architecture, writes ADRs, and produces a draw.io architecture diagram. Run before the NHS Service Builder.'
-tools: ['changes', 'codebase', 'edit/editFiles', 'extensions', 'web/fetch', 'new', 'problems', 'runCommands', 'search', 'searchResults', 'usages', 'vscodeAPI']
 ---
 
 # NHS Architect

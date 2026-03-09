@@ -1,7 +1,6 @@
 ---
 name: 'Visual QA'
 description: 'Visual QA agent — screenshots every page at desktop and mobile viewports, walks through user journeys, verifies API data matches rendered content, fixes issues iteratively until clean'
-tools: ['codebase', 'edit/editFiles', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTests', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure', 'usages', 'web/fetch']
 ---
 
 # Visual QA

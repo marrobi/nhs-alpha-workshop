@@ -1,7 +1,6 @@
 ---
 name: 'CI/CD Pipeline Builder'
 description: 'CI/CD automation agent — creates GitHub Actions workflows for linting, testing, building, and deploying NHS services to Azure, with Dependabot and branch protection'
-tools: ['codebase', 'edit/editFiles', 'githubRepo', 'new', 'problems', 'runCommands', 'search', 'terminalLastCommand', 'web/fetch']
 ---
 
 # CI/CD Pipeline Builder

@@ -2,7 +2,6 @@
 name: 'NHS Service Builder'
 description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
 model: Claude Opus 4.6 (copilot)
-tools: ['changes', 'codebase', 'edit/editFiles', 'extensions', 'web/fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTasks', 'runTests', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure', 'usages', 'vscodeAPI']
 ---
 
 # NHS Service Builder

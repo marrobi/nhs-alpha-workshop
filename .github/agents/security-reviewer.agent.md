@@ -1,7 +1,6 @@
 ---
 name: 'Security Reviewer'
 description: 'Security audit agent — reviews code against OWASP Top 10, checks security headers, identifies secrets leaks, dependency vulnerabilities, and rate limiting gaps'
-tools: ['codebase', 'edit/editFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'terminalLastCommand', 'web/fetch']
 ---
 
 # Security Reviewer

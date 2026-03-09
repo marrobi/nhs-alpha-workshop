@@ -1,7 +1,6 @@
 ---
 name: 'NHS Product Owner'
 description: 'Product owner agent — decomposes user journeys into user stories with NHS acceptance criteria. Run after the NHS Architect and before the NHS Service Builder.'
-tools: ['codebase', 'edit/editFiles', 'new', 'search', 'web/fetch']
 ---
 
 # NHS Product Owner

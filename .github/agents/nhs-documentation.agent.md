@@ -1,7 +1,6 @@
 ---
 name: 'NHS Documentation'
 description: 'Documentation agent — creates and updates an MKdocs site for the NHS Alpha service, including API docs, user guides, architecture, and deployment runbook.'
-tools: ['changes', 'codebase', 'edit/editFiles', 'extensions', 'web/fetch', 'new', 'problems', 'runCommands', 'runTasks', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'usages', 'vscodeAPI']
 ---
 
 # NHS Documentation
