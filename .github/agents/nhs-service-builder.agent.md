@@ -76,7 +76,7 @@ Follow `.github/instructions/nhs-security.instructions.md` (auto-applied). Key: 
 
 ## Organisational Standards
 
-Read `.github/instructions/org-standards.instructions.md` for organisational policies (deployment strategy, backups, coverage thresholds, secret scanning, coding standards). Standards defined there take precedence over any values hardcoded in this or other files.
+Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to service implementation. Standards defined there take precedence over any values hardcoded in this or other files.
 
 ## NHS Number
 

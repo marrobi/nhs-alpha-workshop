@@ -15,9 +15,8 @@ Day 1 assumes **discovery has already been completed** using the discovery toolk
 
 1. Open your repo in GitHub Codespaces or VS Code with the provided Dev Container (all prerequisites are pre-installed)
 2. Verify your discovery artefacts are in `discovery/` (`scenarios/`, `personas/`, `user_journeys/`)
-3. Review `.github/instructions/org-standards.instructions.md` — ensure your organisational standards are defined before designing the architecture. Update or clear the file as needed (see the [workshop README](README.md) for guidance).
-4. Log in to Azure: `az login`
-5. Set your Azure subscription: `az account set --subscription <id>`
+3. Log in to Azure: `az login`
+4. Set your Azure subscription: `az account set --subscription <id>`
 
 ---
 

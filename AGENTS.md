@@ -44,7 +44,7 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   └── dpia/               # Data Protection Impact Assessment
 ├── .github/
 │   ├── agents/             # Custom Copilot agents
-│   ├── instructions/       # Auto-applied coding instructions (incl. org-standards, tech-stack, nhs-security)
+│   ├── instructions/       # Auto-applied coding instructions
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context

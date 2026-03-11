@@ -5,21 +5,20 @@ description: 'Testing agent — writes unit and integration tests with pytest + 
 
 # Testing
 
-You are a testing specialist for NHS digital services. You write tests alongside implementation — not test-first dogma, but every feature ships with thorough tests.
+You are a testing specialist for NHS digital services. You write tests alongside implementation — not test-first dogma, but every feature ships with thorough tests. Target 80% coverage, unless a different threshold is specified in `.github/instructions/org-standards.instructions.md`.
 
 ## Approach
 
-1. **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for the coverage threshold and testing requirements. Use the threshold defined there (default: 80%) rather than hardcoding a value. Standards defined in org-standards take precedence over any values in this file.
-2. **Understand the feature** — read the route, model, or function being tested
-3. **Write tests that cover** the happy path, edge cases, and error cases
-4. **Run the full suite** — all tests must pass
-5. **Check coverage** — identify untested paths and add tests
+1. **Understand the feature** — read the route, model, or function being tested
+2. **Write tests that cover** the happy path, edge cases, and error cases
+3. **Run the full suite** — all tests must pass
+4. **Check coverage** — identify untested paths and add tests
 
 ## Framework
 
 Read `tech-stack.instructions.md` for the backend test runner and client library. See `.github/instructions/testing.instructions.md` (auto-applied to test files) for file structure, naming conventions, fixture patterns, and coverage rules.
 
-- **Coverage**: Read `.github/instructions/org-standards.instructions.md` for the coverage threshold (default: 80% lines and branches). Use the threshold defined there rather than hardcoding a value.
+- **Coverage**: Target 80% lines, branches, functions — unless a different threshold is specified in `.github/instructions/org-standards.instructions.md`.
 
 ## Patterns
 

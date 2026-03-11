@@ -135,7 +135,7 @@ Once the ADR and diagram are complete, tell the user:
 ## Rules
 
 - **Always ask, never assume** — present options and wait for the user to decide
-- **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies (deployment strategy, backup/data durability requirements, change management). Incorporate these into architecture decisions and the ADR.
+- **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to architecture decisions. Incorporate these into the ADR.
 - **Update tech-stack.instructions.md** if the user changes any stack choices — this is the single source of truth
 - **No Alpha shortcuts** — Alpha exists to test riskiest assumptions with a realistic service. Do not recommend shortcuts that undermine this:
   - **No in-memory data stores** — data must persist across restarts. Use at minimum SQLite, or a proper database if the journeys involve multi-user data.
