@@ -27,6 +27,11 @@ Read `.github/skills/playwright-nhs-e2e/SKILL.md` for all conventions — Page O
 
 One test file per journey, one Page Object per page. Happy path + decision branches + error handling.
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json`:
+- **Context7** — use to look up current Playwright documentation for API usage, selectors, assertions, and configuration
+
 ## Rules
 
 - axe check on every page navigation — no exceptions
