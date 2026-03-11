@@ -19,7 +19,7 @@ You are a testing specialist for NHS digital services. You write tests alongside
 
 Read `tech-stack.instructions.md` for the backend test runner and client library. See `.github/instructions/testing.instructions.md` (auto-applied to test files) for file structure, naming conventions, fixture patterns, and coverage rules.
 
-- **Coverage**: Read `.github/instructions/org-standards.instructions.md` for the coverage threshold (default: 80% lines, branches, functions). Use the threshold defined there rather than hardcoding a value.
+- **Coverage**: Read `.github/instructions/org-standards.instructions.md` for the coverage threshold (default: 80% lines and branches). Use the threshold defined there rather than hardcoding a value.
 
 ## Patterns
 
