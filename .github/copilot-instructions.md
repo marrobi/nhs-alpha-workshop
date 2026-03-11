@@ -1,10 +1,14 @@
-# NHS Alpha — Copilot Instructions
+# NHS Service — Copilot Instructions
 
-You are working on an NHS Alpha-phase digital service. Follow these project-wide standards in every interaction.
+You are working on an NHS digital service. Follow these project-wide standards in every interaction.
+
+## Quality Expectations
+
+**"Alpha" refers to the [GDS delivery phase](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — it does NOT mean lower-quality code, incomplete implementations, or relaxed standards.** All code must be production-quality: fully tested, secure, accessible, and maintainable. Do not skip validation, error handling, security controls, tests, or accessibility requirements. Every standard in this file applies in full — no exceptions based on project phase.
 
 ## Product Context
 
-This is a UK National Health Service (NHS) digital service in the Alpha assessment phase, following the [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points) and [NHS Design System](https://service-manual.nhs.uk/design-system). See `.github/instructions/tech-stack.instructions.md` for the current technology stack.
+This is a UK National Health Service (NHS) digital service following the [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points) and [NHS Design System](https://service-manual.nhs.uk/design-system). See `.github/instructions/tech-stack.instructions.md` for the current technology stack.
 
 ## General Standards
 

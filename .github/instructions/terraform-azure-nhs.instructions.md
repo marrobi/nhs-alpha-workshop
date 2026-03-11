@@ -14,7 +14,7 @@ Refer to the [Terraform Azure Provider docs](https://registry.terraform.io/provi
 
 ## Naming Convention
 
-All resource names must include `var.app_name` so multiple Alpha services can coexist in the same Azure subscription.
+All resource names must include `var.app_name` so multiple services can coexist in the same Azure subscription.
 
 - Resource Group: `rg-${var.app_name}-${var.environment}`
 - App Service Plan: `asp-${var.app_name}-${var.environment}`
@@ -51,8 +51,8 @@ All resource names must include `var.app_name` so multiple Alpha services can co
 
 ## State
 
-- Local state for workshop development
-- Document migration to Azure Storage backend for production
+- Local state for local development
+- Document migration to Azure Storage backend for shared environments
 
 ## Variables
 

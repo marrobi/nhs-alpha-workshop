@@ -1,4 +1,8 @@
-# NHS Alpha — Copilot Coding Agent Context
+# NHS Service — Copilot Coding Agent Context
+
+## Quality Expectations
+
+**All code must be production-quality.** The GDS delivery phase does not affect code standards. Write fully tested, secure, accessible, and maintainable code. Never skip validation, error handling, security controls, tests, or accessibility. Do not take shortcuts.
 
 ## Rules
 
@@ -6,7 +10,7 @@
 
 ## Project Description
 
-This is an NHS Alpha-phase digital service built during a 2-day workshop using GitHub Copilot agents. The service follows the NHS Design System and GDS Service Standard, deployed to Azure using Terraform.
+This is an NHS digital service built with GitHub Copilot agents. The service follows the NHS Design System and GDS Service Standard, deployed to Azure using Terraform.
 
 ## Tech Stack
 
