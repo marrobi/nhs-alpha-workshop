@@ -28,7 +28,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 - Data-access endpoints MUST enforce authorization, not just authentication
 - An authenticated user must only access data they are authorised to see
 - Authentication confirms identity; authorization confirms permission — both are required
-- For alpha/prototype mock auth, document any relaxed authorization as a risk
+- If mock authentication is used, authorization logic must still be fully implemented and enforced — mock the identity provider, never the authorization checks
 
 ### Sessions & Cookies
 
