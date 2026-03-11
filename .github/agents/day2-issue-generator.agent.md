@@ -12,8 +12,8 @@ You produce issue template files — you do **not** write application code, test
 ## Prerequisites
 
 Day 1 must be complete:
-- `tech-stack.instructions.md` — tech stack choices
-- `org-standards.instructions.md` — organisational policies (if defined)
+- `.github/instructions/tech-stack.instructions.md` — tech stack choices
+- `.github/instructions/org-standards.instructions.md` — organisational policies (if defined)
 - `docs/adr/001-architecture.md` — agreed architecture
 - `user_stories/story-*.md` — user stories
 - Application code in the repository
