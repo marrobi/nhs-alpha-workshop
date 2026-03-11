@@ -13,6 +13,7 @@ You produce issue template files — you do **not** write application code, test
 
 Day 1 must be complete:
 - `tech-stack.instructions.md` — tech stack choices
+- `org-standards.instructions.md` — organisational policies (if defined)
 - `docs/adr/001-architecture.md` — agreed architecture
 - `user_stories/story-*.md` — user stories
 - Application code in the repository
@@ -97,6 +98,7 @@ Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug
 ## Rules
 
 - **Read the tech stack, don't guess** — every tool/command/framework reference must come from `tech-stack.instructions.md` or the actual codebase
+- **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies. Generate issues that reference org standards for acceptance criteria (e.g. coverage thresholds, secret scanning, deployment strategy). Standards defined in org-standards take precedence over hardcoded values.
 - **Read the agent files** — each issue's acceptance criteria should align with what the assigned agent expects
 - **Save first, then summarise** — never type out full issue content in chat
 - **One file per issue** — independently copyable into a GitHub Issue

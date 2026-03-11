@@ -31,6 +31,10 @@ This is a UK National Health Service (NHS) digital service in the Alpha assessme
 
 Follow `.github/instructions/nhs-security.instructions.md` (auto-applied to all files) for OWASP Top 10, secrets management, input validation, PII logging rules, and dependency pinning.
 
+## Organisational Standards
+
+Follow `.github/instructions/org-standards.instructions.md` (auto-applied to all files) for organisational policies that apply across all services — deployment strategy, data durability, test coverage thresholds, secret scanning, coding standards, and security requirements. Standards defined in `org-standards.instructions.md` take precedence over any values hardcoded in other files.
+
 ## Infrastructure
 
 Follow `.github/instructions/terraform-azure-nhs.instructions.md` (auto-applied to `infra/` and `.tf` files) for Terraform, Azure UK South, Managed Identity, and Key Vault standards.

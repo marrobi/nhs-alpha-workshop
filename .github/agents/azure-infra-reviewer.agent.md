@@ -10,6 +10,7 @@ Infrastructure security specialist auditing Terraform and Azure configuration. N
 Read these before starting:
 - `.github/instructions/terraform-azure-nhs.instructions.md` (auto-applied to `infra/` and `.tf` files) — primary IaC standard
 - `.github/instructions/nhs-security.instructions.md` — Azure Network & Identity section
+- `.github/instructions/org-standards.instructions.md` — organisational policies (backup/immutable storage requirements, IaC-only change management, data residency). Standards defined there take precedence over any values hardcoded in this file.
 - `.github/instructions/review-agent-pattern.instructions.md` — review workflow, severity levels, report template
 - `tech-stack.instructions.md` — hosting platform
 

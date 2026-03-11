@@ -101,3 +101,38 @@ The default standards below are drawn from the [NHS Architecture Manual](https:/
 - **PR review required before merge** — at least one approving review from a team member is required; branch protection must enforce this
 - **No force-push to the default branch** — branch protection must prevent force-pushes and branch deletion on `main`/`master`
 - **Dependency versions must be pinned exactly** — no loose version ranges (`>=`, `~=`, `^`) in production dependency files; see `nhs-security.instructions.md`
+
+---
+
+## Dependency Management
+
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)*
+
+- **Pin exact versions for all production dependencies** — no loose ranges (`>=`, `~=`, `^`) in production dependency files
+- **Automated dependency update tooling configured** — use Dependabot or Renovate to detect outdated and vulnerable dependencies
+- **Dependency audit in CI fails on critical/high vulnerabilities** — `pip audit`, `npm audit`, or equivalent must run on every PR; critical and high CVEs must be resolved before merge
+- **Docker images must use specific version tags** — never use `latest`; pin to a specific digest or version
+
+---
+
+## Observability
+
+*Source: [NHS Architecture Manual](https://architecture.digital.nhs.uk/) and [GDS Service Standard Point 14](https://www.gov.uk/service-manual/service-standard/point-14-operate-a-reliable-service)*
+
+- **Structured JSON logging required** — all application logs must be structured JSON, not plaintext
+- **Correlation IDs (`X-Request-ID`) in every log entry** — all requests must include a correlation ID for distributed tracing
+- **Health check endpoint required at `/health`** — every service must expose a health check endpoint that returns `{"status": "ok"}` and a 200 status code
+- **Application performance monitoring configured** — use Azure Application Insights or equivalent; monitor response times, error rates, and availability
+- **Alerting on error rate spikes** — configure alerts for sustained error rate increases or availability drops
+
+---
+
+## Change Management
+
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)*
+
+- **All changes to production must go through a PR workflow** — no direct commits to the default branch
+- **PR review required before merge** — at least one approving review from a team member
+- **CI must pass before merge** — all quality gates (lint, test, coverage, security scan) must be green
+- **Rollback procedure must be documented and tested** — every service must have a documented rollback procedure before deployment to production
+- **Change history must be auditable** — all changes tracked in version control with meaningful commit messages

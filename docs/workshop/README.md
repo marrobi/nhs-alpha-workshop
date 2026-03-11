@@ -9,7 +9,7 @@ This repository contains **no application code**. It provides the Copilot config
 ```
 .github/
   agents/             12 custom Copilot agents (7 engineering + 6 NHS)
-  instructions/       7 auto-applied coding instruction files
+  instructions/       8 auto-applied coding instruction files (incl. org-standards)
   skills/             8 agent skills (SKILL.md folders)
   workflows/          GitHub Actions (Copilot Coding Agent setup)
 docs/
@@ -40,7 +40,11 @@ Each team needs:
 
 All other tools (Python, Node.js, Terraform, Azure CLI) are pre-installed in the Dev Container.
 
-### 3. Pre-Workshop — Discovery
+### 3. Review and update the organisational standards
+
+Review [`.github/instructions/org-standards.instructions.md`](../../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. The defaults are based on NHS Architecture Principles and the NHS Cloud Security Good Practice Guide, but teams should tailor them to their organisation. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
+
+### 4. Pre-Workshop — Discovery
 
 Complete discovery **before the workshop** in your new repo:
 - Create a branch for discovery work
@@ -50,7 +54,7 @@ Complete discovery **before the workshop** in your new repo:
 - Merge your discovery branch
 - See [discovery/README.md](../../discovery/README.md) for the full process
 
-### 4. Day 1 — Design and Build with Copilot Agent Mode
+### 5. Day 1 — Design and Build with Copilot Agent Mode
 
 | Phase | Duration | Activities |
 |---|---|---|
@@ -67,7 +71,7 @@ Complete discovery **before the workshop** in your new repo:
 5. **Build user stories**: work through the stories in `user_stories/` in priority order
 6. See [day1-guide.md](day1-guide.md) for the full facilitation guide
 
-### 5. Day 2 — Complete the Alpha with Copilot Coding Agent
+### 6. Day 2 — Complete the Alpha with Copilot Coding Agent
 
 1. Run the **Day 2 Issue Generator** agent to create issues tailored to your tech stack and service
 2. Create GitHub Issues from the generated files in [day2-issues/](day2-issues/)

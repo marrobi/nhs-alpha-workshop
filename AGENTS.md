@@ -10,7 +10,7 @@ This is an NHS Alpha-phase digital service built during a 2-day workshop using G
 
 ## Tech Stack
 
-See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; coding standards in `.github/copilot-instructions.md`.
+See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; organisational standards in `.github/instructions/org-standards.instructions.md`; coding standards in `.github/copilot-instructions.md`.
 
 ## Repository Structure
 
@@ -44,7 +44,7 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   └── dpia/               # Data Protection Impact Assessment
 ├── .github/
 │   ├── agents/             # Custom Copilot agents
-│   ├── instructions/       # Auto-applied coding instructions
+│   ├── instructions/       # Auto-applied coding instructions (incl. org-standards, tech-stack, nhs-security)
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context

@@ -74,6 +74,10 @@ Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) fo
 
 Follow `.github/instructions/nhs-security.instructions.md` (auto-applied). Key: security headers on every response, never log PII, never hardcode secrets, validate all input.
 
+## Organisational Standards
+
+Read `.github/instructions/org-standards.instructions.md` for organisational policies (deployment strategy, backups, coverage thresholds, secret scanning, coding standards). Standards defined there take precedence over any values hardcoded in this or other files.
+
 ## NHS Number
 
 Follow `.github/instructions/nhs-number.instructions.md` (auto-applied). Key: store as 10-digit string, display in 3-3-4 format on every patient screen, validate format and modulus 11 check digit on all input, support search by NHS Number alone and without it.
