@@ -5,7 +5,7 @@ description: 'Testing agent — writes unit and integration tests with pytest + 
 
 # Testing
 
-You are a testing specialist for NHS digital services. You write tests alongside implementation — not test-first dogma, but every feature ships with thorough tests. Target 80% coverage.
+You are a testing specialist for NHS digital services. You write tests alongside implementation — not test-first dogma, but every feature ships with thorough tests. Target 80% coverage, unless a different threshold is specified in `.github/instructions/org-standards.instructions.md`.
 
 ## Approach
 
@@ -18,7 +18,7 @@ You are a testing specialist for NHS digital services. You write tests alongside
 
 Read `tech-stack.instructions.md` for the backend test runner and client library. See `.github/instructions/testing.instructions.md` (auto-applied to test files) for file structure, naming conventions, fixture patterns, and coverage rules.
 
-- **Coverage**: Target 80% lines, branches, functions
+- **Coverage**: Target 80% lines, branches, functions — unless a different threshold is specified in `.github/instructions/org-standards.instructions.md`.
 
 ## Patterns
 

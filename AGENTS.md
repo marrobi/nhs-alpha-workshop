@@ -14,7 +14,7 @@ This is an NHS digital service built with GitHub Copilot agents. The service fol
 
 ## Tech Stack
 
-See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; coding standards in `.github/copilot-instructions.md`.
+See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; organisational standards in `.github/instructions/org-standards.instructions.md`; coding standards in `.github/copilot-instructions.md`.
 
 ## Repository Structure
 

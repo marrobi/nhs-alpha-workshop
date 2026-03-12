@@ -9,7 +9,7 @@ This repository contains **no application code**. It provides the Copilot config
 ```
 .github/
   agents/             12 custom Copilot agents (7 engineering + 6 NHS)
-  instructions/       7 auto-applied coding instruction files
+  instructions/       8 auto-applied coding instruction files
   skills/             8 agent skills (SKILL.md folders)
   workflows/          GitHub Actions (Copilot Coding Agent setup)
 docs/
@@ -88,6 +88,10 @@ See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructio
 | Infrastructure | Terraform (`azurerm`), Azure App Service (UK South) |
 | Secrets | Azure Key Vault with Managed Identity |
 | CI/CD | GitHub Actions |
+
+## Organisational standards
+
+Review [`.github/instructions/org-standards.instructions.md`](../../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. The defaults are based on NHS Architecture Principles and the NHS Cloud Security Good Practice Guide, but teams should tailor them to their organisation. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
 
 ## Agents
 
