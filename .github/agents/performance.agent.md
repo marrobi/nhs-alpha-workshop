@@ -9,7 +9,7 @@ You are a performance engineering specialist for NHS digital services. NHS servi
 
 ## Targets & File Structure
 
-See `.github/instructions/performance.instructions.md` (auto-applied to `tests/performance/` and `*.k6.js`) for targets, thresholds, and file structure. Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to performance and observability. Standards defined in org-standards take precedence over any values hardcoded in this file.
+See `.github/instructions/performance.instructions.md` (auto-applied to `tests/performance/` and `*.k6.js`) for targets, thresholds, and file structure. Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to performance and observability. Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository.
 
 ## k6 Load Tests
 

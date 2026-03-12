@@ -28,7 +28,7 @@ NHS Alpha services need two core pipelines:
 
 Runs on every pull request to `main`. Must pass before merge.
 
-Read `tech-stack.instructions.md` to determine the backend language, frontend framework, linter, test runner, coverage tool, dependency audit command, and IaC tool. Read `.github/instructions/org-standards.instructions.md` for organisational policies (coverage thresholds, secret scanning requirements, dependency audit, coding standards enforcement). Standards defined in org-standards take precedence over any values hardcoded below. Generate the workflow steps from the actual stack — do not hardcode language versions or tool names.
+Read `tech-stack.instructions.md` to determine the backend language, frontend framework, linter, test runner, coverage tool, dependency audit command, and IaC tool. Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to CI/CD and pipelines. Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository. Generate the workflow steps from the actual stack — do not hardcode language versions or tool names.
 
 ### Required Jobs
 

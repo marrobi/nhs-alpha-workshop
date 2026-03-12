@@ -10,7 +10,7 @@ Security specialist reviewing an NHS digital service. NHS services process healt
 Read these before starting:
 - `.github/instructions/nhs-security.instructions.md` (auto-applied) — OWASP Top 10, secrets, input validation, sessions, PII logging, dependencies, Azure network/identity
 - `.github/instructions/nhs-number.instructions.md` (auto-applied) — NHS Number validation rules
-- `.github/instructions/org-standards.instructions.md` — organisational policies that apply to security. Standards defined there take precedence over any values hardcoded in this file.
+- `.github/instructions/org-standards.instructions.md` — organisational policies that apply to security. Standards defined there take precedence over values that may be defined anywhere else in the repository.
 - `.github/instructions/review-agent-pattern.instructions.md` — review workflow, severity levels, report template
 - `tech-stack.instructions.md` — current frameworks and tools
 
