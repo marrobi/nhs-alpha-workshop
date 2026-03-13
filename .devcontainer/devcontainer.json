@@ -44,20 +44,6 @@
           "editor.formatOnSave": true
         },
         "markdown.marp.html": "all"
-      },
-      "mcp": {
-        "servers": {
-          "context7": {
-            "type": "stdio",
-            "command": "npx",
-            "args": ["-y", "@upstash/context7-mcp@1.0.0"]
-          },
-          "drawio": {
-            "type": "stdio",
-            "command": "npx",
-            "args": ["-y", "@drawio/mcp@1.0.0"]
-          }
-        }
       }
     }
   },
