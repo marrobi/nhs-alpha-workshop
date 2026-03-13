@@ -64,7 +64,8 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 12 | DPIA | NHS DPIA Advisor | Data protection considered |
 | 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
 | 14 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 15 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 15 | Demo Recording | Demo Recorder | Recorded walkthrough of user journeys, issues identified and fixed |
+| 16 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 

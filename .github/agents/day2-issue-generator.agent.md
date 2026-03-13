@@ -44,6 +44,7 @@ For each issue: read the referenced agent/instruction/skill files, then write ac
 | 12 | DPIA | `nhs-dpia/SKILL.md`, `nhs-dpia-advisor.agent.md` | Actual data types and flows from architecture/stories |
 | 13 | GDS Evidence | `gds-service-standard/SKILL.md`, `nhs-gds-assessor.agent.md` | Tech stack for tech points, research artefacts for user points |
 | 14 | Runbook & Docs | IaC files, `nhs-service-builder.agent.md` | Actual IaC tool, hosting, deploy commands, monitoring |
+| 15 | Demo Recording | `demo-recorder.agent.md`, `playwright-nhs-e2e/SKILL.md` | Actual user journeys, pages, routes; Playwright video recording; demo narrative script. **Should complete after** E2E Tests and Visual QA |
 
 Each issue's **Context** section must reference the files above. The **Context** provides guidance, but the primary way to direct the Coding Agent is by selecting the correct **custom agent** when assigning Copilot on GitHub.
 
@@ -88,12 +89,13 @@ Present **only issue titles and custom agents** — don't type out full acceptan
 | 12 DPIA | **NHS DPIA Advisor** |
 | 13 GDS Assessment Evidence | **NHS GDS Assessor** |
 | 14 Runbook & Deployment Docs | **NHS Service Builder** |
+| 15 Demo Recording | **Demo Recorder** |
 
 **Wait for user confirmation** before creating on GitHub.
 
 ### Step 5 — Create on GitHub
 
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–14). Do **not** use `--assignee`. Report issue numbers/URLs, then instruct user to assign Copilot with the correct custom agent per issue.
+Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–15). Do **not** use `--assignee`. Report issue numbers/URLs, then instruct user to assign Copilot with the correct custom agent per issue.
 
 ## Rules
 

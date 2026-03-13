@@ -46,3 +46,5 @@ Thumbs.db
 test-results/
 playwright-report/
 tests/e2e/screenshots/
+tests/e2e/demo/videos/
+tests/e2e/demo/screenshots/
