@@ -89,8 +89,9 @@ Generate `.github/dependabot.yml` with ecosystems matching `tech-stack.instructi
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json`:
+This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
 - **Context7** — use to look up current GitHub Actions and CI/CD tool documentation
+- **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to verify Azure resource configuration when building deploy pipelines
 
 ## References
 

@@ -77,6 +77,11 @@ Read all `.tf` files, `.tfvars`, deployment scripts, and CI/CD workflows before 
 - **Medium**: Missing NSGs, missing tags, provider not pinned, naming violations
 - **Low**: Missing Application Insights, minor Terraform style
 
+## MCP Servers
+
+This agent has access to MCP servers via VS Code extensions:
+- **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, verify deployed infrastructure, and validate RBAC role assignments and network configuration
+
 ## Rules
 
 - Do not review application-level security — that is the Security Reviewer's scope
