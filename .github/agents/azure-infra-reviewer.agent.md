@@ -79,7 +79,8 @@ Read all `.tf` files, `.tfvars`, deployment scripts, and CI/CD workflows before 
 
 ## MCP Servers
 
-This agent has access to MCP servers via VS Code extensions:
+This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+- **Context7** — use to look up current Terraform provider and module documentation (azurerm resources, arguments, attributes) when reviewing infrastructure code
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, verify deployed infrastructure, and validate RBAC role assignments and network configuration
 
 ## Rules

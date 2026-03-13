@@ -137,7 +137,7 @@ Once the ADR and diagram are complete, tell the user:
 ## MCP Servers
 
 This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
-- **Context7** — use to look up current documentation for libraries and frameworks when advising on tech stack choices
+- **Context7** — use to look up current documentation for libraries, frameworks, and Terraform providers/modules when advising on tech stack and infrastructure choices
 - **Draw.io** — use to create and edit architecture diagrams in draw.io format
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, validate infrastructure decisions, and explore available Azure services
 
