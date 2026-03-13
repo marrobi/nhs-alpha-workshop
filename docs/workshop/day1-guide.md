@@ -103,7 +103,7 @@ The agent will:
 
 This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-> **Parallel builds**: If you have multiple developers or agent sessions, you can build stories in parallel. See the [parallel builds strategy](parallel-builds.md) for code isolation conventions, auto-discovery patterns, and branching workflow. Ensure Phase 3 scaffolding has set up router auto-discovery and a frontend route registry before parallelising.
+> **Parallel builds**: If you have multiple developers or agent sessions, you can build stories in parallel. See the [parallel builds strategy](parallel-builds.md) for code isolation conventions, auto-discovery patterns, and branching workflow. Ensure Phase 3 scaffolding has set up auto-discovery for route handlers and frontend routes before parallelising.
 
 ### Build → QA → Repeat
 

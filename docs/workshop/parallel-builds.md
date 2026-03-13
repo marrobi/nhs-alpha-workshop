@@ -2,14 +2,18 @@
 
 This guide describes how to build multiple user stories in parallel during Day 1 Phase 4 without merge conflicts. It applies when multiple developers or Copilot agent sessions work on different stories simultaneously.
 
+> **Tech-stack agnostic**: The principles below apply regardless of which backend framework, frontend framework, or language the team selects in `tech-stack.instructions.md`. The patterns are described generically — the NHS Service Builder agent implements them using whatever stack is configured.
+
 ## Problem
 
 The default Day 1 workflow builds user stories sequentially — one batch at a time. This creates a bottleneck when multiple team members (or agent sessions) are available. Naïve parallelisation causes merge conflicts because stories often touch the same shared files:
 
-- `app/main.py` — registering new routers
-- `frontend/src/App.tsx` — adding new routes
-- `tests/conftest.py` — adding shared fixtures
-- `frontend/src/components/Layout.tsx` — modifying navigation links
+- **Application entrypoint** — registering new route handlers or controllers
+- **Frontend root component** — adding new page routes
+- **Shared test configuration** — adding test fixtures or helpers
+- **Layout or navigation components** — modifying navigation links
+
+These files act as bottlenecks: every story needs to edit them, so parallel branches always conflict.
 
 ## Strategy Overview
 
@@ -23,87 +27,43 @@ The default Day 1 workflow builds user stories sequentially — one batch at a t
 
 ## 1. Auto-Discovery Patterns
 
-The scaffold phase (Phase 3) sets up auto-discovery so that adding a new router or page does not require editing a shared file. This is the single most important technique for avoiding conflicts.
+The scaffold phase (Phase 3) sets up auto-discovery so that adding a new route handler or page does not require editing a shared file. This is the single most important technique for avoiding conflicts.
 
-### Backend — Router Auto-Discovery
+### Backend — Route Handler Auto-Discovery
 
-Instead of manually importing and registering each router in `app/main.py`, use a discovery pattern that finds all routers automatically:
+Instead of manually importing and registering each route handler in the application entrypoint, the scaffold should use a discovery pattern that automatically finds and registers all handlers at startup:
 
-```python
-# app/main.py — scaffold this once in Phase 3
-import importlib
-import pkgutil
-from fastapi import APIRouter
+- **Convention**: each story creates a new route handler module in a designated directory (e.g. `routes/`, `routers/`, `controllers/`), exporting a well-known object (e.g. a router, blueprint, or controller)
+- **Discovery**: the application entrypoint scans that directory at startup, imports every module it finds, and registers any exported handler objects
+- **Result**: adding a new story means creating a new file — the entrypoint does not need editing
 
-import app.routers
+Most backend frameworks have an idiomatic way to achieve this:
 
-def discover_routers() -> list[APIRouter]:
-    """Import all router modules and collect their router objects."""
-    routers = []
-    package = app.routers
-    for importer, module_name, is_pkg in pkgutil.iter_modules(package.__path__):
-        module = importlib.import_module(f"app.routers.{module_name}")
-        if hasattr(module, "router"):
-            routers.append(module.router)
-    return routers
+| Framework | Auto-discovery approach |
+|---|---|
+| FastAPI (Python) | Scan `app/routers/` with `pkgutil.iter_modules`, import each module, register any `router` attribute |
+| Django (Python) | Use `django.urls.path` with `include()` — each app registers its own `urls.py` |
+| Express (Node.js) | Scan `routes/` with `fs.readdirSync`, `require()` each file, mount with `app.use()` |
+| Spring Boot (Java) | Component scanning — annotated `@RestController` classes are auto-discovered |
+| ASP.NET (C#) | Convention-based controller discovery via `AddControllers()` |
 
-# In app setup:
-for router in discover_routers():
-    app.include_router(router)
-```
-
-With this pattern, each story creates a new file in `app/routers/` (e.g. `app/routers/appointments.py`) and exports a `router` object. No changes to `app/main.py` are required.
+The NHS Service Builder agent should implement the appropriate pattern for the configured stack during Phase 3 scaffolding.
 
 ### Frontend — Route Auto-Discovery
 
-Use a route registry pattern so that new pages register themselves without editing `App.tsx`:
+Use a route registry pattern so that new pages register themselves without editing the root application component:
 
-```typescript
-// frontend/src/routes.ts — scaffold this once in Phase 3
-interface AppRoute {
-  path: string;
-  label: string;
-  element: React.ReactNode;
-}
+- **Convention**: each story creates a new page module in a designated directory (e.g. `pages/`), which self-registers its route on import
+- **Registry**: a central route registry module exports a list of routes and a registration function; the root component reads from this list to render routes
+- **Barrel file**: a barrel/index file in the pages directory imports all page modules, triggering their self-registration
 
-// Each page module adds its route to this array
-export const routes: AppRoute[] = [];
+The only shared touchpoint is the single-line import added to the barrel file, which is a trivial merge conflict if it occurs.
 
-export function registerRoute(route: AppRoute): void {
-  routes.push(route);
-}
-```
+If the frontend framework supports file-based routing (e.g. Next.js, Nuxt, SvelteKit, Remix), auto-discovery is built in — each story simply creates a new file in the pages/routes directory and no shared files need editing.
 
-```typescript
-// frontend/src/App.tsx — scaffold this once in Phase 3
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { routes } from './routes';
+### Navigation Links
 
-// Import all page modules so they register their routes
-import './pages';
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Routes>
-    </BrowserRouter>
-  );
-}
-```
-
-```typescript
-// frontend/src/pages/index.ts — auto-imports all page modules
-// Scaffold this once; each story adds a new page file that self-registers
-
-// Story-specific page modules are imported here.
-// Each page module calls registerRoute() on import.
-```
-
-Each story creates a new page file (e.g. `frontend/src/pages/AppointmentsPage.tsx`) that calls `registerRoute()` on import, then adds its import to `frontend/src/pages/index.ts`. The only shared touchpoint is the single-line import in `pages/index.ts`, which is a trivial merge conflict if it occurs.
+Navigation menus that list pages should also be driven by the route registry or a similar data structure, so that adding a new page does not require editing a shared navigation component. The scaffold should wire the navigation to read from the same registry that powers routing.
 
 ---
 
@@ -113,28 +73,30 @@ Each user story should create its own files and avoid modifying files owned by o
 
 ### File Ownership
 
-| File pattern | Owner | Parallel-safe? |
-|---|---|---|
-| `app/routers/<resource>.py` | Story that introduces the resource | ✅ Yes — one file per resource |
-| `app/models/<resource>.py` | Story that introduces the resource | ✅ Yes — one file per resource |
-| `frontend/src/pages/<Page>.tsx` | Story that introduces the page | ✅ Yes — one file per page |
-| `frontend/src/components/<Component>.tsx` | Shared — first story to need it | ⚠️ Caution — assign to one stream |
-| `tests/unit/test_<resource>.py` | Story that introduces the resource | ✅ Yes — one file per resource |
-| `tests/e2e/test_<journey>.py` | Story that introduces the journey | ✅ Yes — one file per journey |
-| `app/main.py` | Scaffold (Phase 3) | ✅ Yes — auto-discovery, no edits needed |
-| `frontend/src/App.tsx` | Scaffold (Phase 3) | ✅ Yes — route registry, no edits needed |
-| `frontend/src/routes.ts` | Scaffold (Phase 3) | ✅ Yes — no edits needed |
-| `frontend/src/pages/index.ts` | All stories (append-only) | ⚠️ Low-risk — append-only imports |
-| `tests/conftest.py` | Scaffold (Phase 3) | ⚠️ Low-risk — add fixtures rarely |
-| `infra/*.tf` | Scaffold (Phase 3) | ❌ Sequential — only modify in scaffold |
+| Layer | File pattern | Owner | Parallel-safe? |
+|---|---|---|---|
+| **Backend routes** | One file per resource in the routes directory | Story that introduces the resource | ✅ Yes |
+| **Data models** | One file per resource in the models directory | Story that introduces the resource | ✅ Yes |
+| **Frontend pages** | One file per page in the pages directory | Story that introduces the page | ✅ Yes |
+| **Shared UI components** | One file per component in the components directory | First story to need it | ⚠️ Caution — assign to one stream |
+| **Unit tests** | One test file per resource | Story that introduces the resource | ✅ Yes |
+| **E2E tests** | One test file per user journey | Story that introduces the journey | ✅ Yes |
+| **App entrypoint** | Single file — uses auto-discovery | Scaffold (Phase 3) | ✅ No edits needed |
+| **Frontend root** | Single file — reads from route registry | Scaffold (Phase 3) | ✅ No edits needed |
+| **Route registry** | Single file | Scaffold (Phase 3) | ✅ No edits needed |
+| **Page barrel file** | Single file — append-only imports | All stories | ⚠️ Low-risk |
+| **Shared test config** | Single file (e.g. conftest, setup) | Scaffold (Phase 3) | ⚠️ Low-risk |
+| **Infrastructure** | IaC files | Scaffold (Phase 3) | ❌ Sequential only |
 
 ### Naming Conventions
 
-- **Routers**: `app/routers/<plural_resource>.py` — e.g. `appointments.py`, `patients.py`
-- **Models**: `app/models/<plural_resource>.py` — e.g. `appointments.py`, `patients.py`
-- **Pages**: `frontend/src/pages/<PascalCase>Page.tsx` — e.g. `AppointmentsPage.tsx`, `PatientSearchPage.tsx`
-- **Tests**: `tests/unit/test_<resource>.py` — e.g. `test_appointments.py`, `test_patients.py`
-- **E2E tests**: `tests/e2e/test_<journey_slug>.py` — e.g. `test_book_appointment.py`
+Agree naming conventions during Phase 3 so that parallel streams do not create conflicting file names. General principles:
+
+- **Route handlers**: one file per resource, named after the resource (plural) — e.g. `appointments`, `patients`
+- **Data models**: one file per resource, named after the resource (plural)
+- **Pages**: one file per page, named descriptively — e.g. `AppointmentsPage`, `PatientSearchPage`
+- **Tests**: one file per resource or journey, prefixed with `test_` or suffixed with `.test` per framework convention
+- **E2E tests**: one file per user journey, named after the journey slug
 
 ---
 
@@ -176,16 +138,16 @@ Before parallelising, group stories by the resources and pages they touch:
 
 | Stream | Stories | Resources | Pages |
 |---|---|---|---|
-| A | story-001, story-004 | `appointments` | AppointmentsPage, BookingPage |
-| B | story-002, story-005 | `patients` | PatientSearchPage, PatientDetailPage |
-| C | story-003 | `prescriptions` | PrescriptionsPage |
+| A | story-001, story-004 | `appointments` | Appointments list, Booking form |
+| B | story-002, story-005 | `patients` | Patient search, Patient detail |
+| C | story-003 | `prescriptions` | Prescriptions list |
 
 ### Rules for Assigning Streams
 
-1. **Stories that share a resource** (same router, same page) go in the **same stream** — build them sequentially within that stream
+1. **Stories that share a resource** (same route handler, same page) go in the **same stream** — build them sequentially within that stream
 2. **Stories that touch different resources** go in **different streams** — build them in parallel
-3. **Shared components** (e.g. a navigation component used by multiple pages) should be created by whichever story needs them first; other streams wait for that story to merge before using the component
-4. **Infrastructure changes** are sequential — only modify `infra/` in the scaffold phase or in a dedicated infrastructure story
+3. **Shared components** (e.g. a navigation component or patient banner used by multiple pages) should be created by whichever story needs them first; other streams wait for that story to merge before using the component
+4. **Infrastructure changes** are sequential — only modify IaC files in the scaffold phase or in a dedicated infrastructure story
 
 ### Example Timeline
 
@@ -205,40 +167,16 @@ Merges happen one at a time to main.
 
 ## 5. Handling Shared Fixtures and Configuration
 
-### Test Fixtures (`tests/conftest.py`)
+### Shared Test Configuration
 
-Scaffold the shared test client fixture in Phase 3. Story-specific fixtures belong in the story's own test file, not in `conftest.py`:
+Scaffold the shared test client or setup fixture in Phase 3. Story-specific fixtures and test data belong in the story's own test file, not in the shared configuration:
 
-```python
-# tests/conftest.py — scaffold once in Phase 3
-import pytest
-from httpx import ASGITransport, AsyncClient
+- **Shared config** (scaffolded once): test client setup, base URL, common helpers
+- **Story-specific** (per story file): sample data, resource-specific fixtures, mock responses
 
-from app.main import app
+This prevents the shared test configuration file from becoming a merge conflict hotspot.
 
-
-@pytest.fixture
-async def client():
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as ac:
-        yield ac
-```
-
-```python
-# tests/unit/test_appointments.py — story-specific fixtures stay here
-import pytest
-
-
-@pytest.fixture
-def sample_appointment():
-    return {
-        "date": "2026-04-01",
-        "time": "09:30",
-        "clinician": "Dr Patel",
-    }
-```
-
-### Frontend Shared Components
+### Shared UI Components
 
 If two stories need the same shared component (e.g. a PatientBanner), assign it to the story that is built first. The second story's branch rebases onto `main` after the first merges, then uses the component.
 
@@ -248,11 +186,11 @@ If two stories need the same shared component (e.g. a PatientBanner), assign it 
 
 Use this checklist during Phase 3 (Scaffold & Deploy) to ensure the codebase is ready for parallel story builds:
 
-- [ ] `app/main.py` uses router auto-discovery — no manual `include_router()` calls needed per story
-- [ ] `frontend/src/App.tsx` uses a route registry — no manual `<Route>` entries needed per story
-- [ ] `frontend/src/routes.ts` exports the route registry and `registerRoute` function
-- [ ] `frontend/src/pages/index.ts` exists as the barrel file for page imports
-- [ ] `tests/conftest.py` has the shared test client fixture
+- [ ] Application entrypoint uses route handler auto-discovery — no manual registration needed per story
+- [ ] Frontend root component reads routes from a registry or uses file-based routing — no manual route entries needed per story
+- [ ] Page barrel/index file exists for importing new page modules (if not using file-based routing)
+- [ ] Shared test configuration has the test client fixture scaffolded
+- [ ] Navigation component is driven by the route registry — no manual link additions needed per story
 - [ ] Stories are grouped into streams by resource — no two parallel streams touch the same resource
 - [ ] Feature branch naming convention agreed: `story/<NNN>-<slug>`
 - [ ] Branch protection enabled on `main` (no force-push, PR required)
