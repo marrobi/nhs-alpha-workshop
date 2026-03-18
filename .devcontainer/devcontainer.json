@@ -34,7 +34,8 @@
         "yzhang.markdown-all-in-one",
         "davidanson.vscode-markdownlint",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-azure-mcp-server"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",

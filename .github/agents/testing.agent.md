@@ -46,6 +46,11 @@ Use the test client for the backend framework (e.g. `httpx.AsyncClient` for Fast
 - Third-party library behaviour
 - Private implementation details — test the public interface
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json`:
+- **Context7** — use to look up current documentation for test frameworks (pytest, httpx, Vitest, etc.) when writing tests
+
 ## Rules
 
 See `.github/instructions/testing.instructions.md` for full test rules (skip markers, mutable state, synthetic data).

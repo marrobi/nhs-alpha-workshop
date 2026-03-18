@@ -86,6 +86,12 @@ Follow `.github/instructions/nhs-number.instructions.md` (auto-applied). Key: st
 
 Follow the IaC instructions auto-applied to infrastructure files. Key: UK region, app-name-based naming, managed identity, secrets vault.
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+- **Context7** — use to look up current documentation for libraries and frameworks (FastAPI, React, nhsuk-react-components, Playwright, Terraform, etc.) when implementing features
+- **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to interact with Azure resources when deploying and configuring infrastructure
+
 ## When Stuck
 
 - If IaC deployment fails, read the error, fix the config, and re-run

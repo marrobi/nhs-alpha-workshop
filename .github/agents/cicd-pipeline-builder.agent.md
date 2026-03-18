@@ -87,6 +87,12 @@ Generate `.github/dependabot.yml` with ecosystems matching `tech-stack.instructi
 5. Run a dry-run of CI steps locally to verify (ruff, pytest, terraform validate)
 6. Recommend branch protection rules to the team
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+- **Context7** — use to look up current GitHub Actions and CI/CD tool documentation
+- **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to verify Azure resource configuration when building deploy pipelines
+
 ## References
 
 - [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)

@@ -96,7 +96,9 @@ Also create `docs/adr/README.md` as an ADR index.
 
 ### Step 7 — Generate Architecture Diagram
 
-Create an architecture diagram as a draw.io file at `docs/adr/architecture.drawio`. The diagram should show:
+Create an architecture diagram as a draw.io file at `docs/adr/architecture.drawio`. Use the **Draw.io MCP server** (configured in `.vscode/mcp.json`) to create and edit the diagram. The MCP server provides tools for generating draw.io XML from descriptions, converting Mermaid diagrams, and editing existing diagrams.
+
+The diagram should show:
 
 - Frontend (browser) connecting to the backend API
 - Backend API with key routers/endpoints
@@ -131,6 +133,13 @@ Example draw.io XML structure:
 
 Once the ADR and diagram are complete, tell the user:
 > Architecture is ready. Switch to the **NHS Product Owner** agent to decompose the user journeys into user stories with acceptance criteria. Then use the **NHS Service Builder** agent to scaffold and build. The architecture is documented in `docs/adr/001-architecture.md` and the diagram is at `docs/adr/architecture.drawio`.
+
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+- **Context7** — use to look up current documentation for libraries, frameworks, and Terraform providers/modules when advising on tech stack and infrastructure choices
+- **Draw.io** — use to create and edit architecture diagrams in draw.io format
+- **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, validate infrastructure decisions, and explore available Azure services
 
 ## Rules
 
