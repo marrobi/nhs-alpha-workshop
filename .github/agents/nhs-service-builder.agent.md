@@ -1,6 +1,6 @@
 ---
 name: 'NHS Service Builder'
-description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
+description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect (both passes) and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
 model: Claude Opus 4.6 (copilot)
 ---
 
@@ -14,13 +14,14 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ## Prerequisites
 
-Before using this agent, the architecture must be designed and user stories must be written. Run these agents first:
-1. **NHS Architect** — produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design
+Before using this agent, the architecture must be designed, user stories must be written, and ADRs must be created. Run these agents first:
+1. **NHS Architect** (first pass) — produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design
 2. **NHS Product Owner** — produces `user_stories/story-*.md` with prioritised user stories and acceptance criteria decomposed from the user journeys
+3. **NHS Architect** (second pass) — reviews the user stories and creates additional ADRs in `docs/adr/` for detailed technical decisions revealed by the stories
 
 ## Build Sequence
 
-Read `docs/adr/001-architecture.md` for the agreed design, then follow this iteration sequence:
+Read `docs/adr/001-architecture.md` and the additional ADRs in `docs/adr/` for the agreed design, then follow this iteration sequence:
 
 ### Iteration 0 — Scaffold & Deploy
 
@@ -52,9 +53,7 @@ After the scaffold is deployed, read the user story files in `user_stories/story
 6. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
 7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
 
-**After all stories in a journey are built**, write the Playwright E2E test for that journey. (Step numbers above reset per story; E2E is once per journey.)
-
- Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
+**After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
 7. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
 8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
