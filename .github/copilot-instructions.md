@@ -21,7 +21,7 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 - Handle errors explicitly — never swallow errors silently
 - Follow [PEP 8](https://peps.python.org/pep-0008/) via `ruff` linter/formatter
 - **No silent fallback values** — never provide fallback/default values for required configuration (env vars, URLs, secrets). Code must fail explicitly with a clear error when a dependency is missing. Use `os.environ["VAR"]` (raises `KeyError`) instead of `os.environ.get("VAR", "default")`. In JavaScript/k6, validate and throw instead of using `||` fallbacks.
-- **No unauthorised mocking of services** — do not mock, stub, or fake Azure services, NHS APIs, databases, or other external dependencies unless there is an explicit user story requesting that mock. Unit tests may mock external calls for isolation, but integration tests, E2E tests, and application code must use real services or real sandbox environments. If a dependency is unavailable, the code must fail — not silently degrade to a local substitute.
+- **No unauthorised mocking of services** — do not mock, stub, or fake cloud services, NHS APIs, databases, or other external dependencies unless there is an explicit user story requesting that mock. Unit tests may mock external calls for isolation, but integration tests, E2E tests, and application code must use real services or real sandbox environments. If a dependency is unavailable, the code must fail — not silently degrade to a local substitute. For cloud services with no local emulator (e.g. hosted AI/LLM APIs), see the Mocking Boundary in `testing.instructions.md` — an ADR authorising the integration is sufficient justification.
 
 ## NHS-Specific Rules
 

@@ -38,18 +38,20 @@ Read `docs/adr/001-architecture.md` and the additional ADRs in `docs/adr/` for t
    - Add `continue-on-error: true` to all dependency install steps (e.g. pip install, npm ci, Terraform setup) so the workflow does not fail when optional files or directories do not yet exist.
    - Use conditional checks for directories that may not exist yet. Note: conditional directory checks are acceptable **only** in this CI setup workflow where directories are created incrementally — never use this pattern in application runtime code.
 10. Build the frontend for production
-11. Deploy infrastructure and application
-12. Verify the health endpoint returns 200 on the live URL
+11. **Provision all services named in the ADR tech stack** — read the tech stack table in `docs/adr/001-architecture.md` and provision every service listed, not just the database and app service. If the ADR specifies an AI or LLM service, add the corresponding IaC resource, the identity/access grant, and the endpoint as an app setting. Do not selectively omit ADR-specified services — provision them at scaffold time so stories that depend on them can be implemented straight away.
+12. Deploy infrastructure and application
+13. Verify the health endpoint returns 200 on the live URL
 
 ### Build User Stories
 
 After the scaffold is deployed, read the user story files in `user_stories/story-*.md` assigned to this batch and implement them. Each story file contains the persona, action, benefit, and acceptance criteria across four categories (Functional, Accessibility, Clinical Safety, Data Protection). For each story:
 1. Read the story's acceptance criteria — these define what to build and test
-2. Create the API endpoint with input validation
-3. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
-4. Wire up routing and navigation between pages
-5. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
-6. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
+2. **Implement all service integrations the story depends on** — if the acceptance criteria reference an external service named in the ADR (AI generation, scoring, notifications, third-party APIs), implement the full service layer for that integration before building the API endpoint. Do not build the endpoint as if the service layer does not exist — if the ADR specifies it, it must be implemented.
+3. Create the API endpoint with input validation
+4. Create frontend page components using [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
+5. Wire up routing and navigation between pages
+6. Write unit/integration tests that verify the story's **Functional** acceptance criteria (Given/When/Then)
+7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
 
 **After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
 7. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
@@ -105,7 +107,7 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
 Alpha exists to test riskiest assumptions with a realistic service. Do not take shortcuts that undermine this, even under time pressure:
 - **No in-memory data stores** (Python dicts, global lists) — use the database specified in the ADR. Data must persist across restarts.
 - **No hardcoded/mock data as API responses** — use proper seed scripts with synthetic data via the `nhs-synthetic-data` skill. APIs must read from and write to the data store.
-- **No mocks or stubs for service integrations** — integrate with real Azure services (Entra ID, Azure Monitor, Key Vault) using real SDKs and configuration. If a story requires an NHS API, use the real sandbox environment or implement real FHIR endpoints with synthetic data. Never substitute a real service with a local mock — unless there is an explicit user story to build that mock, with the decision recorded in the ADR.
+- **No mocks or stubs for service integrations** — integrate with real services using real SDKs and configuration. If a story requires an NHS API, use the real sandbox environment or implement real FHIR endpoints with synthetic data. Never substitute a real service with a local mock — unless there is an explicit user story to build that mock, with the decision recorded in the ADR. **Exception — cloud services with no local emulator** (e.g. hosted AI/LLM APIs): unit tests must mock the SDK client using the test framework's mocking library; the ADR that authorises the service integration is sufficient justification. Do not skip the implementation because the live endpoint is unavailable in the dev environment — implement the service code and mock the SDK boundary in tests only.
 - **No silent fallback values** — never use `os.environ.get("VAR", "default")` or `|| 'fallback'` for required configuration. Required env vars, URLs, and secrets must raise an error if missing. Fallbacks mask broken dependencies and defer failures to production.
 - **No skipping input validation** — every API endpoint must validate input using Pydantic models.
 - **No skipping error handling** — implement proper error responses (400, 404, 422, 500) with user-friendly messages. Error states are part of the user journey.
