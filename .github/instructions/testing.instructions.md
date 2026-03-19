@@ -22,6 +22,7 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 ## Mocking Boundary
 
 - **Unit tests**: MAY mock external dependencies (databases, APIs, file systems) using `unittest.mock.patch` or `pytest-mock` — this is standard isolation practice
+- **Azure services with no local emulator** (e.g. Azure OpenAI): unit tests MUST mock the SDK client using `unittest.mock.patch` — there is no alternative for local testing. An ADR authorising the integration is sufficient justification; a separate user story for the mock is not required. Integration tests should use the real service endpoint or be skipped with a clear reason if no sandbox exists
 - **Integration tests**: MUST use real services or real test instances (e.g. test database, Azure sandbox). Do not substitute with in-memory fakes unless there is an explicit user story for that mock
 - **E2E tests**: MUST hit the real running application and its real backing services — no service mocking at this layer
 - **Application code**: MUST never contain mock/stub implementations of external services. If a service client is needed, integrate with the real SDK and real configuration. If the real service is unavailable, the code must fail — not silently degrade
