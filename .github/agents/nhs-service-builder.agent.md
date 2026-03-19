@@ -1,6 +1,6 @@
 ---
 name: 'NHS Service Builder'
-description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
+description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect (both passes) and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
 model: Claude Opus 4.6 (copilot)
 ---
 
@@ -14,13 +14,14 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ## Prerequisites
 
-Before using this agent, the architecture must be designed and user stories must be written. Run these agents first:
-1. **NHS Architect** — produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design
+Before using this agent, the architecture must be designed, user stories must be written, and ADRs must be created. Run these agents first:
+1. **NHS Architect** (first pass) — produces `docs/adr/001-architecture.md` with the agreed tech stack, API endpoints, data models, frontend pages, and infrastructure design
 2. **NHS Product Owner** — produces `user_stories/story-*.md` with prioritised user stories and acceptance criteria decomposed from the user journeys
+3. **NHS Architect** (second pass) — reviews the user stories and creates additional ADRs in `docs/adr/` for detailed technical decisions revealed by the stories
 
 ## Build Sequence
 
-Read `docs/adr/001-architecture.md` for the agreed design, then follow this iteration sequence:
+Read `docs/adr/001-architecture.md` and the additional ADRs in `docs/adr/` for the agreed design, then follow this iteration sequence:
 
 ### Iteration 0 — Scaffold & Deploy
 

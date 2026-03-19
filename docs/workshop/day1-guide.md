@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, and then building as many stories as possible.
+Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
 
 > **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
 > - `discovery/scenarios/scenario.md` — scenario overview and problem statement
@@ -78,17 +78,45 @@ Walk through as a team:
 - Is the priority order correct (riskiest assumption first)?
 - Are the acceptance criteria testable?
 
-Approve the stories before moving to scaffold.
+Approve the stories before moving to ADR review.
 
 ---
 
-## Phase 3 — Scaffold & Deploy (1.5 hours)
+## Phase 3 — Architecture ADR Review (30 minutes)
+
+Now that user stories exist, run the **NHS Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
+
+### Start the ADR Review Session
+
+**Agent**: NHS Architect
+
+> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts. Identify the architectural decisions that need to be recorded as ADRs based on the stories, then create them.
+
+The agent will:
+
+1. **Review user stories alongside the architecture** — identify decisions implied by the stories (e.g. data storage for specific entities, auth strategy for role-based access, API versioning, error handling patterns)
+2. **Identify required ADRs** — present a list of ADR topics with rationale and confirm with the team
+3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `nhs-adr-writer` skill
+4. **Update the ADR index** — update `docs/adr/README.md` with the new records
+
+### Review the ADRs (10 minutes)
+
+Walk through as a team:
+- Do the ADRs cover all significant decisions from the stories?
+- Are any decisions missing (database choice, auth strategy, external integrations)?
+- Are the alternatives and trade-offs realistic?
+
+Approve the ADRs before moving to scaffold.
+
+---
+
+## Phase 4 — Scaffold & Deploy (1.5 hours)
 
 ### Iteration 0 — Scaffold the Service
 
 **Agent**: NHS Service Builder
 
-> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
+> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
 
 The agent will:
 - Create the backend app structure with middleware
@@ -99,7 +127,7 @@ The agent will:
 
 ---
 
-## Phase 4 — Build User Stories (3.5+ hours)
+## Phase 5 — Build User Stories (3.5+ hours)
 
 This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
