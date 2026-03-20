@@ -1,11 +1,11 @@
 ---
 name: 'Day 2 Issue Generator'
-description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, visual QA, infrastructure review, accessibility, performance, ADRs, clinical safety, DPIA, GDS evidence, and runbook.'
+description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, infrastructure review, accessibility, performance, clinical safety, DPIA, GDS evidence, and runbook.'
 ---
 
 # Day 2 Issue Generator
 
-Generates the 14 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
+Generates the 12 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
 
 You produce issue template files — you do **not** write application code, tests, or infrastructure.
 
@@ -25,17 +25,15 @@ Day 1 must be complete:
 | 01 | CI/CD Pipeline | CI/CD Pipeline Builder |
 | 02 | Unit & Integration Tests | Testing |
 | 03 | Playwright E2E Tests | Playwright E2E |
-| 04 | Visual QA | Visual QA |
-| 05 | Code Quality Review | Code Quality Reviewer |
-| 06 | Security Hardening | Security Reviewer |
-| 07 | Azure Infra Security Review | Azure Infra Security Reviewer |
-| 08 | Accessibility Audit | Accessibility Auditor |
-| 09 | Performance Load Tests | Performance |
-| 10 | ADRs | NHS GDS Assessor |
-| 11 | DCB0129 Clinical Safety | NHS Clinical Safety |
-| 12 | DPIA | NHS DPIA Advisor |
-| 13 | GDS Assessment Evidence | NHS GDS Assessor |
-| 14 | Runbook & Deployment Docs | NHS Service Builder |
+| 04 | Code Quality Review | Code Quality Reviewer |
+| 05 | Security Hardening | Security Reviewer |
+| 06 | Azure Infra Security Review | Azure Infra Security Reviewer |
+| 07 | Accessibility Audit | Accessibility Auditor |
+| 08 | Performance Load Tests | Performance |
+| 09 | DCB0129 Clinical Safety | NHS Clinical Safety |
+| 10 | DPIA | NHS DPIA Advisor |
+| 11 | GDS Assessment Evidence | NHS GDS Assessor |
+| 12 | Runbook & Deployment Docs | NHS Service Builder |
 
 ## Workflow
 
@@ -66,7 +64,7 @@ Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
 
 Present the issue titles and custom agents table from above. **Wait for user confirmation** before creating on GitHub.
 
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–14). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
+Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–12). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
 
 ## Rules
 
