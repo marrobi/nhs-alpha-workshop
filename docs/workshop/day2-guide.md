@@ -18,7 +18,6 @@ At the end of Day 2, your service should have evidence for:
 
 1. Ensure all Day 1 code is committed and pushed
 2. Enable Copilot Coding Agent on your repository (Settings → Copilot → Coding Agent)
-3. Verify the `copilot-setup-steps.yml` workflow runs successfully (created by the NHS Service Builder during Day 1 scaffolding)
 
 ## Generate Day 2 Issues (15 minutes)
 
@@ -91,7 +90,6 @@ Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence repo
 - **Don't create all issues at once** — Copilot works on one at a time per repo
 - **Review PRs carefully** — Copilot is good but not perfect
 - **Iterate on PRs** — request changes via review comments, Copilot will update
-- **Check the workflow logs** — if setup-steps fails, the agent can't build/test
 - **Link back to discovery** — Day 1 artefacts (scenarios, personas, journeys) are key evidence for GDS points 1, 2, and 3
 
 ---
