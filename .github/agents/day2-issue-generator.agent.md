@@ -18,45 +18,39 @@ Day 1 must be complete:
 - `user_stories/story-*.md` — user stories
 - Application code in the repository
 
+## Issues
+
+| # | Issue | Custom Agent |
+|---|---|---|
+| 01 | CI/CD Pipeline | CI/CD Pipeline Builder |
+| 02 | Unit & Integration Tests | Testing |
+| 03 | Playwright E2E Tests | Playwright E2E |
+| 04 | Visual QA | Visual QA |
+| 05 | Code Quality Review | Code Quality Reviewer |
+| 06 | Security Hardening | Security Reviewer |
+| 07 | Azure Infra Security Review | Azure Infra Security Reviewer |
+| 08 | Accessibility Audit | Accessibility Auditor |
+| 09 | Performance Load Tests | Performance |
+| 10 | ADRs | NHS GDS Assessor |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety |
+| 12 | DPIA | NHS DPIA Advisor |
+| 13 | GDS Assessment Evidence | NHS GDS Assessor |
+| 14 | Runbook & Deployment Docs | NHS Service Builder |
+
 ## Workflow
 
 ### Step 1 — Read the Codebase
 
-Read tech stack, ADR, user stories, and scan actual code (routers, pages, config). Summarise findings and **wait for user confirmation** before proceeding.
+Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architecture ADR, user stories, and scan actual code (routers, pages, config). Summarise findings and **wait for user confirmation** before proceeding.
 
 ### Step 2 — Generate Issues
 
-For each issue: read the referenced agent/instruction/skill files, then write acceptance criteria using **actual** tools, commands, file paths, and frameworks from the tech stack.
-
-| # | Issue | Read These Files | Key Acceptance Criteria Focus |
-|---|---|---|---|
-| 01 | CI/CD Pipeline | `cicd-pipeline-builder.agent.md`, `nhs-security.instructions.md` | Actual language versions, linters, test commands, dependency audit, OIDC deploy |
-| 02 | Unit & Integration Tests | `testing.instructions.md`, `testing.agent.md` | Actual test runner, coverage tool, router modules, exact coverage command |
-| 03 | Playwright E2E Tests | `playwright-e2e.agent.md`, `testing.instructions.md` | Actual user journeys from stories, pages from frontend code |
-| 04 | Visual QA | `visual-qa.agent.md` | Actual pages/journeys; desktop + mobile viewports. **Must complete before** Accessibility Audit |
-| 05 | Code Quality Review | `code-quality-reviewer.agent.md`, `copilot-instructions.md` | Actual modules, linter, coverage command. **Must complete before** Security Hardening |
-| 06 | Security Hardening | `nhs-security.instructions.md`, `security-reviewer.agent.md` | Actual validation framework, dependency audit command, middleware approach |
-| 07 | Azure Infra Review | `azure-infra-reviewer.agent.md`, `terraform-azure-nhs.instructions.md`, `nhs-security.instructions.md` | Actual IaC files. **Must complete after** Security Hardening |
-| 08 | Accessibility Audit | `accessibility-auditor.agent.md`, `nhsuk-frontend.instructions.md` | WCAG 2.2 AA, actual pages from frontend code |
-| 09 | Performance Tests | `performance.instructions.md`, `performance.agent.md` | Actual API endpoints, performance tool from tech stack |
-| 10 | ADRs | `nhs-adr-writer/SKILL.md` | ADR topics from **actual decisions** in architecture ADR |
-| 11 | Clinical Safety | `dcb0129-hazard-log/SKILL.md`, `nhs-clinical-safety.agent.md` | Clinical context from scenario and stories |
-| 12 | DPIA | `nhs-dpia/SKILL.md`, `nhs-dpia-advisor.agent.md` | Actual data types and flows from architecture/stories |
-| 13 | GDS Evidence | `gds-service-standard/SKILL.md`, `nhs-gds-assessor.agent.md` | Tech stack for tech points, research artefacts for user points |
-| 14 | Runbook & Docs | IaC files, `nhs-service-builder.agent.md` | Actual IaC tool, hosting, deploy commands, monitoring |
-
-Each issue's **Context** section must reference the files above. The **Context** provides guidance, but the primary way to direct the Coding Agent is by selecting the correct **custom agent** when assigning Copilot on GitHub.
-
-### Step 3 — Save Issues
+For each issue, read the corresponding agent file listed above, then write acceptance criteria using **actual** tools, commands, file paths, and frameworks from the tech stack.
 
 Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
 
 ```markdown
 ## [Issue Title]
-
-### Context
-Follow the instructions in `[relevant-instruction-file]` and the patterns in `[relevant-agent-file]`.
-[Additional context about files to read, patterns to follow, or skills to use.]
 
 ### Goal
 [One sentence describing what this achieves]
@@ -68,35 +62,15 @@ Follow the instructions in `[relevant-instruction-file]` and the patterns in `[r
 `label1`, `label2`
 ```
 
-### Step 4 — Present Summary
+### Step 3 — Present Summary and Create on GitHub
 
-Present **only issue titles and custom agents** — don't type out full acceptance criteria in chat.
+Present the issue titles and custom agents table from above. **Wait for user confirmation** before creating on GitHub.
 
-| Issue | Custom Agent |
-|---|---|
-| 01 CI/CD Pipeline | **CI/CD Pipeline Builder** |
-| 02 Unit & Integration Tests | **Testing** |
-| 03 Playwright E2E Tests | **Playwright E2E** |
-| 04 Visual QA | **Visual QA** |
-| 05 Code Quality Review | **Code Quality Reviewer** |
-| 06 Security Hardening | **Security Reviewer** |
-| 07 Azure Infra Security Review | **Azure Infra Security Reviewer** |
-| 08 Accessibility Audit | **Accessibility Auditor** |
-| 09 Performance Load Tests | **Performance** |
-| 10 ADRs | **NHS GDS Assessor** |
-| 11 DCB0129 Clinical Safety | **NHS Clinical Safety** |
-| 12 DPIA | **NHS DPIA Advisor** |
-| 13 GDS Assessment Evidence | **NHS GDS Assessor** |
-| 14 Runbook & Deployment Docs | **NHS Service Builder** |
-
-**Wait for user confirmation** before creating on GitHub.
-
-### Step 5 — Create on GitHub
-
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–14). Do **not** use `--assignee`. Report issue numbers/URLs, then instruct user to assign Copilot with the correct custom agent per issue.
+Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–14). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
 
 ## Rules
 
+- **Do not assign issues** — create issues without `--assignee`; the user assigns Copilot manually
 - **Read the tech stack, don't guess** — every tool/command/framework reference must come from `tech-stack.instructions.md` or the actual codebase
 - **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies. Generate issues that reference org standards for acceptance criteria (e.g. coverage thresholds, secret scanning, deployment strategy). Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository.
 - **Read the agent files** — each issue's acceptance criteria should align with what the assigned agent expects

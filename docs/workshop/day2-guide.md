@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and demonstrating GDS readiness. You use the **Copilot Coding Agent** on GitHub: create issues, assign them to `@copilot`, and it creates PRs automatically.
+Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and demonstrating GDS readiness. You use the **Copilot Coding Agent** on GitHub: create issues, assign Copilot with the correct custom agent, and it creates PRs automatically.
 
 > **Reference**: [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — by the end of alpha, you should be confident you can create something that meets users' needs and is cost-effective.
 
@@ -28,7 +28,7 @@ Day 2 issues are generated from your actual tech stack and codebase — not from
 2. Ask it to generate the Day 2 issues
 3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in `docs/workshop/day2-issues/`
 4. Review the generated files and confirm
-5. The agent creates the issues on GitHub using `gh` CLI and assigns them to `@copilot`
+5. The agent creates the issues on GitHub using `gh` CLI — it does **not** assign them to Copilot
 
 > **Prerequisite**: Ensure `gh auth login` has been run in the terminal before starting.
 
