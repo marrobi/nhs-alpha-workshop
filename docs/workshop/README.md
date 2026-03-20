@@ -11,7 +11,7 @@ This repository contains **no application code**. It provides the Copilot config
   agents/             12 custom Copilot agents (7 engineering + 6 NHS)
   instructions/       8 auto-applied coding instruction files
   skills/             8 agent skills (SKILL.md folders)
-  workflows/          GitHub Actions (Copilot Coding Agent setup)
+  workflows/          GitHub Actions
 docs/
   workshop/           Workshop guides and Day 2 issue templates
 AGENTS.md             Copilot Coding Agent context file

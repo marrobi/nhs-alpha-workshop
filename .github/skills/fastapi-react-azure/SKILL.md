@@ -52,13 +52,6 @@ infra/
    - `ruff` (linting)
    - Pin **exact** versions (`==`) — no loose ranges
 
-### Copilot Setup Workflow
-
-1. Create `.github/workflows/copilot-setup-steps.yml` with:
-   - `on: workflow_dispatch`
-   - Steps: checkout, setup Python 3.12, `pip install -r requirements.txt`, setup Node 20, conditional `npm ci` (only if `frontend/` exists), setup Terraform
-   - This workflow configures the Copilot Coding Agent environment — it is **not** CI/CD
-
 ### Backend — FastAPI
 
 1. Set up FastAPI app in `app/main.py` with:

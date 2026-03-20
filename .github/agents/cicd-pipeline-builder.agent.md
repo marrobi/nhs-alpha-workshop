@@ -19,8 +19,7 @@ NHS Alpha services need two core pipelines:
 .github/
 ├── workflows/
 │   ├── ci.yml                    # Runs on every PR to main
-│   ├── deploy.yml                # Runs on push to main (after merge)
-│   └── copilot-setup-steps.yml   # Copilot Coding Agent environment (if exists)
+│   └── deploy.yml                # Runs on push to main (after merge)
 └── dependabot.yml                # Automated dependency updates
 ```
 
