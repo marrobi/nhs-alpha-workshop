@@ -92,6 +92,27 @@ Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence repo
 
 ---
 
+## Demo Recording (VS Code Activity)
+
+While Copilot works through the Day 2 issues, use the **Demo Recorder** agent in VS Code to produce a recorded walkthrough of the service. This runs locally because it needs access to the running application — the hosted Copilot Coding Agent may not be able to reach it.
+
+**Agent**: Demo Recorder _(in VS Code, not as a GitHub issue)_
+
+> Record a demo of the service. Read the user journeys, stories, and frontend/backend routes. Generate a demo narrative script, then create a Playwright recording that walks through each journey with video capture.
+
+The agent will:
+
+1. Discover all routes and user journeys from the codebase
+2. Generate a demo narrative script at `docs/demo/demo-script.md`
+3. Create a Playwright test at `tests/e2e/demo/test_demo_recording.py` with video recording enabled
+4. Run the walkthrough — if any issues are found, fix them iteratively
+5. Save recorded videos to `tests/e2e/demo/videos/` and screenshots to `tests/e2e/demo/screenshots/`
+6. Report any issues found and fixed in `docs/demo/demo-issues-resolved.md`
+
+> **Tip**: Run this after E2E tests are complete (issue 03) so the journeys are already verified. The demo recording serves as a final end-to-end validation and produces shareable evidence for assessors.
+
+---
+
 ## When All Done — MKDocs Documentation Site
 
 Once all issues are merged, use the **NHS Documentation** agent to build a single MKDocs site that pulls every alpha artefact together into one browsable, shareable site.
