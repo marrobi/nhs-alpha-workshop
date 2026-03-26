@@ -43,6 +43,15 @@ infra/
 
 ## Scaffold Steps
 
+### Dependencies
+
+1. Create `requirements.txt` with pinned production and dev dependencies:
+   - `fastapi`, `uvicorn[standard]`, `pydantic`, `slowapi`, `python-multipart`, `structlog`, `httpx` (production)
+   - `pytest`, `pytest-asyncio`, `httpx` (testing)
+   - `pytest-playwright`, `axe-playwright-python` (E2E testing — pre-installed in devcontainer, pinned here for CI)
+   - `ruff` (linting)
+   - Pin **exact** versions (`==`) — no loose ranges
+
 ### Backend — FastAPI
 
 1. Set up FastAPI app in `app/main.py` with:

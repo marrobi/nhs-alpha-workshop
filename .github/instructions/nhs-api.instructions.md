@@ -4,7 +4,7 @@ applyTo: "**/routers/**,**/api/**"
 
 # NHS API Standards
 
-See `tech-stack.instructions.md` for the current backend framework. The NHS rules below are framework-agnostic; the implementation section is specific to the current stack.
+See `tech-stack.instructions.md` for the current backend framework and implementation details. The rules below are framework-agnostic.
 
 ---
 
@@ -23,17 +23,17 @@ See `tech-stack.instructions.md` for the current backend framework. The NHS rule
 - Use standard HTTP status codes: 200, 201, 400, 401, 403, 404, 422, 500
 - Include `X-Request-ID` header in all responses for distributed tracing
 
-### NHS Number Validation
+### NHS Number
 
-- NHS numbers are 10 digits with a modulus 11 check digit
-- Display format: 3-3-4 groups (e.g. `943 476 5919`)
-- Validate inbound NHS numbers with the check digit algorithm
-- Never accept NHS numbers via GET query parameters
+See `nhs-number.instructions.md` (auto-applied) for full ISB 0149 rules. Key API rules:
+
+- Validate format + modulus 11 check digit on all inbound NHS numbers
+- Never accept NHS numbers via GET query parameters — POST only
 
 ### FHIR UK Core
 
 - When integrating with NHS services, use FHIR R4 UK Core profiles
-- For Alpha stubs, return valid FHIR JSON structure with synthetic data
+- Return valid FHIR JSON structure with synthetic data
 - Use FHIR resource types: Patient, Appointment, Encounter, Observation
 - Base URL pattern for FHIR: `/fhir/R4/<ResourceType>`
 
@@ -50,16 +50,9 @@ See `tech-stack.instructions.md` for the current backend framework. The NHS rule
 - Stricter limits for auth endpoints: 10 per 15 minutes
 - Exclude `/health` from rate limiting
 
----
+### Frontend/Backend Field Contract
 
-## FastAPI Implementation (current stack)
+- Frontend type definitions for API responses MUST use the exact field names from the corresponding backend response model
+- Do not rename, alias, or case-convert fields between backend and frontend without an explicit serialisation layer
 
-### Route Structure
-
-- Define routers in `app/routers/` using `APIRouter(prefix="/...", tags=["..."])`
-- Use Pydantic models for all request/response schemas
-- Use `async def` for route handlers — FastAPI is async-first
-- Include routers in `app/main.py` with `app.include_router()`
-- Use Pydantic models for input validation — FastAPI returns 422 automatically for invalid input
-- Use a Pydantic validator for NHS number check digit validation
-- Apply `slowapi` rate limiting to all API endpoints
+> See `tech-stack.instructions.md` for framework-specific API implementation details.

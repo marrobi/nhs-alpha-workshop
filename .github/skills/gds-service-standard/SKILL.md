@@ -35,6 +35,8 @@ This skill maps repository evidence to the [14-point GDS Service Standard](https
 
 ## Output Format
 
+**Create a new file** at `docs/gds-assessment.md`. Do **not** edit this skill file — it is a reference, not a template to fill in.
+
 Generate `docs/gds-assessment.md` with a table:
 
 ```markdown

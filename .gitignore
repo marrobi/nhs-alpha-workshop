@@ -32,7 +32,8 @@ frontend/build/
 crash.log
 
 # IDE
-.vscode/
+.vscode/*
+!.vscode/mcp.json
 .idea/
 *.swp
 *.swo
@@ -45,3 +46,4 @@ Thumbs.db
 # Playwright
 test-results/
 playwright-report/
+tests/e2e/screenshots/

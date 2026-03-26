@@ -2,29 +2,21 @@
 
 ## Overview
 
-Day 1 assumes **discovery has already been completed** using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture and then building as many user stories as possible.
+Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
 
-> **Prerequisites**: Complete discovery before the workshop using the [product-dev-copilot](https://github.com/marrobi/product-dev-copilot) toolkit. You need:
-> - `scenarios/scenario.md` — scenario overview and problem statement
-> - `personas/persona-report.md` — researched NHS personas
-> - `user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
+> **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
+> - `discovery/scenarios/scenario.md` — scenario overview and problem statement
+> - `discovery/personas/persona-report.md` — researched NHS personas
+> - `discovery/user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
 >
-> See the [discovery guide](discovery-guide.md) for how to produce these artefacts.
+> See the [discovery guide](../../discovery/README.md) for how to produce these artefacts.
 
 ## Setup (30 minutes)
 
-1. Create a new repo from this template
-2. Clone and open in VS Code Insiders
-3. Copy your discovery artefacts (`scenarios/`, `personas/`, `user_journeys/`) into the repo
-4. Verify prerequisites:
-   ```bash
-   python --version    # 3.12+
-   node --version      # 20+
-   terraform --version
-   az --version
-   az login
-   ```
-5. Set your Azure subscription: `az account set --subscription <id>`
+1. Open your repo in GitHub Codespaces or VS Code with the provided Dev Container (all prerequisites are pre-installed)
+2. Verify your discovery artefacts are in `discovery/` (`scenarios/`, `personas/`, `user_journeys/`)
+3. Log in to Azure: `az login`
+4. Set your Azure subscription: `az account set --subscription <id>`
 
 ---
 
@@ -36,7 +28,7 @@ Before writing any code, design the technical architecture informed by your disc
 
 **Agent**: NHS Architect
 
-> Read the discovery artefacts in `scenarios/`, `personas/`, and `user_journeys/data/`. Design the architecture for this service.
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`. Design the architecture for this service.
 
 The agent will:
 
@@ -58,17 +50,73 @@ Walk through as a team:
 - **ADR** — does the architecture make sense given the constraints?
 - **Diagram** — open `docs/adr/architecture.drawio` in VS Code to review visually
 
-Agree the architecture before moving to build.
+Agree the architecture before moving to user stories.
 
 ---
 
-## Phase 2 — Scaffold & Deploy (1.5 hours)
+## Phase 2 — Generate User Stories (30 minutes)
+
+Before building, decompose the user journeys into implementable user stories with acceptance criteria. This phase uses the **NHS Product Owner** agent.
+
+**Agent**: NHS Product Owner
+
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
+
+The agent will:
+
+1. **Read all discovery artefacts and the ADR** — understands the journeys, personas, and technical design
+2. **Decompose each journey into discrete user stories** — typically 3–8 stories per journey
+3. **Write acceptance criteria** in four categories: Functional (Given/When/Then), Accessibility, Clinical Safety, Data Protection
+4. **Present stories for review** — you approve, adjust, or add stories before they are saved
+5. **Save each story** as a separate file in `user_stories/story-NNN-short-slug.md`
+
+### Review the Stories (10 minutes)
+
+Walk through as a team:
+- Are any stories missing from the journeys?
+- Should any be split further or merged?
+- Is the priority order correct (riskiest assumption first)?
+- Are the acceptance criteria testable?
+
+Approve the stories before moving to ADR review.
+
+---
+
+## Phase 3 — Architecture ADR Review (30 minutes)
+
+Now that user stories exist, run the **NHS Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
+
+### Start the ADR Review Session
+
+**Agent**: NHS Architect
+
+> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts. Identify the architectural decisions that need to be recorded as ADRs based on the stories, then create them.
+
+The agent will:
+
+1. **Review user stories alongside the architecture** — identify decisions implied by the stories (e.g. data storage for specific entities, auth strategy for role-based access, API versioning, error handling patterns)
+2. **Identify required ADRs** — present a list of ADR topics with rationale and confirm with the team
+3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `nhs-adr-writer` skill
+4. **Update the ADR index** — update `docs/adr/README.md` with the new records
+
+### Review the ADRs (10 minutes)
+
+Walk through as a team:
+- Do the ADRs cover all significant decisions from the stories?
+- Are any decisions missing (database choice, auth strategy, external integrations)?
+- Are the alternatives and trade-offs realistic?
+
+Approve the ADRs before moving to scaffold.
+
+---
+
+## Phase 4 — Scaffold & Deploy (1.5 hours)
 
 ### Iteration 0 — Scaffold the Service
 
 **Agent**: NHS Service Builder
 
-> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
+> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
 
 The agent will:
 - Create the backend app structure with middleware
@@ -79,22 +127,36 @@ The agent will:
 
 ---
 
-## Phase 3 — Build User Stories (4+ hours)
+## Phase 5 — Build User Stories (3.5+ hours)
 
-This is the core of Day 1. The agent will build all user stories from your discovery journeys in a single session.
+This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-**Agent**: NHS Service Builder
+### Build → QA → Repeat
 
-> Build all the user stories from the user journeys in `user_journeys/data/`. Implement every story: API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+For each batch:
 
-The agent will work through all stories, creating API endpoints, frontend pages, tests, and E2E tests for each. Monitor progress and provide guidance if it asks questions.
+1. **Build** — use the **NHS Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
 
-### While the Agent Works
+   **Agent**: NHS Service Builder
 
-- Watch for questions — the agent may need clarification on specific stories
+   > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+
+2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
+
+   **Agent**: Visual QA
+
+   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+
+3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
+
+4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
+
+### While the Agents Work
+
+- Watch for questions — the agents may need clarification on specific stories
 - Review the code as it's created — catch design issues early
 - If you spot problems, steer the agent in the chat
-- Switch agents mid-session if needed (e.g. **Security Reviewer** for a quick audit)
+- Group related stories into batches — stories from the same journey or that share pages/components work best together
 
 ### End of Day — Review & Commit (15 minutes)
 
@@ -108,7 +170,7 @@ The agent will work through all stories, creating API endpoints, frontend pages,
 
 - **Arrive with discovery done** — the workshop is for building, not researching
 - **Architecture first** — do not scaffold until the architecture is agreed
-- **Let the agent do the work** — it will build all stories in one session
+- **Build in batches** — 2–5 connected stories at a time, then Visual QA, then repeat
 - **Switch agents** — use the right agent for the right job
 - **Verify on the live URL** — always check the deployed service after deployment
 - **Commit frequently** — the agent can run `git commit` for you

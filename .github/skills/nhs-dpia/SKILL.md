@@ -42,4 +42,4 @@ This skill drafts DPIAs for NHS digital health services following [ICO guidance]
 
 ## Output
 
-Generate the DPIA as `docs/dpia/dpia.md` using the template in `templates/dpia-template.md`.
+The agent must **create a new file** at `docs/dpia/dpia.md` following the ICO 8-step structure described above. Do **not** edit this skill file — it is a reference, not a template to fill in.

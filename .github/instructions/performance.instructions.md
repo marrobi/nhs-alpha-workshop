@@ -40,6 +40,7 @@ thresholds: {
 ## Running
 
 ```bash
-k6 run tests/performance/smoke.k6.js
-k6 run -e BASE_URL=https://app-nhs-alpha-dev.azurewebsites.net tests/performance/load.k6.js
+# BASE_URL must always be set explicitly — scripts will throw if it is missing
+k6 run -e BASE_URL=http://localhost:3000 tests/performance/smoke.k6.js
+k6 run -e BASE_URL=$BASE_URL tests/performance/load.k6.js
 ```

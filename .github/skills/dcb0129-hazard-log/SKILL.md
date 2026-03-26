@@ -40,4 +40,8 @@ Risk levels: **1** = Acceptable, **2** = Acceptable with monitoring, **3** = Und
 
 ## Output
 
-Generate the hazard log as `docs/clinical-safety/hazard-log.md` using the template in `templates/hazard-log-template.md`.
+The agent must **create new files**:
+- Hazard log: `docs/clinical-safety/hazard-log.md`
+- Clinical Safety Case Report: `docs/clinical-safety/safety-case-report.md`
+
+Use the structure described above as guidance. Do **not** edit this skill file — it is a reference, not a template to fill in.

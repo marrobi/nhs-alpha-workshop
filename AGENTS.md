@@ -1,4 +1,8 @@
-# NHS Alpha — Copilot Coding Agent Context
+# NHS Service — Copilot Coding Agent Context
+
+## Quality Expectations
+
+**All code must be production-quality.** The GDS delivery phase does not affect code standards. Write fully tested, secure, accessible, and maintainable code. Never skip validation, error handling, security controls, tests, or accessibility. Do not take shortcuts.
 
 ## Rules
 
@@ -6,31 +10,33 @@
 
 ## Project Description
 
-This is an NHS Alpha-phase digital service built during a 2-day workshop using GitHub Copilot agents. The service follows the NHS Design System and GDS Service Standard, deployed to Azure using Terraform.
+This is an NHS digital service built with GitHub Copilot agents. The service follows the NHS Design System and GDS Service Standard, deployed to Azure using Terraform.
 
 ## Tech Stack
 
-See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; coding standards in `.github/copilot-instructions.md`.
+See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; organisational standards in `.github/instructions/org-standards.instructions.md`; coding standards in `.github/copilot-instructions.md`.
 
 ## Repository Structure
 
 ```
-├── app/                    # FastAPI backend
-│   ├── routers/            # FastAPI route modules
-│   ├── middleware/          # FastAPI middleware
-│   └── main.py             # FastAPI app entrypoint
-├── frontend/               # React application
+├── app/                    # Backend application (see tech-stack.instructions.md)
+│   ├── routers/            # API route modules
+│   ├── middleware/          # Application middleware
+│   └── main.py             # App entrypoint
+├── frontend/               # Frontend application (see tech-stack.instructions.md)
 │   ├── src/
-│   │   ├── components/     # React components (nhsuk-react-components)
+│   │   ├── components/     # UI components (NHS Design System)
 │   │   ├── pages/          # Page components
 │   │   └── App.tsx         # Root component
 │   ├── package.json
 │   └── vite.config.ts
+├── user_stories/           # User stories generated from journeys (Day 1)
+│   └── story-NNN-slug.md   # One file per story with acceptance criteria
 ├── tests/
-│   ├── unit/               # pytest unit tests (backend)
-│   ├── integration/        # httpx API integration tests
-│   ├── e2e/                # Playwright browser tests
-│   └── performance/        # k6 load tests
+│   ├── unit/               # Backend unit tests
+│   ├── integration/        # API integration tests
+│   ├── e2e/                # Browser tests
+│   └── performance/        # Load tests
 ├── infra/                  # Terraform configuration
 │   ├── main.tf
 │   ├── variables.tf
@@ -46,7 +52,7 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context
-├── requirements.txt        # Python backend dependencies
+├── requirements.txt        # Backend dependencies
 └── .gitignore
 ```
 

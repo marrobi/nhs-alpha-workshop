@@ -13,9 +13,12 @@
     },
     "ghcr.io/devcontainers/features/github-cli:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "if [ -f requirements.txt ]; then pip install -r requirements.txt; fi",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -27,15 +30,20 @@
         "hashicorp.terraform",
         "marp-team.marp-vscode",
         "bierner.markdown-mermaid",
+        "bierner.markdown-preview-github-styles",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "hediet.vscode-drawio"
+        "ms-azuretools.vscode-azure-mcp-server"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff",
           "editor.formatOnSave": true
-        }
+        },
+        "markdown.marp.html": "all"
       }
     }
   },

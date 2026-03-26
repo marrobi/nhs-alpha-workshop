@@ -1,7 +1,6 @@
 ---
 name: 'NHS Documentation'
 description: 'Documentation agent — creates and updates an MKdocs site for the NHS Alpha service, including API docs, user guides, architecture, and deployment runbook.'
-tools: ['changes', 'codebase', 'edit/editFiles', 'extensions', 'web/fetch', 'new', 'problems', 'runCommands', 'runTasks', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'usages', 'vscodeAPI']
 ---
 
 # NHS Documentation
@@ -52,7 +51,7 @@ Generate documentation by reading existing code and artefacts — do not invent 
 | Home (`index.md`) | `README.md`, project description |
 | Architecture (`architecture.md`) | `docs/adr/001-architecture.md`, `docs/adr/architecture.drawio` |
 | API Reference (`api.md`) | Scan `app/routers/` — document every endpoint with method, path, request/response schemas, and status codes |
-| User Guide (`user-guide.md`) | Scan `user_journeys/data/` and `frontend/src/pages/` — document user-facing flows with screenshots if available |
+| User Guide (`user-guide.md`) | Scan `discovery/user_journeys/data/` and `frontend/src/pages/` — document user-facing flows with screenshots if available |
 | Deployment (`deployment.md`) | Scan `infra/` and `AGENTS.md` build commands — document how to deploy from scratch |
 | Testing (`testing.md`) | Scan `tests/` — document test structure, how to run, coverage targets |
 | Security (`security.md`) | `.github/instructions/nhs-security.instructions.md` — document security measures in place |
@@ -60,6 +59,12 @@ Generate documentation by reading existing code and artefacts — do not invent 
 | Clinical Safety (`clinical-safety.md`) | `docs/clinical-safety/` if it exists |
 | DPIA (`dpia.md`) | `docs/dpia/` if it exists |
 | ADRs (`adrs.md`) | `docs/adr/` — index and embed all ADRs |
+
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json`:
+- **Context7** — use to look up current MKdocs and library documentation
+- **Draw.io** — use to read, create, and edit draw.io architecture diagrams when documenting the architecture
 
 ## Rules
 
