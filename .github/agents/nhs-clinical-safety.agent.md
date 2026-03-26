@@ -113,4 +113,6 @@ Create as a **new file** at `docs/clinical-safety/safety-case-report.md`:
 - Every hazard must have at least one mitigation
 - Follow verification rules from `review-agent-pattern.instructions.md` — only code counts as evidence
 - Unimplemented mitigations do not reduce residual risk
+- **Iterate to fix before writing** — follow the Compliance Document Workflow from `review-agent-pattern.instructions.md`: read the codebase, identify gaps, fix them, then write the document
+- **Document current state, not history** — the hazard log and safety case report must reflect the service as it stands after all fixes. Do not include "Review Passes" or "Resolved Issues" sections — these are audit report sections, not compliance documents
 - This is a living document — update when features change

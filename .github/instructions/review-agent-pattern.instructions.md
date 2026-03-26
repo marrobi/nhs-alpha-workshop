@@ -73,3 +73,27 @@ Each agent specifies its own report path and category table. Use this structure:
 - **Never mark a control as implemented** without searching the codebase for evidence — ADRs and instruction files describe intent, not reality
 - **Distinguish "designed" from "implemented"** — unimplemented controls are gaps, not assurances
 - Save the report only after the final review pass
+
+---
+
+## Compliance Document Workflow
+
+Some agents produce **compliance documents** rather than review reports — for example, the NHS Clinical Safety (DCB0129), DPIA, and GDS assessment agents. These follow a different pattern:
+
+### Workflow
+
+1. **Read the full codebase** — understand what is actually implemented, not just designed or intended.
+2. **Identify compliance gaps** — compare the actual implementation against the standard being assessed.
+3. **Fix gaps** — where code, Terraform, or configuration changes are needed to meet the standard, make them and verify. Fix critical and high gaps before writing the document.
+4. **Iterate until compliant** — repeat fix → verify until no critical gaps remain. Minimum two passes.
+5. **Write the compliance document** — only after completing all fixes. The document must reflect the **current state** of the service, not the history of the review.
+
+### Document Format
+
+Compliance documents show **current compliance state**, not a review history:
+
+- ✅ Met / Implemented — evidence found in the codebase (cite file and line)
+- ⚠️ Partial — some evidence but incomplete (explain what's missing)
+- ❌ Gap / Not implemented — no code evidence found; document as accepted risk with rationale if not fixable
+
+**Do not include** "Review Passes" or "Resolved Issues" sections in compliance documents. These sections belong in audit reports, not living compliance records. The final document must read as a statement of the service's current compliance position — what is true now, after all iteration is complete.
