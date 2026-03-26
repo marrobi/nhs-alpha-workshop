@@ -64,8 +64,7 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 12 | DPIA | NHS DPIA Advisor | Data protection considered |
 | 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
 | 14 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 15 | Demo Recording | Demo Recorder | Recorded walkthrough of user journeys, issues identified and fixed |
-| 16 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 15 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -94,6 +93,27 @@ Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence repo
 - **Iterate on PRs** — request changes via review comments, Copilot will update
 - **Check the workflow logs** — if setup-steps fails, the agent can't build/test
 - **Link back to discovery** — Day 1 artefacts (scenarios, personas, journeys) are key evidence for GDS points 1, 2, and 3
+
+---
+
+## Demo Recording (VS Code Activity)
+
+While Copilot works through the Day 2 issues, use the **Demo Recorder** agent in VS Code to produce a recorded walkthrough of the service. This runs locally because it needs access to the running application — the hosted Copilot Coding Agent may not be able to reach it.
+
+**Agent**: Demo Recorder _(in VS Code, not as a GitHub issue)_
+
+> Record a demo of the service. Read the user journeys, stories, and frontend/backend routes. Generate a demo narrative script, then create a Playwright recording that walks through each journey with video capture.
+
+The agent will:
+
+1. Discover all routes and user journeys from the codebase
+2. Generate a demo narrative script at `docs/demo/demo-script.md`
+3. Create a Playwright test at `tests/e2e/demo/test_demo_recording.py` with video recording enabled
+4. Run the walkthrough — if any issues are found, fix them iteratively
+5. Save recorded videos to `tests/e2e/demo/videos/` and screenshots to `tests/e2e/demo/screenshots/`
+6. Report any issues found and fixed in `docs/demo/demo-issues-resolved.md`
+
+> **Tip**: Run this after E2E tests and Visual QA are complete (issues 03–04) so the journeys are already verified. The demo recording serves as a final end-to-end validation and produces shareable evidence for assessors.
 
 ---
 
