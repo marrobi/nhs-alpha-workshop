@@ -107,3 +107,5 @@ For each point:
 - Link to specific files and line numbers
 - An Alpha assessment accepts partial — show awareness and a plan
 - Check both GDS standard and NHS-specific angle (clinical safety, IG, NHS Design System)
+- **Iterate to fix before writing** — follow the Compliance Document Workflow from `review-agent-pattern.instructions.md`: read the codebase, identify gaps, fix them, then write the assessment
+- **Document current state, not history** — the GDS assessment must reflect the service as it stands after all fixes. Do not include "Review Passes" or "Resolved Issues" sections — these are audit report sections, not compliance documents

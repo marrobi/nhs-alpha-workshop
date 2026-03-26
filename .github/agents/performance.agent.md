@@ -97,6 +97,11 @@ Add to GitHub Actions workflow:
     BASE_URL: http://localhost:3000  # Set explicitly — k6 scripts will throw if BASE_URL is missing
 ```
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json`:
+- **Context7** — use to look up current k6 documentation for scripting, thresholds, scenarios, and checks
+
 ## Rules
 
 - Always define thresholds — a load test without thresholds is just a stress generator

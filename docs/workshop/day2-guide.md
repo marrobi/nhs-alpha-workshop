@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and demonstrating GDS readiness. You use the **Copilot Coding Agent** on GitHub: create issues, assign them to `@copilot`, and it creates PRs automatically.
+Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and demonstrating GDS readiness. You use the **Copilot Coding Agent** on GitHub: create issues, assign Copilot with the correct custom agent, and it creates PRs automatically.
 
 > **Reference**: [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — by the end of alpha, you should be confident you can create something that meets users' needs and is cost-effective.
 
@@ -18,7 +18,6 @@ At the end of Day 2, your service should have evidence for:
 
 1. Ensure all Day 1 code is committed and pushed
 2. Enable Copilot Coding Agent on your repository (Settings → Copilot → Coding Agent)
-3. Verify the `copilot-setup-steps.yml` workflow runs successfully (created by the NHS Service Builder during Day 1 scaffolding)
 
 ## Generate Day 2 Issues (15 minutes)
 
@@ -28,7 +27,7 @@ Day 2 issues are generated from your actual tech stack and codebase — not from
 2. Ask it to generate the Day 2 issues
 3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in `docs/workshop/day2-issues/`
 4. Review the generated files and confirm
-5. The agent creates the issues on GitHub using `gh` CLI and assigns them to `@copilot`
+5. The agent creates the issues on GitHub using `gh` CLI — it does **not** assign them to Copilot
 
 > **Prerequisite**: Ensure `gh auth login` has been run in the terminal before starting.
 
@@ -53,18 +52,16 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 01 | CI/CD Pipeline | CI/CD Pipeline Builder | Operational reliability |
 | 02 | Unit & Integration Tests | Testing | Technical quality |
 | 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
-| 04 | Visual QA | Visual QA | Pages render correctly, journeys work, data matches |
-| 05 | Code Quality Review | Code Quality Reviewer | Code standards, type safety, test coverage |
-| 06 | Security Hardening | Security Reviewer | Threat awareness |
-| 07 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
-| 08 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
-| 09 | Performance Load Tests | Performance | Service can handle expected load |
-| 10 | ADRs | NHS GDS Assessor | Technology choices documented |
-| 11 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 12 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 14 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 15 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 04 | Code Quality Review | Code Quality Reviewer | Code standards, type safety, test coverage |
+| 05 | Security Hardening | Security Reviewer | Threat awareness |
+| 06 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
+| 07 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
+| 08 | Performance Load Tests | Performance | Service can handle expected load |
+| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
+| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
+| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
+| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -84,14 +81,13 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, runbook |
 
-Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence report.
+Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence report.
 
 ## Tips
 
 - **Don't create all issues at once** — Copilot works on one at a time per repo
 - **Review PRs carefully** — Copilot is good but not perfect
 - **Iterate on PRs** — request changes via review comments, Copilot will update
-- **Check the workflow logs** — if setup-steps fails, the agent can't build/test
 - **Link back to discovery** — Day 1 artefacts (scenarios, personas, journeys) are key evidence for GDS points 1, 2, and 3
 
 ---
@@ -113,7 +109,7 @@ The agent will:
 5. Save recorded videos to `tests/e2e/demo/videos/` and screenshots to `tests/e2e/demo/screenshots/`
 6. Report any issues found and fixed in `docs/demo/demo-issues-resolved.md`
 
-> **Tip**: Run this after E2E tests and Visual QA are complete (issues 03–04) so the journeys are already verified. The demo recording serves as a final end-to-end validation and produces shareable evidence for assessors.
+> **Tip**: Run this after E2E tests are complete (issue 03) so the journeys are already verified. The demo recording serves as a final end-to-end validation and produces shareable evidence for assessors.
 
 ---
 

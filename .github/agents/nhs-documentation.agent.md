@@ -60,6 +60,12 @@ Generate documentation by reading existing code and artefacts — do not invent 
 | DPIA (`dpia.md`) | `docs/dpia/` if it exists |
 | ADRs (`adrs.md`) | `docs/adr/` — index and embed all ADRs |
 
+## MCP Servers
+
+This agent has access to MCP servers configured in `.vscode/mcp.json`:
+- **Context7** — use to look up current MKdocs and library documentation
+- **Draw.io** — use to read, create, and edit draw.io architecture diagrams when documenting the architecture
+
 ## Rules
 
 - **Read the codebase, don't guess** — every documented endpoint, model, or config must come from actual files

@@ -129,4 +129,6 @@ Include a Mermaid data flow diagram showing: user devices → web app (HTTPS) �
 - Reference NHS-specific guidance: Caldicott Principles, NHS Code of Confidentiality
 - **Never mark a control as "implemented" without searching the codebase for evidence** — only code, Terraform, and config files count
 - **Distinguish "designed" from "implemented"** — unbuilt controls are gaps to flag
+- **Iterate to fix before writing** — follow the Compliance Document Workflow from `review-agent-pattern.instructions.md`: read the codebase, identify gaps, fix them, then write the DPIA
+- **Document current state, not history** — the DPIA must reflect the service as it stands after all fixes. Do not include "Review Passes" or "Resolved Issues" sections — these are audit report sections, not compliance documents
 - This is a living document — update when data processing changes

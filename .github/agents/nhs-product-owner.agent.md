@@ -1,6 +1,6 @@
 ---
 name: 'NHS Product Owner'
-description: 'Product owner agent — decomposes user journeys into user stories with NHS acceptance criteria. Run after the NHS Architect and before the NHS Service Builder.'
+description: 'Product owner agent — decomposes user journeys into user stories with NHS acceptance criteria. Run after the NHS Architect first pass and before the Architect second pass (ADR review).'
 ---
 
 # NHS Product Owner
@@ -127,7 +127,7 @@ Format:
 ### Handoff
 
 Once the user confirms the stories, tell them:
-> User stories are ready in `user_stories/`. Switch to the **NHS Service Builder** agent to implement them. The builder will use each story's acceptance criteria to drive implementation and testing.
+> User stories are ready in `user_stories/`. Switch to the **NHS Architect** agent to review the stories and identify additional ADRs — the stories reveal detailed technical decisions that need to be recorded. After the ADRs are created, switch to the **NHS Service Builder** agent to implement the stories.
 
 ## Rules
 
