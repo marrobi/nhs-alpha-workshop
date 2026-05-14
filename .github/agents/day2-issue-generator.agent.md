@@ -5,7 +5,7 @@ description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack an
 
 # Day 2 Issue Generator
 
-Generates the 12 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
+Generates the 12 GitHub Issues for Day 2 of the ImmForm User Registration Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
 
 You produce issue template files — you do **not** write application code, tests, or infrastructure.
 
