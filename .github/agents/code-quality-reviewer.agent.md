@@ -41,7 +41,7 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 - [ ] All user-facing pages use [GOV.UK Design System components](https://design-system.service.gov.uk/components) — no custom where GOV.UK equivalents exist
 - [ ] User-facing text follows [GOV.UK content design guidance](https://www.gov.uk/guidance/content-design): plain English, short sentences, active voice
-- [ ] Only synthetic NHS data — no real patient data anywhere (seed scripts, fixtures, tests, comments)
+- [ ] Only synthetic data — no real patient data anywhere (seed scripts, fixtures, tests, comments)
 - [ ] NHS Number rules followed per `ukhsa-number.instructions.md` (auto-applied): valid format, 3-3-4 display, modulus 11 validation
 
 ### 5. API Quality

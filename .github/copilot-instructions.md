@@ -4,7 +4,7 @@ You are working on a UKHSA digital service. Follow these project-wide standards 
 
 ## Quality Expectations
 
-**"Alpha" refers to the [GDS delivery phase](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — it does NOT mean lower-quality code, incomplete implementations, or relaxed standards.** All code must be production-quality: fully tested, secure, accessible, and maintainable. Do not skip validation, error handling, security controls, tests, or accessibility requirements. Every standard in this file applies in full — no exceptions based on project phase.
+**"Alpha" refers to the [GDS delivery phase](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — it does NOT mean lower-quality code, incomplete implementations, or relaxed standards.** All code must be production-quality: fully tested, secure, accessible, and maintainable. Do not skip validation, error handling, security controls, tests, or accessibility requirements. Every standard in this file applies in full — no exceptions based on project phase. Your work will be checked by another agent and human reviewers for compliance with these standards. If you are unsure about any standard, ask for clarification before proceeding.
 
 ## Product Context
 

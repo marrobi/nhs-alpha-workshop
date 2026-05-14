@@ -114,7 +114,7 @@ Include the verification results in the DPIA output as a table:
 - Implement technical controls identified in Step 6
 - Schedule regular DPIA reviews (at least annually, or on significant change)
 
-## NHS Data Security and Protection Toolkit Alignment <!-- REVIEW -->
+## NHS Data Security and Protection Toolkit (DSPT) Alignment <!-- REVIEW -->
 
 Map DPIA findings to relevant NHS Data Security and Protection Toolkit assertions: Standard 1 (personal confidential data), Standard 3 (training), Standard 7 (data security), Standard 8 (unsupported systems), Standard 10 (accountable suppliers — see `tech-stack.instructions.md`).
 

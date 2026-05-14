@@ -1,4 +1,4 @@
-# NHS Service — Copilot Coding Agent Context
+# UKHSA — Copilot Coding Agent Context
 
 ## Quality Expectations
 

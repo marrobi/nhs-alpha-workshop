@@ -50,7 +50,7 @@ Identify the key decision points and present 2–3 options for each. Do **not** 
 - **API structure** — single router vs. domain-based routers. How many distinct resources exist?
 - **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
 - **External integrations** — which NHS API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
-- **Auth approach** — NHS login/CIS2 vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
+- **Auth approach** — custom vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
 - **Network & identity** — all service-to-service and service-to-data communication must use Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `ukhsa-security.instructions.md` for the full rules.
 - **Infrastructure extras** — baseline only vs. database, queue, or cache. What does the data model need?
 
@@ -138,7 +138,7 @@ Once the ADR and diagram are complete, tell the user:
 
 ## Second Pass — ADR Review (After User Stories)
 
-This workflow runs **after the UKHSA Product Owner** has created user stories in `user_stories/`. The stories reveal detailed technical decisions that were not visible during the initial architecture phase — data models, integration patterns, auth flows, error handling strategies, and more. This pass identifies and creates the ADRs needed.
+This workflow runs **after the UKHSA Technical Product/Technical BA** has created user stories in `user_stories/`. The stories reveal detailed technical decisions that were not visible during the initial architecture phase — data models, integration patterns, auth flows, error handling strategies, and more. This pass identifies and creates the ADRs needed.
 
 ### Step 1 — Read User Stories and Architecture
 
@@ -206,7 +206,7 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
   - **No in-memory data stores** — data must persist across restarts. Use at minimum SQLite, or a proper database if the journeys involve multi-user data.
   - **No skipping authentication** when user roles exist — if the service distinguishes between patients, clinicians, and admin, auth is a riskiest assumption.
   - **No hardcoded/mock data in production code** — use synthetic data via proper seed scripts, not inline dictionaries or JSON files served as APIs.
-  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and NHS API sandboxes. If a service requires configuration or credentials, include that in the architecture. Only create a mock/stub if there is an explicit user story requesting it — record the decision and rationale in the ADR.
+  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and UKHSA API sandboxes. If a service requires configuration or credentials, include that in the architecture. Only create a mock/stub if there is an explicit user story requesting it — record the decision and rationale in the ADR.
   - **No skipping error handling** — error states are part of the user journey and must be designed.
   - **No single-file applications** — follow the project structure in the implementation skill.
   - If the team explicitly decides to descope something, record it as a decision in the ADR with rationale.
