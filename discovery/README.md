@@ -26,7 +26,7 @@ Create a new branch for your discovery work: `git checkout -b discovery`
 
 In Copilot Chat, run:
 
-> `/generate_scenario_and_problem_statement` [describe your NHS service idea]
+> `/generate_scenario_and_problem_statement` [describe your UKHSA service idea]
 
 This generates a structured **Scenario Overview** and **Problem Statement**. Save to `discovery/scenarios/scenario.md`.
 
@@ -40,7 +40,7 @@ Key questions to answer:
 
 ### 3. Generate Personas
 
-Use the **M365 Copilot Researcher** agent to generate realistic NHS personas:
+Use the **M365 Copilot Researcher** agent to generate realistic UKHSA personas:
 
 1. Open [M365 Copilot Chat](https://m365.cloud.microsoft/chat/) and select the **Researcher** agent ([docs](https://learn.microsoft.com/en-us/copilot/microsoft-365/researcher-agent))
 2. Paste your `discovery/scenarios/scenario.md` content into the bottom of [discovery/personas/persona-generation-prompt.md](personas/persona-generation-prompt.md) and run in Researcher
@@ -74,7 +74,7 @@ Each journey file should include:
 
 Discuss with your team and document in `docs/discovery-notes.md`:
 
-- **Technical constraints**: existing systems to integrate with, data sovereignty, NHS network access
+- **Technical constraints**: existing systems to integrate with, data sovereignty, UKHSA network access
 - **Legislative constraints**: UK GDPR / Art. 9 (health data), clinical safety (DCB0129)
 - **Riskiest assumptions**: what must be true for the service to work?
 - **What you will not build**: scope boundaries for the alpha
@@ -88,14 +88,14 @@ Commit and merge your discovery branch before the workshop so the artefacts are 
 Before the workshop, confirm you have:
 
 - [ ] `discovery/scenarios/scenario.md` — scenario overview and problem statement
-- [ ] `discovery/personas/persona-report.md` — researched NHS personas (up to 10)
+- [ ] `discovery/personas/persona-report.md` — researched UKHSA personas (up to 10)
 - [ ] `discovery/personas/generated/personas-deck.md` — Marp slide deck
 - [ ] `discovery/user_journeys/data/journey-*.md` — detailed user journeys covering each primary user type
 - [ ] `docs/discovery-notes.md` — constraints, riskiest assumptions, scope boundaries
 - [ ] Prioritised list of which journeys to build first
 - [ ] Discovery branch merged to main
 
-> **Note**: User stories are generated from the journeys during Day 1 using the **NHS Product Owner** agent. Discovery produces journeys only — not stories.
+> **Note**: User stories are generated from the journeys during Day 1 using the **UKHSA Product Owner** agent. Discovery produces journeys only — not stories.
 
 ## Where things live
 

@@ -1,14 +1,14 @@
-# NHS Alpha — Copilot Workshop Template
+# UKHSA Alpha — Copilot Workshop Template
 
-A pre-configured GitHub repository template for building NHS Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
+A pre-configured GitHub repository template for building UKHSA Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
 
 ## What's in this repo
 
-This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build an NHS service from scratch using AI-assisted development.
+This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build a UKHSA service from scratch using AI-assisted development.
 
 ```
 .github/
-  agents/             12 custom Copilot agents (7 engineering + 6 NHS)
+  agents/             12 custom Copilot agents (7 engineering + 5 UKHSA)
   instructions/       8 auto-applied coding instruction files
   skills/             8 agent skills (SKILL.md folders)
   workflows/          GitHub Actions
@@ -26,7 +26,7 @@ AGENTS.md             Copilot Coding Agent context file
 
 ## Workshop overview
 
-This workshop runs over two days using GitHub Copilot to build an NHS Alpha-phase digital service. **Use this template** to create a new repository for your team, then open it in GitHub Codespaces or VS Code with the provided Dev Container.
+This workshop runs over two days using GitHub Copilot to build a UKHSA Alpha-phase digital service. **Use this template** to create a new repository for your team, then open it in GitHub Codespaces or VS Code with the provided Dev Container.
 
 **Prerequisites**: GitHub account with a Copilot seat, Azure subscription with Contributor access to UK South, and access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery). All other tools are pre-installed in the Dev Container.
 
@@ -41,8 +41,8 @@ See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructio
 | Layer | Technology |
 |---|---|
 | Backend | Python 3.12, FastAPI, Uvicorn |
-| Frontend | React 18, Vite, TypeScript, [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-components) |
-| Design System | [NHS.UK Frontend](https://service-manual.nhs.uk/design-system) |
+| Frontend | React 18, Vite, TypeScript, [govuk-react](https://github.com/govuk-react/govuk-react) |
+| Design System | [GOV.UK Frontend](https://design-system.service.gov.uk) |
 | Testing | pytest + httpx, Vitest, Playwright, k6 |
 | Infrastructure | Terraform (`azurerm`), Azure App Service (UK South) |
 | Secrets | Azure Key Vault with Managed Identity |
@@ -50,24 +50,24 @@ See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructio
 
 ## Organisational standards
 
-Review [`.github/instructions/org-standards.instructions.md`](../../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. The defaults are based on NHS Architecture Principles and the NHS Cloud Security Good Practice Guide, but teams should tailor them to their organisation. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
+Review [`.github/instructions/org-standards.instructions.md`](../../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
 
 ## Agents
 
 | Agent | Purpose |
 |---|---|
-| **NHS Architect** | Architecture design — analyses discovery, clarifies tech stack, writes ADRs, generates draw.io diagrams. Run first (before stories) and again after stories to create detailed ADRs. |
-| **NHS Product Owner** | Decomposes user journeys into user stories with NHS acceptance criteria. Run after Architect first pass, before Architect second pass. |
-| **NHS Service Builder** | Day 1 primary — scaffolds full-stack app, deploys to cloud. Run after Architect (both passes) and Product Owner. |
+| **UKHSA Architect** | Architecture design — analyses discovery, clarifies tech stack, writes ADRs, generates draw.io diagrams. Run first (before stories) and again after stories to create detailed ADRs. |
+| **UKHSA Product Owner** | Decomposes user journeys into user stories with UKHSA acceptance criteria. Run after Architect first pass, before Architect second pass. |
+| **UKHSA Service Builder** | Day 1 primary — scaffolds full-stack app, deploys to cloud. Run after Architect (both passes) and Product Owner. |
 | **Testing** | Backend + frontend unit/integration tests — 80% coverage target |
-| **Playwright E2E** | Browser tests for NHS user journeys with accessibility assertions |
+| **Playwright E2E** | Browser tests for UKHSA user journeys with accessibility assertions |
 | **Security Reviewer** | OWASP Top 10 audit, security headers, secrets, dependencies |
 | **Performance** | Load tests, Core Web Vitals, p95/p99 targets |
-| **NHS Clinical Safety** | DCB0129 hazard logs and Clinical Safety Case Reports |
-| **NHS DPIA Advisor** | Data Protection Impact Assessments for health data |
-| **NHS GDS Assessor** | GDS Service Standard 14-point evidence mapping |
+| **UKHSA Clinical Safety** | DCB0129 hazard logs and Clinical Safety Case Reports |
+| **UKHSA DPIA Advisor** | Data Protection Impact Assessments for health data |
+| **UKHSA GDS Assessor** | GDS Service Standard 14-point evidence mapping |
 | **Accessibility Auditor** | WCAG 2.2 AA audits, axe-core scans, keyboard testing, accessibility statements |
-| **NHS Content Designer** | Reviews and writes user-facing copy against NHS content style guide |
+| **UKHSA Content Designer** | Reviews and writes user-facing copy against GOV.UK content design guidance |
 | **CI/CD Pipeline Builder** | GitHub Actions workflows for lint, test, build, deploy |
 
 ## Skills
@@ -77,13 +77,13 @@ Skills are auto-selected by Copilot based on the task context:
 | Skill | Triggered When |
 |---|---|
 | `fastapi-react-azure` | Scaffolding or building the service (current tech stack) |
-| `azure-nhs-deploy` | Deploying to Azure, configuring Terraform |
+| `azure-ukhsa-deploy` | Deploying to Azure, configuring Terraform |
 | `dcb0129-hazard-log` | Generating clinical safety documentation |
-| `nhs-dpia` | Drafting Data Protection Impact Assessments |
+| `ukhsa-dpia` | Drafting Data Protection Impact Assessments |
 | `gds-service-standard` | Assessing against GDS 14 points |
-| `nhs-user-stories` | Writing user stories and acceptance criteria |
-| `nhs-adr-writer` | Documenting architectural decisions for GDS assessment evidence |
-| `nhs-synthetic-data` | Generating synthetic NHS numbers, patient data, and test fixtures |
+| `ukhsa-user-stories` | Writing user stories and acceptance criteria |
+| `ukhsa-adr-writer` | Documenting architectural decisions for GDS assessment evidence |
+| `ukhsa-synthetic-data` | Generating synthetic NHS numbers, patient data, and test fixtures |
 
 ## Azure naming convention
 
@@ -97,13 +97,13 @@ kv-{app_name}-{env}        Key Vault
 ai-{app_name}-{env}        Application Insights
 ```
 
-## NHS constraints
+## UKHSA constraints
 
 - **No real patient data** — use synthetic NHS numbers (e.g. `943 476 5919`)
 - **Azure UK South only** — data sovereignty
 - **Managed Identity** — no service principal secrets
 - **WCAG 2.2 AA** — mandatory accessibility standard
-- **NHS Design System** — all user-facing pages must use nhsuk components
+- **GOV.UK Design System** — all user-facing pages must use govuk-react components
 
 ## References
 
@@ -111,9 +111,9 @@ ai-{app_name}-{env}        Application Insights
 - [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works)
 - [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points)
 - [Discovery toolkit](../../discovery/README.md) — discovery prompts for scenarios, personas, and user journeys
-- [NHS Design System](https://service-manual.nhs.uk/design-system)
-- [NHS Content Style Guide](https://service-manual.nhs.uk/content)
-- [NHS Accessibility Guidance](https://service-manual.nhs.uk/accessibility)
+- [GOV.UK Design System](https://design-system.service.gov.uk)
+- [GOV.UK Content Design guidance](https://www.gov.uk/guidance/content-design)
+- [GOV.UK Accessibility Guidance](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [DCB0129 Clinical Safety](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems)
 - [ICO DPIA Guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/)

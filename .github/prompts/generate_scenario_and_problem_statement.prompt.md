@@ -30,6 +30,6 @@ List the key assumptions that must be true for the problem statement to hold. Fl
 ## Out of Scope
 Explicitly state what is NOT part of this problem. Agree boundaries early to keep the alpha focused.
 
-Use proper NHS terminology and context. Where details are missing, state assumptions clearly rather than silently filling gaps.
+Use proper UKHSA/public health terminology and context. Where details are missing, state assumptions clearly rather than silently filling gaps.
 
 Save the output in markdown format with appropriate headings at `discovery/scenarios/scenario.md`

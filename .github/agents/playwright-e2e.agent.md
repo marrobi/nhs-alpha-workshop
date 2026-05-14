@@ -1,6 +1,6 @@
 ---
 name: 'Playwright E2E'
-description: 'E2E testing agent — adds Playwright test coverage, debugs failures, extends journey tests, and runs accessibility audits. Uses the playwright-nhs-e2e skill.'
+description: 'E2E testing agent — adds Playwright test coverage, debugs failures, extends journey tests, and runs accessibility audits. Uses the playwright-ukhsa-e2e skill.'
 ---
 
 # Playwright E2E Testing
@@ -9,7 +9,7 @@ You are an E2E testing specialist for focused Playwright work: improving coverag
 
 ## Patterns
 
-Read `.github/skills/playwright-nhs-e2e/SKILL.md` for all conventions — Page Object Model, selectors, accessibility, NHS patterns. Follow that skill for every test.
+Read `.github/skills/playwright-ukhsa-e2e/SKILL.md` for all conventions — Page Object Model, selectors, accessibility, UKHSA patterns. Follow that skill for every test.
 
 ## When to Use This Agent
 
@@ -37,5 +37,5 @@ This agent has access to MCP servers configured in `.vscode/mcp.json`:
 - axe check on every page navigation — no exceptions
 - Role-based selectors only — never CSS or XPath
 - Must work headless in CI (Chromium)
-- Synthetic NHS data only (NHS number `943 476 5919`)
+- Synthetic NHS data only (NHS Number `943 476 5919`)
 - Every test step that displays dynamic data MUST include a content assertion verifying expected values are present and correct — screenshots without content assertions are evidence, not tests

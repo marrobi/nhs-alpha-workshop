@@ -13,8 +13,8 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | Concern | Choice |
 |---|---|
 | **Backend** | Python 3.12 / FastAPI / Uvicorn |
-| **Frontend** | React 18 / Vite / TypeScript / nhsuk-react-components |
-| **Design System** | NHS.UK Frontend (`nhsuk-frontend` CSS + `nhsuk-react-components`) |
+| **Frontend** | React 18 / Vite / TypeScript / govuk-react |
+| **Design System** | GOV.UK Frontend (`govuk-frontend` CSS + `govuk-react`) |
 | **Database** |  PostgreSQL, SQL Server, CosmosDB, also consider Azure HDS FHIR when storing health data. |
 | **Backend Testing** | pytest + httpx (unit/integration) |
 | **Frontend Testing** | Vitest |
@@ -31,12 +31,12 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 
 | Layer | Files to swap |
 |---|---|
-| Tech agents | `nhs-service-builder`, `testing`, `playwright-e2e`, `performance`, `security-reviewer`, `cicd-pipeline-builder`, `accessibility-auditor` |
+| Tech agents | `ukhsa-service-builder`, `testing`, `playwright-e2e`, `performance`, `security-reviewer`, `cicd-pipeline-builder`, `accessibility-auditor` |
 | Tech instructions | This file (`tech-stack.instructions.md`) — all tech-specific implementation details live here |
-| Tech skills | `fastapi-react-azure`, `azure-nhs-deploy`, `playwright-nhs-e2e`, `nhs-synthetic-data` (code examples) |
-| Domain agents (no change needed) | `nhs-architect`, `nhs-product-owner`, `day2-issue-generator`, `nhs-clinical-safety`, `nhs-dpia-advisor`, `nhs-gds-assessor`, `nhs-content-designer` |
-| Domain instructions (no change needed) | `nhs-api`, `nhs-security`, `nhsuk-frontend`, `testing`, `performance`, `terraform-azure-nhs` — these contain tech-agnostic rules only |
-| Domain skills (no change needed) | `dcb0129-hazard-log`, `nhs-dpia`, `nhs-user-stories`, `gds-service-standard`, `nhs-adr-writer` |
+| Tech skills | `fastapi-react-azure`, `azure-ukhsa-deploy`, `playwright-ukhsa-e2e`, `ukhsa-synthetic-data` (code examples) |
+| Domain agents (no change needed) | `ukhsa-architect`, `ukhsa-product-owner`, `day2-issue-generator`, `ukhsa-clinical-safety`, `ukhsa-dpia-advisor`, `ukhsa-gds-assessor`, `ukhsa-content-designer` |
+| Domain instructions (no change needed) | `ukhsa-api`, `ukhsa-security`, `ukhsa-frontend`, `testing`, `performance`, `terraform-azure-ukhsa` — these contain tech-agnostic rules only |
+| Domain skills (no change needed) | `dcb0129-hazard-log`, `ukhsa-dpia`, `ukhsa-user-stories`, `gds-service-standard`, `ukhsa-adr-writer` |
 
 ---
 
@@ -49,7 +49,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 - Use `async def` for route handlers — FastAPI is async-first
 - Include routers in `app/main.py` with `app.include_router()`
 - Use Pydantic models for input validation — FastAPI returns 422 automatically for invalid input
-- Use a Pydantic validator for NHS number check digit validation
+- Use a Pydantic validator for NHS Number check digit validation
 - Apply `slowapi` rate limiting to all API endpoints
 - Frontend type definitions for API responses MUST use the exact field names from the corresponding Pydantic response model
 - Do not rename, alias, or case-convert fields between backend and frontend without an explicit serialisation layer
@@ -57,7 +57,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 ### Security Middleware (FastAPI)
 
 - Apply security headers middleware before any route handlers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options)
-- Configure strict Content Security Policy: `default-src 'self'`; allowlist only `nhsuk-frontend` CDN assets if used
+- Configure strict Content Security Policy: `default-src 'self'`; allowlist only `govuk-frontend` CDN assets if used
 - Apply `slowapi` rate limiting to all public-facing routes
 - Enable CSRF protection on all state-changing routes (POST, PUT, DELETE)
 
@@ -81,30 +81,30 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 
 ---
 
-## Frontend Implementation (React / nhsuk-react-components)
+## Frontend Implementation (React / govuk-react)
 
 ### Setup
 
-- Install: `npm install nhsuk-react-components nhsuk-frontend`
-- Import CSS in entry point: `import 'nhsuk-frontend/dist/nhsuk.css'`
-- Import components individually: `import { Header, Footer, Button } from 'nhsuk-react-components'`
+- Install: `npm install govuk-react govuk-frontend`
+- Import CSS in entry point: `import 'govuk-frontend/dist/govuk/all.css'`
+- Import components individually: `import { Header, Footer, Button } from 'govuk-react'`
 
 ### Component Usage
 
-- Always use `nhsuk-react-components` — never hand-code components that exist in the design system
-- See [component list](https://github.com/NHSDigital/nhsuk-react-components#components) for available components
-- Follow the prop patterns from the nhsuk-react-components docs, which mirror the [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
+- Always use `govuk-react` — never hand-code components that exist in the design system
+- See [GOV.UK Design System components](https://design-system.service.gov.uk/components) for available components
+- Follow the prop patterns from the govuk-react docs, which mirror the [GOV.UK Design System components](https://design-system.service.gov.uk/components)
 
 ### Layout
 
-- Wrap pages in `<Header>` and `<Footer>` from nhsuk-react-components
+- Wrap pages in `<Header>` and `<Footer>` from govuk-react
 - Set service name in the Header component
-- Use NHS grid: `<Container>`, `<Row>`, `<Col width="two-thirds">`
+- Use GOV.UK grid: `<GridRow>`, `<GridCol setWidth="two-thirds">`
 - Include a skip link as the first element
 
 ### Forms
 
-- Use `<Input>`, `<Radios>`, `<DateInput>`, `<Select>` components from nhsuk-react-components
+- Use `<Input>`, `<Radios>`, `<DateInput>`, `<Select>` components from govuk-react
 - Use `<ErrorSummary>` at the top of the page on validation failure
 - Use `error` prop on form components for inline error messages
 

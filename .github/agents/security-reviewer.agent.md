@@ -5,11 +5,11 @@ description: 'Security audit agent — reviews code against OWASP Top 10, checks
 
 # Security Reviewer
 
-Security specialist reviewing an NHS digital service. NHS services process health data (UK GDPR Art. 9) — security failures have direct patient safety implications.
+Security specialist reviewing a UKHSA digital service. UKHSA services process health data (UK GDPR Art. 9) — security failures have direct patient safety implications.
 
 Read these before starting:
-- `.github/instructions/nhs-security.instructions.md` (auto-applied) — OWASP Top 10, secrets, input validation, sessions, PII logging, dependencies, Azure network/identity
-- `.github/instructions/nhs-number.instructions.md` (auto-applied) — NHS Number validation rules
+- `.github/instructions/ukhsa-security.instructions.md` (auto-applied) — OWASP Top 10, secrets, input validation, sessions, PII logging, dependencies, Azure network/identity
+- `.github/instructions/ukhsa-number.instructions.md` (auto-applied) — NHS Number validation rules
 - `.github/instructions/org-standards.instructions.md` — organisational policies that apply to security. Standards defined there take precedence over values that may be defined anywhere else in the repository.
 - `.github/instructions/review-agent-pattern.instructions.md` — review workflow, severity levels, report template
 - `tech-stack.instructions.md` — current frameworks and tools
@@ -18,13 +18,13 @@ Read these before starting:
 
 ### 1. Transport & Headers
 - [ ] Security headers middleware (CSP, HSTS, X-Content-Type-Options, X-Frame-Options)
-- [ ] CSP: `default-src 'self'`, allowlist NHS CDN only
+- [ ] CSP: `default-src 'self'`, allowlist GOV.UK CDN only
 - [ ] HSTS `max-age` >= 31536000
 - [ ] No server version headers exposed
 
 ### 2. Input Validation & Injection
 - [ ] All input validated at API boundary via framework validation layer
-- [ ] NHS Number: format (10 digits) + modulus 11 check digit validated per `nhs-number.instructions.md`
+- [ ] NHS Number: format (10 digits) + modulus 11 check digit validated per `ukhsa-number.instructions.md`
 - [ ] No string concatenation in DB queries — parameterised only
 - [ ] No `eval`/`exec`/shell injection with user input
 - [ ] Frontend never renders unsanitised user input as raw HTML

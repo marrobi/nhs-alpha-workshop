@@ -2,7 +2,7 @@
 applyTo: "**/infra/**,**/*.tf"
 ---
 
-# Terraform — Azure NHS Infrastructure
+# Terraform — Azure UKHSA Infrastructure
 
 Refer to the [Terraform Azure Provider docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs) for resource reference.
 

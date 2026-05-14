@@ -1,17 +1,17 @@
 ---
 name: fastapi-react-azure
-description: 'Use when scaffolding or building an NHS service with the FastAPI + React + Azure stack. Contains project structure, scaffold steps, and deployment commands.'
+description: 'Use when scaffolding or building a UKHSA service with the FastAPI + React + Azure stack. Contains project structure, scaffold steps, and deployment commands.'
 ---
 
 # FastAPI + React + Azure — Implementation Skill
 
-This skill provides the concrete implementation detail for building an NHS service with the current default tech stack. It is referenced by the NHS Service Builder agent and can be swapped for an alternative (e.g. `django-htmx-azure`) when changing stacks.
+This skill provides the concrete implementation detail for building a UKHSA service with the current default tech stack. It is referenced by the UKHSA Service Builder agent and can be swapped for an alternative (e.g. `django-htmx-azure`) when changing stacks.
 
 ## Tech Stack
 
 - **Backend**: Python 3.12 with FastAPI and Uvicorn — API-only (JSON)
-- **Frontend**: React 18 with Vite and TypeScript, using [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-components) + `nhsuk-frontend` CSS
-- **Design System**: [NHS.UK Frontend](https://service-manual.nhs.uk/design-system) — all user-facing pages
+- **Frontend**: React 18 with Vite and TypeScript, using [govuk-react](https://github.com/govuk-react/govuk-react) + `govuk-frontend` CSS
+- **Design System**: [GOV.UK Frontend](https://design-system.service.gov.uk) — all user-facing pages
 - **Testing**: pytest + httpx (backend), Vitest (frontend) — write tests alongside features
 - **IaC**: Terraform with `azurerm` provider — see [Terraform Azure Provider docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
 - **Hosting**: Azure App Service on Linux (UK South region only)
@@ -27,10 +27,10 @@ app/
   middleware/         # Security, logging middleware
 frontend/
   src/
-    components/      # React components using nhsuk-react-components
+    components/      # React components using govuk-react
     pages/           # Page components
     App.tsx           # Root component with React Router
-    main.tsx          # Entry point — imports nhsuk-frontend CSS
+    main.tsx          # Entry point — imports govuk-frontend CSS
   package.json
   vite.config.ts
   tsconfig.json
@@ -63,13 +63,13 @@ infra/
 3. Use Pydantic models for all request/response schemas
 4. Use `async def` for route handlers
 
-### Frontend — React + nhsuk-react-components
+### Frontend — React + govuk-react
 
 1. Scaffold React app with Vite:
    - `npm create vite@latest frontend -- --template react-ts`
-   - Install: `npm install nhsuk-react-components nhsuk-frontend react-router-dom`
-   - Import `nhsuk-frontend/dist/nhsuk.css` in `main.tsx`
-2. Create NHS-branded layout with `<Header>`, `<Footer>` from nhsuk-react-components
+   - Install: `npm install govuk-react govuk-frontend react-router-dom`
+   - Import `govuk-frontend/dist/govuk/all.css` in `main.tsx`
+2. Create UKHSA-branded layout with `<Header>`, `<Footer>` from govuk-react
 3. Create the start page at `/`
 4. Configure Vite to proxy `/api` to FastAPI during development
 

@@ -2,7 +2,7 @@
 applyTo: "**"
 ---
 
-# NHS Security Standards
+# UKHSA Security Standards
 
 Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all security decisions. See `tech-stack.instructions.md` for the current stack. The principles below are universal.
 

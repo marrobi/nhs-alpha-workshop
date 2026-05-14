@@ -1,6 +1,6 @@
 # Persona generation prompt (Microsoft 365 Copilot → Researcher)
 
-Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to generate a set of personas for an NHS system/initiative.
+Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to generate a set of personas for a UKHSA system/initiative.
 
 - Open Copilot Chat: https://m365.cloud.microsoft/chat/
 - Find **Researcher** under **Agents**.
@@ -9,7 +9,7 @@ Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to gene
 ---
 
 ### Objective
-Research and create detailed user personas for every role involved in the described system, using real-world UK NHS job titles and organizational context. Include both NHS staff roles and non-NHS roles (such as patients, carers, family members, external partners, and other stakeholders).
+Research and create detailed user personas for every role involved in the described system, using real-world UK UKHSA/public health job titles and organizational context. Include both UKHSA staff roles and non-UKHSA roles (such as patients, carers, family members, external partners, and other stakeholders).
 
 **Important**: Each persona should be written as if describing a specific individual person, not a generalized role. Use concrete details, specific behaviors, and personal context to make each persona feel real and relatable. Keep each persona to one page. Include enough personas to cover every distinct user type, framework level, and interaction pattern — but no more. If a role doesn't add a meaningfully different perspective, merge it with a similar persona. Provide the output in Markdown format.
 
@@ -22,9 +22,9 @@ For each identified role, create a comprehensive persona using the following tem
 **Persona Template Structure:**
 1. **Persona Name & Role**
    - Fictional first name (representative names)
-   - Official UK NHS job title (for NHS staff) OR role description (for patients, carers, family members, etc.)
+   - Official UK UKHSA/public health job title (for UKHSA staff) OR role description (for patients, carers, family members, etc.)
    - Position level and department/specialty (if applicable)
-   - Reporting structure context (for NHS staff) OR relationship to care/system (for non-NHS roles)
+   - Reporting structure context (for UKHSA staff) OR relationship to care/system (for non-UKHSA roles)
    - Brief personal background (e.g., years in role, previous experience, personal situation)
 
 2. **Goals & Outcomes**
@@ -81,7 +81,7 @@ For each identified role, create a comprehensive persona using the following tem
    - Approve or govern processes
    - Support or maintain the system
    - Are impacted by system outcomes
-   - **Non-NHS roles such as:**
+   - **Non-UKHSA roles such as:**
      - Patients (various demographics, conditions, and accessibility needs)
      - Family members and carers
      - Informal carers
@@ -100,32 +100,32 @@ For each identified role, create a comprehensive persona using the following tem
 - Use concrete, specific details and examples throughout
 - **Group personas by workflow stage** (clearly labeled)
 - Use consistent formatting across all personas
-- Include realistic UK NHS context, terminology, and constraints
-- Base findings on actual NHS organizational structures and real job roles
+- Include realistic UK UKHSA/public health context, terminology, and constraints
+- Base findings on actual UKHSA organizational structures and real job roles
 - **Provide citations** wherever possible to support claims about:
-  - Job roles and responsibilities (link to NHS job frameworks, e.g., Agenda for Change)
+  - Job roles and responsibilities (link to UKHSA/civil service job frameworks)
   - Typical challenges and pain points (link to reports, surveys, studies)
-  - NHS organizational structures and hierarchies
-  - Patient experiences and statistics
+  - UKHSA organizational structures and hierarchies
+  - Patient and public experiences and statistics
   - Regulatory requirements and standards
 
 ### Research Approach
 
-- Reference current NHS job frameworks and role definitions for staff roles
-- Consider NHS organizational hierarchies and typical team structures
-- Include NHS-specific challenges (e.g., resource constraints, patient safety priorities, regulatory requirements)
-- Reflect realistic workloads and operational pressures in NHS settings
+- Reference current UKHSA/civil service job frameworks and role definitions for staff roles
+- Consider UKHSA organizational hierarchies and typical team structures
+- Include UKHSA-specific challenges (e.g., resource constraints, patient safety priorities, regulatory requirements)
+- Reflect realistic workloads and operational pressures in UKHSA settings
 - **Provide citations and sources** for all factual claims, including:
-  - NHS job frameworks (e.g., NHS Agenda for Change, Medical and Dental pay scales)
-  - NHS policies and guidance documents
-  - Research studies on NHS workforce or patient experiences
-  - Official NHS statistics and reports
+  - UKHSA/civil service job frameworks and pay scales
+  - UKHSA policies and guidance documents
+  - Research studies on public health workforce or patient experiences
+  - Official UKHSA statistics and reports
   - Regulatory frameworks (CQC, ICO, MHRA, etc.)
   - Industry reports and surveys
 - **For patient and carer personas:**
   - Consider diverse demographics (age, disability, ethnicity, socioeconomic background)
   - Include varying levels of health literacy and digital literacy
-  - Reflect real patient/carer experiences and challenges in navigating NHS services
+  - Reflect real patient/carer experiences and challenges in navigating public health services
   - Consider accessibility requirements and barriers to access
   - Include mental capacity and cognitive considerations where relevant
   - Cite patient experience data and research where available

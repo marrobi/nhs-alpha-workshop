@@ -2,13 +2,13 @@
 applyTo: "**/routers/**,**/api/**"
 ---
 
-# NHS API Standards
+# UKHSA API Standards
 
 See `tech-stack.instructions.md` for the current backend framework and implementation details. The rules below are framework-agnostic.
 
 ---
 
-## NHS API Rules (tech-agnostic)
+## UKHSA API Rules (tech-agnostic)
 
 ### URL Design
 
@@ -25,7 +25,7 @@ See `tech-stack.instructions.md` for the current backend framework and implement
 
 ### NHS Number
 
-See `nhs-number.instructions.md` (auto-applied) for full ISB 0149 rules. Key API rules:
+See `ukhsa-number.instructions.md` (auto-applied) for full ISB 0149 rules. Key API rules:
 
 - Validate format + modulus 11 check digit on all inbound NHS numbers
 - Never accept NHS numbers via GET query parameters — POST only

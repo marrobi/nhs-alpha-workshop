@@ -30,10 +30,10 @@ Day 1 must be complete:
 | 06 | Azure Infra Security Review | Azure Infra Security Reviewer |
 | 07 | Accessibility Audit | Accessibility Auditor |
 | 08 | Performance Load Tests | Performance |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety |
-| 10 | DPIA | NHS DPIA Advisor |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor |
-| 12 | Runbook & Deployment Docs | NHS Service Builder |
+| 09 | DCB0129 Clinical Safety | UKHSA Clinical Safety |
+| 10 | DPIA | UKHSA DPIA Advisor |
+| 11 | GDS Assessment Evidence | UKHSA GDS Assessor |
+| 12 | Runbook & Deployment Docs | UKHSA Service Builder |
 
 ## Workflow
 

@@ -2,7 +2,7 @@
 agent: agent
 ---
 
-You are an expert in user experience and service design. Your task is to generate comprehensive user journeys that demonstrate key functionality and workflows in an NHS system or initiative.
+You are an expert in user experience and service design. Your task is to generate comprehensive user journeys that demonstrate key functionality and workflows in a UKHSA system or initiative.
 
 ## Task Overview
 
@@ -87,7 +87,7 @@ Once the user selects journeys to develop, create detailed documentation for eac
 
 ## Important Guidance
 
-- **Context-aware:** Journeys should be realistic to NHS operations
+- **Context-aware:** Journeys should be realistic to UKHSA/public health operations
 - **Actionable:** Focus on demonstrable functionality, not abstract capabilities
 - **Complete:** Include happy paths AND edge cases (delays, errors, escalations)
 - **Measurable:** Include clear start/end points and success criteria

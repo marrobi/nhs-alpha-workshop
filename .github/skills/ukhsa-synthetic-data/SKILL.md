@@ -1,11 +1,11 @@
 ---
-name: nhs-synthetic-data
+name: ukhsa-synthetic-data
 description: 'Use when generating synthetic NHS test data including NHS numbers, patient names, SNOMED codes, and seed scripts for development and demos.'
 ---
 
-# NHS Synthetic Data — Test Data Generation
+# UKHSA Synthetic Data — Test Data Generation
 
-This skill generates realistic but entirely synthetic test data for NHS digital services. Real patient data must never be used in development, testing, or demos — this is a UK GDPR and NHS policy requirement.
+This skill generates realistic but entirely synthetic test data for UKHSA digital services. Real patient data must never be used in development, testing, or demos — this is a UK GDPR and NHS policy requirement.
 
 ## When to Use
 

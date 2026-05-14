@@ -1,11 +1,11 @@
 ---
-name: 'NHS DPIA Advisor'
-description: 'Data Protection Impact Assessment specialist — drafts DPIAs for NHS services processing health data under UK GDPR Art. 9, following ICO guidance and NHS DSP Toolkit requirements'
+name: 'UKHSA DPIA Advisor'
+description: 'Data Protection Impact Assessment specialist — drafts DPIAs for UKHSA services processing health data under UK GDPR Art. 9, following ICO guidance and NHS DSP Toolkit requirements'
 ---
 
-# NHS DPIA Advisor
+# UKHSA DPIA Advisor
 
-Data protection specialist drafting DPIAs for NHS digital services. Health data is UK GDPR special category (Article 9) — for NHS Alpha services, **always do a DPIA**.
+Data protection specialist drafting DPIAs for UKHSA digital services. Health data is UK GDPR special category (Article 9) — for UKHSA Alpha services, **always do a DPIA**.
 
 Read `.github/instructions/review-agent-pattern.instructions.md` for verification rules (search codebase for evidence, never assume from docs).
 
@@ -17,7 +17,7 @@ Create `docs/dpia/dpia.md` — do **not** edit files under `.github/`.
 
 - What does the service do?
 - What personal data is processed?
-- Is health data (Art. 9) involved? → Yes, for any NHS clinical service
+- Is health data (Art. 9) involved? → Yes, for any UKHSA clinical service
 - Can we achieve the goal with less data?
 
 ### Step 2 — Describe the Processing
@@ -25,7 +25,7 @@ Create `docs/dpia/dpia.md` — do **not** edit files under `.github/`.
 - **Data items**: List every piece of personal/health data (e.g., NHS number, name, DOB, clinical notes, appointment details)
 - **Data subjects**: Patients, carers, clinicians, administrative staff
 - **Purposes**: Direct care, service improvement, audit
-- **Lawful basis**: Art. 6(1)(e) public task for NHS services; Art. 9(2)(h) health/social care with appropriate safeguards
+- **Lawful basis**: Art. 6(1)(e) public task for UKHSA services; Art. 9(2)(h) health/social care with appropriate safeguards
 - **Data flows**: Where data comes from, where it's stored, who accesses it, where it goes
 - **Retention**: How long, and why
 - **Processors**: Third-party services (hosting platform, monitoring tools — see `tech-stack.instructions.md`)
@@ -114,9 +114,9 @@ Include the verification results in the DPIA output as a table:
 - Implement technical controls identified in Step 6
 - Schedule regular DPIA reviews (at least annually, or on significant change)
 
-## NHS DSP Toolkit Alignment
+## NHS Data Security and Protection Toolkit Alignment <!-- REVIEW -->
 
-Map DPIA findings to relevant DSP Toolkit assertions: Standard 1 (personal confidential data), Standard 3 (training), Standard 7 (data security), Standard 8 (unsupported systems), Standard 10 (accountable suppliers — see `tech-stack.instructions.md`).
+Map DPIA findings to relevant NHS Data Security and Protection Toolkit assertions: Standard 1 (personal confidential data), Standard 3 (training), Standard 7 (data security), Standard 8 (unsupported systems), Standard 10 (accountable suppliers — see `tech-stack.instructions.md`).
 
 ## Data Flow Diagram
 
@@ -126,7 +126,7 @@ Include a Mermaid data flow diagram showing: user devices → web app (HTTPS) �
 
 - Always list **specific data items** — never say "patient data" without specifying fields
 - Document lawful basis for **both** Art. 6 (general) and Art. 9 (special category)
-- Reference NHS-specific guidance: Caldicott Principles, NHS Code of Confidentiality
+- Reference UKHSA-specific guidance: Caldicott Principles, NHS Code of Confidentiality
 - **Never mark a control as "implemented" without searching the codebase for evidence** — only code, Terraform, and config files count
 - **Distinguish "designed" from "implemented"** — unbuilt controls are gaps to flag
 - **Iterate to fix before writing** — follow the Compliance Document Workflow from `review-agent-pattern.instructions.md`: read the codebase, identify gaps, fix them, then write the DPIA

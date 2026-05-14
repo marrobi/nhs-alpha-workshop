@@ -42,7 +42,7 @@ For each persona, create a JSON file in `discovery/personas/data/` following thi
   "jobTitle": "Job Title - Specialization/Band",
   "slideTitle": "ROLE CATEGORY IN CAPS",
   "experience": "X years in role/field with relevant background",
-  "location": "NHS Organization/Region",
+  "location": "UKHSA Region/Office",
   "department": "Department/Service Name",
   "photo": "../images/placeholder.jpg",
   "photoPrompt": "Detailed AI image generation prompt for a photorealistic professional headshot",
@@ -74,7 +74,7 @@ For each persona, create a JSON file in `discovery/personas/data/` following thi
 ```
 
 **JSON File Naming Convention:**
-- For NHS staff: `firstname-job-role.json` (e.g., `sanjay-programme-director.json`)
+- For UKHSA staff: `firstname-job-role.json` (e.g., `sanjay-programme-director.json`)
 - For patients: `firstname-patient-context.json` (e.g., `ellie-young-patient-crohns.json`)
 - For carers: `firstname-carer-context.json`
 
@@ -88,7 +88,7 @@ For each persona, create a JSON file in `discovery/personas/data/` following thi
 
 **Photo Prompt Guidelines:**
 Include: age range, ethnicity/diversity, professional attire, expression, lighting, background, image quality details. Example:
-"Photorealistic headshot of a senior NHS programme director (mid-40s, South Asian British man), business professional attire (navy suit, open collar shirt), confident warm expression, soft studio lighting, modern office background slightly blurred, sharp focus, natural skin tones, no text"
+"Photorealistic headshot of a senior UKHSA programme director (mid-40s, South Asian British man), business professional attire (navy suit, open collar shirt), confident warm expression, soft studio lighting, modern office background slightly blurred, sharp focus, natural skin tones, no text"
 
 ## Step 3: Generate Slides
 

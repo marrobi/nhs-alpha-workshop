@@ -1,6 +1,6 @@
-# NHS Persona Slides Generator
+# UKHSA Persona Slides Generator
 
-This directory contains everything needed to generate NHS persona slides with separated content and styling.
+This directory contains everything needed to generate UKHSA persona slides with separated content and styling.
 
 ## Directory Structure
 
@@ -26,7 +26,7 @@ personas/
 Place your JSON files generated from the Copilot prompt into the `data/` directory.
 
 ### 2. Add Images (Optional)
-- Add NHS and Microsoft logos to `images/` directory
+- Add UKHSA and Microsoft logos to `images/` directory
 - Add persona photos as referenced in your JSON files
 
 ### 3. Generate All Slides
@@ -74,7 +74,7 @@ Each persona should be a JSON file in `data/` following this structure:
   "jobTitle": "Job Title - Specialization",
   "slideTitle": "ROLE CATEGORY IN CAPS",
   "experience": "X years experience",
-  "location": "NHS Trust/Region",
+  "location": "UKHSA Region/Office",
   "department": "Department Name",
   "photo": "../images/photo.jpg",
   "photoPrompt": "AI image generation prompt",
@@ -125,7 +125,7 @@ marp generated/personas-deck.md --pptx
 
 ### Modify Template Styling
 Edit `templates/persona-template.md` to change:
-- Colors (NHS blue: #005eb8)
+- Colors (GOV.UK blue: #1d70b8)
 - Layout and spacing
 - Font sizes
 - Section arrangement

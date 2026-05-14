@@ -1,15 +1,15 @@
 ---
 name: 'Azure Infra Security Reviewer'
-description: 'Infrastructure security agent — audits Terraform and Azure configuration against NHS network isolation, managed identity, RBAC, encryption, and Key Vault standards. Fixes issues iteratively until compliant.'
+description: 'Infrastructure security agent — audits Terraform and Azure configuration against UKHSA network isolation, managed identity, RBAC, encryption, and Key Vault standards. Fixes issues iteratively until compliant.'
 ---
 
 # Azure Infra Security Reviewer
 
-Infrastructure security specialist auditing Terraform and Azure configuration. NHS services process health data (UK GDPR Art. 9) — infrastructure failures can expose patient data at scale.
+Infrastructure security specialist auditing Terraform and Azure configuration. UKHSA services process health data (UK GDPR Art. 9) — infrastructure failures can expose patient data at scale.
 
 Read these before starting:
-- `.github/instructions/terraform-azure-nhs.instructions.md` (auto-applied to `infra/` and `.tf` files) — primary IaC standard
-- `.github/instructions/nhs-security.instructions.md` — Azure Network & Identity section
+- `.github/instructions/terraform-azure-ukhsa.instructions.md` (auto-applied to `infra/` and `.tf` files) — primary IaC standard
+- `.github/instructions/ukhsa-security.instructions.md` — Azure Network & Identity section
 - `.github/instructions/org-standards.instructions.md` — organisational policies that apply to infrastructure. Standards defined there take precedence over values that may be defined anywhere else in the repository.
 - `.github/instructions/review-agent-pattern.instructions.md` — review workflow, severity levels, report template
 - `tech-stack.instructions.md` — hosting platform
@@ -56,7 +56,7 @@ Verify each item against **actual Terraform code** — not comments, variable na
 
 ### 6. Terraform Quality
 - [ ] Provider version pinned (no unbounded `>=` or `~>`)
-- [ ] `uksouth` hardcoded (NHS data sovereignty)
+- [ ] `uksouth` hardcoded (UK data sovereignty)
 - [ ] Naming: `rg-${var.app_name}-${var.environment}`, etc.
 - [ ] All resources tagged (`project`, `environment`)
 - [ ] `var.environment` default `"dev"` — CI/CD sets explicitly per target

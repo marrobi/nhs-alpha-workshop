@@ -1,15 +1,15 @@
 ---
-name: nhs-dpia
-description: 'Use when drafting a Data Protection Impact Assessment (DPIA) for an NHS service that processes health data under UK GDPR.'
+name: ukhsa-dpia
+description: 'Use when drafting a Data Protection Impact Assessment (DPIA) for a UKHSA service that processes health data under UK GDPR.'
 ---
 
-# NHS DPIA — Data Protection Impact Assessment
+# UKHSA DPIA — Data Protection Impact Assessment
 
-This skill drafts DPIAs for NHS digital health services following [ICO guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/) and the [NHS Data Security and Protection Toolkit](https://www.dsptoolkit.nhs.uk/).
+This skill drafts DPIAs for UKHSA digital health services following [ICO guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/) and the [NHS Data Security and Protection Toolkit](https://www.dsptoolkit.nhs.uk/). <!-- REVIEW -->
 
 ## When to Use
 
-- Starting a new NHS service that processes personal or health data
+- Starting a new UKHSA service that processes personal or health data
 - Adding a new data processing activity to an existing service
 - Integrating with external NHS systems (PDS, GP Connect, etc.)
 - Before any Alpha assessment — assessors will ask about data protection
@@ -25,17 +25,17 @@ This skill drafts DPIAs for NHS digital health services following [ICO guidance]
 7. **Sign off** — DPO/IG lead approval
 8. **Integrate outcomes** — Feed measures into development backlog
 
-## UK GDPR — Key Articles for NHS
+## UK GDPR — Key Articles for UKHSA
 
-- **Art. 6**: Lawful basis — typically `6(1)(e)` public task for NHS
+- **Art. 6**: Lawful basis — typically `6(1)(e)` public task for UKHSA
 - **Art. 9**: Special category condition — typically `9(2)(h)` health/social care purposes
 - **Art. 35**: DPIA required for high-risk processing (health data always qualifies)
 - **Art. 25**: Data protection by design and default
 
-## NHS-Specific Considerations
+## UKHSA-Specific Considerations
 
 - Caldicott Principles — justify each item of patient data
-- NHS Data Security Standards (DSP Toolkit)
+- NHS Data Security Standards (DSP Toolkit) <!-- REVIEW -->
 - Data flows to/from NHS Spine, PDS, GP Connect
 - Data residency — Azure UK South/UK West only
 - Retention periods — NHS Records Management Code of Practice

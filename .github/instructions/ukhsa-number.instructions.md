@@ -61,7 +61,7 @@ See `tech-stack.instructions.md` for the current stack. The rules below are fram
 
 ## Logging
 
-- **Never log** full NHS Numbers in application logs — see `nhs-security.instructions.md` for PII logging rules
+- **Never log** full NHS Numbers in application logs — see `ukhsa-security.instructions.md` for PII logging rules
 - If an NHS Number must appear in logs for tracing, mask it: `*** *** 5919`
 
 ## Testing

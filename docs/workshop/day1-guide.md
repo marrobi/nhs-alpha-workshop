@@ -6,7 +6,7 @@ Day 1 assumes **discovery has already been completed** using the discovery toolk
 
 > **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
 > - `discovery/scenarios/scenario.md` — scenario overview and problem statement
-> - `discovery/personas/persona-report.md` — researched NHS personas
+> - `discovery/personas/persona-report.md` — researched UKHSA personas
 > - `discovery/user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
 >
 > See the [discovery guide](../../discovery/README.md) for how to produce these artefacts.
@@ -22,11 +22,11 @@ Day 1 assumes **discovery has already been completed** using the discovery toolk
 
 ## Phase 1 — Architecture Design (1 hour)
 
-Before writing any code, design the technical architecture informed by your discovery artefacts. This phase uses the **NHS Architect** agent, which will ask you questions and present options interactively.
+Before writing any code, design the technical architecture informed by your discovery artefacts. This phase uses the **UKHSA Architect** agent, which will ask you questions and present options interactively.
 
 ### Start the Architecture Session
 
-**Agent**: NHS Architect
+**Agent**: UKHSA Architect
 
 > Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`. Design the architecture for this service.
 
@@ -56,9 +56,9 @@ Agree the architecture before moving to user stories.
 
 ## Phase 2 — Generate User Stories (30 minutes)
 
-Before building, decompose the user journeys into implementable user stories with acceptance criteria. This phase uses the **NHS Product Owner** agent.
+Before building, decompose the user journeys into implementable user stories with acceptance criteria. This phase uses the **UKHSA Product Owner** agent.
 
-**Agent**: NHS Product Owner
+**Agent**: UKHSA Product Owner
 
 > Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
 
@@ -84,11 +84,11 @@ Approve the stories before moving to ADR review.
 
 ## Phase 3 — Architecture ADR Review (30 minutes)
 
-Now that user stories exist, run the **NHS Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
+Now that user stories exist, run the **UKHSA Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
 
 ### Start the ADR Review Session
 
-**Agent**: NHS Architect
+**Agent**: UKHSA Architect
 
 > Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts. Identify the architectural decisions that need to be recorded as ADRs based on the stories, then create them.
 
@@ -96,7 +96,7 @@ The agent will:
 
 1. **Review user stories alongside the architecture** — identify decisions implied by the stories (e.g. data storage for specific entities, auth strategy for role-based access, API versioning, error handling patterns)
 2. **Identify required ADRs** — present a list of ADR topics with rationale and confirm with the team
-3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `nhs-adr-writer` skill
+3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `ukhsa-adr-writer` skill
 4. **Update the ADR index** — update `docs/adr/README.md` with the new records
 
 ### Review the ADRs (10 minutes)
@@ -114,13 +114,13 @@ Approve the ADRs before moving to scaffold.
 
 ### Iteration 0 — Scaffold the Service
 
-**Agent**: NHS Service Builder
+**Agent**: UKHSA Service Builder
 
-> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
+> Scaffold the UKHSA Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with GOV.UK Design System components and a start page, and the infrastructure configuration. Deploy everything.
 
 The agent will:
 - Create the backend app structure with middleware
-- Scaffold the frontend with NHS Design System components
+- Scaffold the frontend with GOV.UK Design System components
 - Write infrastructure-as-code configuration
 - Deploy infrastructure and application
 - Verify the health endpoint returns 200 on the live URL
@@ -135,17 +135,17 @@ This is the core of Day 1. Build user stories in **batches of 2–5 connected st
 
 For each batch:
 
-1. **Build** — use the **NHS Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
+1. **Build** — use the **UKHSA Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
 
-   **Agent**: NHS Service Builder
+   **Agent**: UKHSA Service Builder
 
-   > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+   > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using GOV.UK Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
 2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
    **Agent**: Visual QA
 
-   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, GOV.UK Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 

@@ -26,7 +26,7 @@ style: |
   .persona-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #1d70b8;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -63,7 +63,7 @@ style: |
   
   .profile-section {
     background: white;
-    border: 3px solid #005eb8;
+    border: 3px solid #1d70b8;
     border-radius: 10px;
     padding: 0.6rem 0.75rem;
     text-align: center;
@@ -89,7 +89,7 @@ style: |
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 2px solid #005eb8;
+    border: 2px solid #1d70b8;
     margin: 0 auto;
     flex-shrink: 0;
     object-fit: cover;
@@ -98,7 +98,7 @@ style: |
   .persona-name {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #1d70b8;
     margin: 0.2rem 0 0.1rem 0;
     text-transform: uppercase;
     line-height: 1.0;
@@ -133,7 +133,7 @@ style: |
   }
 
   .personal-data h4 {
-    color: #005eb8;
+    color: #1d70b8;
     font-size: 0.75rem;
     margin: 0;
     text-transform: uppercase;
@@ -208,14 +208,14 @@ style: |
     border-radius: 6px;
     padding: 0.7rem;
     margin-bottom: 0.6rem;
-    border-left: 3px solid #005eb8;
+    border-left: 3px solid #1d70b8;
     flex-shrink: 0;
   }
   
   .section-title {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #1d70b8;
     margin: 0 0 0.4rem 0;
     text-transform: uppercase;
     line-height: 1.1;
@@ -237,7 +237,7 @@ style: |
     background: rgba(0, 94, 184, 0.05);
     border-radius: 8px;
     padding: 1rem;
-    border-left: 3px solid #005eb8;
+    border-left: 3px solid #1d70b8;
     flex: 1;
     min-height: 0;
   }
@@ -251,7 +251,7 @@ style: |
   }
   
   .stars {
-    color: #005eb8;
+    color: #1d70b8;
     font-size: 0.9rem;
   }
   
@@ -263,7 +263,7 @@ style: |
   }
   
   .system-badge {
-    background: #005eb8;
+    background: #1d70b8;
     color: white;
     padding: 0.3rem 0.5rem;
     border-radius: 4px;
@@ -318,7 +318,7 @@ style: |
   </div>
 
   <div class="logo-container">
-    <img src="../images/nhs-logo.jpg" alt="NHS logo" />
+    <img src="../images/ukhsa-logo.jpg" alt="UKHSA logo" /> <!-- REVIEW: replace with actual UKHSA logo file -->
     <br />
     <img src="../images/microsoft-logo.png" alt="Microsoft logo" />
   </div>

@@ -1,15 +1,15 @@
 ---
 name: dcb0129-hazard-log
-description: 'Use when generating a clinical safety hazard log, clinical risk matrix, or DCB0129 Clinical Safety Case Report for an NHS digital health service.'
+description: 'Use when generating a clinical safety hazard log, clinical risk matrix, or DCB0129 Clinical Safety Case Report for a UKHSA digital health service.'
 ---
 
 # DCB0129 Hazard Log — Clinical Safety
 
-This skill generates clinical safety documentation following the [DCB0129 standard](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems) for NHS digital health services, using the SIREN methodology for hazard identification.
+This skill generates clinical safety documentation following the [DCB0129 standard](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems) for UKHSA digital health services, using the SIREN methodology for hazard identification.
 
 ## When to Use
 
-- Creating a new hazard log for an NHS Alpha service
+- Creating a new hazard log for a UKHSA Alpha service
 - Adding hazards identified during development or testing
 - Producing a Clinical Safety Case Report for assessment
 - Reviewing code changes that affect clinical data or patient-facing features

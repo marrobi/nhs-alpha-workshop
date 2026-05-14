@@ -1,15 +1,15 @@
 ---
-name: azure-nhs-deploy
-description: 'Use when deploying an NHS Python/FastAPI service to Azure using Terraform, or configuring App Service, Key Vault, or Application Insights.'
+name: azure-ukhsa-deploy
+description: 'Use when deploying a UKHSA Python/FastAPI service to Azure using Terraform, or configuring App Service, Key Vault, or Application Insights.'
 ---
 
-# Azure NHS Deploy — Terraform to Azure UK South
+# Azure UKHSA Deploy — Terraform to Azure UK South
 
-This skill provides step-by-step guidance for deploying an NHS Python/FastAPI + React service to Azure using Terraform. All infrastructure uses Azure UK South for data sovereignty compliance.
+This skill provides step-by-step guidance for deploying a UKHSA Python/FastAPI + React service to Azure using Terraform. All infrastructure uses Azure UK South for data sovereignty compliance.
 
 ## When to Use
 
-- Scaffolding Terraform for a new NHS service
+- Scaffolding Terraform for a new UKHSA service
 - Deploying infrastructure with `terraform apply`
 - Configuring App Service settings, Key Vault, or Application Insights
 - Troubleshooting Azure deployment failures
@@ -92,7 +92,7 @@ curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
 
 ## Rules
 
-- Region: always `uksouth` — other regions might be allowd for development but production must be UK South
+- Region: always `uksouth` — other regions might be allowed for development but production must be UK South
 - Identity: always Managed Identity — never service principal secrets
 - Secrets: always Key Vault — never hardcode or use app settings directly
 - TLS: minimum 1.2, HTTPS only

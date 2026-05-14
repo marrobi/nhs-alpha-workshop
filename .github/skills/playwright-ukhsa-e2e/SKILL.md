@@ -1,11 +1,11 @@
 ---
-name: playwright-nhs-e2e
-description: 'Playwright E2E patterns for NHS user journeys — Page Object Model, accessibility, NHS Design System. Language follows tech-stack.instructions.md.'
+name: playwright-ukhsa-e2e
+description: 'Playwright E2E patterns for UKHSA user journeys — Page Object Model, accessibility, GOV.UK Design System. Language follows tech-stack.instructions.md.'
 ---
 
-# Playwright NHS E2E Testing — Skill
+# Playwright UKHSA E2E Testing — Skill
 
-Patterns and rules for Playwright browser tests that verify NHS user journeys. Check `tech-stack.instructions.md` for the E2E testing language and framework — generate all code in that language.
+Patterns and rules for Playwright browser tests that verify UKHSA user journeys. Check `tech-stack.instructions.md` for the E2E testing language and framework — generate all code in that language.
 
 ## Dependencies
 
@@ -29,17 +29,17 @@ One class per page/route in `tests/e2e/pages/`. Tests call Page Object methods �
 
 ## Accessibility
 
-Run axe-core on **every page** the test visits — zero violations allowed. Also verify: keyboard Tab order, screen reader landmarks (`<main>`, `<nav>`, `<header>`, `<footer>`), form labels, and NHS error summary on validation failure.
+Run axe-core on **every page** the test visits — zero violations allowed. Also verify: keyboard Tab order, screen reader landmarks (`<main>`, `<nav>`, `<header>`, `<footer>`), form labels, and GOV.UK error summary on validation failure.
 
 ## Selectors
 
 Role-based only: `get_by_role`, `get_by_label`, `get_by_text`. Never CSS or XPath.
 
-## NHS Page Patterns
+## UKHSA Page Patterns
 
 | Pattern | Key assertions |
 |---------|---------------|
-| **Start page** | NHS header, service name `<h1>`, "Start now" button |
+| **Start page** | GOV.UK header, service name `<h1>`, "Start now" button |
 | **Question pages** | One question per page, back link, continue button |
 | **Check answers** | Summary list with "Change" links |
 | **Confirmation** | Panel with reference number |
@@ -69,5 +69,5 @@ Save screenshots on failure and at key journey milestones. Store in `tests/e2e/s
 - axe check on every page navigation — no exceptions
 - Role-based selectors only
 - Must work headless in CI (Chromium)
-- Synthetic NHS data only (NHS number `943 476 5919`)
+- Synthetic NHS data only (NHS Number `943 476 5919`)
 - Never mix E2E and unit tests
