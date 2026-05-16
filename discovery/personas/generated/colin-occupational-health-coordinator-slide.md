@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/colin-occupational-health-coordinator.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Colin Rafferty</h2>
+    <p class="job-title">Occupational Health Coordinator - Occupational Health Service</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>12 years in occupational health including vaccine and travel health programmes</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>Midlands</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Occupational Health Services</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Manages occupational health vaccine programmes for large NHS trust</li>
+          <li>Provides travel health and routine immunisation services</li>
+          <li>Works with 5 occupational health nurses</li>
+          <li>Handles 300+ vaccine consultations per year</li>
+          <li>Experience with multiple digital health systems</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Streamline vaccine ordering for occupational health programme</li>
+          <li>Ensure compliance with occupational health vaccine guidance</li>
+          <li>Maintain detailed records of who received which vaccines and when</li>
+          <li>Support team growth without creating new access bottlenecks</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Transparent, documented registration process</li>
+          <li>Registration portal that explains why information is needed</li>
+          <li>Approval from identifiable individual, not generic helpdesk</li>
+          <li>Ability to add team members after initial registration</li>
+          <li>Integration with trust email systems for verification</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Manual process is slow for a time-sensitive health service</li>
+          <li>Each team member change requires full re-registration cycle</li>
+          <li>Current system doesn't support delegation or backup access</li>
+          <li>No clear escalation path if approvals get stuck</li>
+          <li>Paper trail is difficult to audit for compliance purposes</li>
     </ul>
   </div>
 

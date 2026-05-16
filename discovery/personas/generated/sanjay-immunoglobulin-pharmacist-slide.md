@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NON-NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/sanjay-immunoglobulin-pharmacist.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Sanjay Patel</h2>
+    <p class="job-title">Pharmacy Lead - Immunoglobulin Holding Centre</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>18 years as pharmacist; 8 years managing immunoglobulin distribution centre</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>West Midlands</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Immunoglobulin Holding Centre / Pharmacy Services</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Licensed pharmacist managing dedicated immunoglobulin distribution service</li>
+          <li>Serves 40+ NHS sites with specialist immunoglobulin products</li>
+          <li>Manages temperature-controlled storage and complex logistics</li>
+          <li>Responsible for product tracking and MHRA compliance</li>
+          <li>Operates under strict pharmaceutical regulations</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Maintain secure, compliant immunoglobulin supply chain</li>
+          <li>Ensure rapid response to NHS clinical emergencies</li>
+          <li>Meet all MHRA and GDP (Good Distribution Practice) requirements</li>
+          <li>Scale services without compromising traceability or compliance</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Robust registration process that demonstrates competence and compliance</li>
+          <li>Approval from NHS stakeholders familiar with immunoglobulin supply model</li>
+          <li>Integration with patient-level traceability requirements</li>
+          <li>Notification system for urgent supply requests or recalls</li>
+          <li>Compliance-ready audit trail for MHRA inspections</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Current system doesn't adequately reflect specialist, regulated nature of role</li>
+          <li>Manual processing risks breaking strict compliance chains</li>
+          <li>Approval delays can impact clinical delivery of life-saving products</li>
+          <li>No integration with pharmaceutical tracking systems</li>
+          <li>Cannot delegate to backup staff if primary user is unavailable</li>
     </ul>
   </div>
 

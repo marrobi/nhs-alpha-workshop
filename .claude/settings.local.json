@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\" -Recurse -File)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\nhs-api.instructions.md\")",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\nhs-api.instructions.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\nhs-number.instructions.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\nhs-security.instructions.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\nhsuk-frontend.instructions.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\instructions\\\\terraform-azure-nhs.instructions.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\agents\\\\nhs-architect.agent.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\agents\\\\nhs-product-owner.agent.md\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\nhs-synthetic-data\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\nhs-user-stories\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\nhs-dpia\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\nhs-adr-writer\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\playwright-nhs-e2e\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Recurse -Force \"c:\\\\Users\\\\trickeard\\\\Documents\\\\GitHub\\\\UserRegistration\\\\UKHSA-alpha-workshop\\\\.github\\\\skills\\\\azure-nhs-deploy\" -Confirm:$false)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit --amend -m ' *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

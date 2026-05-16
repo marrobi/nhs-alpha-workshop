@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/priya-vaccination-coordinator.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Priya Chandrasekaran</h2>
+    <p class="job-title">Vaccination Coordinator - GP Practice</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>8 years managing immunisation programmes across primary care</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>South West England</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>GP Practice / Immunisation Services</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Manages vaccine ordering for 12,000-patient GP practice</li>
+          <li>Been in practice for 8 years, started as receptionist</li>
+          <li>Coordinates with 4 practice nurses and 2 GPs on immunisation schedules</li>
+          <li>Currently handles ImmForm access via delegated GP account</li>
+          <li>Processes 200+ vaccine orders per year across seasonal flu, COVID-19, and routine programmes</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Get faster access to ImmForm for her team without waiting for GP approval</li>
+          <li>Reduce administrative burden of managing account changes</li>
+          <li>Have visibility into vaccine stock levels and ordering history</li>
+          <li>Ensure compliance with UKHSA vaccine ordering guidelines</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Simple, clear registration process that doesn't require IT support</li>
+          <li>Email confirmation that her application has been received</li>
+          <li>Quick approval turnaround (2-3 days preferred)</li>
+          <li>Individual user account rather than shared practice account</li>
+          <li>Audit trail of who ordered what and when</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Currently waits 5-7 days for account approval via manual PDF process</li>
+          <li>Cannot order vaccines when the authorised person is on leave</li>
+          <li>Manual form-filling is error-prone; re-keying data creates mistakes</li>
+          <li>No visibility into application status while it's being processed</li>
+          <li>Shared account access means no accountability for individual vaccine orders</li>
     </ul>
   </div>
 

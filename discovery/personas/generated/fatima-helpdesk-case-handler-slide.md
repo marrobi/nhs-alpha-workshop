@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# IMMFORM HELPDESK (FALLBACK)
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/fatima-helpdesk-case-handler.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Fatima Osei</h2>
+    <p class="job-title">Case Handler - ImmForm Support (Digitally-Assisted Fallback)</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>3 years in ImmForm support; transitioned from manual helpdesk to assisted role</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>UKHSA National Office</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>ImmForm Support Team / Case Management</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>ImmForm support case handler; newer member of team</li>
+          <li>Works on complex registrations and fallback cases</li>
+          <li>Handles edge cases: shared mailboxes, invalid codes, approval delays</li>
+          <li>Recently upskilled on digital-assisted case management</li>
+          <li>Supports primary helpdesk operators on difficult applications</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Resolve complex registration cases efficiently and fairly</li>
+          <li>Support users who face barriers with standard registration</li>
+          <li>Maintain compliance while being flexible for edge cases</li>
+          <li>Build expertise in handling difficult scenarios</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Clear decision-making framework for edge cases</li>
+          <li>Tools to verify identity and account details</li>
+          <li>Access to Authorised Person contact information for escalation</li>
+          <li>Digital workflow to track case status and decisions</li>
+          <li>Training on regulatory requirements and compliance</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>No standardised process for handling edge cases</li>
+          <li>Limited tools to verify user identity and account details</li>
+          <li>Depends on escalation to seniors for difficult decisions</li>
+          <li>Manual tracking makes it hard to report on case outcomes</li>
+          <li>Difficult users or unclear requirements can get stuck indefinitely</li>
     </ul>
   </div>
 

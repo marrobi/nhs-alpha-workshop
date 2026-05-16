@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# AUTHORISED PERSON
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/linda-authorised-person.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Linda Forsythe</h2>
+    <p class="job-title">Practice Manager and Authorised Person - GP Practice</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>20 years in GP practice management; 12 years as Authorised Person for ImmForm</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>South West England</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>GP Practice Management</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Practice manager for 15-partner GP practice</li>
+          <li>Designated as Authorised Person for ImmForm account</li>
+          <li>Manages 80+ staff including clinicians and administrative team</li>
+          <li>Responsible for practice compliance and governance</li>
+          <li>Has approved 200+ user registrations over 12 years</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Manage user access securely while supporting practice operations</li>
+          <li>Maintain clear, auditable approval process</li>
+          <li>Reduce time spent on access management tasks</li>
+          <li>Support team flexibility without compromising security</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Clear, structured approval process that documents decisions</li>
+          <li>Time-bounded approval requests with escalation if delayed</li>
+          <li>Visibility into who is accessing ImmForm account and when</li>
+          <li>Easy way to revoke access if staff leave or change roles</li>
+          <li>Integration with practice HR/staff directory systems</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Current email-based process creates cluttered approval trail</li>
+          <li>No visibility into what access each person actually has</li>
+          <li>Cannot easily track which staff have been approved</li>
+          <li>Manual process is time-consuming; often deprioritised</li>
+          <li>If approval is forgotten, staff are blocked from vaccine ordering</li>
     </ul>
   </div>
 

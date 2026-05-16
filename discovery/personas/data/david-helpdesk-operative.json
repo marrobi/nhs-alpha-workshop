@@ -1,0 +1,39 @@
+{
+  "name": "David Acheampong",
+  "jobTitle": "Helpdesk Operative - ImmForm Support (Current State)",
+  "slideTitle": "IMMFORM HELPDESK (CURRENT STATE)",
+  "experience": "6 years in ImmForm helpdesk; formerly healthcare admin",
+  "location": "UKHSA National Office",
+  "department": "ImmForm Support Team / Helpdesk Operations",
+  "workflowStage": "HELPDESK — CURRENT STATE",
+  "workflowStageOrder": 4,
+  "photo": "../images/david-helpdesk-operative.jpg",
+  "photoPrompt": "Photorealistic headshot of a Black man in his mid-30s, wearing business casual healthcare IT attire, professional expression, natural lighting, modern helpdesk office background",
+  "background": [
+    "ImmForm support team member handling user registrations",
+    "Processes 5-8 registration requests per day during peak periods",
+    "Manually validates data, re-keys forms into ImmForm",
+    "Chases approvals from Authorised Persons via email",
+    "Works with users on account and organisation code validation"
+  ],
+  "goals": [
+    "Process registration applications quickly and accurately",
+    "Reduce time spent on manual data entry and chasing",
+    "Maintain compliance and audit trail for registrations",
+    "Provide good support experience to healthcare users"
+  ],
+  "wants": [
+    "Structured input from users with validated data",
+    "Automated validation for account/organisation pairs",
+    "Workflow system to track approval status",
+    "Ability to see approval decision history",
+    "Clear escalation path for complex cases"
+  ],
+  "painPoints": [
+    "Manual re-keying is repetitive, error-prone, and time-consuming",
+    "Cannot easily follow up on delayed approvals",
+    "Invalid account/organisation combinations cause rework",
+    "No visibility into application status for users asking about progress",
+    "Email-based chasing is inefficient; approvers don't always respond"
+  ]
+}

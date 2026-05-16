@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/amir-covid-programme-coordinator.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Amir Siddiqui</h2>
+    <p class="job-title">COVID-19 Programme Coordinator - Primary Care Network</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>4 years in COVID-19 vaccination programmes, recently transitioned to routine work</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>North West England</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Primary Care Network / COVID-19 Vaccination Hub</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Started in emergency COVID response; now coordinator for local PCN</li>
+          <li>Manages vaccine ordering for 8 GP practices in PCN</li>
+          <li>Transitioned from temporary to permanent NHS role</li>
+          <li>Works with vaccination teams across multiple locations</li>
+          <li>Gained practical ImmForm knowledge during COVID surge</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Secure permanent, individual access to ImmForm for PCN vaccine coordination</li>
+          <li>Establish standardised ordering process across 8 practices</li>
+          <li>Maintain overview of vaccine stock across network</li>
+          <li>Support transition from emergency to routine immunisation services</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Permanent account status reflecting permanent NHS role</li>
+          <li>Quick registration reflecting existing ImmForm knowledge</li>
+          <li>Access that isn't tied to single approver (resilience)</li>
+          <li>Monthly reporting on vaccine orders and utilisation</li>
+          <li>Clear communication about policy changes affecting vaccine ordering</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Started on temporary emergency access; now needs permanent setup</li>
+          <li>Current account structure doesn't reflect PCN coordinator role</li>
+          <li>Manual registration seems unnecessary given existing usage</li>
+          <li>Worries about approval delays affecting vaccine availability</li>
+          <li>Lacks clear record of ordering history for audit purposes</li>
     </ul>
   </div>
 

@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/donna-mpox-specialist-nurse.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Donna Eze</h2>
+    <p class="job-title">Mpox Specialist Nurse - Infectious Disease Service</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>15 years in infectious disease nursing; 3 years managing Mpox vaccine programme</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>London</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Infectious Disease Service / Mpox Vaccination Programme</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Led development of local Mpox vaccination programme</li>
+          <li>Manages vaccine ordering and clinical delivery</li>
+          <li>Works with sexual health clinics, GUM services, and community partners</li>
+          <li>Trains other clinicians on Mpox vaccine protocols</li>
+          <li>Established good relationships with ImmForm support team</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Maintain reliable vaccine supply for Mpox prevention programme</li>
+          <li>Support expansion of vaccination to community partners</li>
+          <li>Ensure accurate records of vaccine stock and utilisation</li>
+          <li>Share best practice on Mpox ordering across region</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Fast-track registration reflecting programme lead status and experience</li>
+          <li>Support for adding partner organisations as authorised users</li>
+          <li>Regular stock notifications and reorder reminders</li>
+          <li>Benchmarking data on regional Mpox vaccine uptake</li>
+          <li>Direct escalation contact for urgent supply issues</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Current registration process doesn't reflect programme coordinator role</li>
+          <li>Cannot easily grant access to partner organisations</li>
+          <li>Manual process delays vaccine delivery when stock runs low</li>
+          <li>No visibility into other services' Mpox vaccine orders</li>
+          <li>Approval delays have previously caused stock shortages</li>
     </ul>
   </div>
 

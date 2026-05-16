@@ -1,0 +1,39 @@
+{
+  "name": "Amir Siddiqui",
+  "jobTitle": "COVID-19 Programme Coordinator - Primary Care Network",
+  "slideTitle": "APPLICANT — NHS",
+  "experience": "4 years in COVID-19 vaccination programmes, recently transitioned to routine work",
+  "location": "North West England",
+  "department": "Primary Care Network / COVID-19 Vaccination Hub",
+  "workflowStage": "APPLICANT — NHS",
+  "workflowStageOrder": 1,
+  "photo": "../images/amir-covid-programme-coordinator.jpg",
+  "photoPrompt": "Photorealistic headshot of a South Asian man in his early 30s, wearing professional healthcare attire, engaged expression, natural lighting, healthcare hub background with modern equipment",
+  "background": [
+    "Started in emergency COVID response; now coordinator for local PCN",
+    "Manages vaccine ordering for 8 GP practices in PCN",
+    "Transitioned from temporary to permanent NHS role",
+    "Works with vaccination teams across multiple locations",
+    "Gained practical ImmForm knowledge during COVID surge"
+  ],
+  "goals": [
+    "Secure permanent, individual access to ImmForm for PCN vaccine coordination",
+    "Establish standardised ordering process across 8 practices",
+    "Maintain overview of vaccine stock across network",
+    "Support transition from emergency to routine immunisation services"
+  ],
+  "wants": [
+    "Permanent account status reflecting permanent NHS role",
+    "Quick registration reflecting existing ImmForm knowledge",
+    "Access that isn't tied to single approver (resilience)",
+    "Monthly reporting on vaccine orders and utilisation",
+    "Clear communication about policy changes affecting vaccine ordering"
+  ],
+  "painPoints": [
+    "Started on temporary emergency access; now needs permanent setup",
+    "Current account structure doesn't reflect PCN coordinator role",
+    "Manual registration seems unnecessary given existing usage",
+    "Worries about approval delays affecting vaccine availability",
+    "Lacks clear record of ordering history for audit purposes"
+  ]
+}

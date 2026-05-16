@@ -1,0 +1,39 @@
+{
+  "name": "Colin Rafferty",
+  "jobTitle": "Occupational Health Coordinator - Occupational Health Service",
+  "slideTitle": "APPLICANT — NHS",
+  "experience": "12 years in occupational health including vaccine and travel health programmes",
+  "location": "Midlands",
+  "department": "Occupational Health Services",
+  "workflowStage": "APPLICANT — NHS",
+  "workflowStageOrder": 1,
+  "photo": "../images/colin-occupational-health-coordinator.jpg",
+  "photoPrompt": "Photorealistic headshot of a middle-aged white man with grey-brown hair, wearing professional healthcare attire, approachable expression, natural lighting, occupational health clinic background",
+  "background": [
+    "Manages occupational health vaccine programmes for large NHS trust",
+    "Provides travel health and routine immunisation services",
+    "Works with 5 occupational health nurses",
+    "Handles 300+ vaccine consultations per year",
+    "Experience with multiple digital health systems"
+  ],
+  "goals": [
+    "Streamline vaccine ordering for occupational health programme",
+    "Ensure compliance with occupational health vaccine guidance",
+    "Maintain detailed records of who received which vaccines and when",
+    "Support team growth without creating new access bottlenecks"
+  ],
+  "wants": [
+    "Transparent, documented registration process",
+    "Registration portal that explains why information is needed",
+    "Approval from identifiable individual, not generic helpdesk",
+    "Ability to add team members after initial registration",
+    "Integration with trust email systems for verification"
+  ],
+  "painPoints": [
+    "Manual process is slow for a time-sensitive health service",
+    "Each team member change requires full re-registration cycle",
+    "Current system doesn't support delegation or backup access",
+    "No clear escalation path if approvals get stuck",
+    "Paper trail is difficult to audit for compliance purposes"
+  ]
+}

@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# QA / WDA RESPONSIBLE PERSON
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/rachel-qa-wda-responsible-person.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Rachel Thornton</h2>
+    <p class="job-title">Quality Assurance Lead and WDA Responsible Person - UKHSA</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>14 years in UKHSA quality assurance and regulatory compliance; 8 years as WDA Responsible Person</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>UKHSA National Office</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Quality Assurance / Regulatory Compliance</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>UKHSA Quality Assurance and WDA (Wholesale Dealer in Medicines) Responsible Person</li>
+          <li>Responsible for regulatory compliance of ImmForm system</li>
+          <li>Conducts audits of registration processes and user access</li>
+          <li>Manages MHRA inspections and compliance reporting</li>
+          <li>Ensures ImmForm meets GDP and traceability requirements</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Ensure ImmForm registration process meets MHRA and GDP requirements</li>
+          <li>Maintain complete, auditable trail of all user lifecycle decisions</li>
+          <li>Reduce compliance risk from manual processes</li>
+          <li>Support UKHSA governance and regulatory reporting</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>System-generated audit trail of all registration decisions</li>
+          <li>Clear evidence of identity verification for each user</li>
+          <li>Documentation of Authorised Person approval decisions</li>
+          <li>Regular compliance reporting and audit trails</li>
+          <li>System alerts for any policy or compliance anomalies</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Manual email-based process creates gaps in audit trail</li>
+          <li>No clear evidence of identity verification steps taken</li>
+          <li>Difficult to demonstrate compliance during MHRA inspections</li>
+          <li>Cannot easily report on user registration metrics</li>
+          <li>Compliance risk from lack of structured data capture</li>
     </ul>
   </div>
 

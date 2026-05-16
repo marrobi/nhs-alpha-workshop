@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NON-NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/marcus-procurement-compliance-lead.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Marcus Obi</h2>
+    <p class="job-title">Procurement and Compliance Lead - Authorised Wholesaler</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>10 years in pharmaceutical procurement and supply chain compliance</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>South East England</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Authorised Wholesaler / Procurement Operations</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Works for licensed authorised pharmaceutical wholesaler</li>
+          <li>Manages vaccine procurement and distribution to NHS sites</li>
+          <li>Responsible for regulatory compliance and audit trails</li>
+          <li>Coordinates with MHRA and wholesaler management</li>
+          <li>Manages 20+ vaccine product lines and SKUs</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Maintain compliant, auditable ordering process for vaccine procurement</li>
+          <li>Support wholesaler's NHS supply chain relationships</li>
+          <li>Ensure traceability from order to delivery to end-user</li>
+          <li>Scale operations without increasing administrative burden</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Compliant digital registration that meets MHRA expectations</li>
+          <li>Clear audit trail of all ordering transactions</li>
+          <li>Approval from NHS stakeholders who understand wholesaler role</li>
+          <li>Integration with wholesaler's compliance reporting systems</li>
+          <li>Notifications of supply or regulatory changes affecting orders</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Current PDF process creates compliance gaps in audit trail</li>
+          <li>Manual re-keying increases risk of ordering errors</li>
+          <li>Non-NHS status sometimes causes confusion in registration process</li>
+          <li>Approval timescales are unpredictable for supply chain planning</li>
+          <li>No integration with wholesaler's internal systems creates duplicate data entry</li>
     </ul>
   </div>
 

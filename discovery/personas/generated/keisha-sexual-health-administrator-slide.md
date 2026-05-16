@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# APPLICANT — NHS
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/keisha-sexual-health-administrator.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">Keisha Mensah</h2>
+    <p class="job-title">Sexual Health Administrator - Sexual Health Service</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>5 years in sexual health services administration and immunisation coordination</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>Greater London</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>Sexual Health Service / Immunisation Team</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>Works in dedicated sexual health service in urban area</li>
+          <li>Manages HPV and other immunisation programmes for 3+ clinic locations</li>
+          <li>Coordinates with 8 clinical staff and 2 consultants</li>
+          <li>Recently joined team; still getting up to speed on ImmForm</li>
+          <li>Currently shares access via clinic manager's account</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Gain independent ImmForm access for clinic vaccine ordering</li>
+          <li>Maintain clear audit trail for HPV and other sexual health vaccines</li>
+          <li>Support vaccine programme expansion across multiple clinic sites</li>
+          <li>Reduce dependency on clinic manager for routine ordering</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Clear guidance on account numbers and organisation codes for each clinic</li>
+          <li>Ability to request access quickly when starting new role</li>
+          <li>Notification when orders are fulfilled</li>
+          <li>Option to delegate to backup staff during leave periods</li>
+          <li>Mobile-friendly access to check vaccine stock</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Doesn't yet know the correct ImmForm account numbers for clinic locations</li>
+          <li>Current PDF form process feels outdated for a modern NHS service</li>
+          <li>Cannot access system independently; creates bottleneck for clinic</li>
+          <li>Approval delays mean vaccine shortages when clinic runs low on stock</li>
+          <li>No training provided on ImmForm as part of onboarding</li>
     </ul>
   </div>
 

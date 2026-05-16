@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -304,7 +304,7 @@ style: |
 
 ---
 
-# {{slideTitle}}
+# IMMFORM HELPDESK (CURRENT STATE)
 
 <div class="ukhsa-logo-top-right">
   <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
@@ -314,22 +314,26 @@ style: |
 
 <div class="profile-column">
   <div class="profile-section">
-  <img src="{{photo}}" alt="Profile Photo" />
-    <h2 class="persona-name">{{name}}</h2>
-    <p class="job-title">{{jobTitle}}</p>
+  <img src="../images/david-helpdesk-operative.jpg" alt="Profile Photo" />
+    <h2 class="persona-name">David Acheampong</h2>
+    <p class="job-title">Helpdesk Operative - ImmForm Support (Current State)</p>
     <div class="personal-data">
       <div>
         <h4>Professional Data</h4>
         <div class="persona-facts">
-          <div class="data-item"><span class="data-icon">👤</span><span>{{experience}}</span></div>
-          <div class="data-item"><span class="data-icon">📍</span><span>{{location}}</span></div>
-          <div class="data-item"><span class="data-icon">💼</span><span>{{department}}</span></div>
+          <div class="data-item"><span class="data-icon">👤</span><span>6 years in ImmForm helpdesk; formerly healthcare admin</span></div>
+          <div class="data-item"><span class="data-icon">📍</span><span>UKHSA National Office</span></div>
+          <div class="data-item"><span class="data-icon">💼</span><span>ImmForm Support Team / Helpdesk Operations</span></div>
         </div>
       </div>
       <div>
         <h4>Role & Background</h4>
         <ul>
-{{backgroundItems}}
+          <li>ImmForm support team member handling user registrations</li>
+          <li>Processes 5-8 registration requests per day during peak periods</li>
+          <li>Manually validates data, re-keys forms into ImmForm</li>
+          <li>Chases approvals from Authorised Persons via email</li>
+          <li>Works with users on account and organisation code validation</li>
         </ul>
       </div>
     </div>
@@ -342,21 +346,32 @@ style: |
   <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
-{{goalItems}}
+          <li>Process registration applications quickly and accurately</li>
+          <li>Reduce time spent on manual data entry and chasing</li>
+          <li>Maintain compliance and audit trail for registrations</li>
+          <li>Provide good support experience to healthcare users</li>
     </ul>
   </div>
   
   <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
-{{wantItems}}
+          <li>Structured input from users with validated data</li>
+          <li>Automated validation for account/organisation pairs</li>
+          <li>Workflow system to track approval status</li>
+          <li>Ability to see approval decision history</li>
+          <li>Clear escalation path for complex cases</li>
     </ul>
   </div>
 
   <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
-{{painPointItems}}
+          <li>Manual re-keying is repetitive, error-prone, and time-consuming</li>
+          <li>Cannot easily follow up on delayed approvals</li>
+          <li>Invalid account/organisation combinations cause rework</li>
+          <li>No visibility into application status for users asking about progress</li>
+          <li>Email-based chasing is inefficient; approvers don't always respond</li>
     </ul>
   </div>
 

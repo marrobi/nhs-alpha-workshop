@@ -13,8 +13,9 @@ personas/
 ├── scripts/                 # Generation script
 │   └── generate-slides.js
 ├── images/                  # Logo and image assets
+│   ├── UKHSA-master-logo.jpg
 │   ├── nhs-logo.jpg
-│   └── microsoft-logo.png
+│   └── (optional additional partner logos)
 ├── generated/              # Output directory for final slides
 │   └── (generated slides appear here)
 └── README.md              # This file
@@ -26,7 +27,7 @@ personas/
 Place your JSON files generated from the Copilot prompt into the `data/` directory.
 
 ### 2. Add Images (Optional)
-- Add UKHSA and Microsoft logos to `images/` directory
+- Add UKHSA and NHS logos to `images/` directory
 - Add persona photos as referenced in your JSON files
 
 ### 3. Generate All Slides
