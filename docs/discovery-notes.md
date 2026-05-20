@@ -7,12 +7,12 @@ Source used: [ImmForm requirements v0.7](../discovery/requirements/ImmForm-Regis
 1. Platform and stack are fixed for alpha:
 - .NET 10 LTS with ASP.NET Core MVC.
 - GOV.UK component implementation via GovUk.Frontend.AspNetCore (or validated equivalent).
-- Azure SQL + EF Core 10 for persistence.
+- Azure SQL + EF Core 10 migrations with code first approach.
 - nlog + Application Insights for structured logging/tracing.
 - Polly-based timeout/retry/circuit breaker on all outbound integrations.
 
 2. Hosting and architecture constraints:
-- Stateless app required; horizontal scale via Azure Container Apps or AKS.
+- Stateless app required; horizontal scale via Azure Container Apps.
 - Session must be server-side (not in-process), with secure cookie and 60-minute inactivity expiry.
 - UK cloud platform assumptions and Azure resource model are embedded in the CI/CD and IaC requirements.
 
@@ -35,7 +35,7 @@ Source used: [ImmForm requirements v0.7](../discovery/requirements/ImmForm-Regis
 - Approval link is fixed to 72 hours, max two resends.
 - Immutable audit logging is mandatory for all lifecycle events.
 - Audit anomaly detection and retention enforcement are required (scheduled + on-demand).
-- CI/CD gates require security scans (Trivy/CodeQL/etc.) to pass before environment promotion.
+- CI/CD gates require security scans to pass before environment promotion.
 
 ## 2. Legislative and assurance constraints (GDPR, GDP)
 
@@ -74,11 +74,10 @@ Decision confirmed by service owner: DCB0129 is not required for this UKHSA serv
 
 ## Medium risk assumptions
 
-1. Container Apps vs AKS decision will be made early enough not to delay environment setup and observability design.
-2. Reusable step-framework abstraction will remain simple while still meeting all current and future onboarding variants.
-3. AP resend and expiry journey will be understandable enough to avoid significant helpdesk fallback volume.
-4. Existing organisational data quality (account/org/AP mappings) is sufficient for self-service at scale.
-5. Duplicate-check endpoint design will prevent user/account enumeration while still giving useful guidance to applicants.
+1. Reusable step-framework abstraction will remain simple while still meeting all current and future onboarding variants.
+2. AP resend and expiry journey will be understandable enough to avoid significant helpdesk fallback volume.
+3. Existing organisational data quality (account/org/AP mappings) is sufficient for self-service at scale.
+4. Duplicate-check endpoint design will prevent user/account enumeration while still giving useful guidance to applicants.
 
 ## Lower risk but important assumptions
 
@@ -92,7 +91,7 @@ The following are explicitly out of scope for this alpha service:
 1. Authorised person registration.
 2. Account revalidation / reconfirmation journeys.
 3. Delivery point address changes.
-4. Organisation code changes due to merger.
+4. Organisation code changes due to merger of organisational accounts.
 5. Billing and invoice changes.
 6. New delivery location/account creation.
 7. Account deactivation/offboarding.
@@ -102,31 +101,23 @@ The following are explicitly out of scope for this alpha service:
 11. Multi-account registration in one journey (one account per journey only).
 12. AP record maintenance in ImmForm (must be handled by existing account management process).
 
-## 5. Open questions for team discussion (not fully resolved by spec)
+## 5. Answered questions folowing a team discussion (not fully resolved by spec)
 
 1. GDPR legal basis and roles:
 - What are the agreed Article 6 and (if applicable) Article 9 lawful bases?
 - Is UKHSA sole controller for this registration flow, or are any joint-controller arrangements needed?
 
 2. API contract and ownership:
-- What endpoint/source provides "existing active ImmForm user by email" for duplicate checks?
-- What are production SLAs and support hours for Organisation and Registration APIs?
-- What are agreed rate-limit thresholds for duplicate-check requests (for example per IP, per session, and per email plus account tuple)?
+- No existing endpoint/source provides "existing active ImmForm user by email" for duplicate checks. A mock must be created for Alpha.
+- Production SLAs for Organisation and Registration APIs are 24/7 365 with expected uptime of 99.95%. Production support hours are Weekdays 09:00 - 17:00.
+- Industry standard rate-limit thresholds for duplicate-check requests (for example per IP, per session, and per email plus account tuple)
 
-3. Data retention implementation detail:
-- How will deactivation date be sourced for retention calculations where required?
-- How will wholesaler vs non-wholesaler account type be determined reliably at runtime?
+1. Data retention implementation detail:
+- The deactivation date must be captured and used for retention calculations where applicable. Inactive records must be retained for a minimum of 5 years
 
-4. Operational and service design detail:
-- Container Apps or AKS for v1?
-- PDF or CSV as the mandatory FR-24 export format at go-live (or both)?
-- Which team owns anomaly triage and remediation workflow from NFR-22 alerts?
+1. Operational and service design detail:
+- CSV as the mandatory FR-24 export format at go-live.
+- The Helpdesk team owns anomaly triage and remediation workflow from NFR-22 alerts.
 
 5. Assisted digital fallback:
-- What helpdesk runbook and SLA applies when resend limit is reached or AP record is wrong?
-
-## 6. Suggested immediate decisions
-
-1. Freeze API contracts for Organisation/Registration and duplicate detection.
-2. Decide runtime target (Container Apps vs AKS) and FR-24 export format.
-3. Agree alert ownership and helpdesk operational model for expired/failed approval flows.
+- The Helpdesk manual user registration runbook features a 5-7day SLA which applies when resend limit is reached or AP record is wrong.
