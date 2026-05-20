@@ -8,7 +8,7 @@ This file defines the **non-negotiable organisational standards** that apply acr
 
 > **This file is optional.** If your team has no specific organisational standards to enforce, delete the content below (keeping only the frontmatter). Agents will then apply only the baseline UKHSA and GDS standards already defined in the other instruction files.
 
-The default standards below are drawn from the [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW --> and the [NHS Cloud Centre of Excellence Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide) <!-- REVIEW -->. Replace or extend them with your own organisation's policies.
+The default standards below are drawn from the [UKHSA Engineering Standards] (https://ukhsa-collaboration.github.io/standards-org/) and [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW --> and the [NHS Cloud Centre of Excellence Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide) <!-- REVIEW -->. Replace or extend them with your own organisation's policies.
 
 ---
 

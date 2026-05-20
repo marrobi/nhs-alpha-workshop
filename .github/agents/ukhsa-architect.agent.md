@@ -49,7 +49,7 @@ Identify the key decision points and present 2–3 options for each. Do **not** 
 - **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
 - **API structure** — single router vs. domain-based routers. How many distinct resources exist?
 - **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
-- **External integrations** — which NHS API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
+- **External integrations** — which UKHSA API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
 - **Auth approach** — custom vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
 - **Network & identity** — all service-to-service and service-to-data communication must use Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `ukhsa-security.instructions.md` for the full rules.
 - **Infrastructure extras** — baseline only vs. database, queue, or cache. What does the data model need?
