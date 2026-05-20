@@ -50,3 +50,4 @@ tests/e2e/screenshots/
 
 tests/e2e/demo/videos/
 tests/e2e/demo/screenshots/
+.devcontainer/devcontainer-lock.json
