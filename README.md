@@ -19,6 +19,7 @@ This is a **workshop template** — it contains **no application code**. Instead
 3. Complete the [discovery phase](discovery/README.md) before the workshop
 
 == Before 2 day workshops please review and customise all the files in .github folder
+
 4. Follow [Day 1 guide](docs/workshop/day1-guide.md) to design and build with Copilot Agent Mode
 5. Follow [Day 2 guide](docs/workshop/day2-guide.md) to complete the Alpha with Copilot Coding Agent
 
