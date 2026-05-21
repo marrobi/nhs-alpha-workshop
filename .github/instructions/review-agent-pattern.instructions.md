@@ -78,7 +78,7 @@ Each agent specifies its own report path and category table. Use this structure:
 
 ## Compliance Document Workflow
 
-Some agents produce **compliance documents** rather than review reports — for example, the NHS Clinical Safety (DCB0129), DPIA, and GDS assessment agents. These follow a different pattern:
+Some agents produce **compliance documents** rather than review reports — for example, MHRA GDP / Annex 11 assessments (for regulated workloads), UK GDPR DPIAs, NCSC Cloud Security Principles assessments, and GDS Service Standard assessments. These follow a different pattern:
 
 ### Workflow
 
@@ -97,3 +97,14 @@ Compliance documents show **current compliance state**, not a review history:
 - ❌ Gap / Not implemented — no code evidence found; document as accepted risk with rationale if not fixable
 
 **Do not include** "Review Passes" or "Resolved Issues" sections in compliance documents. These sections belong in audit reports, not living compliance records. The final document must read as a statement of the service's current compliance position — what is true now, after all iteration is complete.
+
+### Common UKHSA Compliance Documents
+
+| Document | Standard | When required |
+|---|---|---|
+| DPIA | UK GDPR / Data Protection Act 2018 | Any service processing personal data |
+| NCSC Cloud Security Principles Assessment | NCSC 14 Principles | Any service hosted in Azure (or any cloud) |
+| GDS Service Standard Assessment | [14-point Service Standard](https://www.gov.uk/service-manual/service-standard) | Any public-facing transactional service |
+| Accessibility Statement | WCAG 2.2 AA / PSBAR 2018 | Any public-facing service |
+| MHRA GDP / Annex 11 Validation Pack | EU GMP Annex 11 (computerised systems) | Services within the scope of medicines regulation (IQ / OQ / PQ) |
+| Threat Model | STRIDE (NCSC guidance) | Every service |

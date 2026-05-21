@@ -1,0 +1,33 @@
+{
+  "name": "Dr Charlotte Penrose",
+  "jobTitle": "Deputy Director, Immunisation Policy — DHSC (SCS1)",
+  "slideTitle": "DHSC IMMUNISATION POLICY LEAD",
+  "experience": "Career civil servant, cross-departmental policy",
+  "location": "London / Whitehall",
+  "department": "Department of Health and Social Care",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a British woman (late 40s), formal Whitehall / government office setting, professional, warm lighting, neutral background",
+  "workflowStage": "G — External Partners",
+  "workflowStageOrder": 7,
+  "background": [
+    "Senior Civil Service (Deputy Director, SCS Pay Band 1)",
+    "Led immunisation-policy response post-COVID",
+    "Cross-government coordination with JCVI, Treasury, devolved administrations",
+    "55–65 hours/week; Whitehall idiom"
+  ],
+  "goals": [
+    "Policy environment supports UKHSA and NHSE in delivering immunisation programmes",
+    "Ministers can answer parliamentary questions confidently",
+    "No ImmForm bottleneck becomes a Times Health Commission feature"
+  ],
+  "wants": [
+    "UKHSA to flag operational risk early — not after it becomes news",
+    "Clear briefings on digital plumbing risks",
+    "Confidence that delivery failures won't land as ministerial reputational issues"
+  ],
+  "painPoints": [
+    "Operational delivery failures landing as ministerial reputational issues",
+    "Limited visibility into digital plumbing — relies on UKHSA to flag risk",
+    "Policy commitments at risk when onboarding bottlenecks delay programme delivery"
+  ]
+}

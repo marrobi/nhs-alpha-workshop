@@ -26,7 +26,7 @@ style: |
   .persona-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #00838F;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -63,7 +63,7 @@ style: |
   
   .profile-section {
     background: white;
-    border: 3px solid #005eb8;
+    border: 3px solid #00838F;
     border-radius: 10px;
     padding: 0.6rem 0.75rem;
     text-align: center;
@@ -89,7 +89,7 @@ style: |
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 2px solid #005eb8;
+    border: 2px solid #00838F;
     margin: 0 auto;
     flex-shrink: 0;
     object-fit: cover;
@@ -98,7 +98,7 @@ style: |
   .persona-name {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #00838F;
     margin: 0.2rem 0 0.1rem 0;
     text-transform: uppercase;
     line-height: 1.0;
@@ -133,7 +133,7 @@ style: |
   }
 
   .personal-data h4 {
-    color: #005eb8;
+    color: #00838F;
     font-size: 0.75rem;
     margin: 0;
     text-transform: uppercase;
@@ -204,18 +204,18 @@ style: |
   }
   
   .content-box {
-    background: rgba(0, 94, 184, 0.05);
+    background: rgba(0, 131, 143, 0.05);
     border-radius: 6px;
     padding: 0.7rem;
     margin-bottom: 0.6rem;
-    border-left: 3px solid #005eb8;
+    border-left: 3px solid #00838F;
     flex-shrink: 0;
   }
   
   .section-title {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #005eb8;
+    color: #00838F;
     margin: 0 0 0.4rem 0;
     text-transform: uppercase;
     line-height: 1.1;
@@ -234,10 +234,10 @@ style: |
   }
   
   .skills-box {
-    background: rgba(0, 94, 184, 0.05);
+    background: rgba(0, 131, 143, 0.05);
     border-radius: 8px;
     padding: 1rem;
-    border-left: 3px solid #005eb8;
+    border-left: 3px solid #00838F;
     flex: 1;
     min-height: 0;
   }
@@ -251,7 +251,7 @@ style: |
   }
   
   .stars {
-    color: #005eb8;
+    color: #00838F;
     font-size: 0.9rem;
   }
   
@@ -263,7 +263,7 @@ style: |
   }
   
   .system-badge {
-    background: #005eb8;
+    background: #00838F;
     color: white;
     padding: 0.3rem 0.5rem;
     border-radius: 4px;
@@ -275,17 +275,27 @@ style: |
   
   .logo-container {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
+    gap: 0.4rem;
     flex-shrink: 0;
     height: auto;
+    padding: 0.3rem 0;
   }
 
   .logo-container img {
-    height: 34px;
-    padding: 0 0.5rem;
+    max-width: 200px;
+    height: auto;
     object-fit: contain;
     flex-shrink: 0;
+  }
+
+  .logo-container img:first-child {
+    max-height: 28px;
+  }
+
+  .logo-container img:last-child {
+    max-height: 20px;
   }
 
 ---
@@ -318,8 +328,7 @@ style: |
   </div>
 
   <div class="logo-container">
-    <img src="../images/nhs-logo.jpg" alt="NHS logo" />
-    <br />
+    <img src="../images/ukhsa-logo.png" alt="UKHSA logo" />
     <img src="../images/microsoft-logo.png" alt="Microsoft logo" />
   </div>
 </div>

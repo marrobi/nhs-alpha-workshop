@@ -1,11 +1,11 @@
 ---
 name: 'Day 2 Issue Generator'
-description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, infrastructure review, accessibility, performance, clinical safety, DPIA, GDS evidence, and runbook.'
+description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, infrastructure review, accessibility, performance, regulated-workload safety, DPIA, GDS evidence, and runbook.'
 ---
 
 # Day 2 Issue Generator
 
-Generates the 12 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
+Generates the 12 GitHub Issues for Day 2 of the UKHSA Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
 
 You produce issue template files — you do **not** write application code, tests, or infrastructure.
 
@@ -30,16 +30,18 @@ Day 1 must be complete:
 | 06 | Azure Infra Security Review | Azure Infra Security Reviewer |
 | 07 | Accessibility Audit | Accessibility Auditor |
 | 08 | Performance Load Tests | Performance |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety |
-| 10 | DPIA | NHS DPIA Advisor |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor |
-| 12 | Runbook & Deployment Docs | NHS Service Builder |
+| 09 | Regulated Workload Safety (MHRA GDP / Annex 11) — conditional | UKHSA Clinical Safety |
+| 10 | DPIA | UKHSA DPIA Advisor |
+| 11 | GDS Assessment Evidence | UKHSA GDS Assessor |
+| 12 | Runbook & Deployment Docs | UKHSA Service Builder |
+
+Issue 09 is **conditional**. Include it only when the service handles regulated workloads (medicines, devices, or pharmacovigilance data under MHRA scope). For non-regulated UKHSA services it can be omitted or replaced with a lighter "operational safety review" item — confirm with the user.
 
 ## Workflow
 
 ### Step 1 — Read the Codebase
 
-Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architecture ADR, user stories, and scan actual code (routers, pages, config). Summarise findings and **wait for user confirmation** before proceeding.
+Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architecture ADR, user stories, and scan actual code (controllers, Razor Pages, `Program.cs`, configuration). Summarise findings and **wait for user confirmation** before proceeding.
 
 ### Step 2 — Generate Issues
 
@@ -75,3 +77,4 @@ Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug
 - **Save first, then summarise** — never type out full issue content in chat
 - **One file per issue** — independently copyable into a GitHub Issue
 - **No hardcoded technology references** — if you can't find the tech choice, ask the user
+- **Confirm regulated scope** — only include the MHRA/Annex 11 issue when the service is in scope; otherwise omit or substitute

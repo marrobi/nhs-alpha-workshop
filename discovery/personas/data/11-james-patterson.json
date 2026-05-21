@@ -1,0 +1,33 @@
+{
+  "name": "James Patterson",
+  "jobTitle": "Service Delivery Manager, ImmForm Managed Service",
+  "slideTitle": "IMMFORM SERVICE MANAGER",
+  "experience": "ITIL-certified, 10 years in NHS-adjacent service delivery",
+  "location": "UK-based, hybrid working",
+  "department": "UKHSA Managed Service Contractor",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a British man (mid 40s), office setting, professional, warm lighting, neutral background",
+  "workflowStage": "C — UKHSA Service Operations",
+  "workflowStageOrder": 3,
+  "background": [
+    "Manages contractual SLAs, ticket volumes, and helpdesk capacity",
+    "Previously ran contact-centre for an NHS Digital service",
+    "Accountable to UKHSA's Service Owner and contractor's Account Director",
+    "Targets 70%+ reduction in account-registration ticket volume"
+  ],
+  "goals": [
+    "Reduce registration ticket volume by 70%+ through self-service",
+    "Zero severity-1 incidents during campaign windows",
+    "Helpdesk fights exceptions, not data entry"
+  ],
+  "wants": [
+    "APIs from new onboarding service to ingest events into ITSM tool",
+    "Advance warning of campaign spikes for capacity planning",
+    "Telemetry and observability on any new service's failure modes"
+  ],
+  "painPoints": [
+    "Pandemic volume spikes are unforecastable — can't surge staffing fast enough",
+    "Repetitive registration tickets eat capacity needed for incident resolution",
+    "No structured audit trail — can't defend compliance posture under audit"
+  ]
+}

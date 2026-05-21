@@ -10,7 +10,7 @@ Create:
 
 ## Scenario Overview
 Write 2-3 paragraphs describing:
-- Who is affected (patients, clinicians, admin staff, carers, etc.) and what they are trying to achieve
+- Who is affected and what they are trying to achieve
 - The current state — how things work today and what pain points exist
 - The context — what wider journey or process this sits within
 - Key workflow stages involved
@@ -20,7 +20,7 @@ Write the problem as a user need, not a solution. Frame it as "How might we…" 
 
 Include:
 - The core problem being solved, expressed from the user's perspective
-- Why it matters (impact on patients, staff, safety, efficiency)
+- Why it matters (impact on staff, users, safety, efficiency)
 - The current cost of the problem — time wasted, risks, harm, or inefficiency caused by the status quo
 - What success looks like, expressed as measurable outcomes where possible
 
@@ -30,6 +30,6 @@ List the key assumptions that must be true for the problem statement to hold. Fl
 ## Out of Scope
 Explicitly state what is NOT part of this problem. Agree boundaries early to keep the alpha focused.
 
-Use proper NHS terminology and context. Where details are missing, state assumptions clearly rather than silently filling gaps.
+Use proper UKHSA terminology and context. Where details are missing, state assumptions clearly rather than silently filling gaps.
 
 Save the output in markdown format with appropriate headings at `discovery/scenarios/scenario.md`

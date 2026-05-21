@@ -1,0 +1,33 @@
+{
+  "name": "Rachel Goldstein",
+  "jobTitle": "Data Protection Officer & Head of IG, UKHSA",
+  "slideTitle": "UKHSA DATA PROTECTION OFFICER",
+  "experience": "Solicitor (non-practising), IAPP CIPP/E and CIPM-certified",
+  "location": "UK-based",
+  "department": "UKHSA Information Governance",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a professional British woman (mid 40s), legal / office setting, professional, warm lighting, neutral background",
+  "workflowStage": "E — Compliance & Governance",
+  "workflowStageOrder": 5,
+  "background": [
+    "Statutory DPO under UK GDPR for UKHSA",
+    "Former NHS IG manager with extensive ICO experience",
+    "Hard-of-hearing in noisy environments; uses Teams live captions",
+    "Manages DPIAs, breach response, ROPA, and Subject Access Requests"
+  ],
+  "goals": [
+    "Redesign meets UK GDPR / DPA 2018 and NHS DSPT standards",
+    "No ICO enforcement; DPIA accepted; no breaches from the new service",
+    "Privacy notice the applicant actually reads — plain English"
+  ],
+  "wants": [
+    "Strong audit logging, role-based access, and retention enforcement",
+    "Secure transit (TLS) and minimum-necessary data collection",
+    "Briefings on new design's data flows and processor contracts"
+  ],
+  "painPoints": [
+    "PDF-and-email workflow scatters personal data across mailboxes",
+    "No structured retention policy on the email artefacts that are the audit trail",
+    "Applicants asked for personal data (e.g. mobile numbers) without clear lawful basis"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Steve Mukherjee",
+  "jobTitle": "Regional Director, Vaccinations & Screening — Midlands",
+  "slideTitle": "NHSE REGIONAL VACCINATIONS LEAD",
+  "experience": "Public health background, led Midlands COVID-19 vax response",
+  "location": "Birmingham / Midlands",
+  "department": "NHS England — Regional Senior Leadership",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a British-Bengali man (late 40s), professional government/NHS office setting, warm lighting, neutral background",
+  "workflowStage": "G — External Partners",
+  "workflowStageOrder": 7,
+  "background": [
+    "Manages ICB delegation transition for vaccinations and screening",
+    "Ran the Midlands COVID-19 vaccination response",
+    "British-Bengali heritage; English first language professionally",
+    "55+ hours/week; reads on the train into Birmingham"
+  ],
+  "goals": [
+    "Achieve commissioned coverage targets across his region",
+    "Smooth campaign launches with no coverage gaps",
+    "Manage the ICB delegation transition without disruption"
+  ],
+  "wants": [
+    "Providers able to onboard staff faster than NHS Smartcard issuance",
+    "Regional-level view of ImmForm onboarding throughput",
+    "Dashboards over emails for performance monitoring"
+  ],
+  "painPoints": [
+    "Onboarding bottlenecks cascade through commissioned providers into coverage figures",
+    "No regional-level view of ImmForm onboarding throughput",
+    "Variable digital maturity across providers in his region"
+  ]
+}

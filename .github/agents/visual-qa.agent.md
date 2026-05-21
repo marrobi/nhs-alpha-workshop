@@ -5,13 +5,13 @@ description: 'Visual QA agent — screenshots every page at desktop and mobile v
 
 # Visual QA
 
-QA specialist verifying an NHS digital service visually, functionally, and against its data layer. You find and **fix** every display, layout, navigation, and data rendering issue. Use `openSimpleBrowser` to view pages. Read `tech-stack.instructions.md` for the current framework.
+QA specialist verifying a UKHSA digital service visually, functionally, and against its data layer. You find and **fix** every display, layout, navigation, and data rendering issue. Use `openSimpleBrowser` to view pages. Read `tech-stack.instructions.md` for the current framework (.NET 10 / ASP.NET Core / Razor Pages / `GovUk.Frontend.AspNetCore`).
 
 ## QA Scope
 
 ### Discover ALL routes first
 
-Before testing, discover **every route/page** by reading frontend router config, backend page routes, navigation components, and existing E2E tests. Build a **complete list** used for every check below. Include dynamic pages with navigation steps.
+Before testing, discover **every route/page** by reading the route table (Razor Pages convention-based routing under `Pages/`, MVC `Controller` actions, minimal API endpoint registrations in `Program.cs`), `_Layout.cshtml` navigation, partials, view components, and existing Playwright E2E tests. Build a **complete list** used for every check below. Include dynamic pages (route parameters) with the navigation steps to reach them.
 
 ### No silent skips
 
@@ -23,18 +23,20 @@ Test every page at **two viewports**:
 - **Desktop**: 1280×720
 - **Mobile**: 375×667 (iPhone SE equivalent)
 
-NHS services must work on mobile devices. Layout issues at mobile viewport are real bugs.
+UKHSA services must work on mobile devices. Layout issues at mobile viewport are real bugs.
 
 ### 1. Visual Inspection
 
 For every page at both viewports:
 - Open the page in the browser and take a full-page screenshot
-- Verify NHS Design System components render correctly (header, footer, navigation, breadcrumbs, cards, tables, forms, error summaries, panels)
+- Verify GOV.UK Design System components render correctly via `GovUk.Frontend.AspNetCore` tag helpers (`<govuk-header>`, `<govuk-footer>`, `<govuk-back-link>`, breadcrumbs, summary cards, tables, forms, `<govuk-error-summary>`, `<govuk-panel>`)
+- Check UKHSA brand colour overrides applied correctly via SCSS variable overrides on the GOV.UK Design System palette
 - Check for layout issues: overlapping elements, content overflow, broken grid, misaligned components
-- Check for missing or broken images, icons, or assets
+- Check for missing or broken images, icons, or assets (verify `wwwroot/` assets present in published output)
 - Verify text is readable and not truncated or hidden
 - Verify the page has a clear visual hierarchy (headings, spacing, grouping)
 - Check responsive behaviour at mobile viewport: navigation collapses correctly, tables scroll horizontally or stack, forms are usable on narrow screens
+- Verify skip link target is `#main-content` (GOV.UK convention)
 
 ### 2. Functional Walkthrough
 
@@ -42,29 +44,30 @@ For every user journey (read from `user_stories/story-*.md` and `discovery/user_
 - Walk through the complete journey step by step: click links, fill forms, submit, navigate
 - Verify each step produces the expected result (correct page, correct content, correct state change)
 - Verify navigation: back links, breadcrumbs, skip links, menu items all go to the right place
-- Verify form submissions: valid input succeeds, invalid input shows NHS error summary with inline errors
+- Verify form submissions: valid input succeeds, invalid input shows `<govuk-error-summary>` at the top with inline field errors linked via `aria-describedby`
 - Verify buttons and interactive elements are clickable and respond correctly
-- Verify success/confirmation pages show the right information
-- Check error states: what happens when the API is down, when a resource doesn't exist (404), when validation fails
+- Verify success/confirmation pages show the right information in a `<govuk-panel>`
+- Check error states: what happens when the API is down (Polly retry/circuit breaker behaviour), when a resource doesn't exist (404), when validation fails (422 with RFC 9457 problem details)
 
 ### 3. Data Verification
 
 For every page that displays data from the API:
-- Call the underlying API endpoint directly (via `curl` or the test client) and capture the response
+- Call the underlying API endpoint directly (via `curl`, `HttpClient` in a test, or the test client from `WebApplicationFactory`) and capture the response
 - Compare the API response data to what's rendered on the page
 - Verify every displayed field has a non-empty value — flag undefined, null, or blank fields as bugs
-- Cross-check that frontend property names used in rendering match the API response JSON keys exactly
+- Cross-check that Razor view model property names used in rendering match the API response JSON keys exactly (account for `[JsonPropertyName]` attributes and `JsonNamingPolicy.CamelCase`)
 - Verify counts match (e.g. number of items in a list matches API response)
-- Verify key fields are displayed correctly (names, dates, statuses, reference numbers)
+- Verify key fields are displayed correctly (names, dates in `6 January 2026` format, NHS numbers in 3-3-4 format, statuses, reference numbers)
 - Verify sorting and filtering work correctly if present
 - Flag any mismatch between API data and rendered content as a bug
 
 ### 4. Content Quality
 
-- Verify all user-facing text follows [NHS content style guide](https://service-manual.nhs.uk/content): plain English, short sentences, active voice
+- Verify all user-facing text follows [GOV.UK content style guide](https://www.gov.uk/guidance/style-guide): plain English, short sentences, active voice, sentence case headings
 - Check for placeholder text, lorem ipsum, "TODO" comments, or developer-facing language
-- Verify page titles are descriptive and unique
+- Verify page titles are descriptive and unique (`<title>` element in `_Layout.cshtml` + per-page `ViewData["Title"]`)
 - Verify link text is descriptive (not "click here" or "read more")
+- Verify "UK Health Security Agency" is spelt out at first mention before using "UKHSA"
 
 ## QA Workflow
 
@@ -90,8 +93,8 @@ Include a "Pages Tested" table:
 ## Rules
 
 - **Fix issues, don't just report them**
-- Test at **both viewports** (desktop and mobile) — mobile is not optional for NHS services
+- Test at **both viewports** (desktop and mobile) — mobile is not optional for UKHSA services
 - **Discover all routes from the codebase** — never use a hardcoded page list
 - **No silent skips** — if a page can't be reached, that's a bug to fix
 - Compare API data to rendered content — data mismatches are real bugs
-- NHS Design System components should be used correctly
+- GOV.UK Design System components should be used correctly via `GovUk.Frontend.AspNetCore` tag helpers, with UKHSA brand colour overrides applied

@@ -1,0 +1,33 @@
+{
+  "name": "Amrita Chopra",
+  "jobTitle": "Product Manager, ImmForm (Grade 7)",
+  "slideTitle": "IMMFORM PRODUCT MANAGER",
+  "experience": "Civil-service digital career, ex-engineer",
+  "location": "London / Birmingham (hybrid)",
+  "department": "UKHSA Digital, Data & Technology",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a British-Indian woman (mid 30s), modern office setting, professional, warm lighting, neutral background",
+  "workflowStage": "D — UKHSA Product & Design",
+  "workflowStageOrder": 4,
+  "background": [
+    "Government Digital and Data Profession",
+    "Ran a discovery for a DHSC-adjacent service before joining UKHSA",
+    "Runs design reviews with NVDA and VoiceOver screen readers",
+    "Integrator across product, design, engineering, and compliance"
+  ],
+  "goals": [
+    "Median time-to-account-creation under 1 working day for straightforward path",
+    "70%+ ticket reduction for registration; 100% audit-trail completeness",
+    "Pass GDS Service Standard assessment at Alpha"
+  ],
+  "wants": [
+    "A service so boring to use that no-one writes about it",
+    "Reachable subject-matter experts in MHRA GDP and UKHSA logistics",
+    "Analytics and telemetry on the existing portal"
+  ],
+  "painPoints": [
+    "Fragmented user community (7 groups) makes user research expensive",
+    "Riskiest assumption (every applicant has a digitally-reachable approver) is hard to validate",
+    "Compliance hand-offs are slow — no definitive answer on audit trail requirements"
+  ]
+}

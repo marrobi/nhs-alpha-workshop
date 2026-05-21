@@ -1,0 +1,33 @@
+{
+  "name": "Marcus Doyle",
+  "jobTitle": "Lead Pharmacist for Vaccination Services — Band 8b",
+  "slideTitle": "NHS TRUST APPROVER",
+  "experience": "GPhC since 2005, MSc Clinical Pharmacy, led COVID-19 mass-vax",
+  "location": "West Midlands",
+  "department": "Large NHS Acute Trust — Pharmacy Governance",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of an Irish-British man (mid 40s), NHS pharmacy setting, professional, warm lighting, neutral background",
+  "workflowStage": "B — Approvers",
+  "workflowStageOrder": 2,
+  "background": [
+    "Approves ImmForm registrations for many staff each year",
+    "Led trust's COVID-19 mass-vaccination response 2021–2022",
+    "Power user — expects structured approval queues and dashboards",
+    "Long-sightedness — uses 125% zoom by default"
+  ],
+  "goals": [
+    "Defensible governance chain over every trust ImmForm account",
+    "Pass internal pharmacy audit — no orphan accounts, no missing approvals",
+    "Batch-review and timestamp 30+ registrations during flu campaign launch"
+  ],
+  "wants": [
+    "Queued, batch-reviewable, timestamped approval workflow — not separate emails",
+    "Delegation capability when on annual leave",
+    "Account revocation through the same system during staff off-boarding"
+  ],
+  "painPoints": [
+    "Informal email approval leaves no audit artefact for internal auditors",
+    "No way to delegate — registrations pile up during leave",
+    "No mechanism to revoke access during off-boarding — leavers' accounts linger"
+  ]
+}

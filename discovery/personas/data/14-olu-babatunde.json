@@ -1,0 +1,33 @@
+{
+  "name": "Dr Olu Babatunde",
+  "jobTitle": "UKHSA GDP Compliance Lead / Responsible Person (G7/SCS)",
+  "slideTitle": "UKHSA GDP COMPLIANCE LEAD",
+  "experience": "GPhC-registered pharmacist, MHRA-named RP",
+  "location": "UK-based",
+  "department": "UKHSA Vaccines & Countermeasures",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a Nigerian-British man (mid 40s), pharmaceutical / regulatory office setting, professional, warm lighting, neutral background",
+  "workflowStage": "E — Compliance & Governance",
+  "workflowStageOrder": 5,
+  "background": [
+    "UKHSA Responsible Person for centrally procured medicinal products",
+    "Regulates under WDA(H) and EU/UK GDP (MHRA Guidance Note 6)",
+    "Postgraduate quality-management qualifications",
+    "Personal regulatory liability under Human Medicines Regulations 2012"
+  ],
+  "goals": [
+    "ImmForm onboarding produces an audit trail acceptable to MHRA inspection",
+    "Clean MHRA inspection — UKHSA's wholesale operation in good standing",
+    "Every GDP assurance timestamped, attributable, and exportable"
+  ],
+  "wants": [
+    "Enforced confirmation (no nullable assurance fields)",
+    "Version-stamped records and exportable JSON/PDF evidence packs",
+    "Role-based access control with separation of duties"
+  ],
+  "painPoints": [
+    "Today's email-thread audit trail is non-compliant for MHRA Chapter 4 records",
+    "Paper assurances on the existing PDF give no defence in an inspection",
+    "Often pulled into design at late stages rather than from discovery onward"
+  ]
+}

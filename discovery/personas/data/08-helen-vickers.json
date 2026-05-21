@@ -1,0 +1,33 @@
+{
+  "name": "Dr Helen Vickers",
+  "jobTitle": "GP Senior Partner & CQC-Registered Manager",
+  "slideTitle": "GP SENIOR PARTNER (APPROVER)",
+  "experience": "GMC-registered since 1996, MRCGP since 2001",
+  "location": "Suburban Leicester",
+  "department": "Cherrywood Medical Centre (same practice as Priya)",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a Welsh woman (late 50s), GP practice setting, professional, warm smile, soft lighting, neutral background",
+  "workflowStage": "B — Approvers",
+  "workflowStageOrder": 2,
+  "background": [
+    "Partner at Cherrywood since 2008; CQC-registered manager",
+    "Two clinical sessions/day (~30 patients each) + admin sessions",
+    "Welsh-English bilingual at home; English at work",
+    "Presbyopia — appreciates large tap targets on mobile"
+  ],
+  "goals": [
+    "Staff have access to systems they need to deliver the immunisation contract",
+    "Approve registrations quickly without disrupting clinical sessions",
+    "Governance touches done well, done fast, and over"
+  ],
+  "wants": [
+    "Mobile push notification with applicant name, regulator number, and yes/no button",
+    "One-tap mobile approval flow — not a PDF to print, sign, and scan",
+    "Partner-pooling so another partner can approve when she's on leave"
+  ],
+  "painPoints": [
+    "Current PDF assumes she will print, sign, and scan at a desktop — she approves at midnight on her sofa",
+    "No structured time-bound ask — unclear whether emails are real approval requests",
+    "Has had to chase the helpdesk to confirm her own approval was received"
+  ]
+}

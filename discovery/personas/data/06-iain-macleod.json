@@ -1,0 +1,33 @@
+{
+  "name": "Iain MacLeod",
+  "jobTitle": "Senior Pharmacist, Immunoglobulin Holding Centre — Band 8a",
+  "slideTitle": "IHC PHARMACIST",
+  "experience": "GPhC-registered since 2008, 11 years aseptic services",
+  "location": "Edinburgh",
+  "department": "Teaching Hospital — Aseptic Services / IHC Lead",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a Scottish man (late 30s), pharmacy setting, professional, soft lighting, neutral background",
+  "workflowStage": "A — Registration Applicants",
+  "workflowStageOrder": 1,
+  "background": [
+    "Designated lead for Immunoglobulin Holding Centre (HRIG, HNIG, VZIG, HBIG)",
+    "24/7 availability for emergency clinical release via UKHSA RIgS",
+    "Postgraduate diploma in clinical pharmacy",
+    "MHRA WDA(H) / Specials Licence audit responsibility"
+  ],
+  "goals": [
+    "Zero stock-outs of HRIG when patients with rabies exposure present to A&E",
+    "Ensure ImmForm account is a compliant regulatory artefact at all times",
+    "Onboard locum pharmacists fast enough for out-of-hours cover"
+  ],
+  "wants": [
+    "Structured forms with strict validation (clinical consequence of error)",
+    "IHC-specific terminology in guidance, not routine-immunisation language",
+    "Written confirmation of any phone agreement"
+  ],
+  "painPoints": [
+    "ImmForm journey designed around routine vaccines, not specialist biological release",
+    "Email approval chain is a poor audit substitute for MHRA inspection",
+    "No reciprocal-trust between trust HR and ImmForm — every new pharmacist starts from zero"
+  ]
+}

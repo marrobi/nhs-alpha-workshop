@@ -1,0 +1,33 @@
+{
+  "name": "Eleanor Fairclough",
+  "jobTitle": "Responsible Person (RP), WDA(H) Wholesaler",
+  "slideTitle": "WHOLESALER RESPONSIBLE PERSON",
+  "experience": "GPhC-registered since 2005, named RP since 2017",
+  "location": "Manchester",
+  "department": "Pharmaceutical Wholesaler (mid-size, WDA(H))",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a professional British woman (mid 40s), pharmaceutical/corporate setting, confident, warm lighting, neutral background",
+  "workflowStage": "A — Registration Applicants",
+  "workflowStageOrder": 1,
+  "background": [
+    "MHRA-named statutory Responsible Person — personal regulatory liability",
+    "Multiple MHRA inspections; navigated post-Brexit GDP transition",
+    "Distributes vaccines and biologicals to NHS trusts, OH firms, private clinics",
+    "Mild hearing impairment in left ear; prefers written confirmation"
+  ],
+  "goals": [
+    "Maintain WDA(H) in good standing through every MHRA inspection",
+    "Ensure every ImmForm order has a defensible, timestamped audit trail",
+    "Register multiple staff under one corporate envelope with role-based access"
+  ],
+  "wants": [
+    "E-signatures, timestamped audit logs, and exportable evidence packs",
+    "GDP assurance fields that are enforced, version-stamped, and machine-readable",
+    "Integration with her firm's Quality Management System"
+  ],
+  "painPoints": [
+    "Paper GDP assurances create MHRA regulatory exposure — no version stamping",
+    "Helpdesk email threads would not survive a Chapter 4 GDP records inspection",
+    "Must re-key a separate form per person — no corporate-level batch registration"
+  ]
+}

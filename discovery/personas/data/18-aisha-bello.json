@@ -1,0 +1,33 @@
+{
+  "name": "Dr Aisha Bello",
+  "jobTitle": "Director of Public Health, London Borough Council",
+  "slideTitle": "LOCAL AUTHORITY DPH",
+  "experience": "Public health consultant (FFPH), led borough COVID-19 response",
+  "location": "London",
+  "department": "London Borough Council — Statutory Chief Officer",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a Yoruba-British woman (mid 50s), formal council/government setting, professional, warm lighting, neutral background",
+  "workflowStage": "G — External Partners",
+  "workflowStageOrder": 7,
+  "background": [
+    "Statutory chief officer under s.30 Health and Social Care Act 2012",
+    "Commissioner of sexual health services (Local Authority statutory duty)",
+    "Yoruba-English bilingual; serves multilingual / digitally excluded communities",
+    "50–60 hours/week; commutes on the Tube"
+  ],
+  "goals": [
+    "Coverage rises across deprivation deciles; outbreaks contained early",
+    "Commissioned services deliver GBMSM and Mpox vaccines without onboarding bottlenecks",
+    "Protect and improve health of her local population"
+  ],
+  "wants": [
+    "ImmForm coverage data dashboards for her local intelligence",
+    "Consistent digital maturity across commissioned providers",
+    "Reduced onboarding friction in commissioned services"
+  ],
+  "painPoints": [
+    "Variable provider digital maturity — small charities, OH providers, hospices",
+    "Onboarding bottlenecks in commissioned services degrade commissioning outcomes",
+    "Information fragmented across UKHSA, NHSE, and borough intelligence teams"
+  ]
+}

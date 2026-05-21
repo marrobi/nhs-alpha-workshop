@@ -1,0 +1,33 @@
+{
+  "name": "Yusuf Rahman",
+  "jobTitle": "Lead Nurse, Sexual Health Service — Band 7",
+  "slideTitle": "SEXUAL HEALTH SERVICE LEAD",
+  "experience": "NMC-registered since 2012, specialist sexual health",
+  "location": "Central London",
+  "department": "Integrated Sexual Health Service (NHS Trust)",
+  "photo": "../images/placeholder.jpg",
+  "photoPrompt": "Photorealistic headshot of a Bengali-British man (mid 30s), NHS clinical setting, professional, warm lighting, neutral background",
+  "workflowStage": "A — Registration Applicants",
+  "workflowStageOrder": 1,
+  "background": [
+    "PGD signatory for HPV, Hep A/B and Mpox vaccinations",
+    "Runs GBMSM HPV and Mpox programmes from same service",
+    "Bengali-British, raised in Tower Hamlets",
+    "Teaches trust digital-skills induction for new nurses"
+  ],
+  "goals": [
+    "Hit JCVI-recommended GBMSM HPV coverage in his catchment",
+    "Maintain Mpox vaccine coverage for high-risk cohort",
+    "No clinic day where a service user is turned away for lack of vaccine"
+  ],
+  "wants": [
+    "Register one nurse against two programmes without restating delivery-point details",
+    "Mobile-friendly responsive design (uses trust iPad between clinic rooms)",
+    "Shared service mailbox registration instead of individual nurse addresses"
+  ],
+  "painPoints": [
+    "In 2022 Mpox response, registration delays caused vial stock-outs for high-risk cohort",
+    "PDF form requires duplicate data entry for two programmes from the same fridge",
+    "Mpox permission mis-alignment causes rejected orders mid-programme"
+  ]
+}
