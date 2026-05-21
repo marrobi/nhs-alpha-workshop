@@ -128,7 +128,7 @@ All code generated in the workshop automatically follows UKHSA, GDS, and securit
 - **tech-stack.instructions.md** — Technology implementation details
 - **testing.instructions.md** — Test coverage, patterns, and quality thresholds
 - **performance.instructions.md** — Performance testing, targets, Core Web Vitals
-- **terraform-azure-nhs.instructions.md** — Azure infrastructure patterns for UKHSA services
+- **terraform-azure-ukhsa.instructions.md** — Azure infrastructure patterns for UKHSA services
 
 ## Skills
 

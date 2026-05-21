@@ -1,16 +1,16 @@
-# NHS Alpha — Copilot Workshop Template
+# UKHSA Alpha — Copilot Workshop Template
 
-A pre-configured GitHub repository template for building NHS Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
+A pre-configured GitHub repository template for building UKHSA Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
 
 ## What's in this repo
 
-This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build an NHS service from scratch using AI-assisted development.
+This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build a UKHSA service from scratch using AI-assisted development.
 
 ```
 .github/
-  agents/             12 custom Copilot agents (7 engineering + 6 NHS)
-  instructions/       8 auto-applied coding instruction files
-  skills/             8 agent skills (SKILL.md folders)
+  agents/             19 custom Copilot agents (7 engineering + 6 UKHSA domain + 6 quality/ops)
+  instructions/       10 auto-applied coding instruction files
+  skills/             9 agent skills (SKILL.md folders)
   workflows/          GitHub Actions
 docs/
   workshop/           Workshop guides and Day 2 issue templates
@@ -26,7 +26,7 @@ AGENTS.md             Copilot Coding Agent context file
 
 ## Workshop overview
 
-This workshop runs over two days using GitHub Copilot to build an NHS Alpha-phase digital service. **Use this template** to create a new repository for your team, then open it in GitHub Codespaces or VS Code with the provided Dev Container.
+This workshop runs over two days using GitHub Copilot to build a UKHSA Alpha-phase digital service. **Use this template** to create a new repository for your team, then open it in GitHub Codespaces or VS Code with the provided Dev Container.
 
 **Prerequisites**: GitHub account with a Copilot seat, Azure subscription with Contributor access to UK South, and access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery). All other tools are pre-installed in the Dev Container.
 
@@ -40,13 +40,13 @@ See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructio
 
 | Layer | Technology |
 |---|---|
-| Backend | Python 3.12, FastAPI, Uvicorn |
-| Frontend | React 18, Vite, TypeScript, [nhsuk-react-components](https://github.com/NHSDigital/nhsuk-react-components) |
-| Design System | [NHS.UK Frontend](https://service-manual.nhs.uk/design-system) |
-| Testing | pytest + httpx, Vitest, Playwright, k6 |
-| Infrastructure | Terraform (`azurerm`), Azure App Service (UK South) |
-| Secrets | Azure Key Vault with Managed Identity |
-| CI/CD | GitHub Actions |
+| Backend | .NET 10 LTS, ASP.NET Core MVC, Kestrel |
+| Frontend | ASP.NET Core MVC Razor views, GovUk.Frontend.AspNetCore |
+| Design System | [GOV.UK Design System](https://design-system.service.gov.uk/) with UKHSA branding |
+| Testing | xUnit + FluentAssertions + Moq, WebApplicationFactory, Playwright for .NET, k6 |
+| Infrastructure | Terraform (`azurerm`), Azure App Service / Container Apps (UK South/UK West) |
+| Secrets | Azure Key Vault with User-Assigned Managed Identity |
+| CI/CD | GitHub Actions with OIDC-based Azure auth |
 
 ## Organisational standards
 
