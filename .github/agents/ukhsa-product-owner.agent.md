@@ -40,14 +40,14 @@ For each journey (in priority order from the ADR), identify the discrete user st
 
 **How to decompose a journey into stories:**
 - Each step or decision point in the journey that delivers independent value is a candidate story
-- A story should be implementable in isolation — it has a clear API endpoint, Razor page/component, or data operation
+- A story should be implementable in isolation — it has a clear API endpoint, frontend page/component, or data operation
 - Use the personas from the persona report (not the generic archetypes) as the "As a..." in each story
-- Map each story to the technical design in the ADR — the API endpoint, EF Core entity, and frontend page it requires
+- Map each story to the technical design in the ADR — the API endpoint, data model, and frontend page it requires
 
 **Story scope rules:**
 - Do not create stories for documentation tasks — documentation is not a user story
-- Stories that require Azure services (Entra ID, Azure Monitor, Key Vault, Service Bus, etc.) are valid — the Service Builder will implement them using real Azure SDKs and configuration
-- Stories that require UK gov / health API integrations are valid — use real sandbox environments or implement real endpoints with synthetic data
+- Stories that require Azure services (Entra ID, Azure Monitor, Key Vault, etc.) are valid — the Service Builder will implement them using real Azure SDKs and configuration
+- Stories that require NHS API integrations are valid — use real sandbox environments or implement real FHIR endpoints with synthetic data
 - Every journey step gets a story — do not defer or filter out stories based on infrastructure complexity
 
 **Gap analysis — after decomposing each journey:**
@@ -62,8 +62,8 @@ Every story MUST include acceptance criteria in these four categories (from the 
 
 1. **Functional** — Given/When/Then format for testable behaviour. Include happy path and key edge cases.
 2. **Accessibility** — Keyboard navigation, screen reader, WCAG 2.2 Level AA, GOV.UK Design System components
-3. **Safety** — Data accuracy, error handling, time-sensitivity (if applicable — mark "N/A" if the story has no safety-relevant data). For regulated workloads, reference MHRA GDP / Annex 11 controls.
-4. **Data Protection** — Minimum data collection, no PII in URLs/logs/errors, lawful basis (UK GDPR Art. 6 and Art. 9 where applicable)
+3. **Clinical Safety** — Data accuracy, error handling, time-sensitivity (if applicable — mark "N/A" if the story has no clinical data)
+4. **Data Protection** — Minimum data collection, no PII in URLs/logs/errors, lawful basis
 
 ### Step 4 — Save Stories
 
@@ -94,9 +94,9 @@ So that [benefit].
 - [ ] Keyboard navigable (Tab, Enter, Escape, Arrow keys)
 - [ ] Screen reader announces purpose and state changes
 - [ ] Meets WCAG 2.2 Level AA (verified via axe-core)
-- [ ] Uses GOV.UK Design System components via `GovUk.Frontend.AspNetCore`
+- [ ] Uses GOV.UK Design System components
 
-### Safety
+### Clinical Safety
 - [ ] [criteria or N/A]
 
 ### Data Protection
@@ -134,5 +134,5 @@ Once the user confirms the stories, tell them:
 - **Save first, then summarise** — never type out full stories in the chat; save to files and present only titles
 - **One file per story** — each story must be independently referenceable
 - **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `discovery/personas/persona-report.md`
-- **All four acceptance criteria categories are mandatory** — use "N/A" for Safety only if the story genuinely has no safety-relevant data
+- **All four acceptance criteria categories are mandatory** — use "N/A" for Clinical Safety only if the story genuinely has no clinical data
 - **Priority order comes from the ADR** — the Architect has already prioritised journeys by riskiest assumption; stories inherit that priority

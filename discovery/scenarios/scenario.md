@@ -1,73 +1,65 @@
-# ImmForm User Onboarding Scenario
+# ImmForm New User Registration (Existing Account) — Discovery Scenario
+
+---
 
 ## Scenario Overview
 
-ImmForm is a nationally critical digital platform supporting immunisation programme management, vaccine supply chain operations, and pandemic flu back-office systems for the UK Health Security Agency (UKHSA), NHS England, and the wider public health system. The platform serves thousands of users across health and local authority settings who require access to manage immunisation programmes, coordinate vaccine supply chains, and maintain GDP-compliant pharmaceutical operations.
+ImmForm is a nationally critical digital service used by UKHSA, NHS England, and local health organisations to manage vaccine ordering and related immunisation operations. The users most directly affected by onboarding delays are people newly taking on an ordering role at an existing ImmForm account — for example, GP practice staff, sexual health services, occupational health providers, COVID-19 and Mpox programme teams, immunoglobulin holding centres, and authorised wholesaler staff. These individuals need reliable, timely access to an existing ImmForm ordering account so they can perform programme-critical activity without avoidable disruption to vaccine supply operations.
 
-Currently, any health professional or local authority staff member who needs an ImmForm account must complete a PDF form (ImmForm Account Change/Revalidation Form, V2.6) and email it to a central helpdesk. A helpdesk agent manually reviews the form, validates the information against existing system records, contacts an authorising manager informally via email to confirm approval, then manually creates the account in the ImmForm backend. This process takes up to five working days. The current form handles both new registrations and account changes; this project focuses solely on new user registration.
+Today, onboarding is handled through a manual PDF-and-email process. Applicants complete the ImmForm Account Change/Revalidation Form and submit it to the helpdesk, where staff manually validate details, re-key submitted data into ImmForm, and chase the Authorised Person for approval by email. This creates repeated handoffs, variable lead times, and preventable error loops — for example, invalid account and organisation code pairs, incomplete data, and non-compliant email addresses. Applications routinely take up to five working days to complete.
 
-The workflow involves multiple manual handoffs: the applicant completes the form, the helpdesk agent re-keys data and performs validation checks, the approving manager responds to an ad-hoc email request, and the helpdesk agent finalises the account creation. Throughout this process, there is no structured tracking, no automated validation, and no machine-readable audit trail. The entire record of a registration exists as an email thread, which does not meet the audit requirements for MHRA Good Distribution Practice (GDP) compliant systems.
+This registration step sits within a wider, regulated medicinal product supply chain context where traceability, timeliness, and data integrity are not optional — they are compliance requirements under MHRA GDP expectations. The current journey does not produce a consistent, machine-readable record of approval and lifecycle decisions, creating both operational risk and a fragmented audit picture. The end-to-end workflow stages are: applicant starts journey; submits personal and account details; account and organisation code pair is validated; application is submitted with declaration; Authorised Person approves or rejects within a defined time window; approved requests proceed to account creation and applicant notification.
+
+---
 
 ## Problem Statement
 
-**How might we enable health professionals and local authority staff to obtain ImmForm accounts quickly and securely, with appropriate approval and a full audit trail, without requiring direct helpdesk intervention for every request?**
+**How might we enable people who need access to an existing ImmForm account to complete registration quickly and safely, without relying on manual helpdesk processing and ad hoc email-based approval?**
 
-People who need to access ImmForm to support immunisation programmes and vaccine supply operations currently face significant delays and administrative burden. The manual process creates a bottleneck that becomes critical during pandemic response or new programme rollouts, when onboarding volume spikes and the helpdesk cannot scale to meet demand.
+People need a way to submit a new user registration that validates key account details early in the journey, routes approval to the correct Authorised Person with a clear and enforced time boundary, and produces a complete auditable lifecycle record from submission through to activation. This matters because delays in onboarding slow vaccine ordering operations, increase pressure on helpdesk teams, and introduce avoidable risk into a system that underpins national immunisation and medicinal product distribution.
 
-### Why it matters
+The current cost of the problem is measurable in both operational effort and service risk: repeated manual re-keying of applicant data, fragmented email trails in place of structured event records, variable approval turnaround with no enforcement mechanism, and a baseline activation time of up to five working days. These costs compound across a high volume of registration requests, particularly during programme mobilisation periods.
 
-- **Service continuity risk**: Delays in account provisioning can prevent timely access to critical vaccine supply chain information and immunisation programme data during public health emergencies
-- **Helpdesk resource burden**: Every registration requires manual data entry, validation, and coordination, consuming helpdesk capacity that could be directed to more complex support issues
-- **Compliance risk**: Paper-based GDP assurances (storage capabilities, pharmacovigilance processes, product recall readiness, disposal arrangements) collected without digital record or enforced confirmation create regulatory exposure for a GDP-compliant system
-- **Audit trail gaps**: Email-based approval workflows provide no structured, timestamped, machine-readable record of who requested access, who approved it, and when — failing to meet MHRA audit requirements
-- **User frustration**: Applicants wait up to five working days with no visibility into progress; validation errors discovered late in the process extend timelines further
-- **Data quality issues**: Manual re-keying from PDF forms introduces transcription errors; applicants are asked to provide information (organisation codes, ImmForm account numbers) that already exists in the system
+Success in alpha should be evidenced by measurable outcomes:
 
-### Current cost
+- Mean activation time reduced to two working days or fewer for standard NHS site registrations
+- Manual helpdesk intervention removed from the standard registration pathway
+- Every registration state transition captured in an immutable audit trail that meets UKHSA and MHRA GDP expectations
+- Measurable reduction in error-loop rate driven by early account/organisation code validation
+- The audit trail is independently retrievable and exportable by the UKHSA QA / WDA Responsible Person without helpdesk or product team involvement, producing records adequate for MHRA GDP inspection
 
-- Average processing time: **up to 5 working days** per registration
-- Manual validation effort: helpdesk agents must check organisation codes, ImmForm account numbers, email addresses against existing records
-- Rework loops: validation errors discovered after submission require back-and-forth email exchanges, extending processing time
-- No scalability: volume spikes during pandemic response create immediate bottlenecks with no automated overflow capacity
-- No reusability: the process is specific to this form and cannot be extended to future onboarding scenarios without rebuilding from scratch
-
-### Success looks like
-
-- New users can complete registration without helpdesk intervention for straightforward cases (valid organisation, valid approver)
-- Approving managers receive structured approval requests with clear time boundaries
-- Automated validation catches errors (invalid organisation codes, shared mailboxes, missing GDP assurances) at the point of entry, not after submission
-- A complete, timestamped, machine-readable audit trail exists for every registration, meeting MHRA GDP audit requirements
-- GDP assurances are collected digitally with enforced confirmation, creating a defensible compliance record
-- Helpdesk agents focus on exceptions and complex cases, not routine data entry
-- The system is reusable and extensible for future onboarding workflows beyond new user registration
-
-**Measurable outcomes:**
-- Reduction in median time-to-account-creation from 5 days to 2 days day for straightforward cases
-- Reduction in helpdesk tickets related to account registration by 70%+
-- 100% of registrations have a complete, timestamped audit trail meeting MHRA requirements
-- Zero manual data re-keying from PDF forms
+---
 
 ## Assumptions
 
-1. **Approving managers have existing ImmForm accounts** — we assume that every new user has an identifiable approving manager who is already registered in ImmForm and can be notified digitally. **(Riskiest — test this first.)**
-2. **Organisations are already registered in ImmForm** — we assume that new users are joining existing organisations already known to the system, not creating entirely new organisations. **(High risk — validate in discovery.)**
-3. **Users have access to email** — we assume applicants can receive email notifications and approvers can respond to email-based approval requests.
-4. **GDP assurances remain static** — we assume the list of GDP assurances (storage, pharmacovigilance, recall readiness, disposal) does not change frequently and can be embedded in the digital form. **(Medium risk.)**
-5. **Account changes are out of scope** — we assume the existing PDF form will continue to serve account changes/revalidation for now, and this project covers new registrations only.
-6. **Integration with existing ImmForm user management backend is possible** — we assume the ImmForm backend has an API or integration point that allows automated account creation once approval is granted. **(High risk — confirm technical feasibility early.)**
-7. **Helpdesk will still handle exceptions** — we assume some registrations will require manual intervention (e.g. unrecognised organisation, no approving manager) and the helpdesk will remain the escalation path.
-8. **MHRA GDP audit requirements are well-defined** — we assume we can identify and meet the specific audit trail requirements for a GDP-compliant system through consultation with the compliance team. **(Medium risk.)**
+The following assumptions must hold for the problem statement to remain valid. Each should be treated as a hypothesis to be tested rather than a given.
+
+| Assumption | Risk level |
+|---|---|
+| The ImmForm Organisation API can reliably validate the account number and organisation code pair and return a single Authorised Person for the target account at the point required in the journey | **High — critical path dependency** |
+| Real-world approval behaviour conforms to a 72-hour expiry window with a maximum of two resend attempts, without generating unacceptable rejection or abandonment rates | **High — directly affects completion and activation time** |
+| Users can provide valid ImmForm account numbers and organisation codes during registration without disproportionate drop-off or support demand | **High — drives avoidable error loops and abandonment** |
+| GOV.UK Notify can support the required approval and applicant notification templates at the reliability level required for time-bound approvals | Medium |
+| Shared mailbox detection based on agreed rules and heuristics is adequate for alpha to enforce individual accountability and traceability | Medium |
+| Session expiry and abandonment behaviour in alpha provides sufficient signal for completion-rate analysis without introducing unacceptable friction | Medium |
+| The mocked ImmForm Registration API used in alpha is representative enough to validate the target operational flow and key failure-handling paths | Medium |
+| Both the ImmForm Organisation API and ImmForm Registration API will be mocked for alpha using ASP.NET Core minimal API projects within the same solution, implementing the expected request and response contracts including key failure states (API unavailability, no Authorised Person found, Registration API error) | Medium |
+
+**Riskiest assumptions to test first:** Organisation API accuracy and availability under expected demand; real-world approval behaviour against the 72-hour policy; and user ability to provide valid account and organisation identifiers first time.
+
+---
 
 ## Out of Scope
 
-- **Account changes and revalidation** — this project covers new user registration only. Changes to existing accounts (role changes, organisation changes, access revisions) remain on the existing PDF form process.
-- **Organisation onboarding** — we are not creating a workflow for registering entirely new organisations into ImmForm; we assume users are joining existing organisations.
-- **Approver management** — we are not building a system to define, manage, or delegate approver roles. We assume approving managers are already identified within organisations.
-- **Training and induction** — we are not replacing or digitising any post-registration training, onboarding materials, or induction processes. This project ends at account creation.
-- **Password reset and account recovery** — we are not changing the existing password reset or account recovery workflows.
-- **Integration with external identity providers** — we are not implementing single sign-on (SSO) or integration with NHS Identity or other external authentication systems. Users will continue to have ImmForm-specific credentials.
-- **Vaccine ordering or clinical workflows** — this project is purely about user onboarding. We are not changing any vaccine supply chain, ordering, or immunisation programme workflows within ImmForm itself.
-- **Helpdesk ticketing system replacement** — we are not replacing the existing helpdesk system; we are reducing the volume of routine registration tickets, but complex cases will still flow through the existing helpdesk process.
-- **Decommissioning the PDF form entirely** — the PDF form will remain available for account changes and as a fallback option. We are not retiring it completely.
+The following are explicitly excluded from this alpha to maintain focus. Each represents a separate problem space that may be addressed in subsequent phases.
 
-
+- Authorised Person registration
+- Account revalidation for existing users
+- Existing account changes (for example delivery point address, organisation code merger updates, billing or invoice details)
+- Creation of new delivery locations or new ImmForm accounts
+- Account deactivation or offboarding
+- Federated identity integration (for example CIS2, NHSmail, or other SSO) in alpha — architecture should remain adaptable
+- Welsh language implementation in alpha — architecture should remain adaptable
+- WDA(H) document upload and storage in alpha
+- Multi-account registration within a single journey; users requiring access to multiple accounts complete separate registrations
+- Updating the Authorised Person record held against an ImmForm account where the named individual has left or is incorrect — this is handled through the existing ImmForm account management process and is triggered by the helpdesk as a fallback when automated approval cannot proceed

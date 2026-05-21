@@ -1,0 +1,39 @@
+{
+  "name": "Priya Chandrasekaran",
+  "jobTitle": "Vaccination Coordinator - GP Practice",
+  "slideTitle": "APPLICANT — NHS",
+  "experience": "8 years managing immunisation programmes across primary care",
+  "location": "South West England",
+  "department": "GP Practice / Immunisation Services",
+  "workflowStage": "APPLICANT — NHS",
+  "workflowStageOrder": 1,
+  "photo": "../images/priya-vaccination-coordinator.jpg",
+  "photoPrompt": "Photorealistic headshot of a South Asian woman in her mid-40s, wearing professional healthcare attire, friendly expression, natural lighting, professional medical office background",
+  "background": [
+    "Manages vaccine ordering for 12,000-patient GP practice",
+    "Been in practice for 8 years, started as receptionist",
+    "Coordinates with 4 practice nurses and 2 GPs on immunisation schedules",
+    "Currently handles ImmForm access via delegated GP account",
+    "Processes 200+ vaccine orders per year across seasonal flu, COVID-19, and routine programmes"
+  ],
+  "goals": [
+    "Get faster access to ImmForm for her team without waiting for GP approval",
+    "Reduce administrative burden of managing account changes",
+    "Have visibility into vaccine stock levels and ordering history",
+    "Ensure compliance with UKHSA vaccine ordering guidelines"
+  ],
+  "wants": [
+    "Simple, clear registration process that doesn't require IT support",
+    "Email confirmation that her application has been received",
+    "Quick approval turnaround (2-3 days preferred)",
+    "Individual user account rather than shared practice account",
+    "Audit trail of who ordered what and when"
+  ],
+  "painPoints": [
+    "Currently waits 5-7 days for account approval via manual PDF process",
+    "Cannot order vaccines when the authorised person is on leave",
+    "Manual form-filling is error-prone; re-keying data creates mistakes",
+    "No visibility into application status while it's being processed",
+    "Shared account access means no accountability for individual vaccine orders"
+  ]
+}

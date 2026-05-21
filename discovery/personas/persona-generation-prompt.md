@@ -1,6 +1,6 @@
 # Persona generation prompt (Microsoft 365 Copilot → Researcher)
 
-Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to generate a set of personas for an UKHSA system/initiative.
+Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to generate a set of personas for a UKHSA system/initiative.
 
 - Open Copilot Chat: https://m365.cloud.microsoft/chat/
 - Find **Researcher** under **Agents**.
@@ -9,9 +9,9 @@ Use this prompt in the **Researcher** agent inside Microsoft 365 Copilot to gene
 ---
 
 ### Objective
-Research and create detailed user personas for every role involved in the described system, using real-world UK Health Security Agency (UKHSA) job titles and organisational context. Include both UKHSA/internal public sector roles and external roles (such as members of the public, local authorities, healthcare providers, laboratories, policymakers, and partner agencies).
+Research and create detailed user personas for every role involved in the described system, using real-world UK UKHSA/public health job titles and organizational context. Include both UKHSA staff roles and non-UKHSA roles (such as patients, carers, family members, external partners, and other stakeholders).
 
-**Important**: Each persona should be written as if describing a specific individual person, not a generalized role. Use concrete details, specific behaviours, and personal context to make each persona feel real and relatable. Keep each persona to one page. Include enough personas to cover every distinct user type, framework level, and interaction pattern — but no more. If a role doesn't add a meaningfully different perspective, merge it with a similar persona. Provide the output in Markdown format.
+**Important**: Each persona should be written as if describing a specific individual person, not a generalized role. Use concrete details, specific behaviors, and personal context to make each persona feel real and relatable. Keep each persona to one page. Include enough personas to cover every distinct user type, framework level, and interaction pattern — but no more. If a role doesn't add a meaningfully different perspective, merge it with a similar persona. Provide the output in Markdown format.
 
 > Follow [GDS guidance: Understanding users and their context](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works#understanding-users-and-their-context) — learn what users are trying to achieve, understand the wider journey, and consider accessibility, digital skills, and offline channels.
 
@@ -21,11 +21,11 @@ For each identified role, create a comprehensive persona using the following tem
 
 **Persona Template Structure:**
 1. **Persona Name & Role**
-- Fictional first name 
-- Official UKHSA job title (for internal staff) OR role description (for external/public users)
-- Position level and directorate/team (e.g., Health Protection, Data & Analytics, Emergency Preparedness, Global Health)
-- Reporting structure context (for UKHSA roles) OR relationship to public health system (for external roles)
-- Brief personal background (e.g., years in role, prior experience, public health exposure)
+   - Fictional first name (representative names)
+   - Official UK UKHSA/public health job title (for UKHSA staff) OR role description (for patients, carers, family members, etc.)
+   - Position level and department/specialty (if applicable)
+   - Reporting structure context (for UKHSA staff) OR relationship to care/system (for non-UKHSA roles)
+   - Brief personal background (e.g., years in role, previous experience, personal situation)
 
 2. **Goals & Outcomes**
    - Primary objectives in their role (specific to this individual)
@@ -48,15 +48,10 @@ For each identified role, create a comprehensive persona using the following tem
    - Specific gaps in current solutions that impact their work
 
 5. **Wider Journey & Touchpoints**
-    - Where they sit in the public health lifecycle (e.g., prevention, detection, response, recovery)
-    - Organisations they interact with:
-        NHS organisations (Trusts, GPs)
-        Local authorities / Directors of Public Health
-        Laboratories and diagnostic services
-        Government departments (DHSC, Cabinet Office)
-        International bodies (WHO, ECDC)
-    - Offline channels (phone, field visits, paper-based processes)
-    - Handoffs and dependencies (e.g., lab → surveillance → response teams)
+   - Where this person's interaction sits within a bigger process or user journey
+   - Other services, teams, or organisations they interact with (NHS and non-NHS)
+   - Offline channels they use (phone, paper, face-to-face, post)
+   - Handoff points where they depend on or pass work to others
 
 6. **Additional Context**
    - A typical day-in-the-life for this specific person
@@ -105,30 +100,32 @@ For each identified role, create a comprehensive persona using the following tem
 - Use concrete, specific details and examples throughout
 - **Group personas by workflow stage** (clearly labeled)
 - Use consistent formatting across all personas
-- Include realistic UKHSA and relevant organisations context, terminology, and constraints
-- Base findings on actual organisational structures and real job roles
+- Include realistic UK UKHSA/public health context, terminology, and constraints
+- Base findings on actual UKHSA organizational structures and real job roles
 - **Provide citations** wherever possible to support claims about:
-  - Job roles and responsibilities (link to UKHSA/ NHS job frameworks, e.g., Agenda for Change)
+  - Job roles and responsibilities (link to UKHSA/civil service job frameworks)
   - Typical challenges and pain points (link to reports, surveys, studies)
   - UKHSA organizational structures and hierarchies
+  - Patient and public experiences and statistics
   - Regulatory requirements and standards
 
 ### Research Approach
 
-- Reference current UKHSA job frameworks and role definitions for staff roles
+- Reference current UKHSA/civil service job frameworks and role definitions for staff roles
 - Consider UKHSA organizational hierarchies and typical team structures
-- Include UKHSA-specific challenges 
-- Reflect realistic workloads and operational pressures in NHS settings
+- Include UKHSA-specific challenges (e.g., resource constraints, patient safety priorities, regulatory requirements)
+- Reflect realistic workloads and operational pressures in UKHSA settings
 - **Provide citations and sources** for all factual claims, including:
-    - UKHSA roles and structure
-    - Public health workforce frameworks
-    - Public health challenges and reports
-    - UK regulatory frameworks (ICO, DHSC, UK GDPR)
-    - Public experience and accessibility data
+  - UKHSA/civil service job frameworks and pay scales
+  - UKHSA policies and guidance documents
+  - Research studies on public health workforce or patient experiences
+  - Official UKHSA statistics and reports
+  - Regulatory frameworks (CQC, ICO, MHRA, etc.)
+  - Industry reports and surveys
 - **For patient and carer personas:**
   - Consider diverse demographics (age, disability, ethnicity, socioeconomic background)
   - Include varying levels of health literacy and digital literacy
-  - Reflect real patient/carer experiences and challenges in navigating NHS services
+  - Reflect real patient/carer experiences and challenges in navigating public health services
   - Consider accessibility requirements and barriers to access
   - Include mental capacity and cognitive considerations where relevant
   - Cite patient experience data and research where available

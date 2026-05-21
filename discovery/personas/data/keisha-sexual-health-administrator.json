@@ -1,0 +1,39 @@
+{
+  "name": "Keisha Mensah",
+  "jobTitle": "Sexual Health Administrator - Sexual Health Service",
+  "slideTitle": "APPLICANT — NHS",
+  "experience": "5 years in sexual health services administration and immunisation coordination",
+  "location": "Greater London",
+  "department": "Sexual Health Service / Immunisation Team",
+  "workflowStage": "APPLICANT — NHS",
+  "workflowStageOrder": 1,
+  "photo": "../images/keisha-sexual-health-administrator.jpg",
+  "photoPrompt": "Photorealistic headshot of a Black woman in her early 30s, wearing professional healthcare attire, confident expression, natural lighting, modern clinic office background",
+  "background": [
+    "Works in dedicated sexual health service in urban area",
+    "Manages HPV and other immunisation programmes for 3+ clinic locations",
+    "Coordinates with 8 clinical staff and 2 consultants",
+    "Recently joined team; still getting up to speed on ImmForm",
+    "Currently shares access via clinic manager's account"
+  ],
+  "goals": [
+    "Gain independent ImmForm access for clinic vaccine ordering",
+    "Maintain clear audit trail for HPV and other sexual health vaccines",
+    "Support vaccine programme expansion across multiple clinic sites",
+    "Reduce dependency on clinic manager for routine ordering"
+  ],
+  "wants": [
+    "Clear guidance on account numbers and organisation codes for each clinic",
+    "Ability to request access quickly when starting new role",
+    "Notification when orders are fulfilled",
+    "Option to delegate to backup staff during leave periods",
+    "Mobile-friendly access to check vaccine stock"
+  ],
+  "painPoints": [
+    "Doesn't yet know the correct ImmForm account numbers for clinic locations",
+    "Current PDF form process feels outdated for a modern NHS service",
+    "Cannot access system independently; creates bottleneck for clinic",
+    "Approval delays mean vaccine shortages when clinic runs low on stock",
+    "No training provided on ImmForm as part of onboarding"
+  ]
+}

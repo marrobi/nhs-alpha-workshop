@@ -1,0 +1,39 @@
+{
+  "name": "Linda Forsythe",
+  "jobTitle": "Practice Manager and Authorised Person - GP Practice",
+  "slideTitle": "AUTHORISED PERSON",
+  "experience": "20 years in GP practice management; 12 years as Authorised Person for ImmForm",
+  "location": "South West England",
+  "department": "GP Practice Management",
+  "workflowStage": "AUTHORISED PERSON",
+  "workflowStageOrder": 3,
+  "photo": "../images/linda-authorised-person.jpg",
+  "photoPrompt": "Photorealistic headshot of a white woman in her mid-50s, wearing professional healthcare attire, authoritative expression, natural lighting, modern GP practice office background",
+  "background": [
+    "Practice manager for 15-partner GP practice",
+    "Designated as Authorised Person for ImmForm account",
+    "Manages 80+ staff including clinicians and administrative team",
+    "Responsible for practice compliance and governance",
+    "Has approved 200+ user registrations over 12 years"
+  ],
+  "goals": [
+    "Manage user access securely while supporting practice operations",
+    "Maintain clear, auditable approval process",
+    "Reduce time spent on access management tasks",
+    "Support team flexibility without compromising security"
+  ],
+  "wants": [
+    "Clear, structured approval process that documents decisions",
+    "Time-bounded approval requests with escalation if delayed",
+    "Visibility into who is accessing ImmForm account and when",
+    "Easy way to revoke access if staff leave or change roles",
+    "Integration with practice HR/staff directory systems"
+  ],
+  "painPoints": [
+    "Current email-based process creates cluttered approval trail",
+    "No visibility into what access each person actually has",
+    "Cannot easily track which staff have been approved",
+    "Manual process is time-consuming; often deprioritised",
+    "If approval is forgotten, staff are blocked from vaccine ordering"
+  ]
+}

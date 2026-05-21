@@ -1,11 +1,11 @@
 ---
 name: ukhsa-adr-writer
-description: 'Use when writing or updating an Architecture Decision Record (ADR) for a UKHSA .NET 10 / Azure service.'
+description: 'Use when documenting architectural decisions for a UKHSA digital service using the ADR format, or when reviewing technology choices for GDS assessment evidence.'
 ---
 
-# UKHSA ADR Writer — MADR Format
+# UKHSA ADR Writer — Architectural Decision Records
 
-This skill writes Architecture Decision Records (ADRs) for UKHSA digital services. ADRs provide the evidence trail required by GDS Service Standard point 11 ("Choose the right tools and technology") and point 12 ("Make new source code open").
+This skill generates Architectural Decision Records (ADRs) for UKHSA digital services. ADRs provide the evidence trail required by GDS Service Standard point 11 ("Choose the right tools and technology") and point 12 ("Make new source code open").
 
 ## When to Use
 
@@ -14,14 +14,20 @@ This skill writes Architecture Decision Records (ADRs) for UKHSA digital service
 - Preparing evidence for a GDS Alpha assessment
 - Reviewing or updating an existing ADR after a decision changes
 
-## Location and Numbering
+## ADR Format
 
 Use the MADR (Markdown Any Decision Records) format. Store ADRs as **new files** in `docs/adr/` with sequential numbering. Do **not** edit this skill file — it is a reference, not a template to fill in.
 
-
-- All ADRs live in `docs/adr/`.
-- Sequential numbering: `0001-record-architecture-decisions.md`, `0002-use-net-10.md`, ...
-- The first ADR is always "Record architecture decisions" — the meta-decision to use MADR.
+```
+docs/adr/
+├── README.md           # Index of all ADRs
+├── 0001-backend-framework.md
+├── 0002-frontend-framework.md
+├── 0003-hosting-platform.md
+├── 0004-infrastructure-as-code.md
+├── 0005-authentication-strategy.md
+└── ...
+```
 
 ## ADR Template
 
@@ -37,7 +43,7 @@ Use the MADR (Markdown Any Decision Records) format. Store ADRs as **new files**
 ## Context
 
 [What is the issue that we're seeing that is motivating this decision or change?
-Include NHS-specific constraints that influenced the decision.]
+Include UKHSA-specific constraints that influenced the decision.]
 
 ## Decision
 
@@ -66,21 +72,53 @@ Include NHS-specific constraints that influenced the decision.]
 - **Cons**: [disadvantages]
 - **Why rejected**: [reason]
 
-## UKHSA Constraints Considered
+## UKHSA Constraints
 
-- Data residency: Azure UK South / UK West only
-- Regulatory: MHRA GDP / Annex 11 / ALCOA+ where applicable
-- Privacy: UK GDPR Art. 6(1)(e), Art. 9(2)(i)/(h) where applicable
-- Identity: GOV.UK One Login (public) / Entra ID (internal)
-- Design: GOV.UK Design System via GovUk.Frontend.AspNetCore
-- Accessibility: WCAG 2.2 Level AA mandatory for all user-facing services
+[Document any UKHSA-specific constraints that influenced this decision, such as:]
+- Data sovereignty (UK hosting)
+- Clinical safety implications (DCB0129)
+- Data protection (UK GDPR Art. 9 special category)
+- GOV.UK Design System requirements
+- Integration with NHS systems (PDS, Spine, MESH)
 
 ## References
 
-- [Related ADRs]
-- [User stories / hazard log / DPIA sections]
+- [Links to relevant documentation, RFCs, standards]
 ```
 
+## Standard ADRs for UKHSA Alpha Services
+
+Every UKHSA Alpha built during the workshop should document at minimum:
+
+### ADR-0001: Backend Framework — Python/FastAPI
+- **Context**: Need a lightweight, async-capable API framework with strong type validation
+- **Decision**: FastAPI with Pydantic for input validation, Uvicorn as ASGI server
+- **UKHSA constraints**: Strong ecosystem for health data processing
+- **Alternatives**: Django REST Framework (heavier, more opinionated), Flask (no built-in validation)
+
+### ADR-0002: Frontend Framework — React with govuk-react
+- **Context**: Need to build user-facing pages compliant with GOV.UK Design System
+- **Decision**: React 18 with TypeScript, Vite, and govuk-react
+- **UKHSA constraints**: Must use GOV.UK Design System components, WCAG 2.2 AA mandatory
+- **Alternatives**: Jinja2 server-side rendering (simpler but less interactive), Next.js (more complex than needed for Alpha)
+
+### ADR-0003: Hosting — Azure App Service (UK South)
+- **Context**: UK data sovereignty requires UK-based hosting; team has Azure subscription
+- **Decision**: Azure App Service on Linux in UK South region
+- **UKHSA constraints**: Data must remain in UK, Managed Identity for authentication, Key Vault for secrets
+- **Alternatives**: Azure Container Apps (more complex)
+
+### ADR-0004: Infrastructure as Code — Terraform
+- **Context**: Infrastructure must be reproducible and auditable
+- **Decision**: Terraform with azurerm provider, state stored remotely
+- **UKHSA constraints**: Multiple Alpha teams may share a subscription; naming convention uses `var.app_name` for isolation
+- **Alternatives**: Bicep (Azure-only, less portable), Pulumi (smaller community)
+
+### ADR-0005: Authentication Strategy — Managed Identity
+- **Context**: Service-to-service auth needed for Key Vault, Application Insights
+- **Decision**: User Assigned Managed Identity, no service principal secrets
+- **UKHSA constraints**: No client secrets in code or CI/CD
+- **Alternatives**: Service Principal with client secret (less secure, secret rotation burden)
 
 ## ADR Index Template (`docs/adr/README.md`)
 
@@ -92,7 +130,7 @@ This directory contains the Architectural Decision Records (ADRs) for this servi
 | ADR | Title | Status | Date |
 |---|---|---|---|
 | [0001](0001-backend-framework.md) | Backend Framework — Python/FastAPI | Accepted | YYYY-MM-DD |
-| [0002](0002-frontend-framework.md) | Frontend Framework — React/nhsuk-react-components | Accepted | YYYY-MM-DD |
+| [0002](0002-frontend-framework.md) | Frontend Framework — React/govuk-react | Accepted | YYYY-MM-DD |
 | [0003](0003-hosting-platform.md) | Hosting — Azure App Service UK South | Accepted | YYYY-MM-DD |
 | [0004](0004-infrastructure-as-code.md) | Infrastructure as Code — Terraform | Accepted | YYYY-MM-DD |
 | [0005](0005-authentication-strategy.md) | Authentication — Managed Identity | Accepted | YYYY-MM-DD |
@@ -105,15 +143,16 @@ its context and consequences. See [GDS Service Standard point 11](https://www.go
 
 ## Rules
 
-- One decision per ADR. Bundling masks the trade-offs.
-- Status transitions are explicit — a deprecated ADR is never deleted; a superseding ADR links back.
-- Reference the user story, hazard log entry, or DPIA section that motivated the decision.
-- Decisions that change data flows or processing of personal/health data must trigger a DPIA review and a hazard log review.
-- Pull requests that change architecture without a corresponding ADR change should be blocked in review.
+- Number ADRs sequentially — never reuse a number
+- Set status to "Accepted" when the team agrees, not before
+- When a decision changes, create a new ADR that supersedes the old one — never delete ADRs
+- Include UKHSA-specific constraints — assessors look for evidence of constraint-aware decision making
+- Keep ADRs concise — 1–2 pages maximum
+- Write in plain English — ADRs may be read by non-technical assessors
 
 ## References
 
-- [MADR](https://adr.github.io/madr/)
-- [UKHSA Engineering Standards](https://ukhsa-collaboration.github.io/standards-org/)
+- [MADR — Markdown Any Decision Records](https://adr.github.io/madr/)
 - [GDS Service Standard Point 11](https://www.gov.uk/service-manual/service-standard/point-11-choose-the-right-tools-and-technology)
 - [GDS Service Standard Point 12](https://www.gov.uk/service-manual/service-standard/point-12-make-new-source-code-open)
+- [NHS Cloud Centre of Excellence](https://digital.nhs.uk/services/cloud-centre-of-excellence) <!-- REVIEW -->

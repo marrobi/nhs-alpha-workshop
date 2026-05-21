@@ -18,19 +18,16 @@ Read `.github/instructions/tech-stack.instructions.md` — this is the **default
 > **Tech stack review — please confirm or change:**
 >
 > The default stack is:
-> - **Backend**: .NET 10 LTS / ASP.NET Core MVC (Razor Pages where appropriate) / Kestrel
-> - **Frontend**: Razor views with `GovUk.Frontend.AspNetCore` tag helpers; minimal JS via TypeScript where required
-> - **Data**: Entity Framework Core 10 against Azure SQL Database (UK South)
-> - **IaC**: Terraform (`azurerm`)
-> - **Hosting**: Azure App Service (Linux), UK South region
-> - **Testing**: xUnit + FluentAssertions + Moq, `WebApplicationFactory<TEntryPoint>` for integration, Playwright for .NET (with `Deque.AxeCore.Playwright`) for E2E, k6 for load
-> - **Identity**: User-Assigned Managed Identity for service-to-service auth; OIDC federation for GitHub Actions
+> - **Backend**: Python 3.12 / FastAPI
+> - **Frontend**: React 18 / Vite / TypeScript / govuk-react
+> - **IaC**: Terraform (azurerm)
+> - **Hosting**: Azure App Service (UK South)
+> - **Testing**: pytest, Vitest, Playwright, k6
 >
 > 1. Are you happy with this stack, or do you want to change any layer?
-> 2. Do you need a database beyond Azure SQL? (Cosmos DB, Azure Storage Tables, Redis)
-> 3. Do you need any external integrations (NHS APIs via PDS/MESH, ONS, OS Places, GOV.UK Notify)?
-> 4. Do you need authentication (Microsoft Entra ID for staff, GOV.UK One Login for public)?
-> 5. Is this a regulated workload (medicines, devices, pharmacovigilance) requiring MHRA GDP / Annex 11 controls?
+> 2. Do you need a database? If so, which (PostgreSQL on Azure, CosmosDB, SQLite)?
+> 3. Do you need any external NHS API integrations (PDS, Spine, MESH)?
+> 4. Do you need authentication (NHS login/CIS2, Azure AD)?
 
 **Wait for the user's response.** If they want changes, update `.github/instructions/tech-stack.instructions.md` to reflect their choices. This ensures all downstream agents and instructions use the correct stack.
 
@@ -40,7 +37,7 @@ Read the discovery artefacts:
 1. `discovery/scenarios/scenario.md` — identify the core problem and scope boundaries
 2. `discovery/personas/persona-report.md` — identify primary and secondary users
 3. `discovery/user_journeys/data/journey-*.md` — these drive the entire technical design
-4. Identify **constraints**: UK data sovereignty (UK South / UK West for DR), UK GDPR (Article 9 for special category data), NCSC CAF, Cyber Essentials Plus, GOV.UK Design System (via `GovUk.Frontend.AspNetCore`), WCAG 2.2 AA, and — where applicable — MHRA GDP / Annex 11
+4. Identify **constraints**: data sovereignty, NHS network, UK GDPR Art. 9, DCB0129, GOV.UK Design System
 
 Summarise what you found and confirm with the user:
 > I've read the discovery artefacts. Here's my understanding: [summary]. Is this correct?
@@ -49,13 +46,13 @@ Summarise what you found and confirm with the user:
 
 Identify the key decision points and present 2–3 options for each. Do **not** produce a single design silently. Common decision points:
 
-- **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys. Prefer Azure SQL via EF Core; consider Cosmos DB only for genuine document/scale needs.
-- **API structure** — single controller surface vs. domain-based controllers/minimal APIs. How many distinct resources exist? Plan API versioning via `Asp.Versioning.Mvc` from day one.
-- **Frontend pattern** — multi-page Razor with router vs. interactive Razor Pages. How complex are the user journeys? Default to server-rendered Razor with GOV.UK Design System components.
-- **External integrations** — which Azure services and UK gov / health APIs are needed? Define real integration patterns with `IHttpClientFactory` and `Microsoft.Extensions.Http.Resilience` (Polly), not mocks.
-- **Auth approach** — Microsoft Entra ID for internal users; GOV.UK One Login for public users. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
-- **Network & identity** — all service-to-service and service-to-data communication MUST use User-Assigned Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `ukhsa-security.instructions.md` and `terraform-azure-ukhsa.instructions.md` for the full rules.
-- **Infrastructure extras** — baseline only vs. database, queue (Service Bus), cache (Azure Cache for Redis). What does the data model need?
+- **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
+- **API structure** — single router vs. domain-based routers. How many distinct resources exist?
+- **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
+- **External integrations** — which UKHSA API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
+- **Auth approach** — custom vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
+- **Network & identity** — all service-to-service and service-to-data communication must use Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `ukhsa-security.instructions.md` for the full rules.
+- **Infrastructure extras** — baseline only vs. database, queue, or cache. What does the data model need?
 
 Format each decision as:
 
@@ -71,10 +68,10 @@ Format each decision as:
 ### Step 4 — Map Journeys to Technical Design
 
 Using the agreed decisions, map each user journey to:
-- **API endpoints** — routes, HTTP methods, request/response shapes as `record` types with `required` modifiers; FluentValidation or DataAnnotations
-- **Data models** — EF Core entities, fields, types, validation rules, relationships. Any entity storing person-identifiable health data that uses the NHS Number MUST follow `.github/instructions/health-identifiers.instructions.md` (ISB 0149 — 10-digit string, modulus 11 validation, 3-3-4 display, storage and transmission rules)
-- **Frontend pages** — GOV.UK Design System pages/components (via `GovUk.Frontend.AspNetCore` tag helpers) for each journey step, with UKHSA brand overrides applied via SCSS variables
-- **Infrastructure** — Azure resources required beyond the baseline (App Service, Key Vault, Application Insights, Log Analytics)
+- **API endpoints** — routes, HTTP methods, request/response shapes
+- **Data models** — entities, fields, types, validation rules, relationships. Any entity storing patient data MUST include the NHS Number as a 10-digit string field with modulus 11 validation — see `.github/instructions/ukhsa-number.instructions.md` for the full ISB 0149 requirements (storage, display, search, validation, transmission)
+- **Frontend pages** — GOV.UK Design System pages/components for each journey step. Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149 Req 07/09)
+- **Infrastructure** — cloud resources required beyond the baseline
 
 ### Step 5 — Prioritise by Riskiest Assumption
 
@@ -87,35 +84,35 @@ Present the priority order and confirm with the user.
 Read the `ukhsa-adr-writer` skill (`.github/skills/ukhsa-adr-writer/SKILL.md`) for the ADR template and rules. The skill is a **reference only** — do **not** edit it. Create new files under `docs/adr/`.
 
 Create `docs/adr/001-architecture.md` containing:
-- Tech stack decisions (with rationale, including the note that .NET is approved-by-exception on the [UKHSA Tech Radar](https://ukhsa-collaboration.github.io/tech-radar/))
+- Tech stack decisions (with rationale)
 - API endpoint summary (routes, methods, purpose)
 - Data model summary (entities, key fields)
 - Frontend page structure mapped to user journeys
 - Infrastructure components
 - User journey priority order with riskiest assumption identified
-- UKHSA constraints that shaped the design (UK data sovereignty, UK GDPR Art. 9, NCSC CAF, GOV.UK Design System, WCAG 2.2 AA, MHRA where applicable)
+- UKHSA constraints that shaped the design
 
 Also create `docs/adr/README.md` as an ADR index.
 
 ### Step 7 — Generate Architecture Diagram
 
-Create an architecture diagram as a draw.io file at `docs/adr/architecture.drawio`. Use the **Draw.io MCP server** (configured in `.vscode/mcp.json`) to create and edit the diagram.
+Create an architecture diagram as a draw.io file at `docs/adr/architecture.drawio`. Use the **Draw.io MCP server** (configured in `.vscode/mcp.json`) to create and edit the diagram. The MCP server provides tools for generating draw.io XML from descriptions, converting Mermaid diagrams, and editing existing diagrams.
 
 The diagram should show:
 
-- User types (from personas) connecting to the frontend
-- Frontend (browser) connecting to the ASP.NET Core service
-- ASP.NET Core service with key controllers/endpoints and the GOV.UK Design System layer
-- Data store (Azure SQL via Private Endpoint)
+- Frontend (browser) connecting to the backend API
+- Backend API with key routers/endpoints
+- Data store (if any)
 - External integrations (if any)
-- Cloud infrastructure (App Service, Key Vault, Managed Identity, Application Insights, Log Analytics)
-- Network boundary (VNet, subnets, Private Endpoints)
+- Cloud infrastructure (App Service, Key Vault, monitoring)
+- User types (from personas) connecting to the frontend
 
 Use draw.io XML format. Structure the diagram with:
-- UKHSA brand colours (UKHSA primary green) for UKHSA-owned components
-- Standard Azure icons for infrastructure — https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V23.zip
+- GOV.UK blue (`#1d70b8`) for UKHSA-specific components
+- Standard cloud provider colours for infrastructure
 - Clear arrows showing data flow direction
 - Labels on all connections
+- User Azure icons where appropriate - https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V23.zip
 
 Example draw.io XML structure:
 ```xml
@@ -141,7 +138,7 @@ Once the ADR and diagram are complete, tell the user:
 
 ## Second Pass — ADR Review (After User Stories)
 
-This workflow runs **after the UKHSA Product Owner** has created user stories in `user_stories/`. The stories reveal detailed technical decisions that were not visible during the initial architecture phase — data models, integration patterns, auth flows, error handling strategies, and more. This pass identifies and creates the ADRs needed.
+This workflow runs **after the UKHSA Technical Product/Technical BA** has created user stories in `user_stories/`. The stories reveal detailed technical decisions that were not visible during the initial architecture phase — data models, integration patterns, auth flows, error handling strategies, and more. This pass identifies and creates the ADRs needed.
 
 ### Step 1 — Read User Stories and Architecture
 
@@ -156,11 +153,11 @@ Read all input artefacts:
 Analyse the stories for architectural decisions that should be recorded. Look for:
 
 - **Technology choices** implied by stories (database type, auth provider, API gateway, caching strategy)
-- **Design patterns** required (event-driven, CQRS, repository pattern, service layer, mediator)
-- **Integration decisions** (UK gov / health APIs, FHIR resource types where used, external service contracts)
-- **Data model decisions** (entity relationships, storage format, retention, backup strategy, data classification)
-- **Security decisions** (auth strategy for user roles, session management, PII handling, audit logging)
-- **Infrastructure decisions** (scaling approach, queue/cache needs, monitoring strategy, multi-region for DR)
+- **Design patterns** required (event-driven, CQRS, repository pattern, service layer)
+- **Integration decisions** (NHS API choices, FHIR resource types, external service contracts)
+- **Data model decisions** (entity relationships, storage format, retention, backup strategy)
+- **Security decisions** (auth strategy for user roles, session management, PII handling)
+- **Infrastructure decisions** (scaling approach, queue/cache needs, monitoring strategy)
 
 Present the list of ADR topics to the user with a brief rationale for each:
 
@@ -203,16 +200,16 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
 ## Rules
 
 - **Always ask, never assume** — present options and wait for the user to decide
-- **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to architecture decisions. Incorporate these into the ADR. Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository.
+- **Read organisational standards** — read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to architecture decisions. Incorporate these into the ADR.
 - **Update tech-stack.instructions.md** if the user changes any stack choices — this is the single source of truth
 - **No Alpha shortcuts** — Alpha exists to test riskiest assumptions with a realistic service. Do not recommend shortcuts that undermine this:
-  - **No in-memory data stores** — data must persist across restarts. Use Azure SQL via EF Core (or SQLite locally for development), not in-memory providers in production.
-  - **No skipping authentication** when user roles exist — if the service distinguishes between user roles, auth is a riskiest assumption.
-  - **No hardcoded/mock data in production code** — use synthetic data via proper EF Core seed scripts, not inline collections or JSON files served as APIs.
-  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault, Service Bus) and any external sandboxes. If a service requires configuration or credentials, include that in the architecture. Only create a mock/stub if there is an explicit user story requesting it — record the decision and rationale in the ADR.
-  - **No skipping error handling** — error states are part of the user journey and must be designed. Use RFC 9457 problem details for API errors.
+  - **No in-memory data stores** — data must persist across restarts. Use at minimum SQLite, or a proper database if the journeys involve multi-user data.
+  - **No skipping authentication** when user roles exist — if the service distinguishes between patients, clinicians, and admin, auth is a riskiest assumption.
+  - **No hardcoded/mock data in production code** — use synthetic data via proper seed scripts, not inline dictionaries or JSON files served as APIs.
+  - **No mocks or stubs for service integrations** — design real integrations with Azure services (Entra ID, Monitor, Key Vault) and UKHSA API sandboxes. If a service requires configuration or credentials, include that in the architecture. Only create a mock/stub if there is an explicit user story requesting it — record the decision and rationale in the ADR.
+  - **No skipping error handling** — error states are part of the user journey and must be designed.
   - **No single-file applications** — follow the project structure in the implementation skill.
   - If the team explicitly decides to descope something, record it as a decision in the ADR with rationale.
 - **Do not write application code** — your output is ADRs, diagrams, and configuration updates
 - **Keep ADRs concise** — 1–2 pages maximum, plain English
-- **UKHSA constraints are non-negotiable** — UK data sovereignty (UK South / UK West), GOV.UK Design System (via `GovUk.Frontend.AspNetCore`), WCAG 2.2 AA, no real personal data, UK GDPR Art. 9, NCSC CAF, Cyber Essentials Plus; MHRA GDP / Annex 11 for regulated workloads
+- **UKHSA constraints are non-negotiable** — UK hosting, GOV.UK Design System, WCAG 2.2 AA, no real patient data, DCB0129

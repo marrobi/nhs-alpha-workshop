@@ -38,7 +38,7 @@ cd frontend && npm run lint
 - All function signatures must have type annotations
 - Aim for 80%+ test coverage
 - Follow [PEP 8](https://peps.python.org/pep-0008/) (enforced by `ruff`)
-- Use `nhsuk-react-components` for all user-facing UI
+- Use `govuk-react` for all user-facing UI
 
 ## Reporting issues
 

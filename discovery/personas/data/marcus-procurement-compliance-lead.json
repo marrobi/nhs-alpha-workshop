@@ -1,0 +1,39 @@
+{
+  "name": "Marcus Obi",
+  "jobTitle": "Procurement and Compliance Lead - Authorised Wholesaler",
+  "slideTitle": "APPLICANT — NON-NHS",
+  "experience": "10 years in pharmaceutical procurement and supply chain compliance",
+  "location": "South East England",
+  "department": "Authorised Wholesaler / Procurement Operations",
+  "workflowStage": "APPLICANT — NON-NHS",
+  "workflowStageOrder": 2,
+  "photo": "../images/marcus-procurement-compliance-lead.jpg",
+  "photoPrompt": "Photorealistic headshot of a Black man in his mid-40s, wearing business professional attire, confident expression, natural lighting, modern pharmaceutical warehouse background",
+  "background": [
+    "Works for licensed authorised pharmaceutical wholesaler",
+    "Manages vaccine procurement and distribution to NHS sites",
+    "Responsible for regulatory compliance and audit trails",
+    "Coordinates with MHRA and wholesaler management",
+    "Manages 20+ vaccine product lines and SKUs"
+  ],
+  "goals": [
+    "Maintain compliant, auditable ordering process for vaccine procurement",
+    "Support wholesaler's NHS supply chain relationships",
+    "Ensure traceability from order to delivery to end-user",
+    "Scale operations without increasing administrative burden"
+  ],
+  "wants": [
+    "Compliant digital registration that meets MHRA expectations",
+    "Clear audit trail of all ordering transactions",
+    "Approval from NHS stakeholders who understand wholesaler role",
+    "Integration with wholesaler's compliance reporting systems",
+    "Notifications of supply or regulatory changes affecting orders"
+  ],
+  "painPoints": [
+    "Current PDF process creates compliance gaps in audit trail",
+    "Manual re-keying increases risk of ordering errors",
+    "Non-NHS status sometimes causes confusion in registration process",
+    "Approval timescales are unpredictable for supply chain planning",
+    "No integration with wholesaler's internal systems creates duplicate data entry"
+  ]
+}

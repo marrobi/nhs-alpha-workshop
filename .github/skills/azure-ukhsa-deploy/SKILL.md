@@ -1,143 +1,105 @@
 ---
 name: azure-ukhsa-deploy
-description: 'Use when deploying a UKHSA .NET 10 / ASP.NET Core service to Azure via Terraform with managed identity, Key Vault, and Application Insights.'
+description: 'Use when deploying a UKHSA Python/FastAPI service to Azure using Terraform, or configuring App Service, Key Vault, or Application Insights.'
 ---
 
-# Azure UKHSA Deploy — Terraform + .NET 10 to Azure UK South
+# Azure UKHSA Deploy — Terraform to Azure UK South
 
-This skill provisions Azure infrastructure for UKHSA digital services in line with the [UKHSA Engineering Standards](https://ukhsa-collaboration.github.io/standards-org/) and NCSC Cloud Security Principles. UK South is the primary region; UK West is the DR region.
+This skill provides step-by-step guidance for deploying a UKHSA Python/FastAPI + React service to Azure using Terraform. All infrastructure uses Azure UK South for data sovereignty compliance.
 
 ## When to Use
 
-- Scaffolding a new UKHSA service in Azure South
-- Adding new infrastructure components (database, queue, storage) to an existing service
-- Wiring up CI/CD via GitHub Actions with OIDC federation
-- Provisioning environments (dev / test / prod) from the same Terraform module
+- Scaffolding Terraform for a new UKHSA service
+- Deploying infrastructure with `terraform apply`
+- Configuring App Service settings, Key Vault, or Application Insights
+- Troubleshooting Azure deployment failures
 
+## Architecture
 
-## UKHSA Naming Convention
+All resource names use `var.app_name` so multiple Alphas can coexist in one subscription:
 
-All resources follow `<resource-prefix>-${var.workload}-${var.environment}-uks-${var.instance}`:
-
-| Resource | Prefix | Example |
-|---|---|---|
-| Resource Group | `rg-` | `rg-notify-prod-uks-001` |
-| App Service | `app-` | `app-notify-prod-uks-001` |
-| App Service Plan | `plan-` | `plan-notify-prod-uks-001` |
-| Key Vault | `kv-` | `kv-notify-prod-uks-001` |
-| SQL Server | `sql-` | `sql-notify-prod-uks-001` |
-| SQL Database | `sqldb-` | `sqldb-notify-prod-uks-001` |
-| User-Assigned Managed Identity | `id-` | `id-notify-prod-uks-001` |
-| Application Insights | `appi-` | `appi-notify-prod-uks-001` |
-| Log Analytics Workspace | `log-` | `log-notify-prod-uks-001` |
-| Storage Account | `st` (no dash, ≤24 chars) | `stnotifyproduks001` |
-
-## Mandatory Tags
-
-Every resource block must set these tags:
-
-```hcl
-tags = {
-  workload            = var.workload
-  environment         = var.environment
-  owner               = var.owner_team_email
-  cost_centre         = var.cost_centre
-  data_classification = var.data_classification  # OFFICIAL or OFFICIAL-SENSITIVE
-}
+```
+Resource Group (rg-{app_name}-{env})
+├── App Service Plan (asp-{app_name}-{env}, Linux, B1)
+├── Linux Web App (app-{app_name}-{env}, Python 3.12)
+├── User Assigned Managed Identity
+├── Key Vault (kv-{app_name}-{env})
+│   └── Access Policy → Managed Identity (get, list secrets)
+└── Application Insights (ai-{app_name}-{env})
 ```
 
-## Identity and Secrets
+## Deployment Steps
 
-- **User-Assigned Managed Identity** per app (`azurerm_user_assigned_identity`) — never use system-assigned in shared resources.
-- App Service references secrets via Key Vault references: `@Microsoft.KeyVault(SecretUri=...)`.
-- Managed identity granted `Key Vault Secrets User` role via `azurerm_role_assignment` (RBAC mode, not access policies).
-- SQL authentication is Entra-only — set `azuread_authentication_only = true` on `azurerm_mssql_server`.
+### 1. Scaffold Terraform
 
-## Networking and Security
+Create `infra/` with `main.tf`, `variables.tf`, `outputs.tf`. Define:
+- `variable "app_name"` — required, the service name
+- `variable "environment"` — default `"dev"`
+- All `azurerm` resources using `"${var.app_name}-${var.environment}"` naming
 
-- Private Endpoints for SQL, Key Vault, and Storage (no public network access).
-- HSTS enforced at the app level; `https_only = true` on App Service.
-- TLS 1.2 minimum on App Service, SQL Server, and Storage Account.
-- Diagnostic settings stream to Log Analytics — `azurerm_monitor_diagnostic_setting`.
-
-## .NET 10 App Service Configuration
-
-```hcl
-resource "azurerm_linux_web_app" "app" {
-  name                = "app-${var.workload}-${var.environment}-uks-${var.instance}"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  service_plan_id     = azurerm_service_plan.plan.id
-  https_only          = true
-
-  identity {
-    type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.app.id]
-  }
-
-  site_config {
-    minimum_tls_version = "1.2"
-    application_stack {
-      dotnet_version = "10.0"
-    }
-    health_check_path = "/health"
-  }
-
-  app_settings = {
-    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.appi.id})"
-    "ASPNETCORE_ENVIRONMENT"                = var.environment
-  }
-
-  tags = local.tags
-}
-```
-
-## CI/CD — GitHub Actions OIDC
-
-- Use `azure/login@v2` with federated credentials — no client secrets in GitHub.
-- One federated credential per environment, subject scoped to the deployment job.
-- Deploy via `azure/webapps-deploy@v3` after `dotnet publish -c Release`.
-
-## Deploy Commands
+### 2. Initialise and Plan
 
 ```bash
-dotnet publish src/Web -c Release -o ./publish
+cd infra
+terraform init
+terraform plan -var="app_name=my-service" -out=tfplan
+```
+
+### 3. Apply
+
+```bash
+terraform apply tfplan
+```
+
+### 4. Build Frontend & Deploy
+
+```bash
+cd ../frontend && npm run build && cd ..
+zip -r app.zip app/ frontend/dist/ requirements.txt
 az webapp deploy \
-  --resource-group rg-${WORKLOAD}-${ENV}-uks-001 \
-  --name app-${WORKLOAD}-${ENV}-uks-001 \
-  --src-path ./publish.zip --type zip
+  --resource-group "rg-${APP_NAME}-dev" \
+  --name "app-${APP_NAME}-dev" \
+  --src-path app.zip \
+  --type zip
 ```
 
-## Module Structure
+### 5. Configure Startup Command
 
+```bash
+az webapp config set \
+  --resource-group "rg-${APP_NAME}-dev" \
+  --name "app-${APP_NAME}-dev" \
+  --startup-file "uvicorn app.main:app --host 0.0.0.0 --port 8000"
 ```
-infra/
-├── main.tf            # Resource Group, tags, providers
-├── variables.tf       # workload, environment, instance, owner_team_email, cost_centre, data_classification
-├── outputs.tf
-├── app.tf             # App Service, Plan, Managed Identity
-├── data.tf            # SQL Server + Database
-├── kv.tf              # Key Vault, secrets, RBAC
-├── monitoring.tf      # Log Analytics, Application Insights, diagnostic settings
-├── network.tf         # VNet, subnets, Private Endpoints, Private DNS
-└── envs/
-    ├── dev.tfvars
-    ├── test.tfvars
-    └── prod.tfvars
+
+### 6. Verify
+
+```bash
+curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
 ```
+
+## Key Terraform Resources
+
+| Resource | Terraform Type |
+|---|---|
+| Resource Group | `azurerm_resource_group` |
+| App Service Plan | `azurerm_service_plan` |
+| Web App | `azurerm_linux_web_app` |
+| Key Vault | `azurerm_key_vault` |
+| Key Vault Access Policy | `azurerm_key_vault_access_policy` |
+| Managed Identity | `azurerm_user_assigned_identity` |
+| Application Insights | `azurerm_application_insights` |
 
 ## Rules
 
-- Terraform state lives in a dedicated `tfstate` Storage Account with versioning enabled.
-- No `client_secret` in code — managed identity or OIDC only.
-- Every environment has its own `tfvars` file — never parameterise inline.
-- Production changes go through a PR + plan review; never `terraform apply` ad-hoc.
-- Region: always `uksouth` — other regions might be allowd for development but production must be UK South
+- Region: always `uksouth` — other regions might be allowed for development but production must be UK South
 - Identity: always Managed Identity — never service principal secrets
 - Secrets: always Key Vault — never hardcode or use app settings directly
+- TLS: minimum 1.2, HTTPS only
+- Tags: `project = var.app_name`, `environment = var.environment`
+- Naming: always include `var.app_name` — multiple Alphas may share a subscription
 
 ## References
 
-- [UKHSA Engineering Standards](https://ukhsa-collaboration.github.io/standards-org/)
-- [NCSC Cloud Security Principles](https://www.ncsc.gov.uk/collection/cloud)
-- [azurerm provider docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+- [Terraform azurerm provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+- [Azure App Service Python docs](https://learn.microsoft.com/en-us/azure/app-service/configure-language-python)

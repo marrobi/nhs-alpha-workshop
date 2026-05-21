@@ -1,0 +1,39 @@
+{
+  "name": "Sanjay Patel",
+  "jobTitle": "Pharmacy Lead - Immunoglobulin Holding Centre",
+  "slideTitle": "APPLICANT — NON-NHS",
+  "experience": "18 years as pharmacist; 8 years managing immunoglobulin distribution centre",
+  "location": "West Midlands",
+  "department": "Immunoglobulin Holding Centre / Pharmacy Services",
+  "workflowStage": "APPLICANT — NON-NHS",
+  "workflowStageOrder": 2,
+  "photo": "../images/sanjay-immunoglobulin-pharmacist.jpg",
+  "photoPrompt": "Photorealistic headshot of a South Asian man in his late 40s, wearing pharmacy professional attire, expert expression, natural lighting, modern pharmaceutical facility background",
+  "background": [
+    "Licensed pharmacist managing dedicated immunoglobulin distribution service",
+    "Serves 40+ NHS sites with specialist immunoglobulin products",
+    "Manages temperature-controlled storage and complex logistics",
+    "Responsible for product tracking and MHRA compliance",
+    "Operates under strict pharmaceutical regulations"
+  ],
+  "goals": [
+    "Maintain secure, compliant immunoglobulin supply chain",
+    "Ensure rapid response to NHS clinical emergencies",
+    "Meet all MHRA and GDP (Good Distribution Practice) requirements",
+    "Scale services without compromising traceability or compliance"
+  ],
+  "wants": [
+    "Robust registration process that demonstrates competence and compliance",
+    "Approval from NHS stakeholders familiar with immunoglobulin supply model",
+    "Integration with patient-level traceability requirements",
+    "Notification system for urgent supply requests or recalls",
+    "Compliance-ready audit trail for MHRA inspections"
+  ],
+  "painPoints": [
+    "Current system doesn't adequately reflect specialist, regulated nature of role",
+    "Manual processing risks breaking strict compliance chains",
+    "Approval delays can impact clinical delivery of life-saving products",
+    "No integration with pharmaceutical tracking systems",
+    "Cannot delegate to backup staff if primary user is unavailable"
+  ]
+}

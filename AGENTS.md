@@ -1,4 +1,4 @@
-# UKHSA Service — Copilot Coding Agent Context
+# UKHSA — Copilot Coding Agent Context
 
 ## Quality Expectations
 
@@ -10,7 +10,7 @@
 
 ## Project Description
 
-This is a UKHSA digital service built with GitHub Copilot agents. The service follows the GOV.UK Design System with UKHSA branding and GDS Service Standard, deployed to Azure using Terraform.
+This is a UKHSA digital service built with GitHub Copilot agents. The service follows the GOV.UK Design System and GDS Service Standard, deployed to Azure using Terraform.
 
 ## Tech Stack
 
@@ -19,21 +19,24 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 ## Repository Structure
 
 ```
-├── src/                    # .NET solution (see tech-stack.instructions.md)
-│   ├── <ServiceName>.Web/           # ASP.NET Core MVC entry point
-│   │   ├── Controllers/             # MVC controllers
-│   │   ├── Views/                   # Razor views (.cshtml)
-│   │   └── Program.cs               # App entrypoint
-│   ├── <ServiceName>.Application/   # Use cases, DTOs, validation
-│   ├── <ServiceName>.Domain/        # Domain model
-│   └── <ServiceName>.Infrastructure/# EF Core, repositories, integrations
+├── app/                    # Backend application (see tech-stack.instructions.md)
+│   ├── routers/            # API route modules
+│   ├── middleware/          # Application middleware
+│   └── main.py             # App entrypoint
+├── frontend/               # Frontend application (see tech-stack.instructions.md)
+│   ├── src/
+│   │   ├── components/     # UI components (GOV.UK Design System)
+│   │   ├── pages/          # Page components
+│   │   └── App.tsx         # Root component
+│   ├── package.json
+│   └── vite.config.ts
 ├── user_stories/           # User stories generated from journeys (Day 1)
 │   └── story-NNN-slug.md   # One file per story with acceptance criteria
 ├── tests/
-│   ├── <ServiceName>.UnitTests/      # xUnit unit tests
-│   ├── <ServiceName>.IntegrationTests/# WebApplicationFactory tests
-│   ├── <ServiceName>.E2ETests/       # Playwright for .NET tests
-│   └── <ServiceName>.PerformanceTests/# k6 load tests (.k6.js)
+│   ├── unit/               # Backend unit tests
+│   ├── integration/        # API integration tests
+│   ├── e2e/                # Browser tests
+│   └── performance/        # Load tests
 ├── infra/                  # Terraform configuration
 │   ├── main.tf
 │   ├── variables.tf
@@ -49,39 +52,42 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context
-├── <ServiceName>.sln       # .NET solution file
+├── requirements.txt        # Backend dependencies
 └── .gitignore
 ```
 
 ## Build, Test, and Lint Commands
 
 ```bash
-# Restore dependencies
-dotnet restore
+# Install backend dependencies
+pip install -r requirements.txt
 
-# Build solution
-dotnet build
+# Install frontend dependencies
+cd frontend && npm ci && cd ..
 
-# Run the application locally
-dotnet run --project src/<ServiceName>.Web
+# Run the backend locally
+uvicorn app.main:app --reload --port 8000
 
-# Run all tests
-dotnet test
+# Run the frontend dev server
+cd frontend && npm run dev
+
+# Run backend tests
+pytest
 
 # Run unit tests only
-dotnet test tests/<ServiceName>.UnitTests
+pytest tests/unit/
 
 # Run integration tests only
-dotnet test tests/<ServiceName>.IntegrationTests
+pytest tests/integration/
 
-# Run E2E tests (Playwright for .NET)
-dotnet test tests/<ServiceName>.E2ETests
+# Run E2E tests
+pytest tests/e2e/ --browser chromium
 
-# Run with coverage
-dotnet test --collect:"XPlat Code Coverage"
+# Run backend linter
+ruff check . && ruff format --check .
 
-# Linter and formatter
-dotnet format --verify-no-changes
+# Run frontend linter
+cd frontend && npm run lint
 
 # Terraform
 cd infra && terraform init && terraform plan

@@ -1,85 +1,57 @@
 ---
 name: gds-service-standard
-description: 'Use when assessing a UKHSA digital service against the 14-point GDS Service Standard ahead of an Alpha, Beta, or Live assessment.'
+description: 'Use when assessing a feature or PR against the GDS Service Standard 14 points, or producing UKHSA Alpha service assessment evidence.'
 ---
 
-# GDS Service Standard — UKHSA Assessment
+# GDS Service Standard — Assessment Evidence
 
-This skill produces a GDS Service Standard assessment for UKHSA services. The standard applies to all government services and is the basis for Alpha/Beta/Live spend approval.
+This skill maps repository evidence to the [14-point GDS Service Standard](https://www.gov.uk/service-manual/service-standard) and identifies gaps for UKHSA Alpha assessment readiness.
 
 ## When to Use
 
-- Preparing for an Alpha, Beta, or Live assessment
-- Internal pre-assessment / readiness review
-- Auditing an existing service against the standard
+- Preparing for a UKHSA Alpha or Beta assessment
+- Reviewing a PR for Service Standard compliance
+- Generating an evidence report showing 14-point coverage
+- Identifying gaps in documentation, testing, or accessibility requirements
 
-## Output
+## The 14 Points — Evidence Checklist
 
-Create or update `docs/gds-assessment.md`. Include one section per point with evidence references (links to ADRs, research artefacts, monitoring dashboards, etc.).
-
-## The 14 Points
-
-| # | Point | Evidence to look for |
+| # | Standard | What to Look For |
 |---|---|---|
-| 1 | Understand users and their needs | User research artefacts, personas (see `ukhsa-user-stories`), accessibility research |
-| 2 | Solve a whole problem | Service blueprint, end-to-end journey maps |
-| 3 | Provide a joined-up experience across all channels | Integration with phone/post/in-person channels documented |
-| 4 | Make the service simple to use | Usability test results, task completion rates |
-| 5 | Make sure everyone can use the service | WCAG 2.2 AA audit (axe-core results), assisted-digital plan |
-| 6 | Have a multidisciplinary team | Team composition (delivery, design, research, eng, policy, ops) |
-| 7 | Use agile ways of working | Sprint cadence, retro outputs, backlog discipline |
-| 8 | Iterate and improve frequently | Deployment frequency, change lead time |
-| 9 | Create a secure service which protects users' privacy | DPIA (see `ukhsa-dpia`), threat model, NCSC CAF mapping |
-| 10 | Define what success looks like and publish performance data | KPI definitions, performance dashboard |
-| 11 | Choose the right tools and technology | ADRs (see `ukhsa-adr-writer`), tech stack rationale |
-| 12 | Make new source code open | Repo visibility, OSS licence, dependency provenance |
-| 13 | Use and contribute to open standards, common components and patterns | FHIR, OpenAPI, GOV.UK Design System, NHS Data Dictionary where relevant |
-| 14 | Operate a reliable service | SLOs, on-call rota, runbooks, incident process |
+| 1 | Understand users and their needs | User research artefacts, personas, user stories |
+| 2 | Solve a whole problem for users | Service map, end-to-end journey |
+| 3 | Provide a joined-up experience | Consistent with GOV.UK, NHS App |
+| 4 | Make the service simple to use | GOV.UK Design System components, one-thing-per-page |
+| 5 | Make sure everyone can use the service | WCAG 2.2 AA, axe-core results, assistive tech testing |
+| 6 | Have a multidisciplinary team | Team roles documented, clinical + IG input |
+| 7 | Use agile ways of working | Sprints, backlog (GitHub Issues), retros |
+| 8 | Iterate and improve frequently | Git log shows iterative commits, not big-bang |
+| 9 | Create a secure service | Security headers, dependency scanning, Key Vault |
+| 10 | Define what success looks like | KPIs, performance targets, k6 thresholds |
+| 11 | Choose the right tools and technology | ADRs explaining technology choices |
+| 12 | Make new source code open | Public repo, open licence |
+| 13 | Use and contribute to open standards | FHIR, OpenAPI, NHS Data Dictionary |
+| 14 | Operate a reliable service | Monitoring, `/health` endpoint, runbook |
 
-## UKHSA-Specific Evidence
+## Output Format
 
-| Area | UKHSA additions |
-|---|---|
-| Point 5 (accessibility) | Reference UKHSA Engineering Standards accessibility expectations and the GOV.UK Design System |
-| Point 9 (security/privacy) | DPIA + Safety Hazard Log + NCSC CAF + Cyber Essentials Plus |
-| Point 11 (tech choices) | ADRs justify .NET 10 / ASP.NET Core / EF Core / Azure UK South choices |
-| Point 13 (open standards) | NHS Number ISB 0149, FHIR UK Core, GOV.UK design patterns |
-| Point 14 (reliability) | Application Insights dashboards, Azure Service Health subscriptions, DR plan to UK West |
+**Create a new file** at `docs/gds-assessment.md`. Do **not** edit this skill file — it is a reference, not a template to fill in.
 
-## Assessment Output Structure
+Generate `docs/gds-assessment.md` with a table:
 
-```
-# GDS Service Standard Assessment — [Service Name]
-
-**Stage**: Alpha / Beta / Live
-**Date**: YYYY-MM-DD
-**Assessment lead**: [Name]
-
-## Summary
-- Strengths
-- Areas to improve
-- Recommendation
-
-## Point-by-point evidence
-### 1. Understand users and their needs
-- Evidence: [links / artefacts]
-- Notes: [text]
-
-…
-
-## Actions before next stage
-| # | Action | Owner | Target |
+```markdown
+| # | Standard | Status | Evidence | Gaps |
+|---|---|---|---|---|
+| 1 | Understand users | ✅ Met / ⚠️ Partial / ❌ Not met | [file links] | [what's missing] |
 ```
 
 ## Rules
 
-- Every point gets a section, even if "not yet applicable" — say so explicitly.
-- Evidence links resolve from within the repo or to authoritative internal systems — never to private cloud drives.
-- Pre-assessment must happen at least 2 weeks before the formal assessment date.
-- Assessment outcomes feed back into the backlog as tracked work.
+- Link to specific files and line numbers — not vague references
+- An Alpha assessment accepts partial evidence with a plan to complete
+- Always check both GDS standard AND UKHSA-specific angle (clinical safety, IG, design system)
 
 ## References
 
 - [GDS Service Standard](https://www.gov.uk/service-manual/service-standard)
-- [UKHSA Engineering Standards](https://ukhsa-collaboration.github.io/standards-org/)
-- [NCSC CAF](https://www.ncsc.gov.uk/collection/caf)
+- [GOV.UK Technology Code of Practice](https://www.gov.uk/guidance/the-technology-code-of-practice)

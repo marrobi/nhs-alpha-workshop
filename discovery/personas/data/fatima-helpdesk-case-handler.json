@@ -1,0 +1,39 @@
+{
+  "name": "Fatima Osei",
+  "jobTitle": "Case Handler - ImmForm Support (Digitally-Assisted Fallback)",
+  "slideTitle": "IMMFORM HELPDESK (FALLBACK)",
+  "experience": "3 years in ImmForm support; transitioned from manual helpdesk to assisted role",
+  "location": "UKHSA National Office",
+  "department": "ImmForm Support Team / Case Management",
+  "workflowStage": "HELPDESK — FALLBACK",
+  "workflowStageOrder": 5,
+  "photo": "../images/fatima-helpdesk-case-handler.jpg",
+  "photoPrompt": "Photorealistic headshot of a Black woman in her late 20s, wearing business professional attire, competent expression, natural lighting, modern helpdesk office with computer systems visible",
+  "background": [
+    "ImmForm support case handler; newer member of team",
+    "Works on complex registrations and fallback cases",
+    "Handles edge cases: shared mailboxes, invalid codes, approval delays",
+    "Recently upskilled on digital-assisted case management",
+    "Supports primary helpdesk operators on difficult applications"
+  ],
+  "goals": [
+    "Resolve complex registration cases efficiently and fairly",
+    "Support users who face barriers with standard registration",
+    "Maintain compliance while being flexible for edge cases",
+    "Build expertise in handling difficult scenarios"
+  ],
+  "wants": [
+    "Clear decision-making framework for edge cases",
+    "Tools to verify identity and account details",
+    "Access to Authorised Person contact information for escalation",
+    "Digital workflow to track case status and decisions",
+    "Training on regulatory requirements and compliance"
+  ],
+  "painPoints": [
+    "No standardised process for handling edge cases",
+    "Limited tools to verify user identity and account details",
+    "Depends on escalation to seniors for difficult decisions",
+    "Manual tracking makes it hard to report on case outcomes",
+    "Difficult users or unclear requirements can get stuck indefinitely"
+  ]
+}

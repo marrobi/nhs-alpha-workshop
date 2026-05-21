@@ -1,0 +1,39 @@
+{
+  "name": "Donna Eze",
+  "jobTitle": "Mpox Specialist Nurse - Infectious Disease Service",
+  "slideTitle": "APPLICANT — NHS",
+  "experience": "15 years in infectious disease nursing; 3 years managing Mpox vaccine programme",
+  "location": "London",
+  "department": "Infectious Disease Service / Mpox Vaccination Programme",
+  "workflowStage": "APPLICANT — NHS",
+  "workflowStageOrder": 1,
+  "photo": "../images/donna-mpox-specialist-nurse.jpg",
+  "photoPrompt": "Photorealistic headshot of a Black woman with braided hair in her mid-40s, wearing professional healthcare attire, authoritative expression, natural lighting, infectious disease clinic background",
+  "background": [
+    "Led development of local Mpox vaccination programme",
+    "Manages vaccine ordering and clinical delivery",
+    "Works with sexual health clinics, GUM services, and community partners",
+    "Trains other clinicians on Mpox vaccine protocols",
+    "Established good relationships with ImmForm support team"
+  ],
+  "goals": [
+    "Maintain reliable vaccine supply for Mpox prevention programme",
+    "Support expansion of vaccination to community partners",
+    "Ensure accurate records of vaccine stock and utilisation",
+    "Share best practice on Mpox ordering across region"
+  ],
+  "wants": [
+    "Fast-track registration reflecting programme lead status and experience",
+    "Support for adding partner organisations as authorised users",
+    "Regular stock notifications and reorder reminders",
+    "Benchmarking data on regional Mpox vaccine uptake",
+    "Direct escalation contact for urgent supply issues"
+  ],
+  "painPoints": [
+    "Current registration process doesn't reflect programme coordinator role",
+    "Cannot easily grant access to partner organisations",
+    "Manual process delays vaccine delivery when stock runs low",
+    "No visibility into other services' Mpox vaccine orders",
+    "Approval delays have previously caused stock shortages"
+  ]
+}

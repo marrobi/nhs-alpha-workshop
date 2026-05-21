@@ -6,25 +6,29 @@ applyTo: "**"
 
 This file defines the **non-negotiable organisational standards** that apply across all services, regardless of tech stack. It is the single source of truth for policies that every agent and instruction must respect.
 
-> **This file is optional.** If your team has no specific organisational standards to enforce, delete the content below (keeping only the frontmatter). Agents will then apply only the baseline NHS and GDS standards already defined in the other instruction files.
+> **This file is optional.** If your team has no specific organisational standards to enforce, delete the content below (keeping only the frontmatter). Agents will then apply only the baseline UKHSA and GDS standards already defined in the other instruction files.
 
-Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.github.io/standards-org/) and supporting documents under the `ukhsa-collaboration` GitHub organisation. This file restates the locally-enforceable invariants.
+The default standards below are drawn from the [UKHSA Engineering Standards] (https://ukhsa-collaboration.github.io/standards-org/) and [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW --> and the [NHS Cloud Centre of Excellence Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide) <!-- REVIEW -->. Replace or extend them with your own organisation's policies.
 
 ---
 
 ## Architecture Principles
 
+*Source: [NHS Architecture Manual](https://architecture.digital.nhs.uk/)* <!-- REVIEW For equivalent UKHSA-->
+
 - **Cloud First** — all services must be hosted on public cloud unless a clear, documented justification exists for an alternative; align with the [UK Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy)
 - **Open Standards** — use open web standards, open APIs, and open data formats by default; prefer FHIR R4 UK Core when exchanging clinical data
-- **Reuse Before Buy Before Build** — check whether a UKHSA, GDS, or NHS-shared capability already solves the problem; buy commodity services; build only where genuine differentiation exists
-- **Interoperable by Design** — exchange data through documented APIs and standard health data models (FHIR UK Core where applicable). Avoid point-to-point integration
+- **Reuse Before Buy Before Build** — demonstrate that existing government platforms were evaluated before procuring or building new capability
+- **Interoperability by Default** — expose data via versioned, documented APIs; avoid proprietary formats or protocols that prevent integration
 - **Sustainable Services** — minimise resource consumption (compute, storage, data retention); consider environmental impact at design time
 - **User-Centred Design** — all design decisions must be grounded in user research; services must meet the [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) 14 points
-- **Design for Accessibility** — WCAG 2.2 Level AA is the minimum; follow [NHS accessibility guidance](https://service-manual.nhs.uk/accessibility) and the [NHS Design System](https://service-manual.nhs.uk/design-system)
+- **Design for Accessibility** — WCAG 2.2 Level AA is the minimum; follow [GOV.UK accessibility guidance](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction) and the [GOV.UK Design System](https://design-system.service.gov.uk)
 
 ---
 
 ## Cloud & Deployment
+
+*Source: [NHS Cloud Principles](https://digital.nhs.uk/services/cloud-centre-of-excellence/strategy/nhs-cloud-principles)* <!-- REVIEW to see if UKHSA standards apply-->
 
 - **Zero-downtime deployments required** — use blue/green or canary/staged rollout strategies; no maintenance windows that make a service unavailable to users
 - **Rollback procedure must be documented** — every service must have a tested, documented rollback procedure before deployment to production
@@ -37,7 +41,7 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Security
 
-*Source: [NCSC 14 Cloud Security Principles](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles)*
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide) <!-- REVIEW if UKHSA standards apply--> and [NCSC 14 Cloud Security Principles](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles)*
 
 - **Secure by Design and by Default** — security controls must be built in from the start, not added after; default configuration must be the most secure option
 - **Defence in Depth** — apply multiple independent layers of security controls; do not rely on a single control
@@ -53,6 +57,8 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Data Durability & Backup
 
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)* <!-- REVIEW if UKHSA standards apply -->
+
 - **All persistent data must be backed up** to a geographically separate, immutable backup service; backups must be protected against ransomware (immutable/WORM storage)
 - **Recovery Point Objective (RPO)** must be defined, documented, and tested for each service; default target: ≤ 1 hour for services handling patient data
 - **Recovery Time Objective (RTO)** must be defined, documented, and tested for each service; default target: ≤ 4 hours for services handling patient data
@@ -64,7 +70,7 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Test Coverage
 
-*Source: [GDS quality requirements](https://www.gov.uk/service-manual/service-standard)*
+*Source: [UKHSA service standard and GDS quality requirements](https://www.gov.uk/service-manual/service-standard)*
 
 - **Minimum 80% line coverage** enforced in CI — builds must fail if coverage drops below 80%
 - **Minimum 80% branch coverage** enforced in CI
@@ -76,7 +82,7 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Secret Scanning
 
-*Source: [NCSC 14 Cloud Security Principles](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles)*
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)* <!-- REVIEW if UKHSA standards apply -->
 
 - **Secret scanning must be enabled on all repositories** — use GitHub Advanced Security secret scanning or an equivalent tool
 - **Secret scanning must run in CI as part of the PR workflow** — PRs with detected secrets must be blocked from merging automatically
@@ -87,9 +93,10 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Coding Standards
 
-*Source: [GDS Service Standard Point 11](https://www.gov.uk/service-manual/service-standard/point-11-choose-the-right-tools-and-technology)*
+*Source: [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW if UKHSA standards apply --> and [GDS Service Standard Point 11](https://www.gov.uk/service-manual/service-standard/point-11-choose-the-right-tools-and-technology)*
 
 - **Linter and formatter must be enforced in CI** — the tools are specified in `tech-stack.instructions.md`; CI must fail on lint errors
+- **All function signatures must have type annotations** — in Python this means full type hints; in TypeScript this means explicit types on all function parameters and return values
 - **No `TODO` or `FIXME` comments in merged code** — raise a GitHub Issue instead; CI should warn on (or block) `TODO`/`FIXME` in merged branches
 - **PR review required before merge** — at least one approving review from a team member is required; branch protection must enforce this
 - **No force-push to the default branch** — branch protection must prevent force-pushes and branch deletion on `main`/`master`
@@ -98,6 +105,8 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 ---
 
 ## Dependency Management
+
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)* <!-- REVIEW if UKHSA standards apply -->
 
 - **Pin exact versions for all production dependencies** — no loose ranges (`>=`, `~=`, `^`) in production dependency files
 - **Automated dependency update tooling configured** — use Dependabot or Renovate to detect outdated and vulnerable dependencies
@@ -108,7 +117,7 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Observability
 
-*Source: [GDS Service Standard Point 14](https://www.gov.uk/service-manual/service-standard/point-14-operate-a-reliable-service)*
+*Source: [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW if UKHSA standards apply --> and [GDS Service Standard Point 14](https://www.gov.uk/service-manual/service-standard/point-14-operate-a-reliable-service)*
 
 - **Structured JSON logging required** — all application logs must be structured JSON, not plaintext
 - **Correlation IDs (`X-Request-ID`) in every log entry** — all requests must include a correlation ID for distributed tracing
@@ -120,27 +129,10 @@ Authoritative source: [UKHSA Engineering Standards](https://ukhsa-collaboration.
 
 ## Change Management
 
+*Source: [NHS Cloud Security Good Practice Guide](https://digital.nhs.uk/services/cloud-centre-of-excellence/cloud-security-good-practice-guide)* <!-- REVIEW if UKHSA standards apply -->
+
 - **All changes to production must go through a PR workflow** — no direct commits to the default branch
 - **PR review required before merge** — at least one approving review from a team member
 - **CI must pass before merge** — all quality gates (lint, test, coverage, security scan) must be green
 - **Rollback procedure must be documented and tested** — every service must have a documented rollback procedure before deployment to production
 - **Change history must be auditable** — all changes tracked in version control with meaningful commit messages
-
-## Governance & Compliance
-
-- Every service MUST have an up-to-date Service Information document (purpose, data flows, owners, dependencies)
-- A DPIA MUST exist for any service processing personal data and be refreshed when scope changes
-- Services touching regulated workloads (e.g. MHRA Annex 11 computerised systems) MUST follow the additional GxP rules — see service-specific instructions
-- GDS Service Standard assessment MUST be passed (or self-assessed and approved) before public launch
-
-## Definition of Done
-
-A change is "done" when:
-
-- The acceptance criteria are met and demonstrated
-- Tests are written and passing at the required coverage
-- Linting, formatting, security scans, and accessibility checks pass in CI
-- Documentation (README, ADRs, runbooks, OpenAPI) is updated
-- Observability is in place (logs, metrics, alerts where appropriate)
-- The change has been deployed to a non-production environment and verified end-to-end
-- Risks and follow-ups are captured as tracked issues

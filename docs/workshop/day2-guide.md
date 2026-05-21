@@ -57,11 +57,11 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 06 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
 | 07 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
 | 08 | Performance Load Tests | Performance | Service can handle expected load |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 09 | DCB0129 Clinical Safety | UKHSA Clinical Safety | Clinical risk managed |
+| 10 | DPIA | UKHSA DPIA Advisor | Data protection considered |
+| 11 | GDS Assessment Evidence | UKHSA GDS Assessor | 14-point standard mapped |
+| 12 | Runbook & Deployment Docs | UKHSA Service Builder | Operational readiness |
+| 13 | MKDocs Documentation Site | UKHSA Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -71,17 +71,17 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 |---|---|
 | 1. Understand users and their needs | Discovery: personas, user journeys (Day 1) |
 | 2. Solve a whole problem for users | Working prototype with scoped journeys |
-| 3. Provide a joined up experience | NHS Design System, consistent components |
+| 3. Provide a joined up experience | GOV.UK Design System, consistent components |
 | 5. Iterate and improve | ADRs, Git history, PR iteration |
 | 7. Use agile ways of working | Issues, PRs, iterative delivery |
 | 9. Create a secure service | Security audit, OWASP checklist |
 | 10. Define what success looks like | Performance metrics, k6 thresholds |
 | 11. Choose the right tools and technology | ADRs documenting technology choices |
 | 12. Make new source code open | Public repo, open source licence |
-| 13. Use and contribute to open standards | NHS Design System, FHIR references |
+| 13. Use and contribute to open standards | GOV.UK Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, runbook |
 
-Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence report.
+Use the **UKHSA GDS Assessor** agent (Issue 11) to generate the full evidence report.
 
 ## Tips
 
@@ -115,11 +115,11 @@ The agent will:
 
 ## When All Done — MKDocs Documentation Site
 
-Once all issues are merged, use the **NHS Documentation** agent to build a single MKDocs site that pulls every alpha artefact together into one browsable, shareable site.
+Once all issues are merged, use the **UKHSA Documentation** agent to build a single MKDocs site that pulls every alpha artefact together into one browsable, shareable site.
 
-**Agent**: NHS Documentation
+**Agent**: UKHSA Documentation
 
-> Build the MKDocs documentation site for this service. Read the codebase, user stories, ADRs, clinical safety, DPIA, and GDS evidence artefacts to generate all pages. Use NHS blue branding. Verify with `mkdocs build`.
+> Build the MKDocs documentation site for this service. Read the codebase, user stories, ADRs, clinical safety, DPIA, and GDS evidence artefacts to generate all pages. Use GOV.UK blue branding. Verify with `mkdocs build`.
 
 The agent will:
 
@@ -136,7 +136,7 @@ The agent will:
    - **Clinical Safety** — from `docs/clinical-safety/`
    - **DPIA** — from `docs/dpia/`
    - **ADRs** — index of all records in `docs/adr/`
-3. Apply NHS blue (`#005eb8`) theming
+3. Apply GOV.UK blue (`#1d70b8`) theming
 4. Run `mkdocs build` to verify no broken links
 
 Preview locally with:
@@ -144,4 +144,4 @@ Preview locally with:
 mkdocs serve
 ```
 
-The site provides a single artefact you can share with assessors, stakeholders, and the wider team as evidence of a complete NHS Alpha.
+The site provides a single artefact you can share with assessors, stakeholders, and the wider team as evidence of a complete UKHSA Alpha.

@@ -13,8 +13,16 @@ style: |
     flex-direction: column;
     padding: 0.7rem;
     font-size: 0.8rem;
-    height: 100%;
+    height: 90%;
     overflow: hidden;
+    position: relative;
+  }
+
+  section > h1 {
+    margin-left: 1.5cm !important;
+    margin-top: 50px !important;
+    position: relative;
+    top: 20px;
   }
   
   .persona-header {
@@ -26,7 +34,7 @@ style: |
   .persona-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #00838F;
+    color: #007C91;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -44,8 +52,9 @@ style: |
     display: flex;
     gap: 1rem;
     flex: 1;
+    margin-top: 0.6cm;
     min-height: 0;
-    align-items: stretch;
+    align-items: flex-start;
     height: 100%;
   }
 
@@ -54,6 +63,8 @@ style: |
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    margin-left: 1cm;
+    margin-top: 0;
     height: 100%;
     min-height: 0;
     max-height: 100%;
@@ -63,7 +74,7 @@ style: |
   
   .profile-section {
     background: white;
-    border: 3px solid #00838F;
+    border: 3px solid #007C91;
     border-radius: 10px;
     padding: 0.6rem 0.75rem;
     text-align: center;
@@ -80,7 +91,7 @@ style: |
     font-size: 0.55rem;
     color: #999;
     margin-bottom: 0.4rem;
-    background: #f5f5f5;
+    background: #007C91;
     padding: 0.1rem 0.3rem;
     border-radius: 3px;
   }
@@ -89,7 +100,7 @@ style: |
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 2px solid #00838F;
+    border: 2px solid #007C91;
     margin: 0 auto;
     flex-shrink: 0;
     object-fit: cover;
@@ -98,7 +109,7 @@ style: |
   .persona-name {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #00838F;
+    color: #007C91;
     margin: 0.2rem 0 0.1rem 0;
     text-transform: uppercase;
     line-height: 1.0;
@@ -133,7 +144,7 @@ style: |
   }
 
   .personal-data h4 {
-    color: #00838F;
+    color: #007C91;
     font-size: 0.75rem;
     margin: 0;
     text-transform: uppercase;
@@ -193,6 +204,7 @@ style: |
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    margin-top: 0;
     min-height: 0;
   }
   
@@ -204,18 +216,22 @@ style: |
   }
   
   .content-box {
-    background: rgba(0, 131, 143, 0.05);
+    background: rgba(0, 94, 184, 0.05);
     border-radius: 6px;
     padding: 0.7rem;
     margin-bottom: 0.6rem;
-    border-left: 3px solid #00838F;
+    border-left: 3px solid #007C91;
     flex-shrink: 0;
   }
-  
+
+  .boxed-section {
+    border: 3px solid #007C91;
+  }
+
   .section-title {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #00838F;
+    color: #007C91;
     margin: 0 0 0.4rem 0;
     text-transform: uppercase;
     line-height: 1.1;
@@ -234,10 +250,10 @@ style: |
   }
   
   .skills-box {
-    background: rgba(0, 131, 143, 0.05);
+    background: rgba(0, 94, 184, 0.05);
     border-radius: 8px;
     padding: 1rem;
-    border-left: 3px solid #00838F;
+    border-left: 3px solid #007C91;
     flex: 1;
     min-height: 0;
   }
@@ -251,7 +267,7 @@ style: |
   }
   
   .stars {
-    color: #00838F;
+    color: #007C91;
     font-size: 0.9rem;
   }
   
@@ -263,7 +279,7 @@ style: |
   }
   
   .system-badge {
-    background: #00838F;
+    background: #007C91;
     color: white;
     padding: 0.3rem 0.5rem;
     border-radius: 4px;
@@ -273,34 +289,26 @@ style: |
     flex: 1;
   }
   
-  .logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    flex-shrink: 0;
-    height: auto;
-    padding: 0.3rem 0;
+  .ukhsa-logo-top-right {
+    position: absolute;
+    top: 0.5cm;
+    right: 0.7cm;
+    z-index: 2;
   }
 
-  .logo-container img {
-    max-width: 200px;
-    height: auto;
+  .ukhsa-logo-top-right img {
+    height: 45px;
+    width: auto;
     object-fit: contain;
-    flex-shrink: 0;
-  }
-
-  .logo-container img:first-child {
-    max-height: 28px;
-  }
-
-  .logo-container img:last-child {
-    max-height: 20px;
   }
 
 ---
 
 # {{slideTitle}}
+
+<div class="ukhsa-logo-top-right">
+  <img src="../images/UKHSA-master-logo.jpg" alt="UKHSA logo" />
+</div>
 
 <div class="persona-content">
 
@@ -327,29 +335,25 @@ style: |
     </div>
   </div>
 
-  <div class="logo-container">
-    <img src="../images/ukhsa-logo.png" alt="UKHSA logo" />
-    <img src="../images/microsoft-logo.png" alt="Microsoft logo" />
-  </div>
 </div>
 
 <div class="content-single-column">
   
-  <div class="content-box">
+  <div class="content-box boxed-section goals-box">
     <h3 class="section-title">Goals & Desired Outcomes</h3>
     <ul>
 {{goalItems}}
     </ul>
   </div>
   
-  <div class="content-box">
+  <div class="content-box boxed-section">
     <h3 class="section-title">Wants & Needs</h3>
     <ul>
 {{wantItems}}
     </ul>
   </div>
 
-  <div class="content-box">
+  <div class="content-box boxed-section">
     <h3 class="section-title">Pain Points & Frustrations</h3>
     <ul>
 {{painPointItems}}

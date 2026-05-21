@@ -42,7 +42,7 @@ For each persona, create a JSON file in `discovery/personas/data/` following thi
   "jobTitle": "Job Title - Specialization/Band",
   "slideTitle": "ROLE CATEGORY IN CAPS",
   "experience": "X years in role/field with relevant background",
-  "location": "Organization/Region",
+  "location": "UKHSA Region/Office",
   "department": "Department/Service Name",
   "photo": "../images/placeholder.jpg",
   "photoPrompt": "Detailed AI image generation prompt for a photorealistic professional headshot",
@@ -75,7 +75,8 @@ For each persona, create a JSON file in `discovery/personas/data/` following thi
 
 **JSON File Naming Convention:**
 - For UKHSA staff: `firstname-job-role.json` (e.g., `sanjay-programme-director.json`)
-- For external personas: `firstname-role-organisation.json` (e.g., `emma-ibd-nurse-specialist-nhs.json`)
+- For patients: `firstname-patient-context.json` (e.g., `ellie-young-patient-crohns.json`)
+- For carers: `firstname-carer-context.json`
 
 **Key Requirements:**
 1. **Specific, not generic** - Each item should feel personal to this individual, not a role template
