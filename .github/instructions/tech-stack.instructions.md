@@ -58,8 +58,10 @@ The solution has three distinct project types — do not mix them:
 ### MVC Form Controllers
 
 - Use ASP.NET Core MVC controllers with Razor views (`Views/` folder) — **do not use Razor Pages** (`Pages/` folder); they are a different ASP.NET Core pattern and must not be used in this project
-- Inherit from `FormStepController<TModel>` base class (multi-step form framework)
-- Each step implements `IFormStep<TModel>` with a strongly typed model and Razor view
+- Inherit from `FormStepController<TModel>` base class; it provides: server-side session-backed step state, sequential and non-sequential navigation, back-link generation, model validation orchestration per step, and check-your-answers payload assembly
+- Each step implements `IFormStep<TModel>` with a strongly typed model, a Razor view using GDS tag helpers, and an optional step-visibility predicate (used for conditional steps such as wholesaler-specific screens)
+- Define the step sequence in a JSON configuration file or fluent builder — never hardcode the sequence in the controller; this allows different applications to define different journeys without modifying base framework code
+- Abstract API integration behind `IRegistrationApiClient` — different applications substitute their own implementation; never call the registration API directly from a controller
 - Use `[HttpGet]` / `[HttpPost]` with Model binding and `[ValidateAntiForgeryToken]` on all POST actions
 - Server-side session state only — never store journey state in hidden fields or query parameters
 - Use `ModelState.IsValid` with Data Annotations (`[Required]`, `[MaxLength]`, `[RegularExpression]`) or FluentValidation
