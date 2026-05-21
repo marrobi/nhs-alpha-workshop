@@ -96,7 +96,7 @@ The default standards below are drawn from the [UKHSA Engineering Standards] (ht
 *Source: [NHS Architecture Manual](https://architecture.digital.nhs.uk/) <!-- REVIEW if UKHSA standards apply --> and [GDS Service Standard Point 11](https://www.gov.uk/service-manual/service-standard/point-11-choose-the-right-tools-and-technology)*
 
 - **Linter and formatter must be enforced in CI** — the tools are specified in `tech-stack.instructions.md`; CI must fail on lint errors
-- **All function signatures must have type annotations** — in Python this means full type hints; in TypeScript this means explicit types on all function parameters and return values
+- **All function signatures must have type annotations** — in C# this means `<Nullable>enable</Nullable>` in `*.csproj`, explicit return types on all public methods, and no `var` on public API surfaces (see `.github/instructions/dotnet-coding-standards.instructions.md`); in TypeScript this means explicit types on all function parameters and return values
 - **No `TODO` or `FIXME` comments in merged code** — raise a GitHub Issue instead; CI should warn on (or block) `TODO`/`FIXME` in merged branches
 - **PR review required before merge** — at least one approving review from a team member is required; branch protection must enforce this
 - **No force-push to the default branch** — branch protection must prevent force-pushes and branch deletion on `main`/`master`

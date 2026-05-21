@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.tsx,**/*.jsx,**/frontend/**"
+applyTo: "**/*.cshtml,**/Views/**,**/*.tsx,**/*.jsx"
 ---
 
 # UKHSA Frontend Standards

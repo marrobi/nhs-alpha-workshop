@@ -16,17 +16,17 @@ This is a UK Health Security Agency (UKHSA) digital service following the [GDS S
 - Follow existing patterns in the codebase before introducing new ones
 - Keep functions small and focused — one function, one job
 - Write tests alongside implementation — aim for 80%+ coverage
-- Use type hints on all function signatures
-- Use async/await for I/O-bound operations (FastAPI is async-first)
+- Use explicit types on all method signatures — see `.github/instructions/dotnet-coding-standards.instructions.md` for C# naming and type conventions
+- Use async/await for I/O-bound operations; all async .NET methods must accept a `CancellationToken` parameter
 - Handle errors explicitly — never swallow errors silently
-- Follow [PEP 8](https://peps.python.org/pep-0008/) via `ruff` linter/formatter
-- **No silent fallback values** — never provide fallback/default values for required configuration (env vars, URLs, secrets). Code must fail explicitly with a clear error when a dependency is missing. Use `os.environ["VAR"]` (raises `KeyError`) instead of `os.environ.get("VAR", "default")`. In JavaScript/k6, validate and throw instead of using `||` fallbacks.
+- Follow the [Microsoft C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions); run `dotnet format` and enforce .NET analysers in CI. For k6 performance scripts (JavaScript), use ESLint
+- **No silent fallback values** — never provide fallback/default values for required configuration (secrets, connection strings, required URLs). Code must fail explicitly with a clear error when a dependency is missing. In .NET, use `builder.Configuration["Section:Key"]` — never `.GetValue<T>("Key", defaultValue)` for secrets or required config. In JavaScript/k6, validate and throw instead of using `||` fallbacks.
 - **No unauthorised mocking of services** — do not mock, stub, or fake cloud services, NHS APIs, databases, or other external dependencies unless there is an explicit user story requesting that mock. Unit tests may mock external calls for isolation, but integration tests, E2E tests, and application code must use real services or real sandbox environments. If a dependency is unavailable, the code must fail — not silently degrade to a local substitute. For cloud services with no local emulator (e.g. hosted AI/LLM APIs), see the Mocking Boundary in `testing.instructions.md` — an ADR authorising the integration is sufficient justification.
 
 ## UKHSA-Specific Rules
 
 - **Never include real patient data** — use synthetic NHS numbers (e.g. `943 476 5919`), synthetic names, and placeholder dates
-- **All user-facing pages must use `govuk-frontend` components** — see the [GOV.UK Design System](https://design-system.service.gov.uk)
+- **All user-facing pages must use GOV.UK Design System components via `GovUk.Frontend.AspNetCore` tag helpers** — see the [GOV.UK Design System](https://design-system.service.gov.uk)
 - **Follow the [GOV.UK content design guidance](https://www.gov.uk/guidance/content-design)** — plain English, short sentences, active voice
 - **WCAG 2.2 Level AA is mandatory** — see [GOV.UK accessibility guidance](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction)
 - **Health data is UK GDPR special category (Art. 9)** — always consider data protection implications

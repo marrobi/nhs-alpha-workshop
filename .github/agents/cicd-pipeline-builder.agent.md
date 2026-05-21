@@ -13,51 +13,87 @@ You create GitHub Actions workflow files, Dependabot configuration, and branch p
 
 ## Pipeline Architecture
 
-UKHSA Alpha services need two core pipelines:
+UKHSA services require seven GitHub Actions workflows. Read `tech-stack.instructions.md` for the exact tools, runtimes, and commands to use in each step.
 
 ```
 .github/
 ├── workflows/
-│   ├── ci.yml                    # Runs on every PR to main
-│   └── deploy.yml                # Runs on push to main (after merge)
-└── dependabot.yml                # Automated dependency updates
+│   ├── pr-checks.yml          # Every PR to main: lint, test, coverage, SonarQube, axe-core, Dependabot check
+│   ├── build-push.yml         # Push to main / semver tag: Docker build, tag, push to ACR, Snyk scan, SBOM
+│   ├── deploy-dev.yml         # After build-push on main: Terraform apply (dev), deploy, smoke tests
+│   ├── deploy-staging.yml     # Release tag or manual: Terraform apply (staging), integration tests, OWASP ZAP scan, manual gate
+│   ├── deploy-prod.yml        # Manual approval after staging gate: Terraform apply (prod), blue/green slot swap, smoke tests
+│   ├── scheduled-security.yml # Nightly 02:00 UTC: Dependabot audit, Snyk on production image, Teams alert
+│   └── validate-terraform.yml # PR touching infra/**: fmt -check, validate, tflint, Checkov, plan as PR comment
+└── dependabot.yml           # Automated dependency updates
 ```
 
-## CI Pipeline (`ci.yml`)
+## Workflow Details
 
-Runs on every pull request to `main`. Must pass before merge.
+### `pr-checks.yml` (every PR to main)
 
-Read `tech-stack.instructions.md` to determine the backend language, frontend framework, linter, test runner, coverage tool, dependency audit command, and IaC tool. Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to CI/CD and pipelines. Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository. Generate the workflow steps from the actual stack — do not hardcode language versions or tool names.
+Read `tech-stack.instructions.md` to determine the backend language, linter, test runner, and coverage tool. Required jobs:
 
-### Required Jobs
+1. **Build & test**: setup .NET runtime → restore NuGet → `dotnet build` → `dotnet test` with coverage (fail under 80%) → post coverage summary as PR comment
+2. **SAST**: SonarQube scan (not CodeQL — unavailable for private repositories)
+3. **Dependency audit**: `dotnet list package --vulnerable` + Snyk dependency scan (fail on Critical or High)
+4. **Accessibility**: axe-core scan against localhost
+5. **IaC validation**: `terraform fmt -check`, `terraform validate` (if IaC changes present)
 
-1. **Backend**: setup language runtime → install dependencies → lint → test with coverage (fail under 80%) → dependency audit (fail on critical/high)
-2. **Frontend**: setup runtime → install dependencies → lint → production build → unit tests (if configured)
-3. **IaC validation**: setup IaC tool → init (no backend) → validate → format check
+### `build-push.yml` (push to main or semver tag)
 
-### Principles
+1. Multi-stage Docker build (`mcr.microsoft.com/dotnet/sdk:10.0` → `mcr.microsoft.com/dotnet/aspnet:10.0`)
+2. Tag with Git SHA and semver
+3. Push to Azure Container Registry via **OIDC federated identity** — never store credentials as secrets
+4. Generate SBOM (Syft)
+5. Run Snyk container vulnerability scan — fail on Critical or High
+6. Publish signed image digest as build artefact
 
-- Use `permissions: contents: read` (minimal)
-- Cache dependencies for both backend and frontend
-- Set `timeout-minutes: 10` on all jobs
-- Pin action versions (e.g. `actions/checkout@v4`)
+### `deploy-dev.yml` (after build-push on main)
 
-## Deploy Pipeline (`deploy.yml`)
+1. Authenticate to Azure via OIDC (`azure/login@v2`)
+2. Terraform plan and apply (dev environment)
+3. Deploy to Azure Container App dev revision
+4. Run smoke test suite against dev URL
+5. Post deployment summary to Teams channel
 
-Runs on push to `main` (after PR merge). Deploys to Azure UK South.
+### `deploy-staging.yml` (release tag or manual trigger)
 
-Read `tech-stack.instructions.md` for the hosting platform and build commands. Generate language-appropriate setup, build, package, and deploy steps.
+1. Terraform plan and apply (staging)
+2. Deploy to staging Container App revision
+3. Run full integration test suite
+4. Run OWASP ZAP baseline security scan
+5. Post scan report as artefact
+6. **Require manual approval** from ImmForm Technical Services team before prod
 
-### Required Steps
+### `deploy-prod.yml` (manual approval after staging gate)
 
-1. Authenticate to Azure using OpenID Connect (OIDC) — never use service principal secrets
-2. Setup language runtimes from tech stack
-3. Install dependencies and build frontend for production
-4. Package application for deployment
-5. Deploy using the platform CLI (e.g. `az webapp deploy`)
-6. Verify health endpoint returns 200
+1. Terraform apply (prod)
+2. Blue/green revision swap on Container App
+3. Production smoke tests
+4. GitHub release tag
+5. Post deployment audit record to Azure Monitor custom event log
 
-### Principles
+### `scheduled-security.yml` (nightly 02:00 UTC)
+
+1. Dependabot full dependency audit
+2. Snyk scan on latest production image digest including secrets detection
+3. Alert via Teams webhook on any Critical or High finding
+
+### `validate-terraform.yml` (PR touching `infra/**`)
+
+1. `terraform fmt -check`
+2. `terraform validate`
+3. `tflint`
+4. Checkov IaC security scan
+5. Post plan output as PR comment
+
+### Branch and Environment Strategy
+
+- **`feature/*` branches**: `pr-checks.yml` on push. No deployment.
+- **`main` branch**: `build-push.yml` + `deploy-dev.yml` run automatically on merge.
+- **`release/*` tags**: `deploy-staging.yml` triggers automatically. `deploy-prod.yml` requires named ImmForm Technical Services member approval.
+- All deployments to staging and production require Snyk scan passing and integration tests green.
 
 - `permissions: id-token: write` for OIDC, `contents: read`
 - Use GitHub Environment secrets for Azure credentials (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`)
@@ -79,16 +115,15 @@ Generate `.github/dependabot.yml` with ecosystems matching `tech-stack.instructi
 
 ## Build Sequence
 
-1. Check if `.github/workflows/ci.yml` exists — create or update it
-2. Check if `.github/workflows/deploy.yml` exists — create or update it
-3. Check if `.github/dependabot.yml` exists — create it
-4. Validate workflow syntax: `actionlint` if available, or manual review of YAML
-5. Run a dry-run of CI steps locally to verify (ruff, pytest, terraform validate)
-6. Recommend branch protection rules to the team
+1. Check which workflow files already exist in `.github/workflows/` — create or update each of the seven
+2. Check if `.github/dependabot.yml` exists — create it with ecosystems for NuGet, Docker, GitHub Actions, and Terraform (weekly, 5 PR limit)
+3. Validate workflow YAML syntax with `actionlint` if available
+4. Validate Terraform steps by running `terraform validate` locally
+5. Recommend branch protection rules: require `pr-checks` to pass before merge on `main`, prevent force-push
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+The following MCP servers can be configured in `.vscode/mcp.json` and via VS Code extensions — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
 - **Context7** — use to look up current GitHub Actions and CI/CD tool documentation
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to verify Azure resource configuration when building deploy pipelines
 
@@ -96,6 +131,5 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
 
 - [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 - [Azure Login Action](https://github.com/azure/login)
-- [actions/setup-python](https://github.com/actions/setup-python)
-- [actions/setup-node](https://github.com/actions/setup-node)
+- [actions/setup-dotnet](https://github.com/actions/setup-dotnet)
 - [hashicorp/setup-terraform](https://github.com/hashicorp/setup-terraform)

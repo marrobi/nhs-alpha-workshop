@@ -62,7 +62,7 @@ Generate documentation by reading existing code and artefacts — do not invent 
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json`:
+The following MCP servers can be configured in `.vscode/mcp.json` — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
 - **Context7** — use to look up current MKdocs and library documentation
 - **Draw.io** — use to read, create, and edit draw.io architecture diagrams when documenting the architecture
 

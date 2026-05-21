@@ -135,4 +135,6 @@ Once the user confirms the stories, tell them:
 - **One file per story** — each story must be independently referenceable
 - **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `discovery/personas/persona-report.md`
 - **All four acceptance criteria categories are mandatory** — use "N/A" for Clinical Safety only if the story genuinely has no clinical data
+- **NHS Number acceptance criteria (ISB 0149) apply only if the service collects patient records** — for orderer or staff registration services that hold no patient data, omit NHS Number criteria from the Functional and Data Protection categories
+- **FR-22 reusable form framework** — if the requirements include a reusable multi-step form framework as a `Must` requirement, create an explicit story for it; it is easily missed as it reads like infrastructure but is a deliverable with testable acceptance criteria
 - **Priority order comes from the ADR** — the Architect has already prioritised journeys by riskiest assumption; stories inherit that priority

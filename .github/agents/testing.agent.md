@@ -1,6 +1,6 @@
 ---
 name: 'Testing'
-description: 'Testing agent — writes unit and integration tests with pytest + httpx alongside implementation. 80% coverage target for UKHSA services.'
+description: 'Testing agent — writes unit and integration tests alongside implementation using the framework defined in tech-stack.instructions.md. 80% coverage target for UKHSA services.'
 ---
 
 # Testing
@@ -24,13 +24,13 @@ Read `tech-stack.instructions.md` for the backend test runner and client library
 
 ### Route Testing
 
-Use the test client for the backend framework (e.g. `httpx.AsyncClient` for FastAPI, `supertest` for Express). Create a shared fixture for the test client in the test configuration file. Test HTTP method, status code, response body, headers, and content type.
+Read `tech-stack.instructions.md` to determine the test client and framework. For .NET: use `WebApplicationFactory<Program>` and `HttpClient`; `[TestFixture]` / `[Test]` / `[SetUp]` NUnit attributes. Test HTTP method, status code, response body, headers, and content type.
 
-### Fixtures
+### Fixtures and Setup
 
-- Use shared configuration file for fixtures (test client, mock data, database setup)
-- Use async test support if the backend framework is async
-- Mock external dependencies using the standard mocking library for the language. This applies to **unit tests only** — integration and E2E tests must use real services or real sandbox environments. Do not create mock service implementations (e.g. fake Azure Key Vault, in-memory database substitutes) unless an explicit user story requests it.
+- Use `[SetUp]` / `[OneTimeSetUp]` for shared test setup (test client, mock data, database setup)
+- Inject `WebApplicationFactory<Program>` via constructor for integration test classes
+- Mock external dependencies using `Moq` or `NSubstitute`. This applies to **unit tests only** — integration and E2E tests must use real services or real sandbox environments. Do not create mock service implementations (e.g. fake Azure Key Vault, in-memory database substitutes) unless an explicit user story requests it.
 
 ### What to Test
 
@@ -48,7 +48,7 @@ Use the test client for the backend framework (e.g. `httpx.AsyncClient` for Fast
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json`:
+The following MCP servers can be configured in `.vscode/mcp.json` — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
 - **Context7** — use to look up current documentation for test frameworks (pytest, httpx, Vitest, etc.) when writing tests
 
 ## Rules

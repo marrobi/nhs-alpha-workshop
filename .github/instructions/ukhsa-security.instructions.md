@@ -33,7 +33,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 ### Sessions & Cookies
 
 - Session cookies: httponly, secure, samesite strict
-- Session secrets loaded from environment variables, never hardcoded. Use `os.environ["VAR"]` (bracket notation — raises `KeyError` if missing) for secrets and required configuration. Never use `os.environ.get()` with a fallback value for secrets or required config — missing dependencies must fail loudly
+- Session secrets loaded from configuration, never hardcoded. In .NET, use `builder.Configuration["Section:Key"]` (throws if missing) for secrets and required configuration. Never use `.GetValue<T>("Key", defaultValue)` with a fallback value for secrets or required config — missing dependencies must fail loudly
 
 ### Logging — PII Rules
 
@@ -53,7 +53,7 @@ Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) for all securi
 
 - **No shared access keys** — never use storage account keys, database connection strings with passwords, or shared access signatures (SAS) for service-to-service or service-to-data communication. Use Managed Identity (MSI) with Azure RBAC role assignments instead.
 - **No public endpoints for backend services** — databases, storage accounts, Key Vault, and other data-plane services must not be accessible from the public internet. Use Private Endpoints with VNet integration for all service-to-service and service-to-data communication.
-- **App Service VNet integration** — the App Service must be integrated into a VNet so it can reach Private Endpoints. Only the App Service's public-facing HTTPS endpoint should be internet-accessible.
+- **Container Apps VNet integration** — the Container App must be deployed into a VNet so it can reach Private Endpoints. Only the Container App's public-facing HTTPS ingress should be internet-accessible.
 - **Least privilege RBAC** — grant Managed Identities only the minimum roles required (e.g. `Storage Blob Data Reader`, `Key Vault Secrets User`, `SQL DB Contributor`). Never assign `Owner` or `Contributor` at the resource group level for data access.
 - **Disable local auth where possible** — for Azure resources that support it (Storage, Key Vault, SQL), disable key-based/local authentication and enforce Entra ID-only access.
 

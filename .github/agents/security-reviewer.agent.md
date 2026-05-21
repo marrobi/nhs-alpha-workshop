@@ -24,16 +24,17 @@ Read these before starting:
 
 ### 2. Input Validation & Injection
 - [ ] All input validated at API boundary via framework validation layer
-- [ ] NHS Number: format (10 digits) + modulus 11 check digit validated per `ukhsa-number.instructions.md`
-- [ ] No string concatenation in DB queries — parameterised only
+- [ ] NHS Number: format (10 digits) + modulus 11 check digit validated per `ukhsa-number.instructions.md` — **only applicable if the service collects patient records; not required for orderer registration services**
+- [ ] No string concatenation in DB queries — parameterised / EF Core only
 - [ ] No `eval`/`exec`/shell injection with user input
-- [ ] Frontend never renders unsanitised user input as raw HTML
+- [ ] Frontend never renders unsanitised user input as raw HTML (no `@Html.Raw()` with user content)
+- [ ] Shared mailbox addresses explicitly rejected with GDS error message (FR-03: "Enter an individual email address. Shared mailboxes cannot be used.")
 - [ ] File uploads (if any) validate MIME type, size, filename
 
 ### 3. Authentication & Sessions
 - [ ] Session cookies: `httponly`, `secure`, `samesite=strict`
-- [ ] Session secrets from env vars, never hardcoded
-- [ ] CSRF on all state-changing forms
+- [ ] Session secrets from env vars / Key Vault, never hardcoded
+- [ ] CSRF: `builder.Services.AddAntiforgery()` registered and `[ValidateAntiForgeryToken]` on all POST actions
 - [ ] No sensitive data in URL query parameters
 - [ ] Data endpoints enforce **authorization** (not just authentication) — flag any endpoint where any authenticated user can read any other user's data as **Critical** (OWASP A01)
 
@@ -49,9 +50,9 @@ Read these before starting:
 - [ ] `/health` excluded
 
 ### 6. Dependencies
-- [ ] No critical/high vulnerabilities in dependency audit
-- [ ] Versions pinned exactly (no loose ranges)
-- [ ] Automated dependency updates configured
+- [ ] No critical/high vulnerabilities — run Snyk dependency scan and `dotnet list package --vulnerable`
+- [ ] Versions pinned exactly (no loose ranges in `*.csproj`)
+- [ ] Automated dependency updates configured (Dependabot)
 
 ### 7. Logging & PII
 - [ ] Structured JSON logging
@@ -65,7 +66,11 @@ Read these before starting:
 - [ ] Secrets vault least-privilege access
 - [ ] HTTPS-only, TLS 1.2 minimum
 
-> Deep infrastructure review is the **Azure Infra Security Reviewer** agent's scope.
+### 9. MHRA GDP Audit Integrity
+- [ ] `AuditLog` table: application service account has no `DELETE` or `UPDATE` permission
+- [ ] SHA-256 checksum stored on `RegistrationApplication` payload at submission time
+- [ ] Audit integrity anomaly detection present (EVT sequence gaps, checksum mismatches, EVT-16 without reason) per NFR-22
+- [ ] All registration lifecycle events written as immutable append-only records with `CorrelationId`, `EventType`, `Timestamp` (UTC), `ActorType`, `ActorId`
 
 ## Audit Workflow
 

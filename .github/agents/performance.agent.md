@@ -19,7 +19,7 @@ k6 scripts use JavaScript regardless of the application language.
 
 ```javascript
 export const nhsThresholds = {
-  http_req_duration: ['p(95)<200', 'p(99)<1000'],
+  http_req_duration: ['p(95)<2000', 'p(99)<5000'],
   http_req_failed: ['rate<0.001'],
   http_reqs: ['rate>10'],
 }
@@ -99,13 +99,15 @@ Add to GitHub Actions workflow:
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json`:
+The following MCP servers can be configured in `.vscode/mcp.json` — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
 - **Context7** — use to look up current k6 documentation for scripting, thresholds, scenarios, and checks
 
 ## Rules
 
 - Always define thresholds — a load test without thresholds is just a stress generator
+- **Service-specific performance requirements override the default thresholds above.** Read `discovery/requirements/` if present and apply the documented targets (e.g. NFR-03: p95 under 2 seconds for ImmForm). Update `helpers/config.js` thresholds to match.
+- If the service makes outbound API calls (ImmForm APIs, GOV.UK Notify), verify that Polly circuit breakers enforce a 5-second per-attempt timeout. Include a test scenario that exercises the timeout path.
 - Test against realistic UKHSA user patterns: page views, form submissions, back-button navigation
 - Never run stress tests against production without explicit approval
 - Include think time (`sleep(1)`) between requests — real users don't machine-gun requests
-- Report results in CI — fail the pipeline if p95 > 200ms
+- Report results in CI — fail the pipeline if thresholds are breached
