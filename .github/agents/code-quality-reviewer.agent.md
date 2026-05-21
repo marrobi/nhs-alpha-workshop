@@ -22,10 +22,10 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ### 2. Type Safety
 
-- [ ] Type annotations on **all** function signatures (parameters and return types) in backend code
+- [ ] Explicit types on **all** public method signatures (parameters and return types); `<Nullable>enable</Nullable>` in every `*.csproj`; no `var` on public API surfaces
 - [ ] API request/response validation at route boundaries using the framework's validation layer
 - [ ] No `Any` types in TypeScript — strict typing throughout frontend code
-- [ ] Generic types used appropriately (not overly broad `dict`/`object`/`any`)
+- [ ] Generic types used appropriately (not overly broad `object`/`dynamic`/`any`)
 - [ ] Cross-reference frontend type definitions for API responses against backend response models — field names must match exactly. Flag any mismatch as **High** severity
 
 ### 3. Error Handling
@@ -74,9 +74,9 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 
 ### 8. Security Basics
 
-- [ ] No `eval()`, `exec()`, or `subprocess.run(shell=True)` with user input
-- [ ] No string concatenation or f-string interpolation in database queries — parameterised only
-- [ ] No `dangerouslySetInnerHTML` with user-supplied content
+- [ ] No `Process.Start`, `@Html.Raw()`, or EF Core raw SQL with user-supplied input
+- [ ] No string interpolation into SQL queries — parameterised EF Core queries only
+- [ ] No `dangerouslySetInnerHTML` with user-supplied content (React / JavaScript)
 - [ ] No secrets, API keys, or connection strings hardcoded in source code
 - [ ] `.env` files are in `.gitignore`
 
@@ -94,7 +94,7 @@ Add `Test Coverage: [percentage]` to the report header.
 
 **Severity examples**:
 - **Critical**: Security basics violations (eval with user input, SQL concat, hardcoded secrets), data integrity
-- **High**: Missing input validation, swallowed errors, missing type hints on public API, failing tests
+- **High**: Missing input validation, swallowed errors, missing explicit types on public API, failing tests
 - **Medium**: Naming, code duplication, missing edge-case tests, structural improvements
 - **Low**: Style preferences, minor readability, optional type narrowing
 

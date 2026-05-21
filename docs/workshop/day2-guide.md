@@ -92,6 +92,35 @@ Use the **UKHSA GDS Assessor** agent (Issue 11) to generate the full evidence re
 
 ---
 
+## Capture Agent Assumptions Log (VS Code Activity)
+
+Before recording the demo, capture every assumption the agents made across Day 1 and Day 2. This log is GDS evidence for Point 1 (understanding users and their needs) and Point 5 (iterating and improving) — it shows what was assumed, what it was based on, and where risk remains for beta.
+
+**Agent**: Use the default Copilot agent in VS Code (not a GitHub issue)
+
+Paste the following prompt into the VS Code chat:
+
+> Read all Day 1 artefacts: `discovery/scenarios/`, `discovery/personas/`, `discovery/user_journeys/data/`, `user_stories/`, and `docs/adr/`.
+>
+> Read all Day 2 output artefacts: `docs/clinical-safety/`, `docs/dpia/`, `docs/workshop/day2-issues/`, and any GDS evidence, accessibility, performance, or runbook files in `docs/`.
+>
+> Identify every assumption made by the agents — things that were assumed rather than validated with users or evidence. Do not include facts already confirmed by user research or discovery data.
+>
+> Write `docs/assumptions-log.md` with two sections:
+>
+> **Day 1 Assumptions** — assumptions made during architecture design, ADR creation, user story decomposition, and building the service.
+>
+> **Day 2 Assumptions** — assumptions made during testing, security hardening, clinical safety, DPIA, accessibility, performance, and GDS evidence phases.
+>
+> For each assumption, record:
+> - **Assumption** — what was assumed
+> - **Based on** — the artefact or reasoning that led to the assumption
+> - **Risk if wrong** — what would break or be invalid if this assumption is incorrect
+
+The agent will produce `docs/assumptions-log.md`. Review it as a team — any high-risk assumptions should be added to your beta backlog for validation.
+
+---
+
 ## Demo Recording (VS Code Activity)
 
 While Copilot works through the Day 2 issues, use the **Demo Recorder** agent in VS Code to produce a recorded walkthrough of the service. This runs locally because it needs access to the running application — the hosted Copilot Coding Agent may not be able to reach it.

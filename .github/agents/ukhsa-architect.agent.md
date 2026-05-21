@@ -13,23 +13,24 @@ You can read files, create files, edit files, and run commands. Do **not** scaff
 
 ### Step 1 — Clarify the Tech Stack
 
-Read `.github/instructions/tech-stack.instructions.md` — this is the **default** tech stack. Present it to the user and ask whether they want to change anything. Common questions:
+Read `.github/instructions/tech-stack.instructions.md` — this is the **current** tech stack. Present it to the user and ask whether they want to change anything:
 
 > **Tech stack review — please confirm or change:**
 >
-> The default stack is:
-> - **Backend**: Python 3.12 / FastAPI
-> - **Frontend**: React 18 / Vite / TypeScript / govuk-react
+> The current stack is (from `tech-stack.instructions.md`):
+> - **Backend (form UI)**: ASP.NET Core MVC / Razor views / GovUk.Frontend.AspNetCore
+> - **Backend (real APIs)**: ASP.NET Core Web API
+> - **Backend (alpha mocks)**: ASP.NET Core Minimal API — same solution, not deployed to production
+> - **Testing**: NUnit + WebApplicationFactory + HttpClient
 > - **IaC**: Terraform (azurerm)
-> - **Hosting**: Azure App Service (UK South)
-> - **Testing**: pytest, Vitest, Playwright, k6
+> - **Hosting**: Azure Container Apps (UK South)
 >
 > 1. Are you happy with this stack, or do you want to change any layer?
-> 2. Do you need a database? If so, which (PostgreSQL on Azure, CosmosDB, SQLite)?
-> 3. Do you need any external NHS API integrations (PDS, Spine, MESH)?
-> 4. Do you need authentication (NHS login/CIS2, Azure AD)?
+> 2. Do you need a database? (Azure SQL with EF Core 10 is the default)
+> 3. Do you need any external API integrations (ImmForm Organisation API, ImmForm Registration API, GOV.UK Notify)?
+> 4. Do you need authentication (Azure AD / Entra ID)?
 
-**Wait for the user's response.** If they want changes, update `.github/instructions/tech-stack.instructions.md` to reflect their choices. This ensures all downstream agents and instructions use the correct stack.
+**Wait for the user's response.** If they want changes, update `.github/instructions/tech-stack.instructions.md` to reflect their choices before proceeding.
 
 ### Step 2 — Analyse Discovery Artefacts
 
@@ -47,10 +48,10 @@ Summarise what you found and confirm with the user:
 Identify the key decision points and present 2–3 options for each. Do **not** produce a single design silently. Common decision points:
 
 - **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
-- **API structure** — single router vs. domain-based routers. How many distinct resources exist?
-- **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
-- **External integrations** — which UKHSA API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
-- **Auth approach** — custom vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
+- **API structure** — Three project types: MVC (form UI), Web API (real endpoints), Minimal API (alpha mock stubs). Identify which external APIs need a mock stub vs a real integration.
+- **External integrations** — For ImmForm services: ImmForm Organisation API (account/org code validation and AP lookup), ImmForm Registration API (account creation), GOV.UK Notify (.NET client). Alpha stubs for ImmForm APIs are implemented as ASP.NET Core Minimal API projects in the same solution — not deployed to production.
+- **MHRA GDP audit** — If the service is used in the supply of medicinal products, design an immutable `AuditLog` entity from the start: the application service account must have no `DELETE` or `UPDATE` permission on this table. Include `CorrelationId`, `EventType`, `Timestamp` (UTC), `ActorType`, `ActorId`, `PreviousState`, `NewState`. Design this in the data model, not as an afterthought.
+- **Auth approach** — custom vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included.
 - **Network & identity** — all service-to-service and service-to-data communication must use Managed Identity (no shared keys) and Private Endpoints (no public database/storage endpoints). Design the VNet topology, subnet layout, and RBAC role assignments. See `ukhsa-security.instructions.md` for the full rules.
 - **Infrastructure extras** — baseline only vs. database, queue, or cache. What does the data model need?
 
@@ -69,8 +70,8 @@ Format each decision as:
 
 Using the agreed decisions, map each user journey to:
 - **API endpoints** — routes, HTTP methods, request/response shapes
-- **Data models** — entities, fields, types, validation rules, relationships. Any entity storing patient data MUST include the NHS Number as a 10-digit string field with modulus 11 validation — see `.github/instructions/ukhsa-number.instructions.md` for the full ISB 0149 requirements (storage, display, search, validation, transmission)
-- **Frontend pages** — GOV.UK Design System pages/components for each journey step. Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149 Req 07/09)
+- **Data models** — entities, fields, types, validation rules, relationships. Any entity storing patient data MUST include the NHS Number as a 10-digit string field with modulus 11 validation — see `.github/instructions/ukhsa-number.instructions.md` for the full ISB 0149 requirements. **This does not apply to orderer or staff registration services that hold no patient records.**
+- **Frontend pages** — GOV.UK Design System pages/components for each journey step. Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149). **Not applicable if the service holds no patient records.**
 - **Infrastructure** — cloud resources required beyond the baseline
 
 ### Step 5 — Prioritise by Riskiest Assumption
@@ -192,7 +193,7 @@ Once the ADRs are complete, tell the user:
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
+The following MCP servers can be configured in `.vscode/mcp.json` and via VS Code extensions — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
 - **Context7** — use to look up current documentation for libraries, frameworks, and Terraform providers/modules when advising on tech stack and infrastructure choices
 - **Draw.io** — use to create and edit architecture diagrams in draw.io format
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, validate infrastructure decisions, and explore available Azure services

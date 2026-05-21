@@ -39,7 +39,7 @@ Day 1 must be complete:
 
 ### Step 1 — Read the Codebase
 
-Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architecture ADR, user stories, and scan actual code (routers, pages, config). Summarise findings and **wait for user confirmation** before proceeding.
+Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architecture ADR, user stories, and scan actual code (controllers, views, API endpoints, config). If a requirements file exists in `discovery/requirements/`, read it — use it to tailor acceptance criteria to service-specific requirements (e.g. MHRA GDP audit for issues 02 and 05, 7-workflow pipeline structure for issue 01, Snyk scanning for issues 01 and 05). Summarise findings and **wait for user confirmation** before proceeding.
 
 ### Step 2 — Generate Issues
 

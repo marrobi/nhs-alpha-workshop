@@ -19,24 +19,17 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 ## Repository Structure
 
 ```
-├── app/                    # Backend application (see tech-stack.instructions.md)
-│   ├── routers/            # API route modules
-│   ├── middleware/          # Application middleware
-│   └── main.py             # App entrypoint
-├── frontend/               # Frontend application (see tech-stack.instructions.md)
-│   ├── src/
-│   │   ├── components/     # UI components (GOV.UK Design System)
-│   │   ├── pages/          # Page components
-│   │   └── App.tsx         # Root component
-│   ├── package.json
-│   └── vite.config.ts
+├── src/
+│   ├── ImmForm.Web/            # ASP.NET Core MVC — multi-step form UI (Razor views)
+│   ├── ImmForm.Api/            # ASP.NET Core Web API — real service endpoints
+│   └── ImmForm.Mocks/          # ASP.NET Core Minimal API — alpha stubs (not deployed to production)
 ├── user_stories/           # User stories generated from journeys (Day 1)
 │   └── story-NNN-slug.md   # One file per story with acceptance criteria
 ├── tests/
-│   ├── unit/               # Backend unit tests
-│   ├── integration/        # API integration tests
-│   ├── e2e/                # Browser tests
-│   └── performance/        # Load tests
+│   ├── ImmForm.Tests.Unit/         # Unit tests — mirror src/ structure
+│   ├── ImmForm.Tests.Integration/  # Integration tests via WebApplicationFactory
+│   ├── ImmForm.Tests.E2E/          # Playwright browser tests
+│   └── performance/                # k6 load tests
 ├── infra/                  # Terraform configuration
 │   ├── main.tf
 │   ├── variables.tf
@@ -52,42 +45,41 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── skills/             # Agent skills (SKILL.md folders)
 │   └── workflows/          # GitHub Actions
 ├── AGENTS.md               # This file — Copilot Coding Agent context
-├── requirements.txt        # Backend dependencies
 └── .gitignore
 ```
 
 ## Build, Test, and Lint Commands
 
 ```bash
-# Install backend dependencies
-pip install -r requirements.txt
+# Restore dependencies
+dotnet restore
 
-# Install frontend dependencies
-cd frontend && npm ci && cd ..
+# Build the solution
+dotnet build
 
-# Run the backend locally
-uvicorn app.main:app --reload --port 8000
+# Run the web app locally
+dotnet run --project src/ImmForm.Web
 
-# Run the frontend dev server
-cd frontend && npm run dev
+# Run the API locally
+dotnet run --project src/ImmForm.Api
 
-# Run backend tests
-pytest
+# Run all tests
+dotnet test
 
 # Run unit tests only
-pytest tests/unit/
+dotnet test tests/ImmForm.Tests.Unit/
 
 # Run integration tests only
-pytest tests/integration/
+dotnet test tests/ImmForm.Tests.Integration/
 
 # Run E2E tests
-pytest tests/e2e/ --browser chromium
+dotnet test tests/ImmForm.Tests.E2E/
 
-# Run backend linter
-ruff check . && ruff format --check .
+# Run with code coverage
+dotnet test --collect:"XPlat Code Coverage"
 
-# Run frontend linter
-cd frontend && npm run lint
+# Format code
+dotnet format
 
 # Terraform
 cd infra && terraform init && terraform plan

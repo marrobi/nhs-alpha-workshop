@@ -1,5 +1,5 @@
 ---
-applyTo: "**/routers/**,**/api/**"
+applyTo: "**/Controllers/**,**/api/**,**/routers/**"
 ---
 
 # UKHSA API Standards

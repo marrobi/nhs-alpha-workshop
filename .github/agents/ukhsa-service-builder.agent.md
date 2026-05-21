@@ -10,7 +10,7 @@ Expert full-stack developer building a UKHSA Alpha-phase digital service. Your g
 
 ## Tech Stack & Implementation Detail
 
-Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Read `.github/skills/playwright-ukhsa-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and UKHSA-specific conventions.
+Read `.github/instructions/tech-stack.instructions.md` for the current technology choices and all implementation details — project structure, build commands, security middleware, testing patterns, and deployment procedures. Do **not** rely on any hardcoded stack assumption in this agent; always read the instructions file first. Read `.github/skills/playwright-ukhsa-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and UKHSA-specific conventions.
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ After the scaffold is deployed, read the user story files in `user_stories/story
 7. **Mark acceptance criteria complete** — after verifying each criterion is met (tests pass, manual check), edit the story file and change `- [ ]` to `- [x]` for that criterion. This keeps the story files as a live record of progress.
 
 **After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-ukhsa-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, GOV.UK component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
-7. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), GOV.UK Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
+7. **Quick code review** — check the code written for this story: explicit types on all new method/function signatures, error handling present (no empty catch blocks), GOV.UK Design System components used correctly, no placeholder content or TODO comments, validated DTOs or request models for any new API input. Fix issues before deploying.
 8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
 
 Work through stories in priority order (riskiest assumption first).
@@ -87,8 +87,8 @@ Follow the IaC instructions auto-applied to infrastructure files. Key: UK region
 
 ## MCP Servers
 
-This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
-- **Context7** — use to look up current documentation for libraries and frameworks (FastAPI, React, govuk-react, Playwright, Terraform, etc.) when implementing features
+The following MCP servers can be configured in `.vscode/mcp.json` and via VS Code extensions — use them if available to accelerate tasks. They are not required; if not configured in your environment, proceed without them:
+- **Context7** — use to look up current documentation for libraries and frameworks (.NET, ASP.NET Core, EF Core, GovUk.Frontend.AspNetCore, Playwright, Terraform, etc.) when implementing features
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to interact with Azure resources when deploying and configuring infrastructure
 
 ## When Stuck
@@ -101,11 +101,11 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
 ## No Alpha Shortcuts
 
 Alpha exists to test riskiest assumptions with a realistic service. Do not take shortcuts that undermine this, even under time pressure:
-- **No in-memory data stores** (Python dicts, global lists) — use the database specified in the ADR. Data must persist across restarts.
+- **No in-memory data stores** (.NET static variables, in-process singletons storing mutable state) — use the database specified in the ADR. Data must persist across restarts.
 - **No hardcoded/mock data as API responses** — use proper seed scripts with synthetic data via the `ukhsa-synthetic-data` skill. APIs must read from and write to the data store.
 - **No mocks or stubs for service integrations** — integrate with real services using real SDKs and configuration. If a story requires an NHS API, use the real sandbox environment or implement real FHIR endpoints with synthetic data. Never substitute a real service with a local mock — unless there is an explicit user story to build that mock, with the decision recorded in the ADR. **Exception — cloud services with no local emulator** (e.g. hosted AI/LLM APIs): unit tests must mock the SDK client using the test framework's mocking library; the ADR that authorises the service integration is sufficient justification. Do not skip the implementation because the live endpoint is unavailable in the dev environment — implement the service code and mock the SDK boundary in tests only.
-- **No silent fallback values** — never use `os.environ.get("VAR", "default")` or `|| 'fallback'` for required configuration. Required env vars, URLs, and secrets must raise an error if missing. Fallbacks mask broken dependencies and defer failures to production.
-- **No skipping input validation** — every API endpoint must validate input using Pydantic models.
+- **No silent fallback values** — never use `builder.Configuration["Key"] ?? "default"` or `.GetValue<T>("Key", defaultValue)` for secrets or required configuration. Required configuration, URLs, and secrets must throw at startup if missing. Fallbacks mask broken dependencies and defer failures to production.
+- **No skipping input validation** — every API endpoint must validate input using Data Annotations or FluentValidation on controller DTOs.
 - **No skipping error handling** — implement proper error responses (400, 404, 422, 500) with user-friendly messages. Error states are part of the user journey.
 - **No placeholder pages** — every page must use real GOV.UK Design System components with real (synthetic) content, not "coming soon" or lorem ipsum.
 - **No skipping tests** — every story must have unit/integration tests for its functional acceptance criteria. Every user journey must have a Playwright E2E test (see `.github/skills/playwright-ukhsa-e2e/SKILL.md`).

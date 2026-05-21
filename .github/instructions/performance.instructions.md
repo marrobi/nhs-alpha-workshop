@@ -15,6 +15,8 @@ applyTo: "**/performance/**,**/*.k6.js"
 | CLS (Cumulative Layout Shift) | < 0.1 |
 | TTFB (Time to First Byte) | < 200ms |
 
+> **Service-specific requirements take precedence.** If a service NFR specifies a different threshold (e.g. ImmForm NFR-03: p95 < 2 000 ms for registration pages), override the default thresholds in `tests/performance/helpers/config.js` and document the override with a comment referencing the NFR.
+
 ## File Structure
 
 ```

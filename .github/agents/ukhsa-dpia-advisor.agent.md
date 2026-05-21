@@ -70,13 +70,13 @@ For each measure, search for concrete evidence:
 | Claim | Where to verify |
 |---|---|
 | Managed Identity | Terraform files: look for `identity { type = "SystemAssigned" }` on the deployed resource |
-| Secrets in Key Vault | Terraform: Key Vault resource + access policy. App code: `os.environ` or Key Vault SDK usage, **not** hardcoded values |
+| Secrets in Key Vault | Terraform: Key Vault resource + access policy. App code: `IConfiguration` or Key Vault SDK via Managed Identity, **not** hardcoded values |
 | RBAC role assignments | Terraform: `azurerm_role_assignment` resources with least-privilege roles |
 | Encryption at rest | Terraform: database/storage encryption config. Not just "Azure does this by default" — verify it's not disabled |
-| TLS/HTTPS only | Terraform: `https_only = true` on App Service. Middleware: HSTS header |
+| TLS/HTTPS only | Terraform: HTTPS-only ingress on Container App. Middleware: HSTS header |
 | PII logging filter | App code: search middleware for PII scrubbing/filtering. Check structured logging config excludes NHS numbers, names, DOB |
-| Rate limiting | App code: search for rate limiting middleware (e.g. `slowapi`) |
-| Input validation | App code: Pydantic models on route handlers, no raw string concatenation in queries |
+| Rate limiting | App code: search for rate limiting middleware (e.g. `Microsoft.AspNetCore.RateLimiting`) |
+| Input validation | App code: Data Annotations or FluentValidation on controller DTOs, no raw string concatenation in queries |
 | CSRF protection | App code: CSRF middleware on state-changing routes |
 | Audit logging | App code: search for audit log entries on data access/modification |
 | Retention policy | Database migrations or scheduled jobs that enforce retention periods |
@@ -95,7 +95,7 @@ Include the verification results in the DPIA output as a table:
 
 | Control | Status | Evidence | Notes |
 |---|---|---|---|
-| Managed Identity | ✅ Implemented | `infra/main.tf` line 45 | SystemAssigned on App Service |
+| Managed Identity | ✅ Implemented | `infra/main.tf` line 45 | SystemAssigned on Container App |
 | PII logging filter | ❌ Not implemented | No middleware found | **Gap: needs implementation** |
 ```
 

@@ -90,7 +90,7 @@ Mark each mitigation:
 - **⚠️ Partially implemented** — incomplete (explain gap)
 - **❌ Not implemented** — no evidence (flag as open risk)
 
-Examples: input validation → Pydantic models on routes; error messages → GOV.UK error summary; access controls → auth middleware + Terraform RBAC; audit logging → log entries on CRUD.
+Examples: input validation → Data Annotations / FluentValidation on controller actions; error messages → GOV.UK error summary; access controls → auth middleware + Terraform RBAC; audit logging → log entries on CRUD.
 
 ## Clinical Safety Case Report Structure
 
