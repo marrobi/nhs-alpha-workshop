@@ -58,3 +58,44 @@ These share the same architecture as Wave 1. They test the existing flow under d
 2. **Riskiest assumptions are front-loaded** — the Org API (journey 2) and AP approval behaviour (journeys 5, 7) are the two assumptions most likely to surface integration or behavioural surprises. Failing fast here saves rework.
 3. **Security-critical paths are in Wave 1** — anti-enumeration (4), session expiry (10), and CSRF are requirements that must underpin everything built after them, not retrofitted.
 4. **Persona variants last** — they validate the core under realistic pressure but introduce no new technical surface area. Building them first would be waste if the core journey changes.
+
+---
+
+## Parallel Execution Schedule
+
+Within the wave dependencies above, several phases can run multiple simultaneous Service Builder agents to compress build time. Parallel agents must treat `Program.cs`, `_Layout.cshtml`, EF Core migration files, and `ImmForm.sln` as **read-only** — only Phase A may modify shared project infrastructure. If a parallel agent needs a new service registration or database migration, it must flag it for sequential merge rather than editing those files directly.
+
+### Phase A — Sequential (no shortcut)
+
+**Journey 1** must complete alone. It scaffolds the solution structure, session state, Org API client, form infrastructure, and shared layout — everything else builds on top.
+
+### Phase B — 3 agents in parallel (after Journey 1)
+
+| Agent | Journeys | Owns |
+|---|---|---|
+| 1 | 2 — Org API validation failure | `OrgApiClient` error path |
+| 2 | 3 + 4 — Field validation errors + duplicate detection | Form controller error handling; anti-enumeration controls |
+| 3 | 5 — Authorised Person approval | AP approval controller; GOV.UK Notify time-bound link |
+
+### Phase C — Sequential (after Phase B)
+
+**Journey 6** (account creation / activation) requires Journey 5's approval flow to be complete. Run one agent.
+
+### Phase D — 3 agents in parallel (after Journey 6)
+
+| Agent | Journeys | Owns |
+|---|---|---|
+| 1 | 7 + 8 — Approval resend + rejection outcome | AP outcome variants in the approval controller |
+| 2 | 10 — Session timeout / abandonment | Session middleware; server-side purge on timeout |
+| 3 | 9 — Fallback case resolution | Helpdesk admin action path |
+
+### Phase E — 2 agents in parallel (after Wave 2)
+
+| Agent | Journeys | Notes |
+|---|---|---|
+| 1 | 11 — Admin qualification review | Needs Wave 1 audit events to exist |
+| 2 | 12 — Audit evidence retrieval | Start once Journey 11 has created the first records |
+
+### Phase F — Up to 6 agents in parallel (after Wave 1 is stable)
+
+**Journeys 13–18** (persona and context variants) share zero new controllers or views. All six can run simultaneously — each adds test data, scenario coverage, and persona-specific edge cases only.

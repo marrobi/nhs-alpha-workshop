@@ -131,6 +131,8 @@ The agent will:
 
 This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
+> **Parallel execution**: Some batches in the build schedule allow multiple Service Builder agents to run simultaneously. See the [Parallel Execution Schedule](../prioritised-user-journeys.md#parallel-execution-schedule) for which journeys can be built in parallel and the shared-file conflict rules that parallel agents must follow.
+
 ### Build → QA → Repeat
 
 For each batch:
