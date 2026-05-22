@@ -11,3 +11,11 @@ RUN bash ./installSQLtools.sh \
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+
+# Install Node.js and npm
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends nodejs npm \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# Install Marp and Mermaid npm packages
+RUN npm install -g @marp-team/marp-cli @mermaid-js/mermaid-cli
