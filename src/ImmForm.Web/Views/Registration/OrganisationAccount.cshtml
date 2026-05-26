@@ -1,0 +1,71 @@
+@model ImmForm.Web.Models.OrganisationAccountViewModel
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Organisation and account";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="/register/applicant-details" class="govuk-back-link">Back</a>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">There is a problem</h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            @foreach (var key in ViewData.ModelState.Keys)
+                            {
+                                @foreach (var error in ViewData.ModelState[key]!.Errors)
+                                {
+                                    <li><a href="#@(key == nameof(Model.AccountNumber) ? "AccountNumber" : key)">@error.ErrorMessage</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <h1 class="govuk-heading-l">Organisation and account</h1>
+
+        <form method="post" action="/register/organisation-account" novalidate>
+            @Html.AntiForgeryToken()
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.AccountNumber)) && ViewData.ModelState[nameof(Model.AccountNumber)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="AccountNumber">ImmForm account number</label>
+                <div class="govuk-hint" id="AccountNumber-hint">This is a 10-digit number, for example 1234567890</div>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.AccountNumber)) && ViewData.ModelState[nameof(Model.AccountNumber)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="AccountNumber-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.AccountNumber)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input govuk-input--width-10 @(ViewData.ModelState.ContainsKey(nameof(Model.AccountNumber)) && ViewData.ModelState[nameof(Model.AccountNumber)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="AccountNumber" name="AccountNumber" type="text" value="@Model.AccountNumber" inputmode="numeric" pattern="[0-9]*" aria-describedby="AccountNumber-hint">
+            </div>
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.OrganisationCode)) && ViewData.ModelState[nameof(Model.OrganisationCode)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="OrganisationCode">ImmForm organisation code</label>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.OrganisationCode)) && ViewData.ModelState[nameof(Model.OrganisationCode)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="OrganisationCode-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.OrganisationCode)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input govuk-input--width-10 @(ViewData.ModelState.ContainsKey(nameof(Model.OrganisationCode)) && ViewData.ModelState[nameof(Model.OrganisationCode)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="OrganisationCode" name="OrganisationCode" type="text" value="@Model.OrganisationCode">
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.OrganisationName))
+            {
+                <div class="govuk-inset-text">
+                    Organisation: <strong>@Model.OrganisationName</strong>
+                </div>
+            }
+
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>

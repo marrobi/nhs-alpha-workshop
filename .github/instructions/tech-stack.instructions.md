@@ -125,9 +125,37 @@ The solution has three distinct project types — do not mix them:
 ### Setup
 
 - Install NuGet package: `GovUk.Frontend.AspNetCore`
+- Add `using GovUk.Frontend.AspNetCore;` at the top of `Program.cs`
 - Register in `Program.cs`: `builder.Services.AddGovUkFrontend()`
 - Add tag helper import in `_ViewImports.cshtml`: `@addTagHelper *, GovUk.Frontend.AspNetCore`
 - Apply UKHSA header and footer branding via shared `_Layout.cshtml` layout override
+- Enable the NuGet package build targets in the `.csproj` — this is **required** for CSS, JS, and font assets to be available at runtime:
+
+```xml
+<PropertyGroup>
+  <RestoreGovUkFrontendNpmPackage>true</RestoreGovUkFrontendNpmPackage>
+  <CopyGovUkFrontendAssetsToWebRoot>true</CopyGovUkFrontendAssetsToWebRoot>
+</PropertyGroup>
+
+<!-- Copy compiled CSS and JS into wwwroot so they are served as static files -->
+<Target Name="CopyGovUkFrontendCssToWebRoot" AfterTargets="RestoreGovUkFrontendNpmPackage">
+  <Copy SourceFiles="$(GovUkFrontendNpmPackageLocation)\govuk-frontend.min.css"
+        DestinationFolder="wwwroot\css"
+        SkipUnchangedFiles="true" />
+  <Copy SourceFiles="$(GovUkFrontendNpmPackageLocation)\govuk-frontend.min.js"
+        DestinationFolder="wwwroot\js"
+        SkipUnchangedFiles="true" />
+</Target>
+```
+
+### Static Assets
+
+- **Never create placeholder, stub, or hand-written govuk-frontend CSS/JS files** — the NuGet build target generates them automatically from the package content during `dotnet build` / `dotnet publish`
+<!-- - **Never commit govuk-frontend CSS, JS, or font files to source control** — they are build-generated; add `wwwroot/css/govuk-frontend*`, `wwwroot/js/govuk-frontend*`, `wwwroot/assets/`, and `govuk-frontend/` to `.gitignore` -->
+- CSS: reference as `<link rel="stylesheet" href="/css/govuk-frontend.min.css">` in `_Layout.cshtml` `<head>`
+- JS: reference as `<script src="/js/govuk-frontend.min.js"></script>` before `</body>` in `_Layout.cshtml`, followed by `<script>window.GOVUKFrontend.initAll()</script>`
+- Fonts and images: served from `/assets/fonts/` and `/assets/images/` (auto-populated by `CopyGovUkFrontendAssetsToWebRoot`)
+- If the CSS file is missing or tiny (< 1 KB) after build, the `.csproj` configuration above is missing or incorrect — **never work around this by creating a manual CSS file**
 
 ### Tag Helper Usage
 

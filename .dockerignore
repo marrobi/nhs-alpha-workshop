@@ -1,0 +1,16 @@
+**/.git
+**/bin
+**/obj
+**/node_modules
+**/tests
+**/.vs
+**/.vscode
+**/discovery
+**/docs
+**/infra
+**/.github
+**/AGENTS.md
+**/README.md
+**/LICENSE
+**/.editorconfig
+**/.gitignore

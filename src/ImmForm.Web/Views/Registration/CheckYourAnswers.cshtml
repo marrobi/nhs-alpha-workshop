@@ -1,0 +1,96 @@
+@model ImmForm.Web.Models.CheckYourAnswersViewModel
+@{
+    ViewData["Title"] = "Check your answers";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="/register/organisation-account" class="govuk-back-link">Back</a>
+
+        <h1 class="govuk-heading-l">Check your answers before sending your application</h1>
+
+        <h2 class="govuk-heading-m">Personal details</h2>
+
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">First name</dt>
+                <dd class="govuk-summary-list__value">@Model.FirstName</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/applicant-details?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> first name</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Surname</dt>
+                <dd class="govuk-summary-list__value">@Model.Surname</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/applicant-details?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> surname</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Job title</dt>
+                <dd class="govuk-summary-list__value">@Model.JobTitle</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/applicant-details?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> job title</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Telephone number</dt>
+                <dd class="govuk-summary-list__value">@Model.Telephone</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/applicant-details?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> telephone number</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Email address</dt>
+                <dd class="govuk-summary-list__value">@Model.Email</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/applicant-details?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> email address</span>
+                    </a>
+                </dd>
+            </div>
+        </dl>
+
+        <h2 class="govuk-heading-m">Organisation details</h2>
+
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">ImmForm account number</dt>
+                <dd class="govuk-summary-list__value">@Model.AccountNumber</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/organisation-account?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> ImmForm account number</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">ImmForm organisation code</dt>
+                <dd class="govuk-summary-list__value">@Model.OrganisationCode</dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/organisation-account?returnTo=check-your-answers">
+                        Change<span class="govuk-visually-hidden"> ImmForm organisation code</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Organisation name</dt>
+                <dd class="govuk-summary-list__value">@Model.OrganisationName</dd>
+                <dd class="govuk-summary-list__actions"></dd>
+            </div>
+        </dl>
+
+        <a href="/register/declaration" role="button" draggable="false"
+           class="govuk-button" data-module="govuk-button">
+            Continue
+        </a>
+    </div>
+</div>

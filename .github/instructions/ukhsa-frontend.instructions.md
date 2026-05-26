@@ -45,3 +45,9 @@ Use the [GOV.UK Design System](https://design-system.service.gov.uk) for all use
 
 - All pages must meet [WCAG 2.2 Level AA](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction) — mandatory for UKHSA services
 - Follow the [GOV.UK accessibility guidance](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction)
+
+## Asset Pipeline
+
+- GOV.UK Design System CSS, JS, and font files must be served from the framework's **build pipeline** — never from manually-created stub or placeholder files
+- The design system package provides a build target that copies compiled assets into `wwwroot/` during `dotnet build` / `dotnet publish` — see `tech-stack.instructions.md` for the required `.csproj` configuration
+- If static assets are missing at runtime, fix the build configuration — do not create placeholder files as a workaround

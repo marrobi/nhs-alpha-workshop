@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ImmForm.Api/ImmForm.Api.csproj" />
+    <Project Path="src/ImmForm.Mocks/ImmForm.Mocks.csproj" />
+    <Project Path="src/ImmForm.Web/ImmForm.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ImmForm.Tests.E2E/ImmForm.Tests.E2E.csproj" />
+    <Project Path="tests/ImmForm.Tests.Integration/ImmForm.Tests.Integration.csproj" />
+    <Project Path="tests/ImmForm.Tests.Unit/ImmForm.Tests.Unit.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,41 @@
+@model ImmForm.Web.Models.ConfirmationViewModel
+@{
+    ViewData["Title"] = "Application submitted";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                Application submitted
+            </h1>
+            <div class="govuk-panel__body">
+                Your reference number<br><strong>@Model.CorrelationId</strong>
+            </div>
+        </div>
+
+        <h2 class="govuk-heading-m">What happens next</h2>
+
+        <p class="govuk-body">
+            We have sent your registration to the Authorised Person for your account.
+            They will review and approve your application.
+        </p>
+
+        <p class="govuk-body">
+            Once approved, your ImmForm account will be set up within approximately 2 working days.
+            You will receive an email confirming your access.
+        </p>
+
+        <p class="govuk-body">
+            If you have not heard back within 5 working days, contact the ImmForm helpdesk at
+            <a href="mailto:helpdesk@immform.org.uk" class="govuk-link">helpdesk@immform.org.uk</a>.
+        </p>
+
+        <h2 class="govuk-heading-m">Give feedback</h2>
+
+        <p class="govuk-body">
+            <a href="#" class="govuk-link">What did you think of this service?</a> (takes 30 seconds)
+        </p>
+    </div>
+</div>

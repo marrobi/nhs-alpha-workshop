@@ -1,0 +1,98 @@
+@model ImmForm.Web.Models.ApplicantDetailsViewModel
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Your details";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="/" class="govuk-back-link">Back</a>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">There is a problem</h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            @foreach (var key in ViewData.ModelState.Keys)
+                            {
+                                @foreach (var error in ViewData.ModelState[key]!.Errors)
+                                {
+                                    <li><a href="#@key">@error.ErrorMessage</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <h1 class="govuk-heading-l">Your details</h1>
+
+        <form method="post" action="/register/applicant-details" novalidate>
+            @Html.AntiForgeryToken()
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.FirstName)) && ViewData.ModelState[nameof(Model.FirstName)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="FirstName">First name</label>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.FirstName)) && ViewData.ModelState[nameof(Model.FirstName)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="FirstName-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.FirstName)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input @(ViewData.ModelState.ContainsKey(nameof(Model.FirstName)) && ViewData.ModelState[nameof(Model.FirstName)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="FirstName" name="FirstName" type="text" value="@Model.FirstName" autocomplete="given-name">
+            </div>
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.Surname)) && ViewData.ModelState[nameof(Model.Surname)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="Surname">Surname</label>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.Surname)) && ViewData.ModelState[nameof(Model.Surname)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="Surname-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.Surname)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input @(ViewData.ModelState.ContainsKey(nameof(Model.Surname)) && ViewData.ModelState[nameof(Model.Surname)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="Surname" name="Surname" type="text" value="@Model.Surname" autocomplete="family-name">
+            </div>
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.JobTitle)) && ViewData.ModelState[nameof(Model.JobTitle)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="JobTitle">Job title</label>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.JobTitle)) && ViewData.ModelState[nameof(Model.JobTitle)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="JobTitle-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.JobTitle)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input @(ViewData.ModelState.ContainsKey(nameof(Model.JobTitle)) && ViewData.ModelState[nameof(Model.JobTitle)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="JobTitle" name="JobTitle" type="text" value="@Model.JobTitle" autocomplete="organization-title">
+            </div>
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.Telephone)) && ViewData.ModelState[nameof(Model.Telephone)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="Telephone">Telephone number</label>
+                <div class="govuk-hint" id="Telephone-hint">For example, 01632 960 001 or 07700 900 982</div>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.Telephone)) && ViewData.ModelState[nameof(Model.Telephone)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="Telephone-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.Telephone)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input @(ViewData.ModelState.ContainsKey(nameof(Model.Telephone)) && ViewData.ModelState[nameof(Model.Telephone)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="Telephone" name="Telephone" type="tel" value="@Model.Telephone" autocomplete="tel" aria-describedby="Telephone-hint">
+            </div>
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.Email)) && ViewData.ModelState[nameof(Model.Email)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                <label class="govuk-label" for="Email">Email address</label>
+                <div class="govuk-hint" id="Email-hint">Use your professional email address, not a shared mailbox</div>
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.Email)) && ViewData.ModelState[nameof(Model.Email)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="Email-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.Email)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <input class="govuk-input @(ViewData.ModelState.ContainsKey(nameof(Model.Email)) && ViewData.ModelState[nameof(Model.Email)]!.Errors.Count > 0 ? "govuk-input--error" : "")" id="Email" name="Email" type="email" value="@Model.Email" autocomplete="email" aria-describedby="Email-hint">
+            </div>
+
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,311 @@
+<mxfile>
+  <diagram name="ImmForm Registration Architecture">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="ImmForm New User Registration Service - Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#1d70b8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="800" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- User Types -->
+        <mxCell id="applicant" value="Applicant&#xa;(NHS / Non-NHS Orderer)&#xa;Unauthenticated" style="shape=mxgraph.azure.user;fillColor=#1d70b8;fontColor=#ffffff;strokeColor=#003078;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ap" value="Authorised Person&#xa;(Practice Manager)&#xa;Token-gated" style="shape=mxgraph.azure.user;fillColor=#f47738;fontColor=#ffffff;strokeColor=#d4351c;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="admin" value="ImmForm Admin&#xa;Entra ID - ImmFormAdmin" style="shape=mxgraph.azure.user;fillColor=#00703c;fontColor=#ffffff;strokeColor=#005a30;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="510" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="qarp" value="QA / WDA RP&#xa;(Rachel)&#xa;Entra ID - ImmFormQaRp" style="shape=mxgraph.azure.user;fillColor=#5694ca;fontColor=#ffffff;strokeColor=#1d70b8;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="690" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Container Apps boundary -->
+        <mxCell id="aca_boundary" value="Azure Container Apps (UK South)" style="swimlane;startSize=30;fillColor=#e8edee;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=13;fontStyle=1;rounded=1;arcSize=5;swimlaneLine=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="880" height="750" as="geometry"/>
+        </mxCell>
+
+        <!-- ImmForm.Web -->
+        <mxCell id="web_container" value="ImmForm.Web (MVC)" style="swimlane;startSize=28;fillColor=#1d70b8;strokeColor=#003078;fontColor=#ffffff;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=1;pointerEvents=0;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="30" y="50" width="380" height="300" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="start_page" value="Start Page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="20" y="40" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="applicant_details" value="Applicant Details" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="140" y="40" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="org_account" value="Organisation &amp;&#xa;Account" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="260" y="40" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="check_answers" value="Check Your&#xa;Answers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="20" y="95" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="declaration" value="Declaration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="140" y="95" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="confirmation" value="Confirmation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="web_container">
+          <mxGeometry x="260" y="95" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="session_mgmt" value="Session Management&#xa;(Redis-backed, 60min timeout)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="web_container">
+          <mxGeometry x="20" y="150" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="form_framework" value="Reusable Form Framework&#xa;(FormStepController&lt;T&gt;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="web_container">
+          <mxGeometry x="200" y="150" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="security_mw" value="Security Middleware&#xa;CSP | HSTS | CSRF | Rate Limiting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#d4351c;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="web_container">
+          <mxGeometry x="20" y="205" width="340" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gds_tag" value="GovUk.Frontend.AspNetCore Tag Helpers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#1d70b8;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="web_container">
+          <mxGeometry x="20" y="250" width="340" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ImmForm.Api -->
+        <mxCell id="api_container" value="ImmForm.Api (Web API)" style="swimlane;startSize=28;fillColor=#00703c;strokeColor=#005a30;fontColor=#ffffff;fontSize=12;fontStyle=1;rounded=1;arcSize=8;swimlaneLine=1;pointerEvents=0;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="460" y="50" width="390" height="300" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ap_decision" value="AP Decision&#xa;/api/approval/{token}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#f47738;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="20" y="40" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="admin_dash" value="Admin Dashboard&#xa;/api/admin/*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00703c;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="200" y="40" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="audit_api" value="Audit Interface&#xa;/api/audit/*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#5694ca;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="20" y="95" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="health_ep" value="Health&#xa;/health" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00703c;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="200" y="95" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="reg_service" value="Registration Service&#xa;(Business Logic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="20" y="150" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="notify_service" value="Notification Service&#xa;(Stubbed in Alpha)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#f47738;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="200" y="150" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="audit_service" value="Audit Service&#xa;(INSERT-only writes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#d4351c;fontColor=#0b0c0c;fontSize=10;" vertex="1" parent="api_container">
+          <mxGeometry x="20" y="205" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="polly" value="Polly Resilience&#xa;(Retry, Circuit Breaker, 5s Timeout)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="api_container">
+          <mxGeometry x="200" y="205" width="160" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="entra_mw" value="Entra ID Auth Middleware (Admin + QA/RP roles)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#00703c;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="api_container">
+          <mxGeometry x="20" y="255" width="340" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ImmForm.Mocks -->
+        <mxCell id="mocks_container" value="ImmForm.Mocks (Minimal API) - Alpha Only" style="swimlane;startSize=28;fillColor=#505a5f;strokeColor=#383f43;fontColor=#ffffff;fontSize=12;fontStyle=1;rounded=1;arcSize=8;dashed=1;dashPattern=8 4;swimlaneLine=1;pointerEvents=0;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="30" y="390" width="380" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="org_api_mock" value="Organisation API Mock&#xa;/api/mock/organisation/validate&#xa;(Account/Org validation, AP lookup)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;" vertex="1" parent="mocks_container">
+          <mxGeometry x="20" y="40" width="340" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="reg_api_mock" value="Registration API Mock&#xa;/api/mock/registration/create&#xa;(Account creation, duplicate check)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;" vertex="1" parent="mocks_container">
+          <mxGeometry x="20" y="95" width="340" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Notify stub box -->
+        <mxCell id="notify_stub" value="GOV.UK Notify Stub&#xa;(Logs to console + NotifyLog table)&#xa;Alpha: emails not sent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#f47738;fontColor=#0b0c0c;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="460" y="390" width="390" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- nlog + App Insights -->
+        <mxCell id="logging" value="Structured Logging (nlog + Application Insights sink)&#xa;CorrelationId in every entry | No PII logged" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#505a5f;fontColor=#0b0c0c;fontSize=9;fontStyle=2;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="30" y="580" width="820" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Layer label -->
+        <mxCell id="data_label" value="Data Layer (Private Endpoints, Managed Identity)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#505a5f;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="30" y="640" width="820" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Data stores inside the boundary -->
+        <mxCell id="sql_db" value="Azure SQL Database&#xa;(UK South, TDE)&#xa;dbo schema: Registration, ApprovalToken&#xa;audit schema: AuditLog, NotifyLog (INSERT-only)" style="shape=mxgraph.azure.sql_database_sql_azure;fillColor=#1d70b8;fontColor=#0b0c0c;strokeColor=#003078;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="100" y="680" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="redis" value="Azure Cache for Redis&#xa;(UK South, TLS)&#xa;Session State" style="shape=mxgraph.azure.cache_redis;fillColor=#d4351c;fontColor=#0b0c0c;strokeColor=#942514;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="330" y="680" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="keyvault" value="Azure Key Vault&#xa;(UK South)&#xa;Secrets, Connection Strings" style="shape=mxgraph.azure.key_vault;fillColor=#00703c;fontColor=#0b0c0c;strokeColor=#005a30;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="530" y="680" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="appinsights" value="Application Insights&#xa;(UK South)&#xa;Tracing, Monitoring, Alerts" style="shape=mxgraph.azure.application_insights;fillColor=#5694ca;fontColor=#0b0c0c;strokeColor=#1d70b8;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="aca_boundary">
+          <mxGeometry x="720" y="680" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges: Users to services -->
+        <mxCell id="e_applicant_web" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1d70b8;strokeWidth=2;fontColor=#0b0c0c;fontSize=10;" edge="1" source="applicant" target="web_container" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_applicant_web_label" value="HTTPS&#xa;Registration Form" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_applicant_web">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_ap_api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f47738;strokeWidth=2;" edge="1" source="ap" target="api_container" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_ap_api_label" value="HTTPS&#xa;Approve/Reject Link" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_ap_api">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_admin_api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#00703c;strokeWidth=2;" edge="1" source="admin" target="api_container" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_admin_api_label" value="HTTPS + Entra ID&#xa;Admin Dashboard" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_admin_api">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_qarp_api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#5694ca;strokeWidth=2;" edge="1" source="qarp" target="api_container" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_qarp_api_label" value="HTTPS + Entra ID&#xa;Audit + Export" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_qarp_api">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Internal edges: Web to API -->
+        <mxCell id="e_web_api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#505a5f;strokeWidth=1;dashed=1;" edge="1" source="web_container" target="api_container" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_web_api_label" value="Internal API calls&#xa;(Registration, Audit)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_web_api">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- API to Mocks -->
+        <mxCell id="e_api_orgmock" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#505a5f;strokeWidth=1;dashed=1;" edge="1" source="api_container" target="mocks_container" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1070" y="450"/>
+              <mxPoint x="730" y="450"/>
+              <mxPoint x="730" y="540"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_api_orgmock_label" value="Polly-wrapped HTTP&#xa;(Mock ImmForm APIs)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_api_orgmock">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Entra ID external -->
+        <mxCell id="entra_id" value="Microsoft Entra ID&#xa;(Azure AD)" style="shape=mxgraph.azure.active_directory;fillColor=#00703c;fontColor=#0b0c0c;strokeColor=#005a30;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="160" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_api_entra" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#00703c;strokeWidth=1;" edge="1" source="api_container" target="entra_id" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_api_entra_label" value="OAuth 2.0&#xa;Role Claims" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_api_entra">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- GitHub Actions -->
+        <mxCell id="ghactions" value="GitHub Actions&#xa;CI/CD Pipeline&#xa;Lint | Test | Build | Deploy" style="shape=mxgraph.azure.github;fillColor=#0b0c0c;fontColor=#0b0c0c;strokeColor=#383f43;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="320" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="acr" value="Azure Container&#xa;Registry" style="shape=mxgraph.azure.azure_container_registry;fillColor=#1d70b8;fontColor=#0b0c0c;strokeColor=#003078;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="490" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_gh_acr" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#505a5f;strokeWidth=1;" edge="1" source="ghactions" target="acr" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_gh_acr_label" value="Push images" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#505a5f;" vertex="1" connectable="0" parent="e_gh_acr">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f2f1;strokeColor=#b1b4b6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="640" width="200" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend_title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="650" width="60" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d70b8;strokeColor=#003078;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="680" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1t" value="Applicant / Web UI" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="678" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f47738;strokeColor=#d4351c;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="705" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2t" value="Authorised Person" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="703" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00703c;strokeColor=#005a30;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="730" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3t" value="Admin (Entra ID)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="728" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5694ca;strokeColor=#1d70b8;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="755" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4t" value="QA / WDA RP (Entra ID)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="753" width="140" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#505a5f;strokeColor=#383f43;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="780" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5t" value="Alpha Mock (not prod)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="778" width="140" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg6" value="" style="endArrow=classic;html=1;strokeColor=#505a5f;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1255" y="810" as="sourcePoint"/>
+            <mxPoint x="1275" y="810" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg6t" value="Private Endpoint" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#0b0c0c;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="800" width="120" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

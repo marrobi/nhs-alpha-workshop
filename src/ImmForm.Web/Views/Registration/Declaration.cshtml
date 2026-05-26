@@ -1,0 +1,69 @@
+@model ImmForm.Web.Models.DeclarationViewModel
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Declaration";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <a href="/register/check-your-answers" class="govuk-back-link">Back</a>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">There is a problem</h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            @foreach (var key in ViewData.ModelState.Keys)
+                            {
+                                @foreach (var error in ViewData.ModelState[key]!.Errors)
+                                {
+                                    <li><a href="#@key">@error.ErrorMessage</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <h1 class="govuk-heading-l">Declaration</h1>
+
+        <p class="govuk-body">By submitting this application, you confirm that:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>the information you have provided is correct to the best of your knowledge</li>
+            <li>you understand that your Authorised Person will be notified and asked to approve your registration</li>
+            <li>you understand that providing false information may result in your application being rejected</li>
+        </ul>
+
+        <form method="post" action="/register/declaration" novalidate>
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="FullName" value="@Model.FullName" />
+            <input type="hidden" name="DeclarationJobTitle" value="@Model.DeclarationJobTitle" />
+
+            <div class="govuk-form-group @(ViewData.ModelState.ContainsKey(nameof(Model.ConfirmDeclaration)) && ViewData.ModelState[nameof(Model.ConfirmDeclaration)]!.Errors.Count > 0 ? "govuk-form-group--error" : "")">
+                @if (ViewData.ModelState.ContainsKey(nameof(Model.ConfirmDeclaration)) && ViewData.ModelState[nameof(Model.ConfirmDeclaration)]!.Errors.Count > 0)
+                {
+                    <p class="govuk-error-message" id="ConfirmDeclaration-error">
+                        <span class="govuk-visually-hidden">Error:</span> @ViewData.ModelState[nameof(Model.ConfirmDeclaration)]!.Errors[0].ErrorMessage
+                    </p>
+                }
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        <input class="govuk-checkboxes__input" id="ConfirmDeclaration" name="ConfirmDeclaration" type="checkbox" value="true" @(Model.ConfirmDeclaration ? "checked" : "")>
+                        <label class="govuk-label govuk-checkboxes__label" for="ConfirmDeclaration">
+                            I confirm that the information I have provided is correct and I agree to the terms above
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="govuk-button govuk-button--warning" data-module="govuk-button">
+                Submit application
+            </button>
+        </form>
+    </div>
+</div>
