@@ -46,7 +46,6 @@ infra/
 ### Dependencies
 
 1. Create `requirements.txt` with pinned production and dev dependencies:
-   - **Before pinning, look up the latest stable release of each package on PyPI** (or via the Context7 MCP server) — do not pin a version from memory
    - `fastapi`, `uvicorn[standard]`, `pydantic`, `slowapi`, `python-multipart`, `structlog`, `httpx` (production)
    - `pytest`, `pytest-asyncio`, `httpx` (testing)
    - `pytest-playwright`, `axe-playwright-python` (E2E testing — pre-installed in devcontainer, pinned here for CI)
@@ -69,7 +68,6 @@ infra/
 1. Scaffold React app with Vite:
    - `npm create vite@latest frontend -- --template react-ts`
    - Install: `npm install nhsuk-react-components nhsuk-frontend react-router-dom`
-   - **Resolve the latest stable versions from npm** (or via the Context7 MCP server) and confirm the current component list/props against the [nhsuk-react-components docs](https://github.com/NHSDigital/nhsuk-react-components#components) before coding — do not rely on remembered versions or APIs
    - Import `nhsuk-frontend/dist/nhsuk.css` in `main.tsx`
 2. Create NHS-branded layout with `<Header>`, `<Footer>` from nhsuk-react-components
 3. Create the start page at `/`

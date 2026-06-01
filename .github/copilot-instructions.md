@@ -33,13 +33,11 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 
 ## Retrieving Current Versions and Resources
 
-Do **not** rely on memory or the indicative versions written in this repository for anything that changes over time — they may be out of date. Be explicit: when you need the latest version of a dependency, framework, component library, or the current contents of a design system, **retrieve it from the web or an MCP server** before acting.
+Do **not** rely on memory or the indicative versions recorded in this repository for anything that changes over time — they may be out of date. Be explicit: when you need the latest version of a dependency, framework, or component library, or the current contents of a design system, API, or standard, **retrieve it from the web or an MCP server** before acting. Pin or use the exact value you resolve — never guess from memory.
 
-- **Dependency versions** — before pinning a package version, look up the latest stable release from its authoritative source (npm registry, PyPI, the Terraform Registry, or the project's release notes). Use the Context7 MCP server to fetch current library and framework documentation. Pin the exact resolved version — never guess a version number from memory.
-- **Design system components** — the [NHS Design System](https://service-manual.nhs.uk/design-system) and [`nhsuk-frontend`](https://github.com/NHSDigital/nhsuk-frontend) / [`nhsuk-react-components`](https://github.com/NHSDigital/nhsuk-react-components) evolve. Check the live design system and the current component library docs on the web for the available components, their props, and current usage patterns rather than assuming what existed at training time.
-- **APIs and standards** — for NHS APIs, FHIR profiles, and external standards, consult the current published documentation on the web rather than relying on remembered details.
+This applies whenever you would otherwise assume a version number, component, prop, or API shape, regardless of the specific technology in use (the current stack is defined in `.github/instructions/tech-stack.instructions.md`). For example: look up the latest stable release from the authoritative package registry or release notes before pinning a dependency; check the live [NHS Design System](https://service-manual.nhs.uk/design-system) and the component library's own documentation for available components and their props; and consult the current published documentation for NHS APIs, FHIR profiles, and external standards.
 
-If web access or the relevant MCP server is unavailable, say so explicitly rather than guessing a version or component name.
+If web access or the relevant MCP server is unavailable, say so explicitly rather than guessing a version, component, or API.
 
 ## Security
 

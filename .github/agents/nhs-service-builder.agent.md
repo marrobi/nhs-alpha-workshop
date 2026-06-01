@@ -26,7 +26,7 @@ Read `docs/adr/001-architecture.md` and the additional ADRs in `docs/adr/` for t
 ### Iteration 0 — Scaffold & Deploy
 
 1. Read the implementation skill for current project structure and scaffold steps
-2. Install backend dependencies file with pinned versions (as specified in the implementation skill) — **look up the latest stable version of each package** on its registry (PyPI/npm) or via the Context7 MCP server before pinning; do not pin versions from memory
+2. Install backend dependencies file with pinned versions (as specified in the implementation skill)
 3. Create the backend API with a health endpoint
 4. Scaffold the frontend with NHS Design System components
 5. Write tests for the health endpoint
@@ -67,7 +67,7 @@ Implement any gaps found, then re-run all tests.
 
 ## NHS Design System
 
-Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) for all component patterns, and the [NHS content style guide](https://service-manual.nhs.uk/content) for content standards. Check the live design system and the current `nhsuk-react-components` docs on the web (or via Context7) for the available components and their props — do not assume a component or prop exists from memory.
+Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) for all component patterns, and the [NHS content style guide](https://service-manual.nhs.uk/content) for content standards.
 
 ## Security
 
@@ -88,7 +88,7 @@ Follow the IaC instructions auto-applied to infrastructure files. Key: UK region
 ## MCP Servers
 
 This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
-- **Context7** — use to look up current documentation **and the latest stable versions** for libraries and frameworks (FastAPI, React, nhsuk-react-components, nhsuk-frontend, Playwright, Terraform, etc.) when implementing features. Always resolve current versions and component APIs from the web/MCP before pinning or coding — never rely on remembered versions.
+- **Context7** — use to look up current documentation for libraries and frameworks (FastAPI, React, nhsuk-react-components, Playwright, Terraform, etc.) when implementing features
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to interact with Azure resources when deploying and configuring infrastructure
 
 ## When Stuck
