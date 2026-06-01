@@ -58,7 +58,7 @@ infra/
    - Security headers middleware (CSP, HSTS, X-Content-Type-Options)
    - CORS middleware configured for the React dev server
    - Rate limiting (slowapi)
-   - `GET /api/health` returning `{ "status": "ok" }` with 200
+   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — source the version from an environment variable (e.g. `APP_VERSION`) set at build/deploy time, falling back to a sensible default
 2. Define routers in `app/routers/` using `APIRouter(prefix="/api/v1/...", tags=[...])`
 3. Use Pydantic models for all request/response schemas
 4. Use `async def` for route handlers
@@ -84,7 +84,7 @@ infra/
 
 ### Testing
 
-1. Write pytest tests for `/api/health` using httpx `AsyncClient`
+1. Write pytest tests for `/api/health` using httpx `AsyncClient` — assert 200, the health state, and that a `version` is returned
 2. Write Vitest tests for React components
 3. Target: 80% coverage
 
@@ -112,7 +112,7 @@ az webapp deploy \
   --name "app-${APP_NAME}-dev" \
   --src-path app.zip --type zip
 
-# Verify
+# Verify — expect HTTP 200 and confirm the deployed version matches the committed code
 curl https://app-${APP_NAME}-dev.azurewebsites.net/api/health
 ```
 

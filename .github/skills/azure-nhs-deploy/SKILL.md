@@ -63,6 +63,15 @@ az webapp deploy \
   --type zip
 ```
 
+Set the deployed code version so the health endpoint can report it (use the commit SHA):
+
+```bash
+az webapp config appsettings set \
+  --resource-group "rg-${APP_NAME}-dev" \
+  --name "app-${APP_NAME}-dev" \
+  --settings "APP_VERSION=$(git rev-parse --short HEAD)"
+```
+
 ### 5. Configure Startup Command
 
 ```bash
@@ -74,8 +83,11 @@ az webapp config set \
 
 ### 6. Verify
 
+Confirm the live service returns HTTP 200 **and** that the `version` reported by the health endpoint matches the commit you deployed — this proves the correct code is live:
+
 ```bash
 curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
+# Expect HTTP 200 and a body such as {"status": "ok", "version": "<deployed git SHA>"}
 ```
 
 ## Key Terraform Resources
