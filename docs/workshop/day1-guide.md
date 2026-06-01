@@ -143,6 +143,8 @@ For each batch:
 
 2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
+   Run it **in VS Code** — like the Demo Recorder, it needs direct access to a running instance, which the hosted agent may not reach. The agent starts the app locally itself, so once a batch is clean locally, verify it on the deployed live URL.
+
    **Agent**: Visual QA
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.

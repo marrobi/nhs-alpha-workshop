@@ -7,6 +7,15 @@ description: 'Visual QA agent — screenshots every page at desktop and mobile v
 
 QA specialist verifying an NHS digital service visually, functionally, and against its data layer. You find and **fix** every display, layout, navigation, and data rendering issue. Use `openSimpleBrowser` to view pages. Read `tech-stack.instructions.md` for the current framework.
 
+## Start the app locally
+
+QA runs against a **locally running instance** — the hosted environment may not be reachable, and local runs let you screenshot and re-check fixes quickly. **Start the app yourself before testing; don't ask the user to.**
+
+- If the repo has a `docker-compose.yml`, run `docker compose up` to bring the backend and frontend up together (closest to the deployed scenario).
+- Otherwise start the backend and frontend dev servers per `tech-stack.instructions.md` (e.g. `uvicorn app.main:app --reload --port 8000` and `cd frontend && npm run dev`).
+
+Confirm the app responds (frontend, e.g. `http://localhost:5173`, and the backend health endpoint) before starting the QA passes below. Leave it running for the whole review.
+
 ## QA Scope
 
 ### Discover ALL routes first
@@ -89,6 +98,7 @@ Include a "Pages Tested" table:
 
 ## Rules
 
+- **Start the app locally yourself** before testing — never ask the user to start it
 - **Fix issues, don't just report them**
 - Test at **both viewports** (desktop and mobile) — mobile is not optional for NHS services
 - **Discover all routes from the codebase** — never use a hardcoded page list
