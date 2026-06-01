@@ -35,7 +35,7 @@ frontend/
   vite.config.ts
   tsconfig.json
 requirements.txt     # Pinned Python dependencies
-Dockerfile           # Multi-stage build: frontend assets + FastAPI app (single image)
+Dockerfile           # Multi-stage build: frontend assets + FastAPI app
 infra/
   main.tf            # Terraform resources
   variables.tf       # Input variables
@@ -105,7 +105,7 @@ uvicorn app.main:app --reload --port 8000
 # Run locally — frontend dev server (proxies /api to the backend)
 cd frontend && npm ci && npm run dev
 
-# Run the whole service locally as the production container
+# Run the whole service locally as the production container(s)
 docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) -t nhs-service:local .
 docker run -p 8000:8000 nhs-service:local
 curl http://localhost:8000/api/health   # expect 200 with a version
@@ -114,7 +114,8 @@ curl http://localhost:8000/api/health   # expect 200 with a version
 cd infra && terraform init && terraform plan -var="app_name=my-service" -out=tfplan
 terraform apply tfplan
 
-# Build, push, and deploy the image to Azure (no zip deploy — see azure-nhs-deploy skill)
+# Build and push the image, then deploy by bumping the image tag Terraform variable
+# (no zip deploy — see azure-nhs-deploy skill). The web app picks up the new tag on apply.
 az acr login --name "acr${APP_NAME}dev"
 docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) \
   -t "acr${APP_NAME}dev.azurecr.io/${APP_NAME}:$(git rev-parse --short HEAD)" .

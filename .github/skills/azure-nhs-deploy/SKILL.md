@@ -55,7 +55,7 @@ terraform apply tfplan
 
 ### 4. Build & Push the Container Image
 
-The service ships as a single Docker image (see the tech-stack profile). Build it with the deployed version baked in, then push it to the registry. Avoid zip deploys — containers give an identical artefact locally and in Azure.
+The service ships as a Docker image (see the tech-stack profile — some services may build more than one). Build it with the deployed version baked in, then push it to the registry. Avoid zip deploys — containers give an identical artefact locally and in Azure.
 
 ```bash
 az acr login --name "acr${APP_NAME}dev"

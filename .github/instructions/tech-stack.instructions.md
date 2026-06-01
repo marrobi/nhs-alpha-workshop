@@ -21,8 +21,8 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **E2E Testing** | Playwright (Python) + axe-playwright-python |
 | **Performance Testing** | k6 (JavaScript) |
 | **IaC** | Terraform (`azurerm` provider) |
-| **Packaging** | Docker container (Linux) — single image runs locally and in any container host |
-| **Hosting** | Container on Azure App Service for Containers (Linux, UK South); the image is portable to Container Apps or any OCI host |
+| **Packaging** | Docker container(s) (Linux) — the same image(s) run locally and in any container host |
+| **Hosting** | Azure Web App for Containers (Linux, UK South) |
 | **Secrets** | Azure Key Vault via Managed Identity |
 | **Monitoring** | Azure Application Insights |
 | **CI/CD** | GitHub Actions |
@@ -160,16 +160,6 @@ pytest --cov=app --cov-fail-under=80            # Enforce threshold
 - Mock external dependencies with `unittest.mock.patch` or `pytest-mock`
 
 ---
-
-## Containerisation (Docker)
-
-The service is packaged as a **single Docker image**, independent of the Azure service that ultimately hosts it. The same image runs on a developer machine and in production — only configuration (env vars, secrets) differs.
-
-- Provide a `Dockerfile` at the repo root that builds the frontend, installs backend dependencies, and serves the FastAPI app (e.g. `uvicorn app.main:app --host 0.0.0.0 --port 8000`)
-- The container listens on a single port and serves both the API and the built frontend assets
-- Inject the deployed code version at build time (e.g. `ARG APP_VERSION` → `ENV APP_VERSION=...`) so the health endpoint can report it. Make a missing value fail the **build** (e.g. a `RUN test -n "$APP_VERSION"` step) rather than producing an image that only fails at startup
-- Keep the image slim — use a Python slim base, a multi-stage build for the frontend, and a non-root user
-- Do **not** bake secrets into the image — supply them at runtime via environment variables / Key Vault references
 
 ## Running Locally
 
