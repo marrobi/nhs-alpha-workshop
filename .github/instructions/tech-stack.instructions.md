@@ -163,21 +163,9 @@ pytest --cov=app --cov-fail-under=80            # Enforce threshold
 
 ## Running Locally
 
-```bash
-# Backend (hot reload)
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-
-# Frontend dev server (proxies /api to the backend)
-cd frontend && npm ci && npm run dev
-
-# Or run the whole service as the production container
-docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) -t nhs-service:local .
-docker run -p 8000:8000 nhs-service:local
-
-# Verify
-curl http://localhost:8000/api/health   # expect 200 with {"status": "ok", "version": ...}
-```
+- Run the backend and frontend dev servers directly for fast iteration (uvicorn with hot reload for FastAPI; the Vite dev server for React, proxying `/api` to the backend).
+- Alternatively run the service the same way it ships: a single container via `docker run`, or multiple containers via Docker Compose.
+- Confirm `/api/health` returns 200 with the deployed version before considering the service up.
 
 ---
 
