@@ -7,6 +7,7 @@
 ## Rules
 
 - **Do not create or update documentation files** (README, markdown docs, MKdocs, ADRs, etc.) unless the user explicitly requests it. Focus on code, tests, and infrastructure.
+- **Stop and ask when a required tool is missing** — if a required component (MCP server, Playwright browser, CLI, or external service) is unavailable or fails to execute, pause and prompt the user on how to proceed instead of producing inferior results or fabricating output. See `.github/instructions/tool-availability.instructions.md`.
 
 ## Project Description
 
