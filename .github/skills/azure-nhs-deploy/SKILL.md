@@ -63,14 +63,13 @@ az webapp deploy \
   --type zip
 ```
 
-Set the deployed code version so the health endpoint can report it (use the commit SHA):
+Make the deployed code version discoverable at runtime so the health endpoint can report it. **How** you supply it depends on the deployment model — choose what fits your stack rather than hardcoding one approach:
 
-```bash
-az webapp config appsettings set \
-  --resource-group "rg-${APP_NAME}-dev" \
-  --name "app-${APP_NAME}-dev" \
-  --settings "APP_VERSION=$(git rev-parse --short HEAD)"
-```
+- **App Service app setting (zip deploy)**: define an `APP_VERSION` app setting in Terraform (`azurerm_linux_web_app.app_settings`) and pass the commit SHA via `terraform apply -var="app_version=$(git rev-parse --short HEAD)"`. Keep app settings in Terraform, not ad-hoc `az` commands, so they aren't overwritten on the next apply.
+- **Container/Docker**: bake the version into the image at build time (e.g. a `--build-arg APP_VERSION=...` baked into an env var or a label), so the running image reports the version it was built from.
+- **Build artefact**: write the SHA to a file (e.g. `app/version.txt`) during the build and read it at runtime.
+
+The application reads this value (failing loudly if it is missing — see the `org-standards` no-silent-fallback rule) and returns it from the health endpoint.
 
 ### 5. Configure Startup Command
 

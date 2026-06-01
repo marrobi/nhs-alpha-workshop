@@ -58,7 +58,7 @@ infra/
    - Security headers middleware (CSP, HSTS, X-Content-Type-Options)
    - CORS middleware configured for the React dev server
    - Rate limiting (slowapi)
-   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — read the version from a required environment variable using `os.environ["APP_VERSION"]` (set at build/deploy time) so a missing value fails loudly rather than silently defaulting
+   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — read the version from whatever the deployment supplies it through (a required env var such as `APP_VERSION`, or a build-time version file), failing loudly if it is missing rather than silently defaulting. See the `azure-nhs-deploy` skill for supplying the version per deployment model
 2. Define routers in `app/routers/` using `APIRouter(prefix="/api/v1/...", tags=[...])`
 3. Use Pydantic models for all request/response schemas
 4. Use `async def` for route handlers
