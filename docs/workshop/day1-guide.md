@@ -131,20 +131,6 @@ The agent will:
 
 This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-### Run the app locally (for Visual QA)
-
-Visual QA reviews a running instance, so start the app locally before the first batch and keep it running:
-
-```bash
-# Backend (terminal 1)
-uvicorn app.main:app --reload --port 8000
-
-# Frontend (terminal 2)
-cd frontend && npm run dev   # serves http://localhost:5173
-```
-
-The dev container forwards ports `8000` and `5173`. If the scaffold includes a `docker-compose.yml`, you can instead run `docker compose up` to bring up the backend and frontend together and more closely replicate the deployed scenario. Leave the app running for the whole Build → QA → Repeat loop.
-
 ### Build → QA → Repeat
 
 For each batch:
@@ -157,11 +143,11 @@ For each batch:
 
 2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
-   Run the Visual QA agent **in VS Code against your locally running app** (see *Run the app locally* above, e.g. `http://localhost:5173`). Like the Demo Recorder, it needs direct access to a running instance — the hosted Copilot Coding Agent may not be able to reach it, and running locally lets it screenshot and re-check fixes quickly. Once the batch is clean locally, verify it on the deployed live URL.
+   Run the Visual QA agent **in VS Code** so it has direct access to a running instance — like the Demo Recorder, the hosted Copilot Coding Agent may not be able to reach it, and running locally lets it screenshot and re-check fixes quickly. The agent starts the app itself (via `docker compose up` if the scaffold includes a `docker-compose.yml`, otherwise the backend and frontend dev servers) and reviews against `http://localhost:5173` — you don't need to start it manually. Once the batch is clean locally, verify it on the deployed live URL.
 
    **Agent**: Visual QA
 
-   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003] against the locally running app at `http://localhost:5173`. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+   > Start the app locally (use `docker compose up` if a `docker-compose.yml` exists, otherwise run the backend and frontend dev servers), then review the pages and user journeys implemented by stories [story-001, story-002, story-003] against `http://localhost:5173`. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
