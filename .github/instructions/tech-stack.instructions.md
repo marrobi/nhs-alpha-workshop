@@ -8,6 +8,8 @@ This is the **single source of truth** for the current technology choices. All a
 
 To change the tech stack, update this file and swap the corresponding tech-specific agents, instructions, and skills.
 
+> **Version numbers in this file are indicative baselines, not pinned versions.** Before installing or pinning any dependency, retrieve the latest stable version from its authoritative source (npm registry, PyPI, the Terraform Registry) or via the Context7 MCP server — do not assume the versions remembered from training are current. Pin the exact resolved version once confirmed. See "Retrieving Current Versions and Resources" in `.github/copilot-instructions.md`.
+
 ## Current Stack
 
 | Concern | Choice |
@@ -75,6 +77,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 
 ### Dependencies (Python)
 
+- Before pinning, look up the latest stable release of each package on PyPI (or via the Context7 MCP server) — do not pin a version from memory
 - Pin exact versions in `requirements.txt` — no `>=` or `~=` ranges
 - Run `pip audit` and resolve critical/high vulnerabilities before merging
 - Configure Dependabot for automated security updates
@@ -85,6 +88,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 
 ### Setup
 
+- Before installing, check the latest stable versions of `nhsuk-react-components` and `nhsuk-frontend` on npm (or via the Context7 MCP server), and confirm the current component list and props against their published docs — do not rely on remembered versions or APIs
 - Install: `npm install nhsuk-react-components nhsuk-frontend`
 - Import CSS in entry point: `import 'nhsuk-frontend/dist/nhsuk.css'`
 - Import components individually: `import { Header, Footer, Button } from 'nhsuk-react-components'`

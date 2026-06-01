@@ -9,6 +9,7 @@ Use the [NHS Design System](https://service-manual.nhs.uk/design-system) for all
 ## Design System
 
 - Always use the NHS Design System component library — never hand-code components that exist in the design system
+- The NHS Design System and `nhsuk-frontend` / `nhsuk-react-components` evolve — **check the live design system and the current component library docs on the web** (or via the Context7 MCP server) for the available components, their props, and current usage patterns. Do not assume a component, variant, or prop exists based on memory.
 - Follow the component patterns from the [NHS Design System components](https://service-manual.nhs.uk/design-system/components)
 
 ## Layout

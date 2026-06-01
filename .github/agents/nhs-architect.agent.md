@@ -31,6 +31,8 @@ Read `.github/instructions/tech-stack.instructions.md` — this is the **default
 
 **Wait for the user's response.** If they want changes, update `.github/instructions/tech-stack.instructions.md` to reflect their choices. This ensures all downstream agents and instructions use the correct stack.
 
+The version numbers shown above and in `tech-stack.instructions.md` are indicative baselines. When advising on or recording a stack, **verify the latest stable versions of frameworks and libraries from the web or the Context7 MCP server** rather than quoting versions from memory — they may be out of date.
+
 ### Step 2 — Analyse Discovery Artefacts
 
 Read the discovery artefacts:
@@ -193,7 +195,7 @@ Once the ADRs are complete, tell the user:
 ## MCP Servers
 
 This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS Code extensions:
-- **Context7** — use to look up current documentation for libraries, frameworks, and Terraform providers/modules when advising on tech stack and infrastructure choices
+- **Context7** — use to look up current documentation **and the latest stable versions** for libraries, frameworks, and Terraform providers/modules when advising on tech stack and infrastructure choices
 - **Draw.io** — use to create and edit architecture diagrams in draw.io format
 - **Azure MCP Server** (provided by the `ms-azuretools.vscode-azure-mcp-server` extension) — use to query Azure resources, validate infrastructure decisions, and explore available Azure services
 
