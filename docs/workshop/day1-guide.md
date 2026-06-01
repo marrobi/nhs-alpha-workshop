@@ -83,29 +83,26 @@ Approve the stories before grouping and prioritising them.
 
 ## Phase 3 — Group & Prioritise User Stories (20 minutes)
 
-A flat list of stories is hard to build from. Before writing any code, group the stories into build batches — aligned to complete user journeys — and put them in priority order so the team builds the right things first. Grouping by journey means each batch delivers a working, end-to-end journey that can be demonstrated after it is built. This phase uses the **NHS Product Owner** agent.
+Turn the flat list of stories into an ordered build backlog. This phase uses the **NHS Product Owner** agent.
 
 **Agent**: NHS Product Owner
 
-> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts (especially `docs/discovery-notes.md` for riskiest assumptions). Group the stories into build batches aligned to complete user journeys, so each batch delivers a demonstrable end-to-end journey. Prioritise the batches by riskiest assumption. Save the result as a prioritised build backlog at `user_stories/backlog.md`.
+> Group the user stories in `user_stories/` into journey-aligned batches and prioritise them by riskiest assumption. Save the prioritised build backlog to `user_stories/backlog.md`.
 
 The agent will:
 
-1. **Group stories into batches that complete a user journey** — keep the stories that make up a single journey together (typically 2–5 connected stories sharing pages and components), so each batch delivers a working end-to-end journey that can be demonstrated once built
-2. **Order the batches by priority** — riskiest assumption first (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions)), then by dependency (foundational stories before those that build on them)
-3. **Record dependencies** — note where one story or batch must be built before another
-4. **Present the prioritised batches for review** — you approve or reorder before they are saved
-5. **Save the prioritised build backlog** to `user_stories/backlog.md` — the build order used in Phase 6
+1. **Group stories into journey-aligned batches** — keep the connected stories that make up a single journey together (typically 2–5 stories), so each batch delivers a demonstrable end-to-end journey
+2. **Order batches by priority** — riskiest assumption first (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions)), then by dependency
+3. **Save the build backlog** to `user_stories/backlog.md` — the build order used in Phase 6
 
 ### Review the Backlog (10 minutes)
 
 Walk through as a team:
-- Is the riskiest assumption being tested first?
-- Does each batch complete a user journey, so the app can be demonstrated end-to-end after the batch is built?
-- Are the batches the right size (2–5 connected stories)?
+- Is the riskiest assumption tested first?
+- Does each batch complete a user journey that can be demonstrated end-to-end?
 - Are dependencies in the right order (foundational stories first)?
 
-Approve the prioritised backlog before moving to ADR review.
+Approve the backlog before moving to ADR review.
 
 ---
 
