@@ -21,7 +21,8 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **E2E Testing** | Playwright (Python) + axe-playwright-python |
 | **Performance Testing** | k6 (JavaScript) |
 | **IaC** | Terraform (`azurerm` provider) |
-| **Hosting** | Azure App Service on Linux (UK South) |
+| **Packaging** | Docker container (Linux) — single image runs locally and in any container host |
+| **Hosting** | Container on Azure App Service for Containers (Linux, UK South); the image is portable to Container Apps or any OCI host |
 | **Secrets** | Azure Key Vault via Managed Identity |
 | **Monitoring** | Azure Application Insights |
 | **CI/CD** | GitHub Actions |
@@ -160,9 +161,40 @@ pytest --cov=app --cov-fail-under=80            # Enforce threshold
 
 ---
 
+## Containerisation (Docker)
+
+The service is packaged as a **single Docker image**, independent of the Azure service that ultimately hosts it. The same image runs on a developer machine and in production — only configuration (env vars, secrets) differs.
+
+- Provide a `Dockerfile` at the repo root that builds the frontend, installs backend dependencies, and serves the FastAPI app (e.g. `uvicorn app.main:app --host 0.0.0.0 --port 8000`)
+- The container listens on a single port and serves both the API and the built frontend assets
+- Inject the deployed code version at build time (e.g. `ARG APP_VERSION` → `ENV APP_VERSION=...`) so the health endpoint can report it; the app must fail loudly if the value is missing
+- Keep the image slim — use a Python slim base, a multi-stage build for the frontend, and a non-root user
+- Do **not** bake secrets into the image — supply them at runtime via environment variables / Key Vault references
+
+## Running Locally
+
+```bash
+# Backend (hot reload)
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+# Frontend dev server (proxies /api to the backend)
+cd frontend && npm ci && npm run dev
+
+# Or run the whole service as the production container
+docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) -t nhs-service:local .
+docker run -p 8000:8000 nhs-service:local
+
+# Verify
+curl http://localhost:8000/api/health   # expect 200 with {"status": "ok", "version": ...}
+```
+
+---
+
 ## Infrastructure Implementation (Terraform / Azure)
 
-### App Service
+### App Service (Containers)
 
-- `azurerm_linux_web_app` with Python 3.12 runtime stack
-- Configure startup command: `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+- `azurerm_linux_web_app` configured for a container image via `application_stack { docker_image_name = ... }` (App Service for Containers), pulling the image from a registry such as Azure Container Registry
+- The container defines its own start command (`CMD`/`ENTRYPOINT`) — no App Service startup command needed
+- Set `APP_VERSION` (and other config) as `app_settings` in Terraform, not via ad-hoc `az` commands, so they survive the next `terraform apply`
