@@ -21,7 +21,8 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **E2E Testing** | Playwright (Python) + axe-playwright-python |
 | **Performance Testing** | k6 (JavaScript) |
 | **IaC** | Terraform (`azurerm` provider) |
-| **Hosting** | Azure App Service on Linux (UK South) |
+| **Packaging** | Docker container(s) (Linux) — the same image(s) run locally and in any container host |
+| **Hosting** | Azure Web App for Containers (Linux, UK South) |
 | **Secrets** | Azure Key Vault via Managed Identity |
 | **Monitoring** | Azure Application Insights |
 | **CI/CD** | GitHub Actions |
@@ -160,9 +161,30 @@ pytest --cov=app --cov-fail-under=80            # Enforce threshold
 
 ---
 
+## Running Locally
+
+```bash
+# Backend (hot reload)
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+# Frontend dev server (proxies /api to the backend)
+cd frontend && npm ci && npm run dev
+
+# Or run the whole service as the production container
+docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) -t nhs-service:local .
+docker run -p 8000:8000 nhs-service:local
+
+# Verify
+curl http://localhost:8000/api/health   # expect 200 with {"status": "ok", "version": ...}
+```
+
+---
+
 ## Infrastructure Implementation (Terraform / Azure)
 
-### App Service
+### App Service (Containers)
 
-- `azurerm_linux_web_app` with Python 3.12 runtime stack
-- Configure startup command: `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+- `azurerm_linux_web_app` configured for a container image via `application_stack { docker_image_name = ... }` (App Service for Containers), pulling the image from a registry such as Azure Container Registry
+- The container defines its own start command (`CMD`/`ENTRYPOINT`) — no App Service startup command needed
+- Set `APP_VERSION` (and other config) as `app_settings` in Terraform, not via ad-hoc `az` commands, so they survive the next `terraform apply`

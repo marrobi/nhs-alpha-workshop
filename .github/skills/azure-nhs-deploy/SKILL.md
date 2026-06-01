@@ -20,9 +20,11 @@ All resource names use `var.app_name` so multiple Alphas can coexist in one subs
 
 ```
 Resource Group (rg-{app_name}-{env})
+├── Container Registry (acr{app_name}{env})
 ├── App Service Plan (asp-{app_name}-{env}, Linux, B1)
-├── Linux Web App (app-{app_name}-{env}, Python 3.12)
+├── Linux Web App for Containers (app-{app_name}-{env})
 ├── User Assigned Managed Identity
+├── Role Assignment (identity → AcrPull on the registry)
 ├── Key Vault (kv-{app_name}-{env})
 │   └── Access Policy → Managed Identity (get, list secrets)
 └── Application Insights (ai-{app_name}-{env})
@@ -51,31 +53,34 @@ terraform plan -var="app_name=my-service" -out=tfplan
 terraform apply tfplan
 ```
 
-### 4. Build Frontend & Deploy
+### 4. Build & Push the Container Image
+
+The service ships as a Docker image (see the tech-stack profile — some services may build more than one). Build it with the deployed version baked in, then push it to the registry. Avoid zip deploys — containers give an identical artefact locally and in Azure.
 
 ```bash
-cd ../frontend && npm run build && cd ..
-zip -r app.zip app/ frontend/dist/ requirements.txt
-az webapp deploy \
-  --resource-group "rg-${APP_NAME}-dev" \
-  --name "app-${APP_NAME}-dev" \
-  --src-path app.zip \
-  --type zip
+az acr login --name "acr${APP_NAME}dev"
+docker build \
+  --build-arg APP_VERSION="$(git rev-parse --short HEAD)" \
+  -t "acr${APP_NAME}dev.azurecr.io/${APP_NAME}:$(git rev-parse --short HEAD)" .
+docker push "acr${APP_NAME}dev.azurecr.io/${APP_NAME}:$(git rev-parse --short HEAD)"
 ```
 
-### 5. Configure Startup Command
+The web app pulls this image. Point it at the new tag through Terraform (`docker_image_name` on `azurerm_linux_web_app`) so the change is tracked in IaC:
 
 ```bash
-az webapp config set \
-  --resource-group "rg-${APP_NAME}-dev" \
-  --name "app-${APP_NAME}-dev" \
-  --startup-file "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+cd infra
+terraform apply -var="app_name=${APP_NAME}" -var="image_tag=$(git rev-parse --short HEAD)"
 ```
 
-### 6. Verify
+Because `APP_VERSION` is baked into the image at build time, the running container reports the exact commit it was built from at the health endpoint. The application reads this value and fails loudly if it is missing — see the `org-standards` no-silent-fallback rule.
+
+### 5. Verify
+
+Confirm the live service returns HTTP 200 **and** that the `version` reported by the health endpoint matches the commit you deployed — this proves the correct code is live:
 
 ```bash
 curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
+# Expect HTTP 200 and a body such as {"status": "ok", "version": "<deployed git SHA>"}
 ```
 
 ## Key Terraform Resources
@@ -83,8 +88,9 @@ curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
 | Resource | Terraform Type |
 |---|---|
 | Resource Group | `azurerm_resource_group` |
+| Container Registry | `azurerm_container_registry` |
 | App Service Plan | `azurerm_service_plan` |
-| Web App | `azurerm_linux_web_app` |
+| Web App for Containers | `azurerm_linux_web_app` |
 | Key Vault | `azurerm_key_vault` |
 | Key Vault Access Policy | `azurerm_key_vault_access_policy` |
 | Managed Identity | `azurerm_user_assigned_identity` |

@@ -121,7 +121,7 @@ The default standards below are drawn from the [NHS Architecture Manual](https:/
 
 - **Structured JSON logging required** — all application logs must be structured JSON, not plaintext
 - **Correlation IDs (`X-Request-ID`) in every log entry** — all requests must include a correlation ID for distributed tracing
-- **Health check endpoint required at `/health`** — every service must expose a health check endpoint that returns `{"status": "ok"}` and a 200 status code
+- **Health check endpoint required at `/health`** — every service must expose a health check endpoint that returns the health state and the deployed code version (e.g. `{"status": "ok", "version": "<app version or git SHA>"}`) with a 200 status code. The `version` lets you confirm the correct code is live after a deployment
 - **Application performance monitoring configured** — use Azure Application Insights or equivalent; monitor response times, error rates, and availability
 - **Alerting on error rate spikes** — configure alerts for sustained error rate increases or availability drops
 

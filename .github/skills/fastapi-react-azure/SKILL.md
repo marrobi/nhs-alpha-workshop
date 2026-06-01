@@ -35,6 +35,7 @@ frontend/
   vite.config.ts
   tsconfig.json
 requirements.txt     # Pinned Python dependencies
+Dockerfile           # Multi-stage build: frontend assets + FastAPI app
 infra/
   main.tf            # Terraform resources
   variables.tf       # Input variables
@@ -58,7 +59,7 @@ infra/
    - Security headers middleware (CSP, HSTS, X-Content-Type-Options)
    - CORS middleware configured for the React dev server
    - Rate limiting (slowapi)
-   - `GET /api/health` returning `{ "status": "ok" }` with 200
+   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — read the version from whatever the deployment supplies it through (a required env var such as `APP_VERSION`, or a build-time version file), failing loudly if it is missing rather than silently defaulting. See the `azure-nhs-deploy` skill for supplying the version per deployment model
 2. Define routers in `app/routers/` using `APIRouter(prefix="/api/v1/...", tags=[...])`
 3. Use Pydantic models for all request/response schemas
 4. Use `async def` for route handlers
@@ -76,43 +77,52 @@ infra/
 ### Infrastructure — Terraform + Azure
 
 1. Write Terraform in `infra/` using `var.app_name` for resource naming:
-   - Resource Group, App Service Plan (Linux, B1), Linux Web App
-   - Key Vault with Managed Identity access policy
+   - Resource Group, Container Registry, App Service Plan (Linux, B1), Linux Web App for Containers
+   - Key Vault with Managed Identity access policy; grant the identity the `AcrPull` role on the Container Registry so it can pull the image
    - Application Insights
    - All in `uksouth` region
 2. Run `terraform init && terraform plan` to validate
 
+### Container — Docker
+
+1. Add a `Dockerfile` at the repo root that builds the frontend and serves the FastAPI app on a single port (`uvicorn app.main:app --host 0.0.0.0 --port 8000`)
+2. Accept `ARG APP_VERSION` and set it as `ENV APP_VERSION` so the health endpoint reports the deployed commit
+3. The same image runs locally (`docker run`) and on Azure — see the tech-stack profile for details
+
 ### Testing
 
-1. Write pytest tests for `/api/health` using httpx `AsyncClient`
+1. Write pytest tests for `/api/health` using httpx `AsyncClient` — assert 200, the health state, and that a `version` is returned
 2. Write Vitest tests for React components
 3. Target: 80% coverage
 
 ## Build & Deploy Commands
 
 ```bash
-# Backend
+# Run locally — backend (hot reload)
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 
-# Frontend
+# Run locally — frontend dev server (proxies /api to the backend)
 cd frontend && npm ci && npm run dev
 
-# Build for production
-cd frontend && npm run build && cd ..
+# Run the whole service locally as the production container(s)
+docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) -t nhs-service:local .
+docker run -p 8000:8000 nhs-service:local
+curl http://localhost:8000/api/health   # expect 200 with a version
 
-# Terraform
+# Provision infrastructure
 cd infra && terraform init && terraform plan -var="app_name=my-service" -out=tfplan
 terraform apply tfplan
 
-# Deploy to Azure
-zip -r app.zip app/ frontend/dist/ requirements.txt
-az webapp deploy \
-  --resource-group "rg-${APP_NAME}-dev" \
-  --name "app-${APP_NAME}-dev" \
-  --src-path app.zip --type zip
+# Build and push the image, then deploy by bumping the image tag Terraform variable
+# (no zip deploy — see azure-nhs-deploy skill). The web app picks up the new tag on apply.
+az acr login --name "acr${APP_NAME}dev"
+docker build --build-arg APP_VERSION=$(git rev-parse --short HEAD) \
+  -t "acr${APP_NAME}dev.azurecr.io/${APP_NAME}:$(git rev-parse --short HEAD)" .
+docker push "acr${APP_NAME}dev.azurecr.io/${APP_NAME}:$(git rev-parse --short HEAD)"
+terraform apply -var="app_name=${APP_NAME}" -var="image_tag=$(git rev-parse --short HEAD)"
 
-# Verify
+# Verify — expect HTTP 200 and confirm the deployed version matches the committed code
 curl https://app-${APP_NAME}-dev.azurewebsites.net/api/health
 ```
 
@@ -120,5 +130,5 @@ curl https://app-${APP_NAME}-dev.azurewebsites.net/api/health
 
 - If `terraform apply` fails, read the error, fix the HCL, and re-run
 - If `pytest` fails, fix the code (not the test) unless the test is wrong
-- If the Azure deployment fails, check logs with `az webapp log tail`
+- If the container fails to start on Azure, check logs with `az webapp log tail`
 - Always verify live by hitting the Azure URL with `curl`

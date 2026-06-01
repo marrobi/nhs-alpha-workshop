@@ -123,7 +123,7 @@ The agent will:
 - Scaffold the frontend with NHS Design System components
 - Write infrastructure-as-code configuration
 - Deploy infrastructure and application
-- Verify the health endpoint returns 200 on the live URL
+- Verify the health endpoint returns 200 on the live URL and reports the deployed code version
 
 ---
 
@@ -151,7 +151,13 @@ For each batch:
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
-4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
+4. **Deploy** — once Visual QA is clean, switch back to the **NHS Service Builder** agent to deploy the latest code to Azure. Don't rely on the build step having already deployed — explicitly deploy after each QA cycle so the live service stays current.
+
+   **Agent**: NHS Service Builder
+
+   > Deploy the latest code (infrastructure and application) to Azure. Verify the health endpoint returns 200 on the live URL and that the `version` it reports matches the commit just deployed.
+
+5. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
 
 ### While the Agents Work
 

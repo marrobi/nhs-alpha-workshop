@@ -63,6 +63,8 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
 | 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
+> **Deploying to Azure on Day 2**: From Day 2 onwards, deployment to Azure relies on the GitHub Actions CI/CD pipeline created by **Issue 01 (CI/CD Pipeline)**, which deploys on each merge to `main`. Until that pipeline is created and operational, Azure is **not** updated automatically — after each merge to `main` you must deploy manually (see the `azure-nhs-deploy` skill) or ask the **NHS Service Builder** agent to deploy. After any deployment, verify the live `/api/health` endpoint returns 200 and reports the expected `version`.
+
 ## GDS Alpha Assessment Readiness
 
 By the end of Day 2, review your evidence against the [GDS Service Standard](https://www.gov.uk/service-manual/service-standard):
