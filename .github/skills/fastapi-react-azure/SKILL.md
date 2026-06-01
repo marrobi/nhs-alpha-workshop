@@ -58,7 +58,7 @@ infra/
    - Security headers middleware (CSP, HSTS, X-Content-Type-Options)
    - CORS middleware configured for the React dev server
    - Rate limiting (slowapi)
-   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — source the version from an environment variable (e.g. `APP_VERSION`) set at build/deploy time, falling back to a sensible default
+   - `GET /api/health` returning the health state and deployed code version (e.g. `{ "status": "ok", "version": "<app version or git SHA>" }`) with 200 — read the version from a required environment variable using `os.environ["APP_VERSION"]` (set at build/deploy time) so a missing value fails loudly rather than silently defaulting
 2. Define routers in `app/routers/` using `APIRouter(prefix="/api/v1/...", tags=[...])`
 3. Use Pydantic models for all request/response schemas
 4. Use `async def` for route handlers
