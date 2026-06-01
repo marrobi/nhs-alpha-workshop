@@ -56,6 +56,14 @@ For each journey (in priority order from the ADR), identify the discrete user st
 - Check for cross-journey gaps: shared components, common data operations, or transitions between journeys
 - If you find gaps, add stories to cover them — mark them with `**Gap fill**` in the journey reference field
 
+**End-to-end completeness check — the stories must be sufficient to complete each journey from start to finish.** After the gap analysis, confirm that, if every story for a journey were implemented, a real user could complete that journey end to end with nothing missing:
+- **Entry point** — there is a story that lets the actor start the journey (landing page, sign-in, or first action in the journey's Main Flow)
+- **Preconditions** — everything in the journey's **Preconditions** is satisfied by a story or an explicit dependency (e.g. authentication, an existing record, a prior journey). If a precondition is not covered, add a `**Gap fill**` story or note the dependency
+- **Every step connects** — each step's output feeds the next; there are no orphan stories and no steps that depend on functionality no story provides (data, navigation, state)
+- **Decision points** — every branch/path and edge case in the journey's **Decision Points** is reachable and handled by a story
+- **Success Criteria** — there is a story whose acceptance criteria deliver the journey's stated **Success Criteria**, so the journey reaches its defined end state
+- If any of these are not met, add or split stories until the set is complete. Do not leave a journey that cannot be completed end to end.
+
 ### Step 3 — Write Acceptance Criteria
 
 Every story MUST include acceptance criteria in these four categories (from the `nhs-user-stories` skill):
@@ -120,6 +128,8 @@ Format:
 > 4. Story 004 — [title]
 > 5. Story 005 — [title]
 >
+> I've checked each journey end to end: the stories above cover the entry point, preconditions, every step and decision point, and the journey's success criteria — so each journey can be completed from start to finish.
+>
 > Please review the story files in `user_stories/` and let me know if you want to add, remove, split, or re-prioritise any stories.
 
 **Wait for the user's response.** If they request changes, edit the relevant files directly.
@@ -132,6 +142,7 @@ Once the user confirms the stories, tell them:
 ## Rules
 
 - **Save first, then summarise** — never type out full stories in the chat; save to files and present only titles
+- **Every journey must be completable end to end** — the stories for a journey, taken together, must cover its entry point, preconditions, every step and decision point, and its success criteria; never leave a journey that cannot be completed from start to finish
 - **One file per story** — each story must be independently referenceable
 - **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `discovery/personas/persona-report.md`
 - **All four acceptance criteria categories are mandatory** — use "N/A" for Clinical Safety only if the story genuinely has no clinical data
