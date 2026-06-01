@@ -80,7 +80,9 @@ infra/
    - Key Vault with Managed Identity access policy
    - Application Insights
    - All in `uksouth` region
-2. Run `terraform init && terraform plan` to validate
+2. Run `terraform init && terraform plan -out=tfplan` to validate, then review the
+   plan with `terraform show tfplan` before `terraform apply tfplan` — watch for
+   any `-` (destroy) or `-/+` (recreate) changes
 
 ### Testing
 
@@ -103,6 +105,7 @@ cd frontend && npm run build && cd ..
 
 # Terraform
 cd infra && terraform init && terraform plan -var="app_name=my-service" -out=tfplan
+terraform show tfplan   # review changes — watch for '-' destroy / '-/+' recreate
 terraform apply tfplan
 
 # Deploy to Azure
