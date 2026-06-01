@@ -83,15 +83,15 @@ Approve the stories before grouping and prioritising them.
 
 ## Phase 3 — Group & Prioritise User Stories (20 minutes)
 
-A flat list of stories is hard to build from. Before writing any code, group the stories into build batches and put them in priority order so the team builds the right things first. This phase uses the **NHS Product Owner** agent.
+A flat list of stories is hard to build from. Before writing any code, group the stories into build batches — aligned to complete user journeys — and put them in priority order so the team builds the right things first. Grouping by journey means each batch delivers a working, end-to-end journey that can be demonstrated after it is built. This phase uses the **NHS Product Owner** agent.
 
 **Agent**: NHS Product Owner
 
-> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts (especially `docs/discovery-notes.md` for riskiest assumptions). Group the stories into build batches and prioritise them by riskiest assumption. Save the result as a prioritised build backlog at `user_stories/backlog.md`.
+> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts (especially `docs/discovery-notes.md` for riskiest assumptions). Group the stories into build batches aligned to complete user journeys, so each batch delivers a demonstrable end-to-end journey. Prioritise the batches by riskiest assumption. Save the result as a prioritised build backlog at `user_stories/backlog.md`.
 
 The agent will:
 
-1. **Group related stories into batches** — typically 2–5 connected stories that share a journey, pages, or components, so each batch can be built and QA'd together
+1. **Group stories into batches that complete a user journey** — keep the stories that make up a single journey together (typically 2–5 connected stories sharing pages and components), so each batch delivers a working end-to-end journey that can be demonstrated once built
 2. **Order the batches by priority** — riskiest assumption first (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions)), then by dependency (foundational stories before those that build on them)
 3. **Record dependencies** — note where one story or batch must be built before another
 4. **Present the prioritised batches for review** — you approve or reorder before they are saved
@@ -101,9 +101,9 @@ The agent will:
 
 Walk through as a team:
 - Is the riskiest assumption being tested first?
+- Does each batch complete a user journey, so the app can be demonstrated end-to-end after the batch is built?
 - Are the batches the right size (2–5 connected stories)?
 - Are dependencies in the right order (foundational stories first)?
-- Does each batch hang together (shared journey, pages, or components)?
 
 Approve the prioritised backlog before moving to ADR review.
 
@@ -156,13 +156,13 @@ The agent will:
 
 ## Phase 6 — Build User Stories (3.5+ hours)
 
-This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
+This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), one journey-aligned batch at a time, with a Visual QA review after each batch. Because each batch completes a user journey, you can demonstrate a working end-to-end journey after every batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-### Build → QA → Repeat
+### Build → QA → Demo → Repeat
 
 Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
 
-1. **Build** — use the **NHS Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
+1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
 
    **Agent**: NHS Service Builder
 
@@ -176,14 +176,16 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
-4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
+4. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
+
+5. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
 
 ### While the Agents Work
 
 - Watch for questions — the agents may need clarification on specific stories
 - Review the code as it's created — catch design issues early
 - If you spot problems, steer the agent in the chat
-- Follow the build backlog — work through the batches in `user_stories/backlog.md` in priority order; the batches already group stories that share a journey, pages, or components
+- Follow the build backlog — work through the batches in `user_stories/backlog.md` in priority order; each batch completes a user journey so you can demonstrate it once built
 
 ### End of Day — Review & Commit (15 minutes)
 
@@ -197,8 +199,9 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
 - **Arrive with discovery done** — the workshop is for building, not researching
 - **Architecture first** — do not scaffold until the architecture is agreed
-- **Build in batches** — 2–5 connected stories at a time, then Visual QA, then repeat
+- **Build in batches** — build one journey-aligned batch at a time, then Visual QA, then demo the journey, then repeat
 - **Prioritise the riskiest assumption first** — build the backlog in priority order so the riskiest assumptions are tested earliest
+- **Complete a journey per batch** — group stories so each batch delivers a working end-to-end journey you can demonstrate
 - **Switch agents** — use the right agent for the right job
 - **Verify on the live URL** — always check the deployed service after deployment
 - **Commit frequently** — the agent can run `git commit` for you
