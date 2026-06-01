@@ -143,9 +143,11 @@ For each batch:
 
 2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
+   Run the Visual QA agent **in VS Code against your locally running app** (start the backend and frontend dev servers first, e.g. `http://localhost:5173`). Like the Demo Recorder, it needs direct access to a running instance — the hosted Copilot Coding Agent may not be able to reach it, and running locally lets it screenshot and re-check fixes quickly. Once the batch is clean locally, verify it on the deployed live URL.
+
    **Agent**: Visual QA
 
-   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003] against the locally running app at `http://localhost:5173`. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
