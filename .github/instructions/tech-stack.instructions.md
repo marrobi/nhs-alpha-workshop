@@ -167,7 +167,7 @@ The service is packaged as a **single Docker image**, independent of the Azure s
 
 - Provide a `Dockerfile` at the repo root that builds the frontend, installs backend dependencies, and serves the FastAPI app (e.g. `uvicorn app.main:app --host 0.0.0.0 --port 8000`)
 - The container listens on a single port and serves both the API and the built frontend assets
-- Inject the deployed code version at build time (e.g. `ARG APP_VERSION` → `ENV APP_VERSION=...`) so the health endpoint can report it; the app must fail loudly if the value is missing
+- Inject the deployed code version at build time (e.g. `ARG APP_VERSION` → `ENV APP_VERSION=...`) so the health endpoint can report it. Make a missing value fail the **build** (e.g. a `RUN test -n "$APP_VERSION"` step) rather than producing an image that only fails at startup
 - Keep the image slim — use a Python slim base, a multi-stage build for the frontend, and a non-root user
 - Do **not** bake secrets into the image — supply them at runtime via environment variables / Key Vault references
 

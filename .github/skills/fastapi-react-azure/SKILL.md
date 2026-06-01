@@ -78,7 +78,7 @@ infra/
 
 1. Write Terraform in `infra/` using `var.app_name` for resource naming:
    - Resource Group, Container Registry, App Service Plan (Linux, B1), Linux Web App for Containers
-   - Key Vault with Managed Identity access policy (and `AcrPull` for the identity)
+   - Key Vault with Managed Identity access policy; grant the identity the `AcrPull` role on the Container Registry so it can pull the image
    - Application Insights
    - All in `uksouth` region
 2. Run `terraform init && terraform plan` to validate

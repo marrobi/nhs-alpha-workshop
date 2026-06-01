@@ -24,7 +24,7 @@ Resource Group (rg-{app_name}-{env})
 ├── App Service Plan (asp-{app_name}-{env}, Linux, B1)
 ├── Linux Web App for Containers (app-{app_name}-{env})
 ├── User Assigned Managed Identity
-│   └── AcrPull role on the registry
+├── Role Assignment (identity → AcrPull on the registry)
 ├── Key Vault (kv-{app_name}-{env})
 │   └── Access Policy → Managed Identity (get, list secrets)
 └── Application Insights (ai-{app_name}-{env})
