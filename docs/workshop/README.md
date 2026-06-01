@@ -31,7 +31,7 @@ This workshop runs over two days using GitHub Copilot to build an NHS Alpha-phas
 **Prerequisites**: GitHub account with a Copilot seat, Azure subscription with Contributor access to UK South, and access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery). All other tools are pre-installed in the Dev Container.
 
 - **Pre-workshop — Discovery**: Complete the discovery phase in your new repo before the workshop — scenario, personas, and user journeys. See [discovery/README.md](../../discovery/README.md).
-- **Day 1 — Design and Build**: Design the architecture, generate user stories, scaffold the service, and build as many stories as possible using Copilot Agent Mode in VS Code. See [day1-guide.md](day1-guide.md).
+- **Day 1 — Design and Build**: Design the architecture, generate user stories, group and prioritise them into a build backlog, scaffold the service, and build as many stories as possible using Copilot Agent Mode in VS Code. See [day1-guide.md](day1-guide.md).
 - **Day 2 — Complete the Alpha**: Harden, test, document, and demonstrate GDS readiness using Copilot Coding Agent on GitHub. See [day2-guide.md](day2-guide.md).
 
 ## Tech stack
@@ -57,7 +57,7 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | Agent | Purpose |
 |---|---|
 | **NHS Architect** | Architecture design — analyses discovery, clarifies tech stack, writes ADRs, generates draw.io diagrams. Run first (before stories) and again after stories to create detailed ADRs. |
-| **NHS Product Owner** | Decomposes user journeys into user stories with NHS acceptance criteria. Run after Architect first pass, before Architect second pass. |
+| **NHS Product Owner** | Decomposes user journeys into user stories with NHS acceptance criteria, then groups and prioritises them into a build backlog. Run after Architect first pass, before Architect second pass. |
 | **NHS Service Builder** | Day 1 primary — scaffolds full-stack app, deploys to cloud. Run after Architect (both passes) and Product Owner. |
 | **Testing** | Backend + frontend unit/integration tests — 80% coverage target |
 | **Playwright E2E** | Browser tests for NHS user journeys with accessibility assertions |

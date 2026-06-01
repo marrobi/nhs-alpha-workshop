@@ -31,7 +31,8 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── package.json
 │   └── vite.config.ts
 ├── user_stories/           # User stories generated from journeys (Day 1)
-│   └── story-NNN-slug.md   # One file per story with acceptance criteria
+│   ├── story-NNN-slug.md   # One file per story with acceptance criteria
+│   └── backlog.md          # Prioritised build backlog (stories grouped into batches)
 ├── tests/
 │   ├── unit/               # Backend unit tests
 │   ├── integration/        # API integration tests
