@@ -48,6 +48,7 @@ Identify the key decision points and present 2–3 options for each. Do **not** 
 
 - **Data storage** — Choose based on data volume and query needs. **Never recommend in-memory or file-based storage** — even in Alpha, data must persist across restarts to test real user journeys.
 - **API structure** — single router vs. domain-based routers. How many distinct resources exist?
+- **User interface (UI) vs. API-only** — for each component or capability, decide whether it needs a user-facing UI (NHS Design System pages) or is API-only (e.g. a backend integration, a machine-to-machine endpoint, a background job). **If it is not clear whether a component requires a UI, stop and ask the user explicitly** — do not silently assume API-only. Omitting a UI here causes UI user stories to be missed downstream.
 - **Frontend pattern** — multi-page with router vs. single interactive page. How complex are the user journeys?
 - **External integrations** — which NHS API sandboxes and Azure services are needed? Define real integration patterns, not mocks.
 - **Auth approach** — NHS login/CIS2 vs. Azure AD. If the service has multiple user roles, authentication is likely a riskiest assumption and should be included. Only omit auth if the team explicitly decides it is not a riskiest assumption.
@@ -70,7 +71,7 @@ Format each decision as:
 Using the agreed decisions, map each user journey to:
 - **API endpoints** — routes, HTTP methods, request/response shapes
 - **Data models** — entities, fields, types, validation rules, relationships. Any entity storing patient data MUST include the NHS Number as a 10-digit string field with modulus 11 validation — see `.github/instructions/nhs-number.instructions.md` for the full ISB 0149 requirements (storage, display, search, validation, transmission)
-- **Frontend pages** — NHS Design System pages/components for each journey step. Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149 Req 07/09)
+- **Frontend pages** — NHS Design System pages/components for each journey step (per the UI vs. API-only decision from Step 3). Every screen showing patient-identifiable data MUST display the NHS Number in 3-3-4 format (ISB 0149 Req 07/09).
 - **Infrastructure** — cloud resources required beyond the baseline
 
 ### Step 5 — Prioritise by Riskiest Assumption
@@ -100,7 +101,7 @@ Create an architecture diagram as a draw.io file at `docs/adr/architecture.drawi
 
 The diagram should show:
 
-- Frontend (browser) connecting to the backend API
+- Frontend (browser) connecting to the backend API — show the user-facing UI for every component that has one, distinct from API-only components
 - Backend API with key routers/endpoints
 - Data store (if any)
 - External integrations (if any)
