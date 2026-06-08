@@ -45,13 +45,41 @@ terraform init
 terraform plan -var="app_name=my-service" -out=tfplan
 ```
 
-### 3. Apply
+### 3. Review the plan before applying
+
+**Always read the `tfplan` output before running `apply`.** Resources being
+destroyed or recreated without warning have delayed deployments — never apply a
+plan you have not inspected.
+
+Generate a machine- and human-readable view of the plan:
+
+```bash
+terraform show tfplan            # full human-readable review of what will change
+terraform show -no-color tfplan  # capture this output to summarise for the user
+```
+
+**The agent must summarise this plan back to the user and wait for explicit
+confirmation before running `apply`.** Present the summary as:
+
+- The final summary line, e.g. `Plan: 1 to add, 0 to change, 0 to destroy.`
+- A short bullet list of every resource grouped by action, using the change symbols:
+  - `+` create — a new resource
+  - `~` update in place — safe change
+  - `-` destroy — the resource will be **deleted**
+  - `-/+` destroy and then create replacement — the resource will be **recreated**
+    (existing data, such as Key Vault contents, may be lost)
+- An explicit call-out of any `-` (destroy) or `-/+` (recreate) resources.
+
+If anything is unexpectedly marked `-` or `-/+`, stop and investigate before
+applying. Only proceed to apply once the user has confirmed the summary.
+
+### 4. Apply
 
 ```bash
 terraform apply tfplan
 ```
 
-### 4. Build Frontend & Deploy
+### 5. Build Frontend & Deploy
 
 ```bash
 cd ../frontend && npm run build && cd ..
@@ -63,7 +91,7 @@ az webapp deploy \
   --type zip
 ```
 
-### 5. Configure Startup Command
+### 6. Configure Startup Command
 
 ```bash
 az webapp config set \
@@ -72,7 +100,7 @@ az webapp config set \
   --startup-file "uvicorn app.main:app --host 0.0.0.0 --port 8000"
 ```
 
-### 6. Verify
+### 7. Verify
 
 ```bash
 curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
@@ -98,6 +126,9 @@ curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
 - TLS: minimum 1.2, HTTPS only
 - Tags: `project = var.app_name`, `environment = var.environment`
 - Naming: always include `var.app_name` — multiple Alphas may share a subscription
+- Plan review: always inspect `tfplan` before `apply`, summarise it for the user,
+  and wait for confirmation — never apply a plan with unexpected `-` (destroy) or
+  `-/+` (recreate) changes
 
 ## References
 
