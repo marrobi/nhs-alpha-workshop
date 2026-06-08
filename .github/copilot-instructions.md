@@ -32,6 +32,14 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 - **WCAG 2.2 Level AA is mandatory** — see [NHS accessibility guidance](https://service-manual.nhs.uk/accessibility)
 - **Health data is UK GDPR special category (Art. 9)** — always consider data protection implications
 
+## Retrieving Current Versions and Resources
+
+Do **not** rely on memory or the indicative versions recorded in this repository for anything that changes over time — they may be out of date. Be explicit: when you need the latest version of a dependency, framework, or component library, or the current contents of a design system, API, or standard, **retrieve it from the web or an MCP server** before acting. Pin or use the exact value you resolve — never guess from memory.
+
+This applies whenever you would otherwise assume a version number, component, prop, or API shape, regardless of the specific technology in use (the current stack is defined in `.github/instructions/tech-stack.instructions.md`). For example: look up the latest stable release from the authoritative package registry or release notes before pinning a dependency; check the live [NHS Design System](https://service-manual.nhs.uk/design-system) and the component library's own documentation for available components and their props; and consult the current published documentation for NHS APIs, FHIR profiles, and external standards.
+
+If web access or the relevant MCP server is unavailable, say so explicitly rather than guessing a version, component, or API.
+
 ## Security
 
 Follow `.github/instructions/nhs-security.instructions.md` (auto-applied to all files) for OWASP Top 10, secrets management, input validation, PII logging rules, and dependency pinning.
