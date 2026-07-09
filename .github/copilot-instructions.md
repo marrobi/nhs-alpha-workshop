@@ -22,6 +22,7 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 - Follow [PEP 8](https://peps.python.org/pep-0008/) via `ruff` linter/formatter
 - **No silent fallback values** — never provide fallback/default values for required configuration (env vars, URLs, secrets). Code must fail explicitly with a clear error when a dependency is missing. Use `os.environ["VAR"]` (raises `KeyError`) instead of `os.environ.get("VAR", "default")`. In JavaScript/k6, validate and throw instead of using `||` fallbacks.
 - **No unauthorised mocking of services** — do not mock, stub, or fake cloud services, NHS APIs, databases, or other external dependencies unless there is an explicit user story requesting that mock. Unit tests may mock external calls for isolation, but integration tests, E2E tests, and application code must use real services or real sandbox environments. If a dependency is unavailable, the code must fail — not silently degrade to a local substitute. For cloud services with no local emulator (e.g. hosted AI/LLM APIs), see the Mocking Boundary in `testing.instructions.md` — an ADR authorising the integration is sufficient justification.
+- **Stop and ask when a required tool is missing** — if a required component (MCP server, Playwright browser, CLI, or external service) is unavailable or fails, pause and ask the user how to proceed. See `.github/instructions/tool-availability.instructions.md`.
 
 ## NHS-Specific Rules
 
@@ -30,6 +31,14 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 - **Follow the [NHS content style guide](https://service-manual.nhs.uk/content)** — plain English, short sentences, active voice
 - **WCAG 2.2 Level AA is mandatory** — see [NHS accessibility guidance](https://service-manual.nhs.uk/accessibility)
 - **Health data is UK GDPR special category (Art. 9)** — always consider data protection implications
+
+## Retrieving Current Versions and Resources
+
+Do **not** rely on memory or the indicative versions recorded in this repository for anything that changes over time — they may be out of date. Be explicit: when you need the latest version of a dependency, framework, or component library, or the current contents of a design system, API, or standard, **retrieve it from the web or an MCP server** before acting. Pin or use the exact value you resolve — never guess from memory.
+
+This applies whenever you would otherwise assume a version number, component, prop, or API shape, regardless of the specific technology in use (the current stack is defined in `.github/instructions/tech-stack.instructions.md`). For example: look up the latest stable release from the authoritative package registry or release notes before pinning a dependency; check the live [NHS Design System](https://service-manual.nhs.uk/design-system) and the component library's own documentation for available components and their props; and consult the current published documentation for NHS APIs, FHIR profiles, and external standards.
+
+If web access or the relevant MCP server is unavailable, say so explicitly rather than guessing a version, component, or API.
 
 ## Security
 

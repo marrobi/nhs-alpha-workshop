@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
+Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, grouping and prioritising those stories into a build backlog, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
 
 > **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
 > - `discovery/scenarios/scenario.md` — scenario overview and problem statement
@@ -77,14 +77,38 @@ The agent will:
 Walk through as a team:
 - Are any stories missing from the journeys?
 - Should any be split further or merged?
-- Is the priority order correct (riskiest assumption first)?
 - Are the acceptance criteria testable?
 
-Approve the stories before moving to ADR review.
+Approve the stories before grouping and prioritising them.
 
 ---
 
-## Phase 3 — Architecture ADR Review (30 minutes)
+## Phase 3 — Group & Prioritise User Stories (20 minutes)
+
+Turn the flat list of stories into an ordered build backlog. This phase uses the **NHS Product Owner** agent.
+
+**Agent**: NHS Product Owner
+
+> Group the user stories in `user_stories/` into journey-aligned batches and prioritise them by riskiest assumption. Save the prioritised build backlog to `user_stories/backlog.md`.
+
+The agent will:
+
+1. **Group stories into journey-aligned batches** — keep the connected stories that make up a single journey together (typically 2–5 stories), so each batch delivers a demonstrable end-to-end journey
+2. **Order batches by priority** — riskiest assumption first (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions)), then by dependency
+3. **Save the build backlog** to `user_stories/backlog.md` — the build order used in Phase 6
+
+### Review the Backlog (10 minutes)
+
+Walk through as a team:
+- Is the riskiest assumption tested first?
+- Does each batch complete a user journey that can be demonstrated end-to-end?
+- Are dependencies in the right order (foundational stories first)?
+
+Approve the backlog before moving to ADR review.
+
+---
+
+## Phase 4 — Architecture ADR Review (30 minutes)
 
 Now that user stories exist, run the **NHS Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
 
@@ -114,7 +138,7 @@ Approve the ADRs before moving to scaffold.
 
 ---
 
-## Phase 4 — Scaffold & Deploy (1.5 hours)
+## Phase 5 — Scaffold & Deploy (1.5 hours)
 
 ### Iteration 0 — Scaffold the Service
 
@@ -131,15 +155,15 @@ The agent will:
 
 ---
 
-## Phase 5 — Build User Stories (3.5+ hours)
+## Phase 6 — Build User Stories (3.5+ hours)
 
-This is the core of Day 1. Build user stories in **batches of 2–5 connected stories**, with a Visual QA review after each batch. This iterative approach catches layout, data, and journey issues early — before they compound.
+This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), one journey-aligned batch at a time, with a Visual QA review after each batch. Because each batch completes a user journey, you can demonstrate a working end-to-end journey after every batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-### Build → QA → Repeat
+### Build → QA → Demo → Repeat
 
-For each batch:
+Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
 
-1. **Build** — use the **NHS Service Builder** agent to implement 2–5 connected stories (e.g. stories from the same user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
+1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
 
    **Agent**: NHS Service Builder
 
@@ -147,20 +171,24 @@ For each batch:
 
 2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
+   Run it **in VS Code** — like the Demo Recorder, it needs direct access to a running instance, which the hosted agent may not reach. The agent starts the app locally itself, so once a batch is clean locally, verify it on the deployed live URL.
+
    **Agent**: Visual QA
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
 3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
-4. **Repeat** — move to the next batch of 2–5 stories and repeat the cycle.
+4. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
+
+5. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
 
 ### While the Agents Work
 
 - Watch for questions — the agents may need clarification on specific stories
 - Review the code as it's created — catch design issues early
 - If you spot problems, steer the agent in the chat
-- Group related stories into batches — stories from the same journey or that share pages/components work best together
+- Follow the build backlog — work through the batches in `user_stories/backlog.md` in priority order; each batch completes a user journey so you can demonstrate it once built
 
 ### End of Day — Review & Commit (15 minutes)
 
@@ -175,7 +203,9 @@ For each batch:
 
 - **Arrive with discovery done** — the workshop is for building, not researching
 - **Architecture first** — do not scaffold until the architecture is agreed
-- **Build in batches** — 2–5 connected stories at a time, then Visual QA, then repeat
+- **Build in batches** — build one journey-aligned batch at a time, then Visual QA, then demo the journey, then repeat
+- **Prioritise the riskiest assumption first** — build the backlog in priority order so the riskiest assumptions are tested earliest
+- **Complete a journey per batch** — group stories so each batch delivers a working end-to-end journey you can demonstrate
 - **Switch agents** — use the right agent for the right job
 - **Verify on the live URL** — always check the deployed service after deployment
 - **Keep diagrams alive** — the architecture diagram is a living artefact; update it (and add new diagrams) whenever the design changes, not just at the start
