@@ -41,6 +41,8 @@ The agent will:
 7. **Write an ADR** at `docs/adr/001-architecture.md`
 8. **Generate a draw.io architecture diagram** at `docs/adr/architecture.drawio`
 
+> **Diagrams are living artefacts.** The architecture diagram you generate here is a first draft, not a one-off deliverable. You will revisit it after the ADR review (Phase 3), as you build (Phase 5), and again on Day 2 so it always reflects the current design. You can also ask the **NHS Architect** agent for additional diagrams when they would help the team — for example a data model (entity-relationship) diagram, a sequence/data-flow diagram for a key journey, or a deployment diagram. Keep them alongside the architecture diagram in `docs/adr/`.
+
 ### Review the Architecture (15 minutes)
 
 Walk through as a team:
@@ -48,9 +50,9 @@ Walk through as a team:
 - **Personas** — who are the primary users?
 - **User journeys** — which journeys will you build? Are they prioritised by riskiest assumption? (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions))
 - **ADR** — does the architecture make sense given the constraints?
-- **Diagram** — open `docs/adr/architecture.drawio` in VS Code to review visually
+- **Diagram** — open `docs/adr/architecture.drawio` in VS Code to review visually. Is anything missing that a further diagram would make clearer (e.g. data model or a key journey's data flow)?
 
-Agree the architecture before moving to user stories.
+Agree the architecture before moving to user stories. Expect the diagram(s) to change as the design firms up — that is the point.
 
 ---
 
@@ -122,6 +124,7 @@ The agent will:
 2. **Identify required ADRs** — present a list of ADR topics with rationale and confirm with the team
 3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `nhs-adr-writer` skill
 4. **Update the ADR index** — update `docs/adr/README.md` with the new records
+5. **Update the architecture diagram** — revise `docs/adr/architecture.drawio` so it reflects the decisions captured in the new ADRs, and add any further diagrams that now help (e.g. a data model diagram for the chosen storage, or a sequence/data-flow diagram for an auth or integration flow)
 
 ### Review the ADRs (10 minutes)
 
@@ -129,6 +132,7 @@ Walk through as a team:
 - Do the ADRs cover all significant decisions from the stories?
 - Are any decisions missing (database choice, auth strategy, external integrations)?
 - Are the alternatives and trade-offs realistic?
+- Does the architecture diagram still match the design after the new ADRs? Would another diagram make a key flow clearer?
 
 Approve the ADRs before moving to scaffold.
 
@@ -190,7 +194,8 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
 1. Ensure all code is committed and pushed
 2. Verify the service works end-to-end on the live URL
-3. Note which user stories are complete and which remain — these inform Day 2 priorities
+3. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
+4. Note which user stories are complete and which remain — these inform Day 2 priorities
 
 ---
 
@@ -203,5 +208,6 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 - **Complete a journey per batch** — group stories so each batch delivers a working end-to-end journey you can demonstrate
 - **Switch agents** — use the right agent for the right job
 - **Verify on the live URL** — always check the deployed service after deployment
+- **Keep diagrams alive** — the architecture diagram is a living artefact; update it (and add new diagrams) whenever the design changes, not just at the start
 - **Commit frequently** — the agent can run `git commit` for you
 - **Save discovery artefacts** — scenarios, personas, and journeys are evidence for GDS assessment on Day 2

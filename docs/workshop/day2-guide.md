@@ -88,6 +88,7 @@ Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence repo
 - **Don't create all issues at once** — Copilot works on one at a time per repo
 - **Review PRs carefully** — Copilot is good but not perfect
 - **Iterate on PRs** — request changes via review comments, Copilot will update
+- **Keep diagrams current** — Day 2 work (CI/CD, infrastructure security, network isolation) changes the deployed architecture; ask the **NHS Architect** agent in VS Code to update `docs/adr/architecture.drawio` so it reflects the final design before you build the documentation site
 - **Link back to discovery** — Day 1 artefacts (scenarios, personas, journeys) are key evidence for GDS points 1, 2, and 3
 
 ---
