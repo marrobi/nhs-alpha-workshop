@@ -32,4 +32,15 @@ Explicitly state what is NOT part of this problem. Agree boundaries early to kee
 
 Use proper NHS terminology and context. Where details are missing, state assumptions clearly rather than silently filling gaps.
 
-Save the output in markdown format with appropriate headings at `discovery/scenarios/scenario.md`
+Save the output in markdown format with appropriate headings at `discovery/scenarios/scenario.md`.
+
+Then replace the root `README.md` with a concise project README based on the
+agreed scenario. Include:
+- The service name and a one-sentence summary
+- The problem being explored and the people affected
+- A short Mermaid diagram of the service's key workflow
+- A link to `discovery/scenarios/scenario.md` for the full discovery context
+- A link to `docs/workshop/README.md` for the workshop guides
+- A link to the `LICENSE`
+
+Do not retain the NHS Alpha Workshop template content in the project README.

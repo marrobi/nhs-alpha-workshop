@@ -1,9 +1,19 @@
-# NHS Alpha
+# NHS Alpha Workshop
 
-> This README is a placeholder. When the service is built during the workshop, it will be replaced with documentation for the actual service.
+A template for designing and building an NHS digital service with GitHub Copilot.
 
-For workshop documentation, see [docs/workshop/](docs/workshop/).
+```mermaid
+flowchart LR
+    Scenario --> Personas --> Journeys --> Design --> Build --> Validate
+```
+
+Start by running `/generate_scenario_and_problem_statement` in Copilot Chat. The
+prompt creates the discovery scenario and replaces this file with a README for
+your service.
+
+See the [discovery guide](discovery/README.md) and
+[workshop guides](docs/workshop/README.md) for the full process.
 
 ## Licence
 
-MIT
+[MIT](LICENSE)
