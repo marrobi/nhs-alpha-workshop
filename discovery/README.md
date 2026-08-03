@@ -28,7 +28,9 @@ In Copilot Chat, run:
 
 > `/generate_scenario_and_problem_statement` [describe your NHS service idea]
 
-This generates a structured **Scenario Overview** and **Problem Statement**. Save to `discovery/scenarios/scenario.md`.
+This generates a structured **Scenario Overview** and **Problem Statement** at
+`discovery/scenarios/scenario.md`. It also replaces the root template
+`README.md` with a concise overview of your service.
 
 Key questions to answer:
 - What is the problem being solved?
