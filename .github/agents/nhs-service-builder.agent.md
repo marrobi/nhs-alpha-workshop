@@ -65,6 +65,33 @@ After all stories are built, cross-reference the original user journeys in `disc
 
 Implement any gaps found, then re-run all tests.
 
+## Working with the Engineering Team
+
+You implement every story yourself, with no handoffs. The **Engineering Team**
+agent (a lead with three engineers on different models) supports you in two
+ways.
+
+- **Hard design questions.** Ask the Engineering Team in **Decide mode**
+  instead of guessing when:
+  - a story's acceptance criteria are open or conflict with an ADR;
+  - a change would alter something many stories depend on;
+  - there is a security, privacy or clinical-safety trade-off;
+  - you need to choose between data-modelling or integration options;
+  - a new ADR would be needed.
+
+  Run it with the task tool (`agent_type: "Engineering Team"`) or as its own
+  chat. Give it the question, the options you see and the relevant files. Follow
+  its decision. Do not escalate routine implementation choices.
+- **Batch review.** When a journey-aligned batch is built and its tests pass,
+  ask the Engineering Team in **Review mode** to review the batch's commits.
+  Fix every Critical and High finding before you start the next batch.
+- **ADRs.** Do not write ADR files yourself. Pass the team's ADR draft to the
+  **NHS Architect** agent or the workshop team to accept.
+- **Long sessions.** If you were given a progress-file path, append a
+  timestamped line at each step and at least every 5 minutes, and finish with
+  `DONE` or `BLOCKED: <reason>`. If the file already exists, you are resuming:
+  read it and `git status`, then continue.
+
 ## NHS Design System
 
 Refer to the [NHS Design System](https://service-manual.nhs.uk/design-system) for all component patterns, and the [NHS content style guide](https://service-manual.nhs.uk/content) for content standards.

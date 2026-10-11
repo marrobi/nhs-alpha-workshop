@@ -159,7 +159,7 @@ The agent will:
 
 This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), one journey-aligned batch at a time, with a Visual QA review after each batch. Because each batch completes a user journey, you can demonstrate a working end-to-end journey after every batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-### Build → QA → Demo → Repeat
+### Build → Review → QA → Demo → Repeat
 
 Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
 
@@ -169,7 +169,15 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
+2. **Engineering Team review** — ask the **Engineering Team** agent to review the batch. Two engineers on different models review the batch's commits independently. The lead combines their findings and gives a verdict: MERGE or FIX-THEN-MERGE. Hand any Critical or High findings back to the NHS Service Builder to fix.
+
+   **Agent**: Engineering Team
+
+   > Review mode: review the commits for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules.
+
+   If the Service Builder meets a hard design question during the build, such as conflicting acceptance criteria or a security or clinical-safety trade-off, it asks the Engineering Team in Decide mode. You can also ask directly. The team investigates with all three engineers and recommends one option, with an ADR draft if needed.
+
+3. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
 
    Run it **in VS Code** — like the Demo Recorder, it needs direct access to a running instance, which the hosted agent may not reach. The agent starts the app locally itself, so once a batch is clean locally, verify it on the deployed live URL.
 
@@ -177,11 +185,11 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
-3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
+4. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
 
-4. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
+5. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
 
-5. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
+6. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
 
 ### While the Agents Work
 

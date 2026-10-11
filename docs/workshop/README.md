@@ -59,6 +59,7 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | **NHS Architect** | Architecture design — analyses discovery, clarifies tech stack, writes ADRs, generates draw.io diagrams. Run first (before stories) and again after stories to create detailed ADRs. |
 | **NHS Product Owner** | Decomposes user journeys into user stories with NHS acceptance criteria, then groups them into journey-aligned batches and prioritises them into a build backlog so each batch can be demonstrated end-to-end. Run after Architect first pass, before Architect second pass. |
 | **NHS Service Builder** | Day 1 primary — scaffolds full-stack app, deploys to cloud. Run after Architect (both passes) and Product Owner. |
+| **Engineering Team** | A Claude Opus 5.5 lead with three engineers on different models (Claude Haiku 5.5, GPT-6.1 Sol, Claude Sonnet 5.5). Makes hard design decisions when the Service Builder asks, and reviews each built batch and each day's work. It doesn't implement stories. |
 | **Testing** | Backend + frontend unit/integration tests — 80% coverage target |
 | **Playwright E2E** | Browser tests for NHS user journeys with accessibility assertions |
 | **Security Reviewer** | OWASP Top 10 audit, security headers, secrets, dependencies |
