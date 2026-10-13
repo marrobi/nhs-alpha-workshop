@@ -163,17 +163,22 @@ This is the core of Day 1. Build user stories in the priority order set out in t
 
 Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
 
-1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
+1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, deploys, and commits each verified story separately. It is the only agent that writes to the checkout during the build.
 
    **Agent**: NHS Service Builder
 
    > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-2. **Engineering Team review** — ask the **Engineering Team** agent to review the batch. Two engineers on different models review the batch's commits independently. The lead combines their findings and gives a verdict: MERGE or FIX-THEN-MERGE. Hand any Critical or High findings back to the NHS Service Builder to fix.
+2. **Engineering Team review** — after the Service Builder stops and reports the exact commit SHAs and validation results, you ask the **Engineering Team** agent to review that stable batch. Two engineers on different models review the same commits independently without editing them. The lead combines their findings and gives a verdict: MERGE or FIX-THEN-MERGE. Hand any Critical or High findings back to the NHS Service Builder to fix before starting the next batch.
 
    **Agent**: Engineering Team
 
-   > Review mode: review the commits for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules.
+   > Review mode: review commits [base SHA..final SHA, listing each commit SHA] for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules. The Service Builder reported these validation results: [commands and results].
+
+   Do not let the Service Builder continue changing the reviewed checkout while
+   the review runs. If work must continue concurrently, create a separate
+   checkout or detached worktree at the reviewed commits and run the
+   Engineering Team there.
 
    If the Service Builder meets a hard design question during the build, such as conflicting acceptance criteria or a security or clinical-safety trade-off, it asks the Engineering Team in Decide mode. You can also ask directly. The team investigates with all three engineers and recommends one option, with an ADR draft if needed.
 
@@ -201,9 +206,11 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 ### End of Day — Review & Commit (15 minutes)
 
 1. Ensure all code is committed and pushed
-2. Verify the service works end-to-end on the live URL
-3. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
-4. Note which user stories are complete and which remain — these inform Day 2 priorities
+2. Ask the **Engineering Team** for an end-of-day review of the exact commits completed that day; all three engineers review this wider scope
+3. Hand any Critical or High findings to the **NHS Service Builder**, then re-run the affected validation
+4. Verify the service works end-to-end on the live URL
+5. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
+6. Note which user stories are complete and which remain — these inform Day 2 priorities
 
 ---
 
