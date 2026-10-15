@@ -1,11 +1,11 @@
 ---
 name: 'Day 2 Issue Generator'
-description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, infrastructure review, accessibility, performance, clinical safety, DPIA, GDS evidence, and runbook.'
+description: 'Generates Day 2 GitHub Issues tailored to the actual tech stack and service. Run at the start of Day 2 to create issues for testing, code quality, security, CI/CD, infrastructure review, accessibility, performance, clinical safety, DPIA, GDS evidence, runbook, and alerting with Azure SRE Agent.'
 ---
 
 # Day 2 Issue Generator
 
-Generates the 12 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
+Generates the 13 GitHub Issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
 
 You produce issue template files — you do **not** write application code, tests, or infrastructure.
 
@@ -34,6 +34,7 @@ Day 1 must be complete:
 | 10 | DPIA | NHS DPIA Advisor |
 | 11 | GDS Assessment Evidence | NHS GDS Assessor |
 | 12 | Runbook & Deployment Docs | NHS Service Builder |
+| 13 | Alerting & Azure SRE Agent | SRE Agent Builder |
 
 ## Workflow
 
@@ -64,7 +65,15 @@ Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
 
 Present the issue titles and custom agents table from above. **Wait for user confirmation** before creating on GitHub.
 
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–12). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
+Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
+
+### Issue 13 — Alerting & Azure SRE Agent
+
+Read `.github/agents/sre-agent-builder.agent.md` and `.github/skills/azure-sre-agent/SKILL.md`. Map every alert to the hosting platform, database and monitoring resources that `infra/` **actually** deploys, and name the alpha environment that will have the agent enabled. Acceptance criteria must:
+- Split what the Copilot Coding Agent delivers in the PR (ADR, Terraform, config files, scripts, offline tests, runbook section) from **operator steps** done after merge (apply the plan, prove private telemetry access, apply and verify agent configuration, rehearse one fault)
+- Include the guardrails from the skill as testable criteria (UK region, approved model provider, `Low` access, `Review` mode, read-only roles, no public telemetry, required Agent Unit cap, feature flag)
+- Require plan-time `terraform test` coverage and an offline CI test for the agent configuration
+- Hand off to the NHS DPIA Advisor, NHS Clinical Safety and NHS Architect agents
 
 ## Rules
 
