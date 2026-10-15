@@ -45,7 +45,7 @@ The issue generator creates the issues on GitHub but does **not** assign them �
 
 ## Recommended Issue Order
 
-Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence. Alerting and the SRE Agent (06) come before the infrastructure security review, so the agent's roles and networking are audited, and before clinical safety, DPIA, GDS evidence and the runbook, which all build on it.
+Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence. Alerting and the SRE Agent (06) come before the infrastructure security review, so the agent's roles and networking are audited, and before the runbook, clinical safety, DPIA and GDS evidence, which all build on it. The runbook (10) comes before the compliance documents so they can cite its operational and incident controls.
 
 | # | Issue | Custom Agent | Alpha Evidence |
 |---|---|---|---|
@@ -58,10 +58,10 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 07 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
 | 08 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
 | 09 | Performance Load Tests | Performance | Service can handle expected load |
-| 10 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 11 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 12 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 13 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 10 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
+| 12 | DPIA | NHS DPIA Advisor | Data protection considered |
+| 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
 | 14 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
@@ -82,7 +82,7 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, alerting, runbook, SRE Agent incident rehearsal record |
 
-Use the **NHS GDS Assessor** agent (Issue 12) to generate the full evidence report.
+Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence report.
 
 ## Tips
 
@@ -129,7 +129,7 @@ Issue 06 delivers alerting and the Azure SRE Agent **as code**. The Copilot Codi
 4. **Rehearse** — start `scripts/sre-agent-load.sh`, inject one fault, wait for the alert (allow 15–25 minutes), and check the agent's investigation names the failing component, the change that caused it and the runbook section, and recommends a fix through Terraform. Ask the agent to fix it and confirm it refuses
 5. **Restore and record** — restore through Terraform or the runbook, confirm `terraform plan` shows no changes, fill in the rehearsal record in the runbook and delete the investigation threads
 
-> **Tip**: Complete the rehearsal before the GDS Assessment Evidence issue (12) so the record is available as evidence. Do it once before any show-and-tell so a completed investigation is ready — alert evaluation takes several minutes. The Demo Recorder can capture it afterwards.
+> **Tip**: Complete the rehearsal before the GDS Assessment Evidence issue (13) so the record is available as evidence. Do it once before any show-and-tell so a completed investigation is ready — alert evaluation takes several minutes. The Demo Recorder can capture it afterwards.
 
 ---
 

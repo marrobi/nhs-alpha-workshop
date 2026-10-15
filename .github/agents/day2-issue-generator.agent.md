@@ -31,10 +31,10 @@ Day 1 must be complete:
 | 07 | Azure Infra Security Review | Azure Infra Security Reviewer |
 | 08 | Accessibility Audit | Accessibility Auditor |
 | 09 | Performance Load Tests | Performance |
-| 10 | DCB0129 Clinical Safety | NHS Clinical Safety |
-| 11 | DPIA | NHS DPIA Advisor |
-| 12 | GDS Assessment Evidence | NHS GDS Assessor |
-| 13 | Runbook & Deployment Docs | NHS Service Builder |
+| 10 | Runbook & Deployment Docs | NHS Service Builder |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety |
+| 12 | DPIA | NHS DPIA Advisor |
+| 13 | GDS Assessment Evidence | NHS GDS Assessor |
 
 ## Workflow
 
@@ -76,7 +76,7 @@ Read `.github/agents/sre-agent-builder.agent.md` and `.github/skills/azure-sre-a
 - Create the operations section the alerts and agent skills link to (for example `docs/runbook.md`); it is written before the Runbook issue
 - Hand off to the NHS DPIA Advisor, NHS Clinical Safety and NHS Architect agents
 
-Because issue 06 comes first, make the later issues build on it: 07 audits the agent's roles, subnet and NSG; 10 adds the incorrect-diagnosis hazard and cites alerts as detection controls; 11 records the agent as a processor; 12 uses the alerts and rehearsal record for point 14; 13 extends the operations section created by 06 rather than replacing it.
+Because issue 06 comes first, make the later issues build on it: 07 audits the agent's roles, subnet and NSG; 10 extends the operations section created by 06 rather than replacing it; 11 adds the incorrect-diagnosis hazard and cites alerts and the runbook as controls; 12 records the agent as a processor; 13 uses the alerts, runbook and rehearsal record for point 14.
 
 ## Rules
 
