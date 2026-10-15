@@ -27,14 +27,14 @@ Day 1 must be complete:
 | 03 | Playwright E2E Tests | Playwright E2E |
 | 04 | Code Quality Review | Code Quality Reviewer |
 | 05 | Security Hardening | Security Reviewer |
-| 06 | Azure Infra Security Review | Azure Infra Security Reviewer |
-| 07 | Accessibility Audit | Accessibility Auditor |
-| 08 | Performance Load Tests | Performance |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety |
-| 10 | DPIA | NHS DPIA Advisor |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor |
-| 12 | Runbook & Deployment Docs | NHS Service Builder |
-| 13 | Alerting & Azure SRE Agent | SRE Agent Builder |
+| 06 | Alerting & Azure SRE Agent | SRE Agent Builder |
+| 07 | Azure Infra Security Review | Azure Infra Security Reviewer |
+| 08 | Accessibility Audit | Accessibility Auditor |
+| 09 | Performance Load Tests | Performance |
+| 10 | DCB0129 Clinical Safety | NHS Clinical Safety |
+| 11 | DPIA | NHS DPIA Advisor |
+| 12 | GDS Assessment Evidence | NHS GDS Assessor |
+| 13 | Runbook & Deployment Docs | NHS Service Builder |
 
 ## Workflow
 
@@ -67,13 +67,16 @@ Present the issue titles and custom agents table from above. **Wait for user con
 
 Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the correct custom agent for each issue on GitHub.
 
-### Issue 13 — Alerting & Azure SRE Agent
+### Issue 06 — Alerting & Azure SRE Agent
 
 Read `.github/agents/sre-agent-builder.agent.md` and `.github/skills/azure-sre-agent/SKILL.md`. Map every alert to the hosting platform, database and monitoring resources that `infra/` **actually** deploys, and name the alpha environment that will have the agent enabled. Acceptance criteria must:
 - Split what the Copilot Coding Agent delivers in the PR (ADR, Terraform, config files, scripts, offline tests, runbook section) from **operator steps** done after merge (apply the plan, prove private telemetry access, apply and verify agent configuration, rehearse one fault)
 - Include the guardrails from the skill as testable criteria (UK region, approved model provider, `Low` access, `Review` mode, read-only roles, no public telemetry, required Agent Unit cap, feature flag)
 - Require plan-time `terraform test` coverage and an offline CI test for the agent configuration
+- Create the operations section the alerts and agent skills link to (for example `docs/runbook.md`); it is written before the Runbook issue
 - Hand off to the NHS DPIA Advisor, NHS Clinical Safety and NHS Architect agents
+
+Because issue 06 comes first, make the later issues build on it: 07 audits the agent's roles, subnet and NSG; 10 adds the incorrect-diagnosis hazard and cites alerts as detection controls; 11 records the agent as a processor; 12 uses the alerts and rehearsal record for point 14; 13 extends the operations section created by 06 rather than replacing it.
 
 ## Rules
 

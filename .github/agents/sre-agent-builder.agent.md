@@ -15,7 +15,7 @@ Read these before starting:
 - `.github/instructions/nhs-security.instructions.md` — secrets, PII logging, least privilege
 - `.github/instructions/org-standards.instructions.md` — alerting, audit logging, incident response and change-management standards. Standards defined there take precedence over values defined anywhere else in the repository
 - `.github/instructions/tool-availability.instructions.md` — stop and ask if a required tool or MCP server is missing
-- The existing `infra/` Terraform, monitoring resources, health endpoint, runbook (`docs/`) and ADRs
+- The existing `infra/` Terraform, monitoring resources, health endpoint, ADRs and any runbook in `docs/`. If no runbook exists yet, create the operations section the alerts and skills link to (for example `docs/runbook.md`); the later Runbook issue extends it
 
 ## Scope
 
@@ -78,7 +78,7 @@ In the PR description list, for the operator:
 3. Run the apply and verify scripts
 4. Rehearse one fault and fill in the rehearsal record
 
-Ask the user to run the **NHS DPIA Advisor**, **NHS Clinical Safety** and **NHS Architect** agents for the hand-offs listed in the skill.
+Note in the PR that the later Day 2 issues build on this work: the Azure Infra Security Reviewer audits the agent's roles and networking, NHS Clinical Safety and NHS DPIA Advisor pick up the hand-offs listed in the skill, and the NHS GDS Assessor uses the alerts and rehearsal record. Ask the user to run the **NHS Architect** agent to add the agent to the architecture diagram.
 
 ## Rules
 
