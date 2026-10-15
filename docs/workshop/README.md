@@ -69,6 +69,7 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | **Accessibility Auditor** | WCAG 2.2 AA audits, axe-core scans, keyboard testing, accessibility statements |
 | **NHS Content Designer** | Reviews and writes user-facing copy against NHS content style guide |
 | **CI/CD Pipeline Builder** | GitHub Actions workflows for lint, test, build, deploy |
+| **SRE Agent Builder** | Azure Monitor alerting and a read-only Azure SRE Agent as code, with guardrails, tests and an incident rehearsal |
 
 ## Skills
 
@@ -84,6 +85,7 @@ Skills are auto-selected by Copilot based on the task context:
 | `nhs-user-stories` | Writing user stories and acceptance criteria |
 | `nhs-adr-writer` | Documenting architectural decisions for GDS assessment evidence |
 | `nhs-synthetic-data` | Generating synthetic NHS numbers, patient data, and test fixtures |
+| `azure-sre-agent` | Adding alerting and an Azure SRE Agent, agent configuration as code, incident rehearsal |
 
 ## Azure naming convention
 

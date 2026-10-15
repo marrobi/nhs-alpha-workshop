@@ -24,6 +24,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **Hosting** | Azure App Service on Linux (UK South) |
 | **Secrets** | Azure Key Vault via Managed Identity |
 | **Monitoring** | Azure Application Insights |
+| **Alerting & incident diagnosis** | Azure Monitor alert rules + Azure SRE Agent (read-only, `Review` mode, UK South) — added on Day 2 |
 | **CI/CD** | GitHub Actions |
 | **Linting** | ruff (Python), ESLint (frontend) |
 
@@ -31,9 +32,9 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 
 | Layer | Files to swap |
 |---|---|
-| Tech agents | `nhs-service-builder`, `testing`, `playwright-e2e`, `performance`, `security-reviewer`, `cicd-pipeline-builder`, `accessibility-auditor` |
+| Tech agents | `nhs-service-builder`, `testing`, `playwright-e2e`, `performance`, `security-reviewer`, `cicd-pipeline-builder`, `accessibility-auditor`, `sre-agent-builder` (alert signals depend on hosting) |
 | Tech instructions | This file (`tech-stack.instructions.md`) — all tech-specific implementation details live here |
-| Tech skills | `fastapi-react-azure`, `azure-nhs-deploy`, `playwright-nhs-e2e`, `nhs-synthetic-data` (code examples) |
+| Tech skills | `fastapi-react-azure`, `azure-nhs-deploy`, `playwright-nhs-e2e`, `nhs-synthetic-data` (code examples), `azure-sre-agent` (alert signal mapping) |
 | Domain agents (no change needed) | `nhs-architect`, `nhs-product-owner`, `day2-issue-generator`, `nhs-clinical-safety`, `nhs-dpia-advisor`, `nhs-gds-assessor`, `nhs-content-designer` |
 | Domain instructions (no change needed) | `nhs-api`, `nhs-security`, `nhsuk-frontend`, `testing`, `performance`, `terraform-azure-nhs` — these contain tech-agnostic rules only |
 | Domain skills (no change needed) | `dcb0129-hazard-log`, `nhs-dpia`, `nhs-user-stories`, `gds-service-standard`, `nhs-adr-writer` |

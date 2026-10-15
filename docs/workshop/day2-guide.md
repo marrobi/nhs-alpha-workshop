@@ -45,7 +45,7 @@ The issue generator creates the issues on GitHub but does **not** assign them �
 
 ## Recommended Issue Order
 
-Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence.
+Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence. Alerting and the SRE Agent (06) come before the infrastructure security review, so the agent's roles and networking are audited, and before the runbook, clinical safety, DPIA and GDS evidence, which all build on it. The runbook (10) comes before the compliance documents so they can cite its operational and incident controls.
 
 | # | Issue | Custom Agent | Alpha Evidence |
 |---|---|---|---|
@@ -54,14 +54,15 @@ Start with CI/CD so every subsequent PR is automatically checked, then quality a
 | 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
 | 04 | Code Quality Review | Code Quality Reviewer | Code standards, type safety, test coverage |
 | 05 | Security Hardening | Security Reviewer | Threat awareness |
-| 06 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
-| 07 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
-| 08 | Performance Load Tests | Performance | Service can handle expected load |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
-| 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
+| 06 | Alerting & Azure SRE Agent | SRE Agent Builder | Operate a reliable service — alerts and AI-assisted incident diagnosis |
+| 07 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
+| 08 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
+| 09 | Performance Load Tests | Performance | Service can handle expected load |
+| 10 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
+| 12 | DPIA | NHS DPIA Advisor | Data protection considered |
+| 13 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
+| 14 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
 
@@ -79,9 +80,9 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 11. Choose the right tools and technology | ADRs documenting technology choices |
 | 12. Make new source code open | Public repo, open source licence |
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
-| 14. Operate a reliable service | CI/CD, monitoring, runbook |
+| 14. Operate a reliable service | CI/CD, monitoring, alerting, runbook, SRE Agent incident rehearsal record |
 
-Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence report.
+Use the **NHS GDS Assessor** agent (Issue 13) to generate the full evidence report.
 
 ## Tips
 
@@ -114,6 +115,24 @@ The agent will:
 
 ---
 
+## SRE Agent Incident Rehearsal (VS Code Activity)
+
+Issue 06 delivers alerting and the Azure SRE Agent **as code**. The Copilot Coding Agent cannot apply Terraform or reach Azure, so an operator finishes the work from VS Code once the PR is merged.
+
+**Agent**: SRE Agent Builder _(in VS Code, with your own `az login`)_
+
+> Help me bring the SRE Agent live in the alpha environment and rehearse one incident. Walk me through the operator steps in the issue 06 PR, then a fault from `scripts/sre-agent-fault.sh`, and record the result in the runbook.
+
+1. **Apply** — review the Terraform plan for the alpha environment, then apply it. You need permission to create role assignments
+2. **Prove private access** — if telemetry is private, ask the agent in the [SRE Agent portal](https://sre.azure.com) to query request logs for the last hour. If it cannot, **stop**: disable the agent (`sre_agent_enabled = false`) and keep the alerts. Never open the workspace to public query
+3. **Configure** — run `scripts/sre-agent-apply-config.sh`, then `scripts/sre-agent-verify-config.sh`; verify must report no drift
+4. **Rehearse** — start `scripts/sre-agent-load.sh`, inject one fault, wait for the alert (allow 15–25 minutes), and check the agent's investigation names the failing component, the change that caused it and the runbook section, and recommends a fix through Terraform. Ask the agent to fix it and confirm it refuses
+5. **Restore and record** — restore through Terraform or the runbook, confirm `terraform plan` shows no changes, fill in the rehearsal record in the runbook and delete the investigation threads
+
+> **Tip**: Complete the rehearsal before the GDS Assessment Evidence issue (13) so the record is available as evidence. Do it once before any show-and-tell so a completed investigation is ready — alert evaluation takes several minutes. The Demo Recorder can capture it afterwards.
+
+---
+
 ## When All Done — MKDocs Documentation Site
 
 Once all issues are merged, use the **NHS Documentation** agent to build a single MKDocs site that pulls every alpha artefact together into one browsable, shareable site.
@@ -133,6 +152,7 @@ The agent will:
    - **Deployment** — from `infra/` and build commands in `AGENTS.md`
    - **Testing** — test structure, how to run, and coverage targets
    - **Security** — security measures derived from the security hardening PR
+   - **Operations** — alerting, SRE Agent guardrails and the incident rehearsal record from the runbook
    - **Accessibility** — WCAG 2.2 AA audit results
    - **Clinical Safety** — from `docs/clinical-safety/`
    - **DPIA** — from `docs/dpia/`
