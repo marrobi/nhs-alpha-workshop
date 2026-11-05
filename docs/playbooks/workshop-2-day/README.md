@@ -20,6 +20,7 @@ Use this template to make a new repository for your team. Open it in GitHub Code
 
 ## Before the workshop
 
+1. Run the `start-project` skill. Choose the `workshop-2-day` mode. This mode is the default.
 1. Complete the discovery steps in the [discovery guide](../../../discovery/README.md).
 1. Merge the discovery outputs to `main`.
 1. Check which models your organisation's Copilot policy allows. See [Models](../../README.md#models).

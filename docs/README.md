@@ -117,6 +117,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `nhs-dpia` | Drafting the DPIA and checking implemented controls |
 | `nhs-synthetic-data` | Creating synthetic NHS data and test fixtures |
 | `day2-issue-planning` | Preparing tailored Day 2 issue files |
+| `start-project` | Setting the delivery mode, discovery length, sprint length and owners in `delivery-mode.instructions.md` |
 | `problem-statement` | Defining the scenario and problem statement in `discovery/scenarios/scenario.md` |
 | `personas` | Drafting the persona report when the team cannot use M365 Copilot Researcher |
 | `persona-slides` | Making the persona JSON files and Marp deck from the persona report |
