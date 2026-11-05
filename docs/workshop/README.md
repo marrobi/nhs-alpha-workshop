@@ -67,6 +67,14 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | **NHS Content Designer** | Reviews and writes user-facing copy against NHS content guidance |
 | **NHS Documentation** | Builds and maintains service documentation |
 
+## Models
+
+The agents and skills do not pin a model. Each agent uses the model that you select in VS Code, or the default model for the Copilot coding agent on GitHub. This means that you do not need to change the repository when models are added or retired.
+
+- Use a high-capability model for the NHS Service Builder and the NHS Architect. These roles do long, multi-step work.
+- Before the workshop, check which models your organisation's Copilot policy allows, and their premium request cost.
+- Do not add a `model` field to an agent unless the team agrees it. On GitHub, the field accepts only one model, with no fallback.
+
 ## Skills
 
 Agents use task skills for repeatable procedures. Copilot can also load skills when their descriptions match the task.

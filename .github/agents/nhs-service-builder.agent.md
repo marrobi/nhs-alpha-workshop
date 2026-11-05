@@ -1,7 +1,6 @@
 ---
 name: 'NHS Service Builder'
 description: 'Day 1 build agent — scaffolds and deploys full-stack NHS services from agreed architecture and user stories. Run after the NHS Architect (both passes) and NHS Product Owner agents. Uses the current tech stack from tech-stack.instructions.md.'
-model: Claude Opus 4.6 (copilot)
 ---
 
 # NHS Service Builder
