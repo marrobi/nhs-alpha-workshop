@@ -1,6 +1,28 @@
 # NHS Delivery Kit for GitHub Copilot
 
-This kit helps a team to design and build an NHS alpha-phase digital service with GitHub Copilot. It gives role agents, task skills, instructions and discovery prompt files. It contains **no application code**.
+This kit helps a team to run discovery, then design and build an NHS alpha-phase digital service with GitHub Copilot. It ends at the alpha assessment. It does not cover beta or live yet. It gives role agents, task skills, instructions and discovery prompt files. It contains **no application code**.
+
+## Scope: discovery and alpha
+
+The kit covers the **discovery** and **alpha** phases of the [GDS service lifecycle](https://www.gov.uk/service-manual/agile-delivery). It ends at the alpha assessment. It does not cover beta or live yet.
+
+```mermaid
+flowchart LR
+    D["Discovery<br/>problem, users, journeys"] --> A["Alpha<br/>design, build, harden, assess"]
+    A -.-> B["Beta<br/>not covered yet"]
+    B -.-> L["Live<br/>not covered yet"]
+
+    classDef inScope fill:#005eb8,stroke:#003087,color:#ffffff
+    classDef outScope fill:#f0f4f5,stroke:#768692,color:#425563,stroke-dasharray:5 5
+    class D,A inScope
+    class B,L outScope
+```
+
+The alpha that you build is for learning and for the alpha assessment. It is not ready for patients. Before a beta, the service needs, for example:
+
+- DCB0129 sign-off by the Clinical Safety Officer.
+- DPIA approval by the data protection officer (DPO) or information governance (IG) lead.
+- A penetration test, and an operating and support model.
 
 ## What is in this repository
 
