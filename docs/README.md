@@ -7,8 +7,8 @@ This kit helps a team to design and build an NHS alpha-phase digital service wit
 ```
 .github/
   agents/             11 role-based custom Copilot agents (1 hidden worker)
-  instructions/       13 auto-applied instruction files
-  skills/             37 task skills (SKILL.md folders)
+  instructions/       14 auto-applied instruction files
+  skills/             39 task skills (SKILL.md folders)
   workflows/          GitHub Actions
 discovery/
   prompts/            Prompt files for Microsoft 365 Copilot Chat (same methods as the skills)
@@ -16,6 +16,7 @@ discovery/
 docs/
   README.md           This overview
   playbooks/          The phases, and one playbook for each delivery mode
+  alpha-readiness-issues/  Hardening and assessment issue files (made by the `alpha-readiness-issues` skill)
 AGENTS.md             Copilot coding agent context file
 ```
 
@@ -29,6 +30,8 @@ The kit has one method and two schedules. The agents and skills are the method. 
 | Multi-week | A team runs discovery over several weeks, then builds in sprints | [Multi-week playbook](playbooks/multi-week/README.md) |
 
 The phases are the same in both modes: discovery, design, build, harden and assess. See [the phases](playbooks/README.md).
+
+Run the `start-project` skill to set the mode. The skill writes [`delivery-mode.instructions.md`](../.github/instructions/delivery-mode.instructions.md). Agents and skills read that file. They do not assume a schedule.
 
 **Prerequisites**: a GitHub account with a Copilot seat, an Azure subscription with Contributor access to UK South, and access to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/) with the Researcher agent (for discovery). The Dev Container has all other tools.
 

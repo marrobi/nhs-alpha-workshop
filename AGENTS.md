@@ -13,6 +13,8 @@
 
 This is an NHS digital service built with GitHub Copilot agents. The service follows the NHS Design System and GDS Service Standard, deployed to Azure using Terraform.
 
+The team delivers it in a 2-day workshop or over several weeks. See `.github/instructions/delivery-mode.instructions.md` for the mode and the schedule, and `docs/README.md` for the phases.
+
 ## Tech Stack
 
 See `.github/instructions/tech-stack.instructions.md` for current technology choices. Security rules in `.github/instructions/nhs-security.instructions.md`; organisational standards in `.github/instructions/org-standards.instructions.md`; coding standards in `.github/copilot-instructions.md`.
@@ -31,9 +33,9 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   │   └── App.tsx         # Root component
 │   ├── package.json
 │   └── vite.config.ts
-├── user_stories/           # User stories generated from journeys (Day 1)
+├── user_stories/           # User stories generated from journeys (design phase)
 │   ├── story-NNN-slug.md   # One file per story with acceptance criteria
-│   └── backlog.md          # Prioritised build backlog (stories grouped into batches)
+│   └── backlog.md          # Prioritised build backlog (stories grouped into batches, with optional GitHub issue numbers)
 ├── tests/
 │   ├── unit/               # Backend unit tests
 │   ├── integration/        # API integration tests
@@ -45,6 +47,9 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   ├── outputs.tf
 │   └── terraform.tfvars
 ├── docs/
+│   ├── README.md           # Kit overview: phases, agents and skills
+│   ├── playbooks/          # 2-day workshop and multi-week playbooks
+│   ├── alpha-readiness-issues/ # Hardening and assessment issue files
 │   ├── adr/                # Architectural Decision Records
 │   ├── clinical-safety/    # DCB0129 hazard log, safety case
 │   └── dpia/               # Data Protection Impact Assessment
