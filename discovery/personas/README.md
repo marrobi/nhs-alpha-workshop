@@ -100,7 +100,7 @@ Each persona should be a JSON file in `data/` following this structure:
 ## Workflow
 
 1. **Generate Scenario** - Use `.github/prompts/generate_scenario_and_problem_statement.prompt.md`
-2. **Generate Personas** - Use `persona-generation-prompt.md` with M365 Copilot Researcher
+2. **Generate Personas** - Use `persona-generation-prompt.md` with M365 Copilot Researcher, following the [M365 Researcher skill](../../.github/skills/m365-researcher-personas/SKILL.md)
 3. **Generate JSON** - Use `.github/prompts/generate_persona_slides_from_report.prompt.md`
 4. **Place JSON Files** - Copy generated JSON files to `discovery/personas/data/`
 5. **Generate Slides** - Run `node scripts/generate-slides.js combined`

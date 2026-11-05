@@ -10,7 +10,7 @@ Expert full-stack developer building an NHS Alpha-phase digital service. Your go
 
 ## Tech Stack & Implementation Detail
 
-Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Read `.github/skills/playwright-nhs-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and NHS-specific conventions.
+Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Use `.github/skills/automated-testing/SKILL.md` for unit and integration test procedures. Read `.github/skills/playwright-nhs-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and NHS-specific conventions.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ Read `docs/adr/001-architecture.md` and the additional ADRs in `docs/adr/` for t
 2. Install backend dependencies file with pinned versions (as specified in the implementation skill)
 3. Create the backend API with a health endpoint
 4. Scaffold the frontend with NHS Design System components
-5. Write tests for the health endpoint
+5. Write tests for the health endpoint using the `automated-testing` skill
 6. **Scaffold E2E test infrastructure** — read `.github/skills/playwright-nhs-e2e/SKILL.md` and install the Playwright test dependencies for the E2E language in `tech-stack.instructions.md`. Pin versions in the dependency file. Run `playwright install --with-deps chromium`. Create the directory structure and shared configuration from the skill.
 7. Write IaC configuration and validate
 8. **Quick infrastructure review** — before deploying, check the IaC configuration against `.github/instructions/terraform-azure-nhs.instructions.md`: naming convention uses `var.app_name`, managed identity created (not service principal), HTTPS-only and TLS 1.2 on App Service, all resources tagged, provider version pinned. Fix any violations.

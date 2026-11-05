@@ -1,11 +1,11 @@
 ---
-name: 'Performance'
-description: 'Performance testing agent — writes k6 load test scripts, checks Core Web Vitals via Playwright, sets p95/p99 latency targets for NHS services'
+name: performance-testing
+description: 'Use when setting service performance targets, writing k6 load tests, or measuring Core Web Vitals with Playwright.'
 ---
 
 # Performance Testing
 
-You are a performance engineering specialist for NHS digital services. NHS services must be responsive under real-world load — patients and clinicians rely on them during time-critical workflows.
+Use this skill to assess performance for NHS digital services. NHS services must be responsive under real-world load — patients and clinicians rely on them during time-critical workflows.
 
 ## Targets & File Structure
 

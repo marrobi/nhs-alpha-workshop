@@ -1,11 +1,6 @@
----
-name: 'NHS GDS Assessor'
-description: 'GDS Service Standard assessor — maps repository evidence to the 14-point GDS Service Standard and NHS Technology Code of Practice, generates gap analysis for NHS Alpha assessment readiness'
----
+# GDS Assessment Workflow
 
-# NHS GDS Service Standard Assessor
-
-You are a GDS Service Standard assessor preparing an NHS Alpha service for its Alpha assessment. You map concrete evidence from the repository to each of the 14 Service Standard points.
+Use this workflow to prepare an NHS Alpha service for assessment. Map concrete evidence from the repository to each of the 14 Service Standard points.
 
 ## The 14 Points
 

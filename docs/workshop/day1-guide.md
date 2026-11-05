@@ -28,6 +28,8 @@ Before writing any code, design the technical architecture informed by your disc
 
 **Agent**: NHS Architect
 
+**Skills**: `nhs-architecture-design`, followed by `nhs-adr-writer` when creating ADRs.
+
 > Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`. Design the architecture for this service.
 
 The agent will:
@@ -62,6 +64,8 @@ Before building, decompose the user journeys into implementable user stories wit
 
 **Agent**: NHS Product Owner
 
+**Skills**: `nhs-product-backlog` and `nhs-user-stories`.
+
 > Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
 
 The agent will:
@@ -89,6 +93,8 @@ Turn the flat list of stories into an ordered build backlog. This phase uses the
 
 **Agent**: NHS Product Owner
 
+**Skill**: `nhs-product-backlog`.
+
 > Group the user stories in `user_stories/` into journey-aligned batches and prioritise them by riskiest assumption. Save the prioritised build backlog to `user_stories/backlog.md`.
 
 The agent will:
@@ -115,6 +121,8 @@ Now that user stories exist, run the **NHS Architect** agent a second time. The 
 ### Start the ADR Review Session
 
 **Agent**: NHS Architect
+
+**Skills**: `nhs-architecture-design` and `nhs-adr-writer`.
 
 > Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts. Identify the architectural decisions that need to be recorded as ADRs based on the stories, then create them.
 
@@ -144,6 +152,8 @@ Approve the ADRs before moving to scaffold.
 
 **Agent**: NHS Service Builder
 
+**Skills**: `fastapi-react-azure`, `automated-testing`, `playwright-nhs-e2e`, and `azure-nhs-deploy`, as needed for the selected stack and task.
+
 > Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
 
 The agent will:
@@ -167,17 +177,23 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    **Agent**: NHS Service Builder
 
+   **Skills**: `fastapi-react-azure`, `automated-testing`, `playwright-nhs-e2e`, and `azure-nhs-deploy`, as needed.
+
    > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-2. **Visual QA** — switch to the **Visual QA** agent to review the pages and journeys just built. It screenshots every page at desktop and mobile viewports, walks through the user journey, and verifies API data matches rendered content.
+2. **Visual QA** — use the **NHS Quality Engineer** with the `visual-qa` skill to review each page and journey.
 
-   Run it **in VS Code** — like the Demo Recorder, it needs direct access to a running instance, which the hosted agent may not reach. The agent starts the app locally itself, so once a batch is clean locally, verify it on the deployed live URL.
+   Capture each page at desktop and mobile sizes. Walk through the user journey. Check that the rendered content matches the API data.
 
-   **Agent**: Visual QA
+   Run the review in VS Code. It needs a running instance, which the hosted agent may not reach. Start the app locally. After each batch passes local review, check it on the deployed URL.
+
+   **Agent**: NHS Quality Engineer
+
+   **Skill**: `visual-qa`.
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
-3. **Fix** — the Visual QA agent will fix issues it finds (layout, data, navigation). Let it iterate until clean.
+3. **Fix** — the NHS Quality Engineer will fix issues found in layout, data, and navigation. Let it iterate until clean.
 
 4. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
 
@@ -206,7 +222,7 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 - **Build in batches** — build one journey-aligned batch at a time, then Visual QA, then demo the journey, then repeat
 - **Prioritise the riskiest assumption first** — build the backlog in priority order so the riskiest assumptions are tested earliest
 - **Complete a journey per batch** — group stories so each batch delivers a working end-to-end journey you can demonstrate
-- **Switch agents** — use the right agent for the right job
+- **Use skills for procedures** — keep the role agent and select the skill that matches the task
 - **Verify on the live URL** — always check the deployed service after deployment
 - **Keep diagrams alive** — the architecture diagram is a living artefact; update it (and add new diagrams) whenever the design changes, not just at the start
 - **Commit frequently** — the agent can run `git commit` for you

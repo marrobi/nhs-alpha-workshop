@@ -2,7 +2,7 @@
 
 ## Overview
 
-Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and demonstrating GDS readiness. You use the **Copilot Coding Agent** on GitHub: create issues, assign Copilot with the correct custom agent, and it creates PRs automatically.
+Day 2 focuses on **completing the alpha** — hardening, testing, documenting, and showing GDS readiness. Use the **Copilot Coding Agent** on GitHub. Create issues and assign Copilot to each listed role agent. Copilot creates the pull requests.
 
 > **Reference**: [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works) — by the end of alpha, you should be confident you can create something that meets users' needs and is cost-effective.
 
@@ -23,8 +23,8 @@ At the end of Day 2, your service should have evidence for:
 
 Day 2 issues are generated from your actual tech stack and codebase — not from static templates.
 
-1. In VS Code, switch to the **Day 2 Issue Generator** agent
-2. Ask it to generate the Day 2 issues
+1. In VS Code, switch to the **NHS Delivery Lead** agent
+2. Ask it to use `day2-issue-planning` to prepare the Day 2 issues
 3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in `docs/workshop/day2-issues/`
 4. Review the generated files and confirm
 5. The agent creates the issues on GitHub using `gh` CLI — it does **not** assign them to Copilot
@@ -33,11 +33,11 @@ Day 2 issues are generated from your actual tech stack and codebase — not from
 
 ## Working Through Issues
 
-The issue generator creates the issues on GitHub but does **not** assign them — you must assign Copilot with the correct **custom agent** for each issue:
+The Delivery Lead creates the issues on GitHub only after you confirm the proposed list. It does **not** assign them — you must assign Copilot with the listed **role agent**:
 
 1. Open the first issue on GitHub
-2. Click **"Assign Copilot"** and select the custom agent from the dropdown (the generator tells you which one)
-3. Copilot creates a PR using that agent's expertise
+2. Click **"Assign Copilot"** and select the role agent from the dropdown. The issue lists the agent and skill.
+3. Copilot creates a PR using that role agent and its selected skill
 4. Review the PR, request changes if needed, then merge
 5. Move to the next issue — assign one at a time
 
@@ -47,20 +47,20 @@ The issue generator creates the issues on GitHub but does **not** assign them �
 
 Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence.
 
-| # | Issue | Custom Agent | Alpha Evidence |
+| # | Issue | Role Agent + Skill | Alpha Evidence |
 |---|---|---|---|
-| 01 | CI/CD Pipeline | CI/CD Pipeline Builder | Operational reliability |
-| 02 | Unit & Integration Tests | Testing | Technical quality |
-| 03 | Playwright E2E Tests | Playwright E2E | User journeys work end-to-end |
-| 04 | Code Quality Review | Code Quality Reviewer | Code standards, type safety, test coverage |
-| 05 | Security Hardening | Security Reviewer | Threat awareness |
-| 06 | Azure Infra Security Review | Azure Infra Security Reviewer | Infrastructure security, network isolation |
-| 07 | Accessibility Audit | Accessibility Auditor | WCAG 2.2 AA / everyone can use it |
-| 08 | Performance Load Tests | Performance | Service can handle expected load |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | Clinical risk managed |
-| 10 | DPIA | NHS DPIA Advisor | Data protection considered |
-| 11 | GDS Assessment Evidence | NHS GDS Assessor | 14-point standard mapped |
-| 12 | Runbook & Deployment Docs | NHS Service Builder | Operational readiness |
+| 01 | CI/CD Pipeline | NHS Service Builder — `github-actions-pipeline` | Operational reliability |
+| 02 | Unit & Integration Tests | NHS Quality Engineer — `automated-testing` | Technical quality |
+| 03 | Playwright E2E Tests | NHS Quality Engineer — `playwright-nhs-e2e` | User journeys work end-to-end |
+| 04 | Code Quality Review | NHS Quality Engineer — `code-quality-review` | Code standards, type safety, test coverage |
+| 05 | Security Hardening | NHS Quality Engineer — `security-review` | Threat awareness |
+| 06 | Azure Infra Security Review | NHS Quality Engineer — `azure-infrastructure-review` | Infrastructure security, network isolation |
+| 07 | Accessibility Audit | NHS Quality Engineer — `accessibility-audit` | WCAG 2.2 AA / everyone can use it |
+| 08 | Performance Load Tests | NHS Quality Engineer — `performance-testing` | Service can handle expected load |
+| 09 | DCB0129 Clinical Safety | NHS Clinical Safety — `dcb0129-hazard-log` | Clinical risk managed |
+| 10 | DPIA | NHS DPIA Advisor — `nhs-dpia` | Data protection considered |
+| 11 | GDS Assessment Evidence | NHS Quality Engineer — `gds-service-standard` | 14-point standard mapped |
+| 12 | Runbook & Deployment Docs | NHS Service Builder — `azure-nhs-deploy` | Operational readiness |
 | 13 | MKDocs Documentation Site | NHS Documentation | All alpha artefacts in one site _(optional — when all done)_ |
 
 ## GDS Alpha Assessment Readiness
@@ -81,7 +81,7 @@ By the end of Day 2, review your evidence against the [GDS Service Standard](htt
 | 13. Use and contribute to open standards | NHS Design System, FHIR references |
 | 14. Operate a reliable service | CI/CD, monitoring, runbook |
 
-Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence report.
+Use the **NHS Quality Engineer** with the `gds-service-standard` skill (Issue 11) to generate the evidence report.
 
 ## Tips
 
@@ -95,9 +95,11 @@ Use the **NHS GDS Assessor** agent (Issue 11) to generate the full evidence repo
 
 ## Demo Recording (VS Code Activity)
 
-While Copilot works through the Day 2 issues, use the **Demo Recorder** agent in VS Code to produce a recorded walkthrough of the service. This runs locally because it needs access to the running application — the hosted Copilot Coding Agent may not be able to reach it.
+While Copilot works through the Day 2 issues, use the **NHS Quality Engineer** with the `demo-recording` skill in VS Code to produce a recorded walkthrough. This runs locally because it needs access to the running application — the hosted Copilot Coding Agent may not be able to reach it.
 
-**Agent**: Demo Recorder _(in VS Code, not as a GitHub issue)_
+**Agent**: NHS Quality Engineer _(in VS Code, not as a GitHub issue)_
+
+**Skill**: `demo-recording`.
 
 > Record a demo of the service. Read the user journeys, stories, and frontend/backend routes. Generate a demo narrative script, then create a Playwright recording that walks through each journey with video capture.
 

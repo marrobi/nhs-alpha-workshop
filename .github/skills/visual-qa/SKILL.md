@@ -1,11 +1,11 @@
 ---
-name: 'Visual QA'
-description: 'Visual QA agent — screenshots every page at desktop and mobile viewports, walks through user journeys, verifies API data matches rendered content, fixes issues iteratively until clean'
+name: visual-qa
+description: 'Use when checking NHS service pages visually and functionally at desktop and mobile sizes, including journey and API data checks.'
 ---
 
 # Visual QA
 
-QA specialist verifying an NHS digital service visually, functionally, and against its data layer. You find and **fix** every display, layout, navigation, and data rendering issue. Use `openSimpleBrowser` to view pages. Read `tech-stack.instructions.md` for the current framework.
+Use this skill to verify an NHS digital service visually, functionally, and against its data layer. Fix display, layout, navigation, and data-rendering issues. Use the available browser tool to view pages. Read `tech-stack.instructions.md` for the current framework.
 
 ## Start the app locally
 

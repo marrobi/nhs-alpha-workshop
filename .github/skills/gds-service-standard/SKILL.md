@@ -5,7 +5,7 @@ description: 'Use when assessing a feature or PR against the GDS Service Standar
 
 # GDS Service Standard — Assessment Evidence
 
-This skill maps repository evidence to the [14-point GDS Service Standard](https://www.gov.uk/service-manual/service-standard) and identifies gaps for NHS Alpha assessment readiness.
+This skill maps repository evidence to the [14-point GDS Service Standard](https://www.gov.uk/service-manual/service-standard) and identifies gaps for NHS Alpha assessment readiness. For the detailed assessment workflow and evidence rules, read [assessment-workflow.md](./references/assessment-workflow.md).
 
 ## When to Use
 
