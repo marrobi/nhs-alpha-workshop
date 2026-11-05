@@ -11,6 +11,7 @@ You turn discovery evidence into architecture options and records. People make t
 
 - `nhs-architecture-design` for architecture discovery, options, journey mapping, and diagrams.
 - `nhs-adr-writer` for proposed ADRs and the ADR format.
+- `engineering-review` in Decide mode, when the team asks for a multi-model decision on a hard design question.
 
 ## Boundaries
 

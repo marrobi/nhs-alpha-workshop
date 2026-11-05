@@ -51,6 +51,9 @@ After the scaffold is deployed, read the user story files in `user_stories/story
 **After all stories in a journey are built**, write the Playwright E2E test for that journey. Follow `.github/skills/playwright-nhs-e2e/SKILL.md` for patterns (Page Object Model, role-based selectors, axe on every page, NHS component assertions). Read the journey in `discovery/user_journeys/data/` for the flow sequence, and `docs/adr/001-architecture.md` + story acceptance criteria for routes, fields, and assertions. One test file per journey in `tests/e2e/journeys/`, Page Objects in `tests/e2e/pages/`. Run the full E2E test end-to-end before proceeding.
 7. **Quick code review** — check the code written for this story: type hints on all new function signatures, error handling present (no bare except/empty catch), NHS Design System components used correctly, no placeholder content or TODO comments, Pydantic models for any new API input. Fix issues before deploying.
 8. **Re-deploy and verify** — rebuild the frontend, deploy the updated backend and frontend to Azure, and verify the changes are visible on the live URL. Do this after every story, not just at the end.
+9. **Commit the verified story** — make one commit for the story after its
+   acceptance criteria and tests pass. Do not combine unrelated stories in one
+   commit.
 
 Work through stories in priority order (riskiest assumption first).
 
@@ -63,6 +66,40 @@ After all stories are built, cross-reference the original user journeys in `disc
 - Cross-journey functionality (e.g. common dashboard, shared data)
 
 Implement any gaps found, then re-run all tests.
+
+## Working with the engineering review team
+
+You implement every story yourself, with no handoffs. A multi-model team of read-only `NHS Engineer` subagents supports you through the `engineering-review` skill. That skill says when to use the team, and how to choose the engineers' models.
+
+- **One writer.** You are the only implementation agent that may edit this
+  checkout while you work. Do not start an engineer or subagent that edits
+  files in it. If you find changes that you did not make, stop and ask the
+  workshop team how to proceed.
+- **Hard design questions (Decide mode).** Do not guess when:
+  - a story's acceptance criteria are open or conflict with an ADR;
+  - a change would alter something many stories depend on;
+  - there is a security, privacy or clinical-safety trade-off;
+  - you need to choose between data-modelling or integration options;
+  - a new ADR would be needed.
+
+  Stop editing. Load the `engineering-review` skill and run Decide mode
+  yourself as the lead, with three `NHS Engineer` subagents on different
+  models. Show the recommendation to the workshop team, and continue after
+  they agree. Do not use the team for routine implementation choices.
+- **Batch review (Review mode).** When a journey-aligned batch is built,
+  tested and committed, stop and report its exact commit SHAs and validation
+  results. The workshop team asks the **NHS Quality Engineer** to run Review
+  mode against those commits. Do not review your own work, and do not keep
+  editing the reviewed checkout while that review runs.
+- **Review fixes.** When the workshop team gives you the review findings, fix
+  every Critical and High finding before the next batch. Re-run the affected
+  tests and report the fix commits and validation results.
+- **ADRs.** Do not write ADR files yourself. Pass the ADR draft from Decide
+  mode to the **NHS Architect** agent or the workshop team to accept.
+- **Long sessions.** If you were given a progress-file path, append a
+  timestamped line at each step and at least every 5 minutes, and finish with
+  `DONE` or `BLOCKED: <reason>`. If the file already exists, you are resuming:
+  read it and `git status`, then continue.
 
 ## NHS Design System
 

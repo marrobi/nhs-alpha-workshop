@@ -169,11 +169,11 @@ The agent will:
 
 This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), one journey-aligned batch at a time, with a Visual QA review after each batch. Because each batch completes a user journey, you can demonstrate a working end-to-end journey after every batch. This iterative approach catches layout, data, and journey issues early — before they compound.
 
-### Build → QA → Demo → Repeat
+### Build → Review → QA → Demo → Repeat
 
 Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
 
-1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, then deploys.
+1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, deploys, and commits each verified story separately. It is the only agent that writes to the checkout during the build.
 
    **Agent**: NHS Service Builder
 
@@ -181,7 +181,21 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
 
-2. **Visual QA** — use the **NHS Quality Engineer** with the `visual-qa` skill to review each page and journey.
+2. **Engineering review** — after the Service Builder stops and reports the exact commit SHAs and validation results, ask the **NHS Quality Engineer** to run the `engineering-review` skill in Review mode. Two read-only engineers on different models review the same commits independently. The Quality Engineer combines their findings and gives a verdict: MERGE or FIX-THEN-MERGE. Give any Critical or High findings to the NHS Service Builder to fix before the next batch.
+
+   **Agent**: NHS Quality Engineer
+
+   **Skill**: `engineering-review`.
+
+   > Review mode: review commits [base SHA..final SHA, listing each commit SHA] for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules. The Service Builder reported these validation results: [commands and results]. Use [model A] and [model B] for the engineers.
+
+   The last sentence is optional. Without it, the Quality Engineer chooses 2 available models from different providers. Run the Quality Engineer on a high-tier model.
+
+   Do not let the Service Builder change the reviewed checkout while the review runs. If work must continue at the same time, create a separate checkout or detached worktree at the reviewed commits and run the review there.
+
+   If the Service Builder meets a hard design question during the build, such as conflicting acceptance criteria or a security or clinical-safety trade-off, it stops and runs Decide mode itself with three engineers. It shows you the recommendation and continues after you agree. During architecture work, ask the **NHS Architect** to run Decide mode.
+
+3. **Visual QA** — use the **NHS Quality Engineer** with the `visual-qa` skill to review each page and journey.
 
    Capture each page at desktop and mobile sizes. Walk through the user journey. Check that the rendered content matches the API data.
 
@@ -193,11 +207,11 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
 
-3. **Fix** — the NHS Quality Engineer will fix issues found in layout, data, and navigation. Let it iterate until clean.
+4. **Fix** — the NHS Quality Engineer will fix issues found in layout, data, and navigation. Let it iterate until clean.
 
-4. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
+5. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
 
-5. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
+6. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
 
 ### While the Agents Work
 
@@ -209,9 +223,11 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 ### End of Day — Review & Commit (15 minutes)
 
 1. Ensure all code is committed and pushed
-2. Verify the service works end-to-end on the live URL
-3. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
-4. Note which user stories are complete and which remain — these inform Day 2 priorities
+2. Ask the **NHS Quality Engineer** to run the `engineering-review` skill in Review mode on the exact commits completed that day; three engineers on different models review this wider scope
+3. Hand any Critical or High findings to the **NHS Service Builder**, then re-run the affected validation
+4. Verify the service works end-to-end on the live URL
+5. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
+6. Note which user stories are complete and which remain — these inform Day 2 priorities
 
 ---
 

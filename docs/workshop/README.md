@@ -8,9 +8,9 @@ This repository contains **no application code**. It provides the Copilot config
 
 ```
 .github/
-  agents/             10 role-based custom Copilot agents
+  agents/             11 role-based custom Copilot agents (1 hidden worker)
   instructions/       8 auto-applied coding instruction files
-  skills/             23 task skills (SKILL.md folders)
+  skills/             24 task skills (SKILL.md folders)
   workflows/          GitHub Actions
 docs/
   workshop/           Workshop guides and Day 2 issue templates
@@ -57,15 +57,16 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | Agent | Purpose |
 |---|---|
 | **NHS Discovery Analyst** | Scenario and problem definition, M365 Researcher persona handoff, and user journeys |
-| **NHS Architect** | Architecture options, diagrams, and proposed ADRs |
+| **NHS Architect** | Architecture options, diagrams, and proposed ADRs. Leads multi-model Decide mode during architecture work |
 | **NHS Product Owner** | User stories, acceptance criteria, end-to-end journey coverage, and prioritised backlog |
-| **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack, including alerting and the Azure SRE Agent |
+| **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack, including alerting and the Azure SRE Agent. The only agent that implements stories. Leads Decide mode for hard design questions during the build |
 | **NHS Delivery Lead** | Day 2 issue planning and delivery sequencing |
-| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills |
+| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills. Leads multi-model Review mode after each batch and at the end of each day |
 | **NHS Clinical Safety** | DCB0129 hazards and safety case; drafts only |
 | **NHS DPIA Advisor** | DPIA and data protection risks; the DPO or IG lead approves |
 | **NHS Content Designer** | Reviews and writes user-facing copy against NHS content guidance |
 | **NHS Documentation** | Builds and maintains service documentation |
+| **NHS Engineer** _(hidden)_ | Read-only engineer that a lead starts as a subagent for the `engineering-review` skill, with a different model for each engineer. You do not select it |
 
 ## Models
 
@@ -74,6 +75,7 @@ The agents and skills do not pin a model. Each agent uses the model that you sel
 - Use a high-capability model for the NHS Service Builder and the NHS Architect. These roles do long, multi-step work.
 - Before the workshop, check which models your organisation's Copilot policy allows, and their premium request cost.
 - Do not add a `model` field to an agent unless the team agrees it. On GitHub, the field accepts only one model, with no fallback.
+- For the `engineering-review` skill, the lead chooses 2 or 3 models from different providers when it starts the engineers. You can name the models in your prompt. Run the lead on a high-tier model, because VS Code does not run a subagent on a model in a higher cost tier than the main chat.
 
 ## Skills
 
@@ -93,6 +95,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `automated-testing` | Writing unit and integration tests |
 | `playwright-nhs-e2e` | Testing user journeys in a browser |
 | `code-quality-review` | Reviewing code quality and maintainability |
+| `engineering-review` | Multi-model Decide mode for hard design questions, and Review mode for built batches |
 | `security-review` | Reviewing application security |
 | `azure-infrastructure-review` | Reviewing Terraform and Azure infrastructure |
 | `accessibility-audit` | Auditing WCAG 2.2 AA accessibility |
