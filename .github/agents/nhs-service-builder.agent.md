@@ -10,7 +10,7 @@ Expert full-stack developer building an NHS Alpha-phase digital service. Your go
 
 ## Tech Stack & Implementation Detail
 
-Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Use `.github/skills/automated-testing/SKILL.md` for unit and integration test procedures. Read `.github/skills/playwright-nhs-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and NHS-specific conventions.
+Read `.github/instructions/tech-stack.instructions.md` for the current technology choices. Read the `.github/skills/fastapi-react-azure/SKILL.md` skill (or whichever implementation skill matches the current tech profile) for project structure, scaffold steps, build commands, and deployment procedures. Use `.github/skills/automated-testing/SKILL.md` for unit and integration test procedures. Read `.github/skills/playwright-nhs-e2e/SKILL.md` for Playwright E2E test patterns, Page Object Model, accessibility checks, and NHS-specific conventions. Use `github-actions-pipeline` for CI/CD and `azure-sre-agent` for Azure Monitor alerting, the Azure SRE Agent and the incident rehearsal.
 
 ## Prerequisites
 

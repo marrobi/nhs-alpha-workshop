@@ -40,6 +40,7 @@ Verify each item against **actual Terraform code** — not comments, variable na
 - [ ] Minimal roles (`Storage Blob Data Contributor`, `Key Vault Secrets User`, etc.)
 - [ ] No `Owner`/`Contributor` at resource group level for data access
 - [ ] `azurerm_role_assignment` scoped to specific resource
+- [ ] If an Azure SRE Agent is deployed (`azure-sre-agent` skill): its identities hold only `Reader`, `Monitoring Reader` and `Log Analytics Reader`; `accessLevel = "Low"` and `mode = "Review"`; UK region; `SRE Agent Administrator` granted to a group, not a user; telemetry not opened to public query for it
 
 ### 4. Encryption & Transport
 - [ ] `https_only = true` on App Service

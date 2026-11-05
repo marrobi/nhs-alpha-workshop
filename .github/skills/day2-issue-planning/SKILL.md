@@ -1,6 +1,6 @@
 ---
 name: day2-issue-planning
-description: 'Use at the start of Day 2 to plan GitHub issues from the actual NHS service, tech stack, architecture, and role-based agent/skill assignments.'
+description: 'Use at the start of Day 2 to plan GitHub issues from the actual NHS service, tech stack, architecture, and role-based agent/skill assignments, including the optional alerting and Azure SRE Agent issue.'
 ---
 
 # Day 2 Issue Planning
@@ -27,13 +27,14 @@ Day 1 must be complete:
 | 03 | Playwright E2E Tests | NHS Quality Engineer | `playwright-nhs-e2e` |
 | 04 | Code Quality Review | NHS Quality Engineer | `code-quality-review` |
 | 05 | Security Hardening | NHS Quality Engineer | `security-review` |
-| 06 | Azure Infra Security Review | NHS Quality Engineer | `azure-infrastructure-review` |
-| 07 | Accessibility Audit | NHS Quality Engineer | `accessibility-audit` |
-| 08 | Performance Load Tests | NHS Quality Engineer | `performance-testing` |
-| 09 | DCB0129 Clinical Safety | NHS Clinical Safety | `dcb0129-hazard-log` |
-| 10 | DPIA | NHS DPIA Advisor | `nhs-dpia` |
-| 11 | GDS Assessment Evidence | NHS Quality Engineer | `gds-service-standard` |
-| 12 | Runbook & Deployment Docs | NHS Service Builder | `azure-nhs-deploy` |
+| 06 | Alerting & Azure SRE Agent _(optional)_ | NHS Service Builder | `azure-sre-agent` |
+| 07 | Azure Infra Security Review | NHS Quality Engineer | `azure-infrastructure-review` |
+| 08 | Accessibility Audit | NHS Quality Engineer | `accessibility-audit` |
+| 09 | Performance Load Tests | NHS Quality Engineer | `performance-testing` |
+| 10 | Runbook & Deployment Docs | NHS Service Builder | `azure-nhs-deploy` |
+| 11 | DCB0129 Clinical Safety | NHS Clinical Safety | `dcb0129-hazard-log` |
+| 12 | DPIA | NHS DPIA Advisor | `nhs-dpia` |
+| 13 | GDS Assessment Evidence | NHS Quality Engineer | `gds-service-standard` |
 
 ## Workflow
 
@@ -64,7 +65,20 @@ Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
 
 Present the issue titles and role agent/skill assignments from above. **Wait for user confirmation** before creating on GitHub.
 
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–12). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
+Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
+
+### Issue 06 — Alerting & Azure SRE Agent (optional)
+
+Ask the user whether the team has Azure SRE Agent access in its subscription. If it does not, generate issue 06 for **alerting only** and set `sre_agent_enabled = false`. Remove the SRE Agent hand-offs from the later issues.
+
+Read `.github/skills/azure-sre-agent/SKILL.md` and its [build workflow](../azure-sre-agent/references/build-workflow.md). Map every alert to the hosting platform, database and monitoring resources that `infra/` **actually** deploys, and name the alpha environment that will have the agent enabled. Acceptance criteria must:
+- Split what the Copilot Coding Agent delivers in the PR (ADR, Terraform, config files, scripts, offline tests, runbook section) from **operator steps** done after merge (apply the plan, prove private telemetry access, apply and verify agent configuration, rehearse one fault)
+- Include the guardrails from the skill as testable criteria (UK region, approved model provider, `Low` access, `Review` mode, read-only roles, no public telemetry, required Agent Unit cap, feature flag)
+- Require plan-time `terraform test` coverage and an offline CI test for the agent configuration
+- Create the operations section the alerts and agent skills link to (for example `docs/runbook.md`); it is written before the Runbook issue
+- Hand off to the NHS DPIA Advisor, NHS Clinical Safety and NHS Architect agents
+
+Because issue 06 comes first, make the later issues build on it: 07 audits the agent's roles, subnet and NSG; 10 extends the operations section created by 06 rather than replacing it; 11 adds the incorrect-diagnosis hazard and cites alerts and the runbook as controls; 12 records the agent as a processor; 13 uses the alerts, runbook and rehearsal record for point 14.
 
 ## Rules
 

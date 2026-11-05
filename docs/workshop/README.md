@@ -10,7 +10,7 @@ This repository contains **no application code**. It provides the Copilot config
 .github/
   agents/             10 role-based custom Copilot agents
   instructions/       8 auto-applied coding instruction files
-  skills/             22 task skills (SKILL.md folders)
+  skills/             23 task skills (SKILL.md folders)
   workflows/          GitHub Actions
 docs/
   workshop/           Workshop guides and Day 2 issue templates
@@ -59,7 +59,7 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 | **NHS Discovery Analyst** | Scenario and problem definition, M365 Researcher persona handoff, and user journeys |
 | **NHS Architect** | Architecture options, diagrams, and proposed ADRs |
 | **NHS Product Owner** | User stories, acceptance criteria, end-to-end journey coverage, and prioritised backlog |
-| **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack |
+| **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack, including alerting and the Azure SRE Agent |
 | **NHS Delivery Lead** | Day 2 issue planning and delivery sequencing |
 | **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills |
 | **NHS Clinical Safety** | DCB0129 hazards and safety case; drafts only |
@@ -80,6 +80,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `nhs-user-stories` | Writing user stories and acceptance criteria |
 | `fastapi-react-azure` | Scaffolding or building with the default tech stack |
 | `azure-nhs-deploy` | Deploying to Azure and configuring Terraform |
+| `azure-sre-agent` | Adding alerting and a read-only Azure SRE Agent as code, and rehearsing an incident |
 | `github-actions-pipeline` | Creating CI/CD and dependency update workflows |
 | `automated-testing` | Writing unit and integration tests |
 | `playwright-nhs-e2e` | Testing user journeys in a browser |
