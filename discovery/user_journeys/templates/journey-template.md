@@ -1,8 +1,9 @@
 # Journey: [Title]
 
-**Primary Actor:** [Persona Name]  
-**Duration:** [E.g., 15 minutes, 2-3 days, ongoing]  
-**Preconditions:** [What must be true before this journey starts]  
+**Primary Actor:** [Persona Name]\
+**Use cases:** [UC- identifiers from discovery/scenarios/scenario.md]\
+**Duration:** [E.g., 15 minutes, 2-3 days, ongoing]\
+**Preconditions:** [What must be true before this journey starts]\
 **Success Criteria:** [How we know the journey was successful]
 
 ## Overview
@@ -27,7 +28,7 @@ sequenceDiagram
     participant [Actor Name]
     participant [System/Service]
     participant [Other Actor]
-    
+
     [Actor Name]->>+[System/Service]: [Action]
     [System/Service]-->>-[Actor Name]: [Response]
     [Actor Name]->>+[Other Actor]: [Action]
@@ -57,6 +58,12 @@ flowchart TD
     C --> E[End: Outcome A]
     D --> E
 ```
+
+## Failure Paths
+
+| Failure | What happens | Who fixes it | Possible clinical risk |
+|---|---|---|---|
+| [What goes wrong] | [Result] | [Role] | [Yes or no, and why] |
 
 ## Touchpoints
 
@@ -96,6 +103,12 @@ flowchart TD
 
 - [Journey Name]: [How it connects]
 - [Journey Name]: [How it connects]
+
+## Open Questions
+
+| Question | Owner | Date |
+|---|---|---|
+| [Question] | [Owner or "Owner needed"] | [Date or "Date needed"] |
 
 ## Notes
 

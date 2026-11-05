@@ -9,9 +9,12 @@ This repository contains **no application code**. It provides the Copilot config
 ```
 .github/
   agents/             11 role-based custom Copilot agents (1 hidden worker)
-  instructions/       8 auto-applied coding instruction files
-  skills/             24 task skills (SKILL.md folders)
+  instructions/       13 auto-applied instruction files
+  skills/             37 task skills (SKILL.md folders)
   workflows/          GitHub Actions
+discovery/
+  prompts/            Prompt files for Microsoft 365 Copilot Chat (same methods as the skills)
+  templates/          Blank templates for discovery logs and registers
 docs/
   workshop/           Workshop guides and Day 2 issue templates
 AGENTS.md             Copilot Coding Agent context file
@@ -107,6 +110,21 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `nhs-dpia` | Drafting the DPIA and checking implemented controls |
 | `nhs-synthetic-data` | Creating synthetic NHS data and test fixtures |
 | `day2-issue-planning` | Preparing tailored Day 2 issue files |
+| `problem-statement` | Defining the scenario and problem statement in `discovery/scenarios/scenario.md` |
+| `personas` | Drafting the persona report when the team cannot use M365 Copilot Researcher |
+| `persona-slides` | Making the persona JSON files and Marp deck from the persona report |
+| `user-journeys` | Suggesting and writing user journeys in `discovery/user_journeys/data/` |
+| `workshop-prep` | Preparing a discovery workshop pack |
+| `workshop-to-actions` | Changing workshop notes into decisions, actions, RAID items and open questions |
+| `decision` | Recording a decision or an open decision in `discovery/decision-log.md` |
+| `raid-and-traceability` | Keeping the RAID log and the traceability table |
+| `interface-register` | Recording external systems and access lead times |
+| `access-tracker` | Tracking access requests and finding the ones to escalate |
+| `weekly-status` | Writing the weekly discovery status report |
+| `playback-pack` | Building the end-of-discovery playback and sign-off pack |
+| `marp-slides` | Making an NHS-style Marp deck from any Markdown document |
+
+The discovery skills have a matching prompt file in [`discovery/prompts/`](../../discovery/prompts/) or a blank template in [`discovery/templates/`](../../discovery/templates/). People with only Microsoft 365 Copilot can use these. See the [discovery guide](../../discovery/README.md).
 
 ## Azure naming convention
 
@@ -133,7 +151,7 @@ ai-{app_name}-{env}        Application Insights
 - [How the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works)
 - [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works)
 - [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points)
-- [Discovery toolkit](../../discovery/README.md) — discovery prompts for scenarios, personas, and user journeys
+- [Discovery toolkit](../../discovery/README.md) — discovery skills and Microsoft 365 Copilot prompt files for scenarios, personas, user journeys and workshops
 - [NHS Design System](https://service-manual.nhs.uk/design-system)
 - [NHS Content Style Guide](https://service-manual.nhs.uk/content)
 - [NHS Accessibility Guidance](https://service-manual.nhs.uk/accessibility)

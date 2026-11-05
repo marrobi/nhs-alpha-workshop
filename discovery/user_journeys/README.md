@@ -24,10 +24,9 @@ user_journeys/
 ### Step 1: Generate Journey Suggestions
 
 1. Gather your **Scenario Overview**, **Problem Statement**, and **Personas**
-2. Open `.github/prompts/generate_user_journeys.prompt.md` in VS Code
-3. Invoke the prompt (using Copilot chat or prompt picker)
-4. Provide your scenario context
-5. Copilot will suggest 5-8 user journeys
+2. In GitHub Copilot Chat, run the `/user-journeys` skill. If you have only Microsoft 365 Copilot, paste [`../prompts/user-journeys.md`](../prompts/user-journeys.md) into Microsoft 365 Copilot Chat
+3. Provide your scenario and personas
+4. Copilot will suggest user journeys, including failure journeys
 
 ### Step 2: Select Journeys to Develop
 
@@ -67,9 +66,10 @@ Each journey file should follow this structure:
 ```markdown
 # Journey: [Title]
 
-**Primary Actor:** [Persona name]  
-**Duration:** [Estimated timeframe]  
-**Preconditions:** [What must be true before journey starts]  
+**Primary Actor:** [Persona name]\
+**Use cases:** [UC- identifiers]\
+**Duration:** [Estimated timeframe]\
+**Preconditions:** [What must be true before journey starts]\
 **Success Criteria:** [How we know the journey succeeded]
 
 ## Overview
@@ -80,6 +80,9 @@ Each journey file should follow this structure:
 
 ## Decision Points
 [Variations and alternative paths]
+
+## Failure Paths
+[What goes wrong, what happens, who fixes it, possible clinical risk]
 
 ## Touchpoints
 - Digital: [Apps, web interfaces, SMS, etc.]
@@ -94,6 +97,9 @@ Each journey file should follow this structure:
 
 ## Related Journeys
 [Other journeys that intersect with this one]
+
+## Open Questions
+[Question, owner, date]
 ```
 
 ## Viewing Journey Diagrams
