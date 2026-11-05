@@ -5,7 +5,7 @@ description: 'Use when assessing a feature or PR against the GDS Service Standar
 
 # GDS Service Standard — Assessment Evidence
 
-This skill maps repository evidence to the [14-point GDS Service Standard](https://www.gov.uk/service-manual/service-standard) and identifies gaps for NHS Alpha assessment readiness.
+This skill maps repository evidence to the [14-point GDS Service Standard](https://www.gov.uk/service-manual/service-standard) and identifies gaps for NHS Alpha assessment readiness. For the detailed assessment workflow and evidence rules, read [assessment-workflow.md](./references/assessment-workflow.md).
 
 ## When to Use
 
@@ -31,7 +31,7 @@ This skill maps repository evidence to the [14-point GDS Service Standard](https
 | 11 | Choose the right tools and technology | ADRs explaining technology choices |
 | 12 | Make new source code open | Public repo, open licence |
 | 13 | Use and contribute to open standards | FHIR, OpenAPI, NHS Data Dictionary |
-| 14 | Operate a reliable service | Monitoring, `/health` endpoint, runbook |
+| 14 | Operate a reliable service | Monitoring, `/health` endpoint, alert rules and action group in IaC, runbook, SRE Agent guardrails and incident rehearsal record (if adopted) |
 
 ## Output Format
 

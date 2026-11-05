@@ -1,23 +1,23 @@
 ---
-name: 'Demo Recorder'
-description: 'Demo recording agent — generates a demo narrative from user journeys, creates a Playwright script that walks through the service with video recording, identifies and fixes issues found during the walkthrough'
+name: demo-recording
+description: 'Use in VS Code to plan and record an NHS service demo from user journeys, create a Playwright recording, and fix issues found.'
 ---
 
-# Demo Recorder
+# Demo Recording
 
-You are a demo specialist for an NHS digital service. You produce a **scripted demo video** by generating a narrative from the user journeys, automating it with Playwright (video recording enabled), and **fixing any issue** you discover during recording. Read `tech-stack.instructions.md` for the current framework.
+Use this skill to produce a **scripted demo video** by generating a narrative from the user journeys, automating it with Playwright (video recording enabled), and fixing issues found during recording. Read `tech-stack.instructions.md` for the current framework.
 
-> **Run from VS Code only** — this agent requires access to the running application (backend + frontend) on localhost. Do not assign this as a GitHub issue to the hosted Copilot Coding Agent.
+> **Run from VS Code only** — this skill requires access to the running application (backend + frontend) on localhost. Do not assign this task to the hosted Copilot Coding Agent.
 
 ## Prerequisites
 
-Before running this agent, the following must exist:
+Before using this skill, the following must exist:
 
 - Application code deployed and running (backend + frontend)
 - `discovery/user_journeys/data/journey-*.md` — user journeys from discovery
 - `user_stories/story-*.md` — user stories with acceptance criteria
 - `docs/adr/001-architecture.md` — architecture (routes, endpoints, data models)
-- Visual QA and E2E tests should have passed (issues 03–04 in Day 2)
+- The Day 1 Visual QA review and the Day 2 E2E tests (issue 03) should have passed
 
 ## Workflow
 
@@ -69,7 +69,7 @@ Rules for the narrative:
 
 - **One scene per user journey** — follow the Main Flow table from the journey file
 - **Include decision point branches** — show both happy path and key alternative paths
-- **Use synthetic NHS data** — NHS number `943 476 5919`, synthetic names and dates
+- **Use synthetic NHS data** from the `nhs-synthetic-data` skill. Use published PDS test numbers only in the PDS sandbox.
 - **Plain English narrator script** — follows the [NHS content style guide](https://service-manual.nhs.uk/content)
 - **Include expected results** — what the viewer should see at each step
 - **Cover every page** — every route discovered in Step 1 must appear in at least one scene
@@ -96,7 +96,7 @@ Implementation requirements:
 3. **Set viewport to 1280×720** (desktop) for consistent recording
 4. **Add deliberate pauses** between steps (1–2 seconds) so the viewer can follow the action
 5. **Use role-based selectors** — `get_by_role`, `get_by_label`, `get_by_text` only
-6. **Use synthetic NHS data** — NHS number `943 476 5919`, synthetic patient names
+6. **Use synthetic NHS data** from the `nhs-synthetic-data` skill. Use published PDS test numbers only in the PDS sandbox.
 7. **Assert expected content at each step** — verify page titles, headings, data values (not just element visibility)
 8. **Take screenshots at key moments** — save to `tests/e2e/demo/screenshots/` as numbered files matching the narrative steps
 9. **One test function per scene** — name them `test_demo_scene_01_[journey_slug]`, `test_demo_scene_02_[journey_slug]`, etc.
@@ -178,7 +178,7 @@ tests/e2e/pages/                # Page Objects (shared with E2E tests)
 
 - **Fix issues, don't just report them** — if the demo script exposes a bug, fix the application code
 - **No silent skips** — if a page can't be reached or a step fails, that is a bug to investigate
-- **Synthetic NHS data only** — NHS number `943 476 5919`, never real patient data
+- **Synthetic NHS data only** — never use real patient data or published PDS test numbers outside the PDS sandbox
 - **Role-based selectors only** — `get_by_role`, `get_by_label`, `get_by_text`; never CSS or XPath
 - **Assert content, not just visibility** — verify expected text, values, and data at each step
 - **Videos and screenshots are gitignored** — they are local artefacts, not committed to the repository

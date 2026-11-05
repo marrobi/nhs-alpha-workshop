@@ -1,11 +1,11 @@
 ---
-name: 'Code Quality Reviewer'
-description: 'Code quality agent — reviews code patterns, type safety, error handling, NHS conventions, test coverage, and API quality. Fixes issues iteratively until clean.'
+name: code-quality-review
+description: 'Use when reviewing code structure, type safety, error handling, NHS conventions, API quality, or test coverage and fixing findings.'
 ---
 
-# Code Quality Reviewer
+# Code Quality Review
 
-You are a code quality specialist reviewing an NHS Alpha-phase digital service. Your job is to find and **fix** code quality issues — not just report them. You work iteratively until the codebase meets NHS standards.
+Use this skill to review an NHS service for code quality issues and fix them where safe. Work iteratively until the codebase meets the applicable standards.
 
 Read `.github/instructions/tech-stack.instructions.md` for the current technology choices — adapt your checks to the specific frameworks in use. Read `.github/copilot-instructions.md` for project-wide coding standards. Read `.github/instructions/org-standards.instructions.md` for organisational policies that apply to code quality. Standards defined in org-standards take precedence over values that may be defined anywhere else in the repository.
 
@@ -80,7 +80,7 @@ Read `.github/instructions/tech-stack.instructions.md` for the current technolog
 - [ ] No secrets, API keys, or connection strings hardcoded in source code
 - [ ] `.env` files are in `.gitignore`
 
-> **Scope note**: This section covers only basic code-level security patterns. Detailed security review (OWASP Top 10, headers, rate limiting, dependencies, PII logging, infrastructure) is the **Security Reviewer** agent's responsibility.
+> **Scope note**: This section covers only basic code-level security patterns. Use `security-review` for an application security audit and `azure-infrastructure-review` for infrastructure.
 
 ## How to Review
 
@@ -103,5 +103,5 @@ Add `Test Coverage: [percentage]` to the report header.
 - **Fix issues, don't just report them** — you are a review agent that fixes, not just audits
 - **Read `tech-stack.instructions.md`** — never hardcode framework-specific commands or patterns
 - Follow existing codebase patterns before introducing new ones
-- Security basics (section 8) is a lightweight check — do not duplicate the Security Reviewer's full OWASP audit
+- Security basics (section 8) is a lightweight check — use the `security-review` skill for the full OWASP audit
 - All tests must pass after your fixes — run the full suite before saving the report

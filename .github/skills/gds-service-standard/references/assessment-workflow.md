@@ -1,11 +1,6 @@
----
-name: 'NHS GDS Assessor'
-description: 'GDS Service Standard assessor — maps repository evidence to the 14-point GDS Service Standard and NHS Technology Code of Practice, generates gap analysis for NHS Alpha assessment readiness'
----
+# GDS Assessment Workflow
 
-# NHS GDS Service Standard Assessor
-
-You are a GDS Service Standard assessor preparing an NHS Alpha service for its Alpha assessment. You map concrete evidence from the repository to each of the 14 Service Standard points.
+Use this workflow to prepare an NHS Alpha service for assessment. Map concrete evidence from the repository to each of the 14 Service Standard points.
 
 ## The 14 Points
 
@@ -77,7 +72,7 @@ You are a GDS Service Standard assessor preparing an NHS Alpha service for its A
 ### 14. Operate a reliable service
 - **Evidence**: Monitoring, alerting, runbook, incident process
 - **NHS Alpha**: Monitoring platform configured (see `tech-stack.instructions.md`), `/health` endpoint, runbook in `docs/`
-- **Check**: Health endpoint, IaC for monitoring, runbook document
+- **Check**: Health endpoint, IaC for monitoring, alert rules and action group in IaC, runbook document, SRE Agent guardrails and incident rehearsal record (if adopted)
 
 ## Output Format
 

@@ -1,11 +1,11 @@
 ---
-name: 'Azure Infra Security Reviewer'
-description: 'Infrastructure security agent — audits Terraform and Azure configuration against NHS network isolation, managed identity, RBAC, encryption, and Key Vault standards. Fixes issues iteratively until compliant.'
+name: azure-infrastructure-review
+description: 'Use when reviewing or fixing Terraform and Azure infrastructure security, including network isolation, managed identity, RBAC, encryption, and Key Vault.'
 ---
 
-# Azure Infra Security Reviewer
+# Azure Infrastructure Security Review
 
-Infrastructure security specialist auditing Terraform and Azure configuration. NHS services process health data (UK GDPR Art. 9) — infrastructure failures can expose patient data at scale.
+Use this skill to audit Terraform and Azure configuration. NHS services process health data (UK GDPR Art. 9) — infrastructure failures can expose patient data at scale.
 
 Read these before starting:
 - `.github/instructions/terraform-azure-nhs.instructions.md` (auto-applied to `infra/` and `.tf` files) — primary IaC standard
@@ -14,7 +14,7 @@ Read these before starting:
 - `.github/instructions/review-agent-pattern.instructions.md` — review workflow, severity levels, report template
 - `tech-stack.instructions.md` — hosting platform
 
-**Scope**: Terraform and infrastructure only. Application-level security (OWASP, headers, input validation, rate limiting, dependencies, PII logging) is the **Security Reviewer** agent's scope.
+**Scope**: Terraform and infrastructure only. Use `security-review` for application-level security (OWASP, headers, input validation, rate limiting, dependencies, and PII logging).
 
 ## Review Checklist
 
@@ -40,6 +40,7 @@ Verify each item against **actual Terraform code** — not comments, variable na
 - [ ] Minimal roles (`Storage Blob Data Contributor`, `Key Vault Secrets User`, etc.)
 - [ ] No `Owner`/`Contributor` at resource group level for data access
 - [ ] `azurerm_role_assignment` scoped to specific resource
+- [ ] If an Azure SRE Agent is deployed (`azure-sre-agent` skill): its identities hold only `Reader`, `Monitoring Reader` and `Log Analytics Reader`; `accessLevel = "Low"` and `mode = "Review"`; UK region; `SRE Agent Administrator` granted to a group, not a user; telemetry not opened to public query for it
 
 ### 4. Encryption & Transport
 - [ ] `https_only = true` on App Service
@@ -86,6 +87,6 @@ This agent has access to MCP servers configured in `.vscode/mcp.json` and via VS
 
 ## Rules
 
-- Do not review application-level security — that is the Security Reviewer's scope
+- Do not review application-level security here; use the `security-review` skill.
 - Run `terraform validate` after every change
 - Every finding must reference the specific `.tf` file and line

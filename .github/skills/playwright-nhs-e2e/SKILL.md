@@ -7,6 +7,13 @@ description: 'Playwright E2E patterns for NHS user journeys — Page Object Mode
 
 Patterns and rules for Playwright browser tests that verify NHS user journeys. Check `tech-stack.instructions.md` for the E2E testing language and framework — generate all code in that language.
 
+## When to Use
+
+- Add or improve journey tests and decision-branch coverage
+- Debug failing Playwright tests
+- Add error-handling and edge-case scenarios
+- Run the full-site accessibility test suite
+
 ## Dependencies
 
 Installed during scaffold. Use the Playwright test runner and axe-core accessibility library for the stack's language. Always run `playwright install --with-deps chromium`.
@@ -69,5 +76,6 @@ Save screenshots on failure and at key journey milestones. Store in `tests/e2e/s
 - axe check on every page navigation — no exceptions
 - Role-based selectors only
 - Must work headless in CI (Chromium)
-- Synthetic NHS data only (NHS number `943 476 5919`)
+- Use synthetic NHS data from the `nhs-synthetic-data` skill. Use published PDS test numbers only in the PDS sandbox.
+- Every step that displays dynamic data must assert the expected content, not only that an element is visible
 - Never mix E2E and unit tests

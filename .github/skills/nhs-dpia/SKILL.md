@@ -7,6 +7,8 @@ description: 'Use when drafting a Data Protection Impact Assessment (DPIA) for a
 
 This skill drafts DPIAs for NHS digital health services following [ICO guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/) and the [NHS Data Security and Protection Toolkit](https://www.dsptoolkit.nhs.uk/).
 
+For the detailed workflow and implementation-evidence checks, read [dpia-workflow.md](./references/dpia-workflow.md).
+
 ## When to Use
 
 - Starting a new NHS service that processes personal or health data

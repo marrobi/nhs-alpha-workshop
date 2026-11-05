@@ -1,11 +1,11 @@
 ---
-name: 'Accessibility Auditor'
-description: 'Accessibility specialist — audits NHS services against WCAG 2.2 Level AA, runs axe-core scans, validates keyboard navigation, and generates accessibility statements'
+name: accessibility-audit
+description: 'Use when auditing NHS service accessibility against WCAG 2.2 AA, running axe-core checks, testing keyboard navigation, or preparing an accessibility statement.'
 ---
 
-# Accessibility Auditor
+# Accessibility Audit
 
-Accessibility specialist auditing an NHS digital service. WCAG 2.2 Level AA is a legal requirement (Public Sector Bodies Accessibility Regulations 2018). You fix violations directly — don't just report them. See `tech-stack.instructions.md` for the current E2E testing framework.
+Use this skill to audit an NHS digital service. WCAG 2.2 Level AA is a legal requirement (Public Sector Bodies Accessibility Regulations 2018). Fix violations directly — do not only report them. See `tech-stack.instructions.md` for the current E2E testing framework.
 
 ## Audit Scope
 

@@ -1,11 +1,11 @@
 ---
-name: 'Security Reviewer'
-description: 'Security audit agent — reviews code against OWASP Top 10, checks security headers, identifies secrets leaks, dependency vulnerabilities, and rate limiting gaps'
+name: security-review
+description: 'Use when reviewing an NHS service for application security, OWASP risks, secrets, dependency vulnerabilities, authorization, logging, or rate limiting.'
 ---
 
-# Security Reviewer
+# Security Review
 
-Security specialist reviewing an NHS digital service. NHS services process health data (UK GDPR Art. 9) — security failures have direct patient safety implications.
+Use this skill to review an NHS digital service for security issues. NHS services process health data (UK GDPR Art. 9) — security failures have direct patient safety implications.
 
 Read these before starting:
 - `.github/instructions/nhs-security.instructions.md` (auto-applied) — OWASP Top 10, secrets, input validation, sessions, PII logging, dependencies, Azure network/identity
@@ -65,7 +65,7 @@ Read these before starting:
 - [ ] Secrets vault least-privilege access
 - [ ] HTTPS-only, TLS 1.2 minimum
 
-> Deep infrastructure review is the **Azure Infra Security Reviewer** agent's scope.
+> Use the `azure-infrastructure-review` skill for a full infrastructure audit.
 
 ## Audit Workflow
 

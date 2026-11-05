@@ -9,7 +9,7 @@ Discovery **must be completed before the workshop**. The goal is to understand t
 | Artefact | Location | How to produce |
 |---|---|---|
 | Scenario & problem statement | `discovery/scenarios/scenario.md` | `/generate_scenario_and_problem_statement` prompt |
-| Persona report | `discovery/personas/persona-report.md` | M365 Copilot Researcher agent |
+| Persona report | `discovery/personas/persona-report.md` | M365 Copilot Researcher agent, following the `m365-researcher-personas` skill |
 | Persona slides | `discovery/personas/generated/personas-deck.md` | `/generate_persona_slides_from_report` prompt |
 | User journeys | `discovery/user_journeys/data/journey-*.md` | `/generate_user_journeys` prompt |
 | Constraints & assumptions | `docs/discovery-notes.md` | Team discussion |
@@ -47,6 +47,8 @@ Use the **M365 Copilot Researcher** agent to generate realistic NHS personas:
 1. Open [M365 Copilot Chat](https://m365.cloud.microsoft/chat/) and select the **Researcher** agent ([docs](https://learn.microsoft.com/en-us/copilot/microsoft-365/researcher-agent))
 2. Paste your `discovery/scenarios/scenario.md` content into the bottom of [discovery/personas/persona-generation-prompt.md](personas/persona-generation-prompt.md) and run in Researcher
 3. Save the output to `discovery/personas/persona-report.md`
+
+Follow `.github/skills/m365-researcher-personas/SKILL.md` for the handoff and data-safety rules. This is a manual step in M365 Copilot; VS Code does not run Researcher.
 
 Then generate persona slides in VS Code:
 
