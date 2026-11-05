@@ -23,7 +23,7 @@ personas/
 ## Quick Start
 
 ### 1. Add Persona Data
-Place your JSON files generated from the Copilot prompt into the `data/` directory.
+Place your JSON files into the `data/` directory. The `persona-slides` skill writes them from the persona report.
 
 ### 2. Add Images (Optional)
 - Add NHS and Microsoft logos to `images/` directory
@@ -99,12 +99,11 @@ Each persona should be a JSON file in `data/` following this structure:
 
 ## Workflow
 
-1. **Generate Scenario** - Use `.github/prompts/generate_scenario_and_problem_statement.prompt.md`
-2. **Generate Personas** - Use `persona-generation-prompt.md` with M365 Copilot Researcher
-3. **Generate JSON** - Use `.github/prompts/generate_persona_slides_from_report.prompt.md`
-4. **Place JSON Files** - Copy generated JSON files to `discovery/personas/data/`
-5. **Generate Slides** - Run `node scripts/generate-slides.js combined`
-6. **Present** - Open generated deck in Marp or VS Code with Marp extension
+1. **Generate Scenario** - Run the `/problem-statement` skill in GitHub Copilot. If you have only Microsoft 365 Copilot, paste [`../prompts/problem-statement.md`](../prompts/problem-statement.md) into Microsoft 365 Copilot Chat.
+2. **Generate Personas** - Use `persona-generation-prompt.md` with M365 Copilot Researcher. Save the output to `persona-report.md`. If your team cannot use Researcher, run the `/personas` skill. It makes an AI draft in the same structure. Check it with real users.
+3. **Generate JSON** - Run the `/persona-slides` skill. It writes one JSON file for each persona to `discovery/personas/data/`.
+4. **Generate Slides** - The skill runs `node scripts/generate-slides.js combined`. You can also run it yourself.
+5. **Present** - Open generated deck in Marp or VS Code with Marp extension. If you have only Microsoft 365 Copilot, ask Copilot in PowerPoint to make a deck from `persona-report.md`.
 
 ## Viewing Slides
 
@@ -114,11 +113,10 @@ Each persona should be a JSON file in `data/` following this structure:
 3. Click the Marp preview button
 
 ### Export to PDF/PowerPoint
-Use Marp CLI:
+Use Marp CLI with a pinned version. The template uses HTML, so add `--html`:
 ```bash
-npm install -g @marp-team/marp-cli
-marp generated/personas-deck.md --pdf
-marp generated/personas-deck.md --pptx
+npx @marp-team/marp-cli@4.5.1 generated/personas-deck.md --html --pdf
+npx @marp-team/marp-cli@4.5.1 generated/personas-deck.md --html --pptx
 ```
 
 ## Customization
@@ -134,7 +132,7 @@ Edit `templates/persona-template.md` to change:
 Update both:
 - `templates/persona-template.md` (add new placeholders)
 - `scripts/generate-slides.js` (handle new fields)
-- `.github/prompts/generate_persona_slides_from_report.prompt.md` (update JSON structure)
+- `.github/skills/persona-slides/SKILL.md` (update JSON structure)
 
 ## Troubleshooting
 
