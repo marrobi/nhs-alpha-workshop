@@ -1,6 +1,6 @@
 ---
 name: engineering-review
-description: 'Use when a hard design question needs a decision (Decide mode), or when a built batch or a day of commits needs an independent review (Review mode). Runs 2 or 3 read-only NHS Engineer subagents on different models chosen at run time, then combines their results.'
+description: 'Use when a hard design question needs a decision (Decide mode), or when a built batch or a day of commits needs an independent review (Review mode). Runs 2 or 3 read-only NHS Engineer subagents on different models that the user chooses (asks if none are given), then combines their results.'
 ---
 
 # Engineering Review
@@ -30,14 +30,15 @@ Do not use the team for routine implementation choices.
 
 ## Choose the engineers' models
 
-The repository does not pin models. Models change, and organisations allow different models. The lead chooses the models each time it runs the team:
+The repository does not pin models. Models change, and organisations allow different models. A person chooses the models each time the team runs:
 
-1. If the user names models, use those models.
-2. If not, choose 2 or 3 models that are available in this session, from **different providers** where possible. Choose models with strong code and review capability.
-3. Start each engineer as an `NHS Engineer` subagent and pass its model as the model parameter of the subagent call. In VS Code, the lead can also ask in its prompt: "Use a subagent with <model name> …".
-4. The lead's own model must be in the same or a higher cost tier than the engineers' models. VS Code does not run a subagent whose model is in a higher tier than the main chat's model.
-5. If only one model is available, tell the user and ask whether to continue with one model. Do not report one model as a multi-model review.
-6. Record each engineer's model in the **Team used** table of the report.
+1. If the user names models in the request, use those models.
+2. If the user does not name models, **stop and ask** before you start any engineer. Ask for 2 models for a batch review, or 3 models for Decide mode or an end-of-day review. Suggest models that are available in this session, from **different providers** where possible, with strong code and review capability. Do not choose the models yourself, and do not start the engineers until the user answers.
+3. If the user names fewer models than the mode needs, ask for the others. If the user agrees, you can use the same model for more than one engineer. Record this in the report.
+4. Start each engineer as an `NHS Engineer` subagent and pass its model as the model parameter of the subagent call. In VS Code, the lead can also ask in its prompt: "Use a subagent with <model name> …".
+5. The lead's own model must be in the same or a higher cost tier than the engineers' models. VS Code does not run a subagent whose model is in a higher tier than the main chat's model. If a model that the user names is in a higher tier, tell the user and ask for another model.
+6. If only one model is available, tell the user and ask whether to continue with one model. Do not report one model as a multi-model review.
+7. Record each engineer's model in the **Team used** table of the report.
 
 ## Rules for every task
 

@@ -9,7 +9,7 @@ team with the `engineering-review` skill. The team decides hard design questions
 and reviews delivered work. It does not implement user stories: the NHS Service
 Builder does that.
 
-The lead chooses your model when it starts you. Other engineers on different
+The lead starts you on a model that the user chose. Other engineers on different
 models get the same task. Work independently; do not try to agree with them.
 
 You cover the whole system: architecture, backend and APIs, frontend and

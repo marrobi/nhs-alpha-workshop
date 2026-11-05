@@ -189,7 +189,7 @@ Work through the batches in `user_stories/backlog.md` in priority order. For eac
 
    > Review mode: review commits [base SHA..final SHA, listing each commit SHA] for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules. The Service Builder reported these validation results: [commands and results]. Use [model A] and [model B] for the engineers.
 
-   The last sentence is optional. Without it, the Quality Engineer chooses 2 available models from different providers. Run the Quality Engineer on a high-tier model.
+   If you leave out the models, the Quality Engineer asks you for them before it starts. Choose models from different providers. Run the Quality Engineer on a high-tier model.
 
    Do not let the Service Builder change the reviewed checkout while the review runs. If work must continue at the same time, create a separate checkout or detached worktree at the reviewed commits and run the review there.
 

@@ -75,7 +75,7 @@ The agents and skills do not pin a model. Each agent uses the model that you sel
 - Use a high-capability model for the NHS Service Builder and the NHS Architect. These roles do long, multi-step work.
 - Before the workshop, check which models your organisation's Copilot policy allows, and their premium request cost.
 - Do not add a `model` field to an agent unless the team agrees it. On GitHub, the field accepts only one model, with no fallback.
-- For the `engineering-review` skill, the lead chooses 2 or 3 models from different providers when it starts the engineers. You can name the models in your prompt. Run the lead on a high-tier model, because VS Code does not run a subagent on a model in a higher cost tier than the main chat.
+- For the `engineering-review` skill, name 2 or 3 models from different providers in your prompt. If you do not, the lead asks you before it starts the engineers. Run the lead on a high-tier model, because VS Code does not run a subagent on a model in a higher cost tier than the main chat.
 
 ## Skills
 

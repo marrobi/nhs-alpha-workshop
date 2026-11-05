@@ -8,7 +8,7 @@ Read this with the [engineering-review skill](../SKILL.md). It explains how to r
   for example from the VS Code Agents panel), run each engineer as its own
   chat. The user can then watch and steer it, and it keeps running if your own
   turn ends. Set:
-  - the model to the model that you chose for that engineer;
+  - the model to the model that the user chose for that engineer;
   - the workspace to the review checkout from the skill's "Review isolation"
     rules, without a new worktree;
   - the title `<task> · <model> · <mode>`.
@@ -16,7 +16,7 @@ Read this with the [engineering-review skill](../SKILL.md). It explains how to r
   The prompt must start: "You are an NHS Engineer. Read and follow
   `.github/agents/nhs-engineer.agent.md`."
 - **Otherwise, subagents.** Run each engineer as a subagent (`runSubagent` in
-  VS Code, or the task tool) with the agent set to `NHS Engineer`, and pass the
+  VS Code, or the task tool) with the agent set to `NHS Engineer`, and pass the user's
   chosen model.
 - **Prompts.** Make every prompt self-contained. Include:
   - the mode (Investigate or Review);

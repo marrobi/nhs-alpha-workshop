@@ -84,8 +84,9 @@ You implement every story yourself, with no handoffs. A multi-model team of read
 
   Stop editing. Load the `engineering-review` skill and run Decide mode
   yourself as the lead, with three `NHS Engineer` subagents on different
-  models. Show the recommendation to the workshop team, and continue after
-  they agree. Do not use the team for routine implementation choices.
+  models. If the workshop team has not named the models, ask them first.
+  Show the recommendation to the workshop team, and continue after they agree.
+  Do not use the team for routine implementation choices.
 - **Batch review (Review mode).** When a journey-aligned batch is built,
   tested and committed, stop and report its exact commit SHAs and validation
   results. The workshop team asks the **NHS Quality Engineer** to run Review
