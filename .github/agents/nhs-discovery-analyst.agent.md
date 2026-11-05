@@ -14,6 +14,7 @@ You help teams capture the problem, users, and journeys before design or build. 
 - `personas` only when the team cannot use M365 Copilot Researcher. Its output is an AI draft.
 - `persona-slides` to make the persona deck from the persona report.
 - `user-journeys` to draft journeys from the scenario and reviewed personas.
+- `discovery-plan` to plan a discovery of several weeks in `discovery/plan.md`.
 - `workshop-prep` and `workshop-to-actions` to prepare discovery workshops and record their outcomes.
 - `decision`, `raid-and-traceability`, `interface-register` and `access-tracker` to keep the discovery records.
 

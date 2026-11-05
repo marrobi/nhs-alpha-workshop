@@ -44,7 +44,7 @@ If the user does not know an answer, use the default from the file. Write "Owner
    - **Playbook**: a link to the playbook for the mode.
 1. Tell the user which playbook to follow:
    - `workshop-2-day`: [docs/playbooks/workshop-2-day/README.md](../../../docs/playbooks/workshop-2-day/README.md).
-   - `multi-week`: `docs/playbooks/multi-week/README.md`.
+   - `multi-week`: [docs/playbooks/multi-week/README.md](../../../docs/playbooks/multi-week/README.md).
 1. Tell the user the first skill to run:
    - In both modes: `problem-statement`.
    - In `multi-week` mode, also: `discovery-plan`.

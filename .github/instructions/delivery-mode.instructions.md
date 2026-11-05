@@ -21,4 +21,4 @@ This file is the **single source of truth** for how the project runs. Agents and
 - **Mode**: `workshop-2-day` or `multi-week`. The default is `workshop-2-day`.
 - **Governance records required**: optional in `workshop-2-day` mode. Required in `multi-week` mode.
 - **Owners**: record the roles. Record names only if the team chooses.
-- **Playbook**: [2-day workshop playbook](../../docs/playbooks/workshop-2-day/README.md) or the multi-week playbook in `docs/playbooks/multi-week/README.md`.
+- **Playbook**: [2-day workshop playbook](../../docs/playbooks/workshop-2-day/README.md) or [multi-week playbook](../../docs/playbooks/multi-week/README.md).

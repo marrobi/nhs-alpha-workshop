@@ -26,7 +26,7 @@ The kit has one method and two schedules. The agents and skills are the method. 
 | Mode | Use it when | Playbook |
 |---|---|---|
 | 2-day workshop | A team builds an alpha in a 2-day workshop, after a short discovery | [2-day workshop playbook](playbooks/workshop-2-day/README.md) |
-| Multi-week | A team runs discovery over several weeks, then builds in sprints | Multi-week playbook (to be added) |
+| Multi-week | A team runs discovery over several weeks, then builds in sprints | [Multi-week playbook](playbooks/multi-week/README.md) |
 
 The phases are the same in both modes: discovery, design, build, harden and assess. See [the phases](playbooks/README.md).
 
@@ -122,6 +122,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `personas` | Drafting the persona report when the team cannot use M365 Copilot Researcher |
 | `persona-slides` | Making the persona JSON files and Marp deck from the persona report |
 | `user-journeys` | Suggesting and writing user journeys in `discovery/user_journeys/data/` |
+| `discovery-plan` | Planning a discovery of several weeks in `discovery/plan.md`, with the weekly rhythm, checklists and the sign-off gate |
 | `workshop-prep` | Preparing a discovery workshop pack |
 | `workshop-to-actions` | Changing workshop notes into decisions, actions, RAID items and open questions |
 | `decision` | Recording a decision or an open decision in `discovery/decision-log.md` |

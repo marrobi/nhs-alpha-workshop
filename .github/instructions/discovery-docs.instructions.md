@@ -25,6 +25,7 @@ The skill follows the method in the prompt file. Both entry points make output i
 | `discovery/personas/persona-report.md` | The users of the service and their needs | Microsoft 365 Copilot Researcher with `discovery/personas/persona-generation-prompt.md`, or the `personas` skill |
 | `discovery/personas/data/*.json` and `discovery/personas/generated/personas-deck.md` | Persona slide data and the Marp deck that the script makes from it | `persona-slides` skill |
 | `discovery/user_journeys/data/journey-<name>.md` | One user journey in each file | `user-journeys` skill or `discovery/prompts/user-journeys.md` |
+| `discovery/plan.md` | Discovery plan of several weeks: how we work, weekly rhythm, workstreams, weekly checklists and the sign-off gate | `discovery-plan` skill or `discovery/prompts/discovery-plan.md` |
 | `discovery/workshops/YYYY-MM-DD-<topic>.md` | Workshop packs and notes summaries | `workshop-prep` and `workshop-to-actions` skills, or their prompt files |
 | `discovery/decision-log.md` | Decisions and open decisions | `decision` skill or `discovery/prompts/decision.md` |
 | `discovery/raid-log.md` | Risks, assumptions, issues, dependencies | `raid-and-traceability` skill |

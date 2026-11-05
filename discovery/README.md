@@ -1,6 +1,9 @@
-# Pre-Workshop Discovery
+# Discovery
 
-Discovery **must be completed before the workshop**. The goal is to understand the problem, your users, and the journeys you will build — so that workshop time is spent building, not researching.
+Complete discovery before you design or build. The goal is to understand the problem, your users and the journeys that you will build.
+
+- In the [2-day workshop](../docs/playbooks/workshop-2-day/README.md), discovery is pre-work. Complete it before the workshop, so that workshop time is for building.
+- In [multi-week delivery](../docs/playbooks/multi-week/README.md), discovery takes several weeks. Run the `discovery-plan` skill first. Discovery ends with a playback and sign-off.
 
 > **Reference**: [How the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works) — understand the problem before committing to building a service.
 
@@ -81,7 +84,7 @@ Generate user journeys from your scenario and personas:
 
 If you have only Microsoft 365 Copilot, paste [`prompts/user-journeys.md`](prompts/user-journeys.md) into Microsoft 365 Copilot Chat, then paste your scenario and personas.
 
-Copilot will suggest user journeys covering each primary persona and key workflow. **Develop all distinct journeys in detail** — the more journeys you have, the more user stories you can build during the workshop. Save detailed journeys to `discovery/user_journeys/data/`.
+Copilot will suggest user journeys covering each primary persona and key workflow. **Develop all distinct journeys in detail** — the more journeys you have, the more user stories you can build. Save detailed journeys to `discovery/user_journeys/data/`.
 
 Each journey file should include:
 - Step-by-step interactions (happy path and edge cases)
@@ -100,12 +103,13 @@ Discuss with your team and document in `docs/discovery-notes.md`:
 - **Riskiest assumptions**: what must be true for the service to work?
 - **What you will not build**: scope boundaries for the alpha
 
-### 6. Run workshops and track the work (optional)
+### 6. Run workshops and track the work
 
-These skills help you to run discovery workshops and to keep the records up to date. Use them if your discovery has more than one workshop or more than one party.
+These skills help you to run discovery workshops and to keep the records up to date. They are optional in the 2-day workshop. They are required in multi-week delivery. See `.github/instructions/delivery-mode.instructions.md`.
 
 | Task | Output | GitHub Copilot | Microsoft 365 Copilot only |
 |---|---|---|---|
+| Plan a discovery of several weeks | `discovery/plan.md` | `/discovery-plan` | [`prompts/discovery-plan.md`](prompts/discovery-plan.md) |
 | Prepare a workshop | `discovery/workshops/YYYY-MM-DD-<topic>.md` | `/workshop-prep` | [`prompts/workshop-prep.md`](prompts/workshop-prep.md) |
 | Change workshop notes into actions | Notes summary in the workshop file, and new rows in the logs | `/workshop-to-actions` | [`prompts/workshop-to-actions.md`](prompts/workshop-to-actions.md) |
 | Record a decision | `discovery/decision-log.md` | `/decision` | [`prompts/decision.md`](prompts/decision.md) and [`templates/decision-log.md`](templates/decision-log.md) |
@@ -120,11 +124,11 @@ To make slides with Microsoft 365 Copilot only, open PowerPoint. Ask Copilot in 
 
 ### 7. Merge your discovery branch
 
-Commit and merge your discovery branch before the workshop so the artefacts are on main.
+Commit and merge your discovery branch before the design phase, so that the artefacts are on `main`.
 
 ## Checklist
 
-Before the workshop, confirm you have:
+Before the design phase, confirm that you have:
 
 - [ ] `discovery/scenarios/scenario.md` — scenario overview and problem statement
 - [ ] `discovery/personas/persona-report.md` — researched NHS personas (up to 10)
@@ -134,7 +138,7 @@ Before the workshop, confirm you have:
 - [ ] Prioritised list of which journeys to build first
 - [ ] Discovery branch merged to main
 
-> **Note**: User stories are generated from the journeys during Day 1 using the **NHS Product Owner** agent. Discovery produces journeys only — not stories.
+> **Note**: The **NHS Product Owner** agent makes user stories from the journeys in the design phase: Day 1 of the workshop, or sprint 0 in multi-week delivery. Discovery produces journeys only — not stories.
 
 ## Where things live
 
