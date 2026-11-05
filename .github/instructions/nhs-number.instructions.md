@@ -19,8 +19,8 @@ See `tech-stack.instructions.md` for the current stack. The rules below are fram
 
 - **Every screen** showing patient-identifiable data MUST display the NHS Number (if available). The PDS verification status SHOULD also be displayed if maintained
 - **All hard-copy outputs** containing patient-identifiable data MUST include the NHS Number (if available at time of output)
-- Display and print the NHS Number in **3-3-4 format** with spaces: `943 476 5919` — never as a continuous 10-digit string
-- Where full display is not necessary, mask the first 7 digits and show only the last 3: `*** *** 5919`
+- Display and print the NHS Number in **3-3-4 format** with spaces: `999 000 0018` — never as a continuous 10-digit string
+- Where full display is not necessary, mask the first 7 digits and show only the last 3: `*** *** 0018`
 - Label the field clearly as "NHS number" (lowercase "number") in user-facing text
 
 ## Input
@@ -62,10 +62,12 @@ See `tech-stack.instructions.md` for the current stack. The rules below are fram
 ## Logging
 
 - **Never log** full NHS Numbers in application logs — see `nhs-security.instructions.md` for PII logging rules
-- If an NHS Number must appear in logs for tracing, mask it: `*** *** 5919`
+- If an NHS Number must appear in logs for tracing, mask it: `*** *** 0018`
 
 ## Testing
 
 - Use **synthetic NHS numbers only** in tests and development — never real patient data
-- Standard synthetic NHS number for tests: `943 476 5919` (valid check digit)
+- Use synthetic NHS numbers in the **999 range**. The NHS does not give these numbers to patients. See the `nhs-synthetic-data` skill
+- Standard synthetic NHS number for tests: `999 000 0018` (valid check digit)
+- Use `943 476 5919` and other published PDS test numbers only with the PDS sandbox
 - Test both valid and invalid NHS numbers, including numbers that fail the check digit
