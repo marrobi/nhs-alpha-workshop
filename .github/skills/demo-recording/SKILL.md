@@ -11,13 +11,13 @@ Use this skill to produce a **scripted demo video** by generating a narrative fr
 
 ## Prerequisites
 
-Before running this agent, the following must exist:
+Before using this skill, the following must exist:
 
 - Application code deployed and running (backend + frontend)
 - `discovery/user_journeys/data/journey-*.md` — user journeys from discovery
 - `user_stories/story-*.md` — user stories with acceptance criteria
 - `docs/adr/001-architecture.md` — architecture (routes, endpoints, data models)
-- Visual QA and E2E tests should have passed (issues 03–04 in Day 2)
+- The Day 1 Visual QA review and the Day 2 E2E tests (issue 03) should have passed
 
 ## Workflow
 

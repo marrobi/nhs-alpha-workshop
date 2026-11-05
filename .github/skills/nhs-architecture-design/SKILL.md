@@ -133,7 +133,7 @@ Example draw.io XML structure:
 ### Handoff
 
 Once the ADR and diagram are complete, tell the user:
-> Architecture is ready. Switch to the **NHS Product Owner** agent to decompose the user journeys into user stories with acceptance criteria. After the stories are created, switch back to me (the **NHS Architect**) to review the stories and identify additional ADRs. Then use the **NHS Service Builder** agent to scaffold and build. The architecture is documented in `docs/adr/001-architecture.md` and the diagram is at `docs/adr/architecture.drawio`.
+> Architecture is ready. Switch to the **NHS Product Owner** agent to decompose the user journeys into user stories with acceptance criteria. After the stories are created, switch back to the **NHS Architect** agent to review the stories and identify additional ADRs. Then use the **NHS Service Builder** agent to scaffold and build. The architecture is documented in `docs/adr/001-architecture.md` and the diagram is at `docs/adr/architecture.drawio`.
 
 ---
 

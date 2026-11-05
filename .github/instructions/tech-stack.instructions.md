@@ -127,8 +127,8 @@ tests/
 │   ├── test_health.py
 │   └── test_<router>.py
 ├── integration/         # Integration tests for cross-module flows
-├── e2e/                 # Playwright browser tests (separate agent)
-└── performance/         # k6 load tests (separate agent)
+├── e2e/                 # Playwright browser tests (playwright-nhs-e2e skill)
+└── performance/         # k6 load tests (performance-testing skill)
 ```
 
 ### Fixtures
