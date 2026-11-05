@@ -163,6 +163,24 @@ Build the batches in the order below. Each batch completes a user journey that c
 - Story 004 — [title]
 ```
 
+### Step 7 — Sync the Backlog to GitHub Issues (optional)
+
+Do this step only after the user approves `user_stories/backlog.md`.
+
+Read `.github/instructions/delivery-mode.instructions.md`:
+- In `multi-week` mode, offer to create the issues.
+- In `workshop-2-day` mode, skip this step. Do it only if the user asks.
+
+1. Check that `gh` is available and signed in with `gh auth status`. If it is not, stop. Tell the user that `gh` is not available or not signed in. Do not continue.
+1. Make a list of the issues, in backlog order:
+   - **Title**: `Story NNN — [title]`
+   - **Body**: a link to the story file in `user_stories/`, then the acceptance criteria from the story file
+   - **Labels**: one label for the batch (for example `batch-1`) and one for the journey (for example `journey-book-appointment`)
+1. Check for open and closed issues with the same title. Use `gh issue list --state all --search "Story NNN in:title"`. Do not create a duplicate. Show the existing issue number instead.
+1. Show the list to the user. Mark each issue as "new" or "exists". **Wait for confirmation.**
+1. Create each new issue in backlog order with `gh issue create --title "..." --body-file <file> --label "..."`. Create a label first with `gh label create` if it does not exist. Do **not** use `--assignee`.
+1. Record the issue number of each story in `user_stories/backlog.md`. Example: `- Story 001 — [title] (#12)`.
+
 ### Handoff
 
 Once the user confirms the stories and backlog, tell them:
@@ -177,3 +195,4 @@ Once the user confirms the stories and backlog, tell them:
 - **Use personas from the persona report** — adapt the generic archetypes from the skill to match the actual personas in `discovery/personas/persona-report.md`
 - **All four acceptance criteria categories are mandatory** — use "N/A" for Clinical Safety only if the story genuinely has no clinical data
 - **Priority order comes from the ADR** — the Architect has already prioritised journeys by riskiest assumption; stories and batches inherit that priority
+- **GitHub issues are optional** — show the list and wait for confirmation, never use `--assignee`, and never create a duplicate issue

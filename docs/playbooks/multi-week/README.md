@@ -75,7 +75,7 @@ Sprint 0 does the design phase and the scaffold. The steps are the same as phase
 
 1. **Architecture.** NHS Architect with `nhs-architecture-design`, then `nhs-adr-writer`. Output: `docs/adr/001-architecture.md` and `docs/adr/architecture.drawio`.
 1. **Stories.** NHS Product Owner with `nhs-user-stories`. Output: `user_stories/story-NNN-*.md`.
-1. **Backlog.** NHS Product Owner with `nhs-product-backlog`. Output: `user_stories/backlog.md`.
+1. **Backlog.** NHS Product Owner with `nhs-product-backlog`. Output: `user_stories/backlog.md`. After you approve the backlog, the skill offers to create one GitHub issue for each story, in backlog order. It shows the list and waits for your confirmation. It does not assign the issues, and it does not create duplicates. It records the issue numbers in `user_stories/backlog.md`.
 1. **ADR review.** NHS Architect reviews the stories and writes the ADRs that they need.
 1. **Scaffold.** NHS Service Builder scaffolds and deploys the service.
 
@@ -85,7 +85,7 @@ The architect or tech lead accepts the ADRs. The product owner approves the stor
 
 Build the backlog in priority order, one journey-aligned batch at a time. The cycle is the same as phase 6 of the [Day 1 guide](../workshop-2-day/day1-guide.md).
 
-1. Make each story a GitHub issue, or track it in `user_stories/backlog.md`.
+1. Use the story issues from sprint 0, or track the stories in `user_stories/backlog.md`.
 1. Build each batch with the NHS Service Builder. Use VS Code, or assign the issue to the Copilot coding agent on GitHub with the NHS Service Builder agent.
 1. After each batch or pull request, ask the NHS Quality Engineer to run `engineering-review` in Review mode with 2 engineers.
 1. Ask the NHS Quality Engineer to run `visual-qa` in VS Code on a running instance.
