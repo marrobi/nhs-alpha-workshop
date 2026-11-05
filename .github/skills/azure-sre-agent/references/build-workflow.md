@@ -6,7 +6,7 @@ The goal is to make the service **operable**: the team is alerted when it fails,
 
 The skill holds the guardrails, Terraform shapes, configuration layout, script requirements and rehearsal guidance. This file gives the order of work.
 
-If the team has no Azure SRE Agent access, do Steps 1–3 and the runbook part of Step 6 only, and set `sre_agent_enabled = false`.
+If the team has no Azure SRE Agent access, use the **alerting only** variant: do Step 2 (record "SRE Agent not adopted" in the ADR), Step 3, the runbook part of Step 6, and the alert checks in Step 7. Do not add the `sre-agent` module or the `sre_agent_enabled` variable. A later change can add them.
 
 Read these before starting:
 - `.github/instructions/tech-stack.instructions.md` — hosting, database, monitoring and IaC choices. Map every alert and resource to what is **actually** deployed

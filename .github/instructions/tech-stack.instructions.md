@@ -24,7 +24,7 @@ To change the tech stack, update this file and swap the corresponding tech-speci
 | **Hosting** | Azure App Service on Linux (UK South) |
 | **Secrets** | Azure Key Vault via Managed Identity |
 | **Monitoring** | Azure Application Insights |
-| **Alerting & incident diagnosis** | Azure Monitor alert rules + Azure SRE Agent (read-only, `Review` mode, UK South) — added on Day 2 |
+| **Alerting & incident diagnosis** | Azure Monitor alert rules, plus Azure SRE Agent if the team has access (read-only, `Review` mode, UK South) — added on Day 2, issue 06 |
 | **CI/CD** | GitHub Actions |
 | **Linting** | ruff (Python), ESLint (frontend) |
 

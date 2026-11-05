@@ -69,16 +69,34 @@ Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug
 
 ### Issue 06 — Alerting & Azure SRE Agent (optional)
 
-Ask the user whether the team has Azure SRE Agent access in its subscription. If it does not, generate issue 06 for **alerting only** and set `sre_agent_enabled = false`. Remove the SRE Agent hand-offs from the later issues.
+Ask the user whether the team has Azure SRE Agent access in its subscription. Record the answer at the top of issue 06 as **Variant: Alerting and SRE Agent** or **Variant: Alerting only**. Use that variant for issue 06 and for the later issues.
 
-Read `.github/skills/azure-sre-agent/SKILL.md` and its [build workflow](../azure-sre-agent/references/build-workflow.md). Map every alert to the hosting platform, database and monitoring resources that `infra/` **actually** deploys, and name the alpha environment that will have the agent enabled. Acceptance criteria must:
+Read `.github/skills/azure-sre-agent/SKILL.md` and its [build workflow](../azure-sre-agent/references/build-workflow.md). Map every alert to the hosting platform, database and monitoring resources that `infra/` **actually** deploys.
+
+**Alerting only.** Acceptance criteria must:
+- Add the alert rules and action group, with plan-time `terraform test` coverage, as in Step 3 of the build workflow
+- Record the decision in an ADR, with "Azure SRE Agent: not adopted, no access" as a rejected or deferred option
+- Create the operations section the alerts link to (for example `docs/runbook.md`)
+- Not add the `sre-agent` module, the `sre_agent_enabled` variable, agent configuration, scripts or operator rehearsal
+
+**Alerting and SRE Agent.** Name the alpha environment that will have the agent enabled. Acceptance criteria must:
 - Split what the Copilot Coding Agent delivers in the PR (ADR, Terraform, config files, scripts, offline tests, runbook section) from **operator steps** done after merge (apply the plan, prove private telemetry access, apply and verify agent configuration, rehearse one fault)
 - Include the guardrails from the skill as testable criteria (UK region, approved model provider, `Low` access, `Review` mode, read-only roles, no public telemetry, required Agent Unit cap, feature flag)
 - Require plan-time `terraform test` coverage and an offline CI test for the agent configuration
 - Create the operations section the alerts and agent skills link to (for example `docs/runbook.md`); it is written before the Runbook issue
 - Hand off to the NHS DPIA Advisor, NHS Clinical Safety and NHS Architect agents
 
-Because issue 06 comes first, make the later issues build on it: 07 audits the agent's roles, subnet and NSG; 10 extends the operations section created by 06 rather than replacing it; 11 adds the incorrect-diagnosis hazard and cites alerts and the runbook as controls; 12 records the agent as a processor; 13 uses the alerts, runbook and rehearsal record for point 14.
+Because issue 06 comes first, make the later issues build on it:
+
+| Issue | Both variants | Alerting and SRE Agent only |
+|---|---|---|
+| 07 Infra security review | Audit the alert rules and action group | Audit the agent's roles, subnet, NSG, region and access level |
+| 10 Runbook | Extend the operations section from 06; do not replace it | Keep the agent section: open, guardrails, disable, delete threads, rehearsal record |
+| 11 Clinical safety | Cite alerts and the runbook as detection controls for "service unavailable" hazards | Add the hazard "agent proposes an incorrect cause or remediation" |
+| 12 DPIA | — | Record Microsoft as processor for agent conversations, storage region and inference location |
+| 13 GDS evidence | Use alerts and the runbook for point 14 | Use the rehearsal record and guardrails for point 14 |
+
+If issue 06 is skipped completely, issue 10 creates the operations section, and none of the later issues refer to alerts from 06 or to the SRE Agent.
 
 ## Rules
 

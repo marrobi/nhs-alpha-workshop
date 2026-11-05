@@ -37,7 +37,7 @@ If web or MCP access is unavailable, say so and stop — do not guess an API ver
 
 Write these into an ADR and enforce them with Terraform `validation` blocks and tests:
 
-1. **UK only** — `location = "uksouth"` (or `ukwest`); any other region fails validation.
+1. **UK South only** — `location = "uksouth"`, as `terraform-azure-nhs.instructions.md` requires; any other region fails validation. UK West needs a change to those instructions first.
 2. **Approved model provider only** — default to Azure OpenAI (`MicrosoftFoundry`). Reject providers whose inference may run outside the UK unless Information Governance has accepted it in the DPIA.
 3. **Read-only and human-approved** — `actionConfiguration.accessLevel = "Low"` and `mode = "Review"` in every environment. Never `High` or `Automatic`. Raising autonomy needs a new ADR and a clinical safety review.
 4. **Stable channel, no experiments** — `upgradeChannel = "Stable"`; do not set `experimentalSettings`.

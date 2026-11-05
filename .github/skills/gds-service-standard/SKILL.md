@@ -31,7 +31,7 @@ This skill maps repository evidence to the [14-point GDS Service Standard](https
 | 11 | Choose the right tools and technology | ADRs explaining technology choices |
 | 12 | Make new source code open | Public repo, open licence |
 | 13 | Use and contribute to open standards | FHIR, OpenAPI, NHS Data Dictionary |
-| 14 | Operate a reliable service | Monitoring, `/health` endpoint, runbook |
+| 14 | Operate a reliable service | Monitoring, `/health` endpoint, alert rules and action group in IaC, runbook, SRE Agent guardrails and incident rehearsal record (if adopted) |
 
 ## Output Format
 

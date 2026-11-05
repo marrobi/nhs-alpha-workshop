@@ -45,7 +45,7 @@ The Delivery Lead creates the issues on GitHub only after you confirm the propos
 
 ## Recommended Issue Order
 
-Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence. Alerting and the SRE Agent (06) come before the infrastructure security review, so the agent's roles and networking are audited, and before the runbook, clinical safety, DPIA and GDS evidence, which all build on it. The runbook (10) comes before the compliance documents so they can cite its operational and incident controls.
+Start with CI/CD so every subsequent PR is automatically checked, then quality and security, then documentation and GDS evidence. Alerting and the SRE Agent (06) come before the infrastructure security review, so the alerts and any agent roles and networking are audited, and before the runbook, clinical safety, DPIA and GDS evidence, which all build on it. Issue 06 has two variants: alerting and SRE Agent, or alerting only. The Delivery Lead asks which one applies and adjusts the later issues. The runbook (10) comes before the compliance documents so they can cite its operational and incident controls.
 
 | # | Issue | Role Agent + Skill | Alpha Evidence |
 |---|---|---|---|
@@ -135,7 +135,7 @@ Skip this activity if your team did issue 06 as alerting only.
 4. **Rehearse** — start `scripts/sre-agent-load.sh`, inject one fault, wait for the alert (allow 15–25 minutes), and check the agent's investigation names the failing component, the change that caused it and the runbook section, and recommends a fix through Terraform. Ask the agent to fix it and confirm it refuses
 5. **Restore and record** — restore through Terraform or the runbook, confirm `terraform plan` shows no changes, fill in the rehearsal record in the runbook and delete the investigation threads
 
-> **Tip**: Complete the rehearsal before the GDS Assessment Evidence issue (13) so the record is available as evidence. Do it once before any show-and-tell so a completed investigation is ready — alert evaluation takes several minutes. The `demo-recording` skill can capture it afterwards.
+> **Tip**: Complete the rehearsal before the GDS Assessment Evidence issue (13) so the record is available as evidence. Do it once before any show-and-tell so a completed investigation is ready — alert evaluation takes several minutes. If you need a video, use a screen recording. The `demo-recording` skill records only the local service with Playwright.
 
 ---
 
