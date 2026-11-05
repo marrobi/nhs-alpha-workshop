@@ -26,7 +26,7 @@ This is a UK National Health Service (NHS) digital service following the [GDS Se
 
 ## NHS-Specific Rules
 
-- **Never include real patient data** — use synthetic NHS numbers (e.g. `943 476 5919`), synthetic names, and placeholder dates
+- **Never include real patient data** — use synthetic NHS numbers in the 999 range (e.g. `999 000 0018`), synthetic names, and placeholder dates
 - **All user-facing pages must use `nhsuk-frontend` components** — see the [NHS Design System](https://service-manual.nhs.uk/design-system)
 - **Follow the [NHS content style guide](https://service-manual.nhs.uk/content)** — plain English, short sentences, active voice
 - **WCAG 2.2 Level AA is mandatory** — see [NHS accessibility guidance](https://service-manual.nhs.uk/accessibility)

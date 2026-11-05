@@ -14,7 +14,7 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 
 - Never share mutable state between tests
 - Never call real databases, APIs, or file systems in unit tests
-- Use synthetic NHS data only (e.g. NHS number `943 476 5919`)
+- Use synthetic NHS data only (e.g. NHS number `999 000 0018`). Use published PDS test numbers only with the PDS sandbox
 - All API routes must have at least one happy-path test
 - Error paths must be tested (invalid input, missing resource)
 - After making code changes, rebuild and restart the application before running tests — always verify tests run against the latest code, not a stale build

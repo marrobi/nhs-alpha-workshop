@@ -1,0 +1,245 @@
+# Day 1 — Design and Build with Copilot
+
+## Overview
+
+Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, grouping and prioritising those stories into a build backlog, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
+
+> **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../../discovery/README.md). You need:
+> - `discovery/scenarios/scenario.md` — scenario overview and problem statement
+> - `discovery/personas/persona-report.md` — researched NHS personas
+> - `discovery/user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
+>
+> See the [discovery guide](../../../discovery/README.md) for how to produce these artefacts.
+
+## Setup (30 minutes)
+
+1. Open your repo in GitHub Codespaces or VS Code with the provided Dev Container (all prerequisites are pre-installed)
+2. Verify your discovery artefacts are in `discovery/` (`scenarios/`, `personas/`, `user_journeys/`)
+3. Log in to Azure: `az login`
+4. Set your Azure subscription: `az account set --subscription <id>`
+
+---
+
+## Phase 1 — Architecture Design (1 hour)
+
+Before writing any code, design the technical architecture informed by your discovery artefacts. This phase uses the **NHS Architect** agent, which will ask you questions and present options interactively.
+
+### Start the Architecture Session
+
+**Agent**: NHS Architect
+
+**Skills**: `nhs-architecture-design`, followed by `nhs-adr-writer` when creating ADRs.
+
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`. Design the architecture for this service.
+
+The agent will:
+
+1. **Review the default tech stack** and ask if you want to change anything (e.g. add a database, change the frontend framework, add authentication)
+2. **Update `tech-stack.instructions.md`** if you make any changes — this ensures all other agents use the correct stack
+3. **Analyse your discovery artefacts** and confirm understanding
+4. **Present architecture decision points** with 2–3 options each — you choose
+5. **Map user journeys to API endpoints, data models, and frontend pages**
+6. **Prioritise journeys by riskiest assumption**
+7. **Write an ADR** at `docs/adr/001-architecture.md`
+8. **Generate a draw.io architecture diagram** at `docs/adr/architecture.drawio`
+
+> **Diagrams are living artefacts.** The architecture diagram you generate here is a first draft, not a one-off deliverable. You will revisit it after the ADR review (Phase 3), as you build (Phase 5), and again on Day 2 so it always reflects the current design. You can also ask the **NHS Architect** agent for additional diagrams when they would help the team — for example a data model (entity-relationship) diagram, a sequence/data-flow diagram for a key journey, or a deployment diagram. Keep them alongside the architecture diagram in `docs/adr/`.
+
+### Review the Architecture (15 minutes)
+
+Walk through as a team:
+- **Scenario & problem statement** — is the scope clear?
+- **Personas** — who are the primary users?
+- **User journeys** — which journeys will you build? Are they prioritised by riskiest assumption? (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions))
+- **ADR** — does the architecture make sense given the constraints?
+- **Diagram** — open `docs/adr/architecture.drawio` in VS Code to review visually. Is anything missing that a further diagram would make clearer (e.g. data model or a key journey's data flow)?
+
+Agree the architecture before moving to user stories. Expect the diagram(s) to change as the design firms up — that is the point.
+
+---
+
+## Phase 2 — Generate User Stories (30 minutes)
+
+Before building, decompose the user journeys into implementable user stories with acceptance criteria. This phase uses the **NHS Product Owner** agent.
+
+**Agent**: NHS Product Owner
+
+**Skills**: `nhs-product-backlog` and `nhs-user-stories`.
+
+> Read the discovery artefacts in `discovery/scenarios/`, `discovery/personas/`, and `discovery/user_journeys/data/`, and the architecture in `docs/adr/001-architecture.md`. Decompose all user journeys into user stories with acceptance criteria.
+
+The agent will:
+
+1. **Read all discovery artefacts and the ADR** — understands the journeys, personas, and technical design
+2. **Decompose each journey into discrete user stories** — typically 3–8 stories per journey
+3. **Write acceptance criteria** in four categories: Functional (Given/When/Then), Accessibility, Clinical Safety, Data Protection
+4. **Present stories for review** — you approve, adjust, or add stories before they are saved
+5. **Save each story** as a separate file in `user_stories/story-NNN-short-slug.md`
+
+### Review the Stories (10 minutes)
+
+Walk through as a team:
+- Are any stories missing from the journeys?
+- Should any be split further or merged?
+- Are the acceptance criteria testable?
+
+Approve the stories before grouping and prioritising them.
+
+---
+
+## Phase 3 — Group & Prioritise User Stories (20 minutes)
+
+Turn the flat list of stories into an ordered build backlog. This phase uses the **NHS Product Owner** agent.
+
+**Agent**: NHS Product Owner
+
+**Skill**: `nhs-product-backlog`.
+
+> Group the user stories in `user_stories/` into journey-aligned batches and prioritise them by riskiest assumption. Save the prioritised build backlog to `user_stories/backlog.md`.
+
+The agent will:
+
+1. **Group stories into journey-aligned batches** — keep the connected stories that make up a single journey together (typically 2–5 stories), so each batch delivers a demonstrable end-to-end journey
+2. **Order batches by priority** — riskiest assumption first (see [focus on testing your riskiest assumptions](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works#focus-on-testing-your-riskiest-assumptions)), then by dependency
+3. **Save the build backlog** to `user_stories/backlog.md` — the build order used in Phase 6
+
+### Review the Backlog (10 minutes)
+
+Walk through as a team:
+- Is the riskiest assumption tested first?
+- Does each batch complete a user journey that can be demonstrated end-to-end?
+- Are dependencies in the right order (foundational stories first)?
+
+Approve the backlog before moving to ADR review.
+
+---
+
+## Phase 4 — Architecture ADR Review (30 minutes)
+
+Now that user stories exist, run the **NHS Architect** agent a second time. The stories reveal detailed technical decisions (data models, integrations, error handling, auth flows) that were not visible during the initial architecture phase. This pass identifies the ADRs needed and creates them.
+
+### Start the ADR Review Session
+
+**Agent**: NHS Architect
+
+**Skills**: `nhs-architecture-design` and `nhs-adr-writer`.
+
+> Read the user stories in `user_stories/`, the architecture in `docs/adr/001-architecture.md`, and the discovery artefacts. Identify the architectural decisions that need to be recorded as ADRs based on the stories, then create them.
+
+The agent will:
+
+1. **Review user stories alongside the architecture** — identify decisions implied by the stories (e.g. data storage for specific entities, auth strategy for role-based access, API versioning, error handling patterns)
+2. **Identify required ADRs** — present a list of ADR topics with rationale and confirm with the team
+3. **Create the ADRs** — write each ADR to `docs/adr/` following the MADR format from the `nhs-adr-writer` skill
+4. **Update the ADR index** — update `docs/adr/README.md` with the new records
+5. **Update the architecture diagram** — revise `docs/adr/architecture.drawio` so it reflects the decisions captured in the new ADRs, and add any further diagrams that now help (e.g. a data model diagram for the chosen storage, or a sequence/data-flow diagram for an auth or integration flow)
+
+### Review the ADRs (10 minutes)
+
+Walk through as a team:
+- Do the ADRs cover all significant decisions from the stories?
+- Are any decisions missing (database choice, auth strategy, external integrations)?
+- Are the alternatives and trade-offs realistic?
+- Does the architecture diagram still match the design after the new ADRs? Would another diagram make a key flow clearer?
+
+Approve the ADRs before moving to scaffold.
+
+---
+
+## Phase 5 — Scaffold & Deploy (1.5 hours)
+
+### Iteration 0 — Scaffold the Service
+
+**Agent**: NHS Service Builder
+
+**Skills**: `fastapi-react-azure`, `automated-testing`, `playwright-nhs-e2e`, and `azure-nhs-deploy`, as needed for the selected stack and task.
+
+> Scaffold the NHS Alpha service based on the architecture in `docs/adr/001-architecture.md` and the ADRs in `docs/adr/`. Create the backend with a health endpoint, the frontend with NHS Design System components and a start page, and the infrastructure configuration. Deploy everything.
+
+The agent will:
+- Create the backend app structure with middleware
+- Scaffold the frontend with NHS Design System components
+- Write infrastructure-as-code configuration
+- Deploy infrastructure and application
+- Verify the health endpoint returns 200 on the live URL
+
+---
+
+## Phase 6 — Build User Stories (3.5+ hours)
+
+This is the core of Day 1. Build user stories in the priority order set out in the build backlog (`user_stories/backlog.md`), one journey-aligned batch at a time, with a Visual QA review after each batch. Because each batch completes a user journey, you can demonstrate a working end-to-end journey after every batch. This iterative approach catches layout, data, and journey issues early — before they compound.
+
+### Build → Review → QA → Demo → Repeat
+
+Work through the batches in `user_stories/backlog.md` in priority order. For each batch:
+
+1. **Build** — use the **NHS Service Builder** agent to implement the stories in the batch (the connected stories that make up a user journey). The agent builds API endpoints, frontend pages, tests, and E2E tests, deploys, and commits each verified story separately. It is the only agent that writes to the checkout during the build.
+
+   **Agent**: NHS Service Builder
+
+   **Skills**: `fastapi-react-azure`, `automated-testing`, `playwright-nhs-e2e`, and `azure-nhs-deploy`, as needed.
+
+   > Build user stories [story-001, story-002, story-003] from `user_stories/`. Implement the API endpoints, frontend pages using NHS Design System components, tests, and Playwright E2E tests. Deploy when complete.
+
+2. **Engineering review** — after the Service Builder stops and reports the exact commit SHAs and validation results, ask the **NHS Quality Engineer** to run the `engineering-review` skill in Review mode. Two read-only engineers on different models review the same commits independently. The Quality Engineer combines their findings and gives a verdict: MERGE or FIX-THEN-MERGE. Give any Critical or High findings to the NHS Service Builder to fix before the next batch.
+
+   **Agent**: NHS Quality Engineer
+
+   **Skill**: `engineering-review`.
+
+   > Review mode: review commits [base SHA..final SHA, listing each commit SHA] for stories [story-001, story-002, story-003] against their acceptance criteria, the ADRs and the repository rules. The Service Builder reported these validation results: [commands and results]. Use [model A] and [model B] for the engineers.
+
+   If you leave out the models, the Quality Engineer asks you for them before it starts. Choose models from different providers. Run the Quality Engineer on a high-tier model.
+
+   Do not let the Service Builder change the reviewed checkout while the review runs. If work must continue at the same time, create a separate checkout or detached worktree at the reviewed commits and run the review there.
+
+   If the Service Builder meets a hard design question during the build, such as conflicting acceptance criteria or a security or clinical-safety trade-off, it stops and runs Decide mode itself with three engineers. It shows you the recommendation and continues after you agree. During architecture work, ask the **NHS Architect** to run Decide mode.
+
+3. **Visual QA** — use the **NHS Quality Engineer** with the `visual-qa` skill to review each page and journey.
+
+   Capture each page at desktop and mobile sizes. Walk through the user journey. Check that the rendered content matches the API data.
+
+   Run the review in VS Code. It needs a running instance, which the hosted agent may not reach. Start the app locally. After each batch passes local review, check it on the deployed URL.
+
+   **Agent**: NHS Quality Engineer
+
+   **Skill**: `visual-qa`.
+
+   > Review the pages and user journeys implemented by stories [story-001, story-002, story-003]. Check layouts, NHS Design System components, form validation, navigation, and data correctness at both desktop and mobile viewports.
+
+4. **Fix** — the NHS Quality Engineer will fix issues found in layout, data, and navigation. Let it iterate until clean.
+
+5. **Demo** — walk through the completed user journey end-to-end on the deployed service to confirm it works and can be demonstrated.
+
+6. **Repeat** — move to the next journey-aligned batch in the backlog and repeat the cycle.
+
+### While the Agents Work
+
+- Watch for questions — the agents may need clarification on specific stories
+- Review the code as it's created — catch design issues early
+- If you spot problems, steer the agent in the chat
+- Follow the build backlog — work through the batches in `user_stories/backlog.md` in priority order; each batch completes a user journey so you can demonstrate it once built
+
+### End of Day — Review & Commit (15 minutes)
+
+1. Ensure all code is committed and pushed
+2. Ask the **NHS Quality Engineer** to run the `engineering-review` skill in Review mode on the exact commits completed that day; three engineers on different models review this wider scope
+3. Hand any Critical or High findings to the **NHS Service Builder**, then re-run the affected validation
+4. Verify the service works end-to-end on the live URL
+5. If building revealed architecture changes (new components, services, or data flows), ask the **NHS Architect** agent to update `docs/adr/architecture.drawio` so it matches what was actually built
+6. Note which user stories are complete and which remain — these inform Day 2 priorities
+
+---
+
+## Tips
+
+- **Arrive with discovery done** — the workshop is for building, not researching
+- **Architecture first** — do not scaffold until the architecture is agreed
+- **Build in batches** — build one journey-aligned batch at a time, then Visual QA, then demo the journey, then repeat
+- **Prioritise the riskiest assumption first** — build the backlog in priority order so the riskiest assumptions are tested earliest
+- **Complete a journey per batch** — group stories so each batch delivers a working end-to-end journey you can demonstrate
+- **Use skills for procedures** — keep the role agent and select the skill that matches the task
+- **Verify on the live URL** — always check the deployed service after deployment
+- **Keep diagrams alive** — the architecture diagram is a living artefact; update it (and add new diagrams) whenever the design changes, not just at the start
+- **Commit frequently** — the agent can run `git commit` for you
+- **Save discovery artefacts** — scenarios, personas, and journeys are evidence for GDS assessment on Day 2
