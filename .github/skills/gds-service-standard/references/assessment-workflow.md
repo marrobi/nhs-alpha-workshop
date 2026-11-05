@@ -41,7 +41,7 @@ Use this workflow to prepare an NHS Alpha service for assessment. Map concrete e
 
 ### 8. Iterate and improve frequently
 - **Evidence**: Multiple iterations with user feedback incorporated
-- **NHS Alpha**: Show how Day 1 iterations responded to feedback
+- **NHS Alpha**: Show how the build iterations responded to feedback
 - **Check**: Git log shows iterative development, not a single big-bang commit
 
 ### 9. Create a secure service

@@ -17,7 +17,7 @@ Before using this skill, the following must exist:
 - `discovery/user_journeys/data/journey-*.md` — user journeys from discovery
 - `user_stories/story-*.md` — user stories with acceptance criteria
 - `docs/adr/001-architecture.md` — architecture (routes, endpoints, data models)
-- The Day 1 Visual QA review and the Day 2 E2E tests (issue 03) should have passed
+- The Visual QA review should have passed, and the Playwright E2E tests should pass
 
 ## Workflow
 

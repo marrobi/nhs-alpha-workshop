@@ -17,7 +17,7 @@ Load only the skill that matches the requested work:
 - `accessibility-audit`, `performance-testing`, and `visual-qa` for those reviews.
 - `gds-service-standard` for assessment evidence.
 - `demo-recording` for a local, scripted service walkthrough.
-- `engineering-review` in Review mode, after each built batch (2 engineers) and at the end of each day (3 engineers).
+- `engineering-review` in Review mode, after each built batch (2 engineers), and at the end of each day (workshop) or sprint (multi-week) (3 engineers).
 
 ## Boundaries
 

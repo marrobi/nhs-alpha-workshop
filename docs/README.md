@@ -70,8 +70,8 @@ Review [`.github/instructions/org-standards.instructions.md`](../.github/instruc
 | **NHS Architect** | Architecture options, diagrams, and proposed ADRs. Leads multi-model Decide mode during architecture work |
 | **NHS Product Owner** | User stories, acceptance criteria, end-to-end journey coverage, and prioritised backlog |
 | **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack, including alerting and the Azure SRE Agent. The only agent that implements stories. Leads Decide mode for hard design questions during the build |
-| **NHS Delivery Lead** | Day 2 issue planning and delivery sequencing |
-| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills. Leads multi-model Review mode after each batch and at the end of each day |
+| **NHS Delivery Lead** | Project set-up, discovery plan, delivery records, alpha readiness issues and delivery sequencing |
+| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills. Leads multi-model Review mode after each batch, and at the end of each day (workshop) or sprint (multi-week) |
 | **NHS Clinical Safety** | DCB0129 hazards and safety case; drafts only |
 | **NHS DPIA Advisor** | DPIA and data protection risks; the DPO or IG lead approves |
 | **NHS Content Designer** | Reviews and writes user-facing copy against NHS content guidance |
@@ -116,7 +116,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `dcb0129-hazard-log` | Drafting clinical safety documentation |
 | `nhs-dpia` | Drafting the DPIA and checking implemented controls |
 | `nhs-synthetic-data` | Creating synthetic NHS data and test fixtures |
-| `day2-issue-planning` | Preparing tailored Day 2 issue files |
+| `alpha-readiness-issues` | Preparing tailored hardening and assessment issue files in `docs/alpha-readiness-issues/`, and proposing a sprint for each in multi-week mode |
 | `start-project` | Setting the delivery mode, discovery length, sprint length and owners in `delivery-mode.instructions.md` |
 | `problem-statement` | Defining the scenario and problem statement in `discovery/scenarios/scenario.md` |
 | `personas` | Drafting the persona report when the team cannot use M365 Copilot Researcher |

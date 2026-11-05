@@ -4,7 +4,7 @@ applyTo: "discovery/**"
 
 # Discovery Documents
 
-Discovery outputs have fixed locations and fixed formats. Skills, prompt files and the Day 1 workshop steps read these files as input. Do not change a format without a decision in the decision log.
+Discovery outputs have fixed locations and fixed formats. Skills, prompt files and the design phase read these files as input. Do not change a format without a decision in the decision log.
 
 Follow [GDS: how the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works). Define the problem before you define a solution.
 

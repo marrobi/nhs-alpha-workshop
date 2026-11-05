@@ -101,7 +101,7 @@ Build the backlog in priority order, one journey-aligned batch at a time. The cy
 
 The hardening work is the same as on Day 2 of the workshop. Spread it over one or more sprints.
 
-1. NHS Delivery Lead: `day2-issue-planning`. The skill proposes the issues.
+1. NHS Delivery Lead: `alpha-readiness-issues`. The skill writes the issue files in `docs/alpha-readiness-issues/` and proposes a sprint for each issue.
 1. Confirm the list. The Delivery Lead creates the issues on GitHub. It does not assign them.
 1. Assign each issue to Copilot with the role agent that the issue gives. Work through them one at a time.
 1. Do the local activities in VS Code: the demo recording and the SRE Agent incident rehearsal. See the [Day 2 guide](../workshop-2-day/day2-guide.md).

@@ -5,7 +5,7 @@ description: 'Use when you need to define the scenario and problem statement for
 
 # Problem Statement
 
-Follow the method, the rules and the output template in [discovery/prompts/problem-statement.md](../../../discovery/prompts/problem-statement.md). Read that file first. Do not change its headings, because Day 1 of the workshop reads them.
+Follow the method, the rules and the output template in [discovery/prompts/problem-statement.md](../../../discovery/prompts/problem-statement.md). Read that file first. Do not change its headings, because the design phase reads them.
 
 The steps below add only the repository steps.
 

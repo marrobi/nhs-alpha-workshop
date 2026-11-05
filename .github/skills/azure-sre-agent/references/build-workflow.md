@@ -1,6 +1,6 @@
 # Azure SRE Agent — Build Workflow
 
-Use this workflow with the [azure-sre-agent skill](../SKILL.md) for Day 2 issue 06 and the operator rehearsal. The NHS Service Builder role owns this work.
+Use this workflow with the [azure-sre-agent skill](../SKILL.md) for the Alerting & Azure SRE Agent alpha readiness issue and the operator rehearsal. The NHS Service Builder role owns this work.
 
 The goal is to make the service **operable**: the team is alerted when it fails, and an [Azure SRE Agent](https://learn.microsoft.com/azure/sre-agent/) gives every serious alert a fast, consistent, **read-only** first investigation. Everything you add is deployed **with the service** from this repository and reviewed like code.
 
@@ -77,7 +77,7 @@ In the PR description list, for the operator:
 3. Run the apply and verify scripts
 4. Rehearse one fault and fill in the rehearsal record
 
-Note in the PR that the later Day 2 issues build on this work: the NHS Quality Engineer audits the agent's roles and networking with `azure-infrastructure-review`, NHS Clinical Safety and NHS DPIA Advisor pick up the hand-offs listed in the skill, and the NHS Quality Engineer uses the alerts and rehearsal record with `gds-service-standard`. Ask the user to run the **NHS Architect** agent to add the agent to the architecture diagram.
+Note in the PR that the later alpha readiness issues build on this work: the NHS Quality Engineer audits the agent's roles and networking with `azure-infrastructure-review`, NHS Clinical Safety and NHS DPIA Advisor pick up the hand-offs listed in the skill, and the NHS Quality Engineer uses the alerts and rehearsal record with `gds-service-standard`. Ask the user to run the **NHS Architect** agent to add the agent to the architecture diagram.
 
 ## Rules
 

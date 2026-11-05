@@ -16,7 +16,9 @@ The team does **not** implement user stories. The NHS Service Builder does that,
 | A hard design question comes up during the build | Decide | **NHS Service Builder**. It stops editing until the decision is made. | 3 | The builder loads this skill and starts the engineers itself |
 | A hard design question comes up during architecture or ADR work | Decide | **NHS Architect** | 3 | The team asks the Architect: "Decide mode: …" |
 | A journey-aligned batch is built, tested and committed | Review | **NHS Quality Engineer** | 2 | The team asks the Quality Engineer: "Review mode: commits …" |
-| End of each workshop day, or a batch that changed something many stories depend on | Review | **NHS Quality Engineer** | 3 | Same as above, with the day's commits |
+| End of each day (workshop) or sprint (multi-week), or a batch that changed something many stories depend on | Review | **NHS Quality Engineer** | 3 | Same as above, with the commits of the day or sprint |
+
+Read the review cadence in `.github/instructions/delivery-mode.instructions.md`.
 
 A hard design question is one of these:
 
@@ -53,15 +55,15 @@ The repository does not pin models. Models change, and organisations allow diffe
 
 - Review exact commit SHAs or another fixed snapshot, never a working tree that is changing.
 - The NHS Service Builder is the only writer in its checkout. Engineers can run builds and tests, so a terminal can still write files. Do not run engineers in the builder's checkout while the builder is working.
-- If the builder must continue while a review runs, ask the workshop team to create a separate checkout or detached worktree at the commits under review. Run every engineer in that checkout.
-- If the commits are not available, the checkout has uncommitted changes that belong to the review, or the scope changes while you work, stop and ask the workshop team for a fixed scope.
+- If the builder must continue while a review runs, ask the delivery team to create a separate checkout or detached worktree at the commits under review. Run every engineer in that checkout.
+- If the commits are not available, the checkout has uncommitted changes that belong to the review, or the scope changes while you work, stop and ask the delivery team for a fixed scope.
 
 ## Decide mode
 
 1. **Investigate.** Start all three engineers in Investigate mode with the same question. They edit nothing.
 2. **Challenge.** Show each engineer the other proposals and ask it to challenge them on evidence.
 3. **Decide.** Recommend one option. Record the decision, the alternatives that you rejected and why, the consequences, and what the builder must do.
-4. **Draft an ADR if needed.** Use the `nhs-adr-writer` skill and put the draft in your report. The NHS Architect or the workshop team accepts it. Do not commit it.
+4. **Draft an ADR if needed.** Use the `nhs-adr-writer` skill and put the draft in your report. The NHS Architect or the delivery team accepts it. Do not commit it.
 
 People make the final decision. Aim to finish within 30 minutes.
 
@@ -79,7 +81,7 @@ People make the final decision. Aim to finish within 30 minutes.
    - No mocks of external services in integration tests.
 4. **Combine the findings.** Remove duplicates. Check each disputed claim, and each claim from only one engineer, against the code yourself. Record disagreements and how you resolved them. Use the severity levels in `.github/instructions/review-agent-pattern.instructions.md`.
 
-Aim to finish a batch review within 30 minutes. The workshop team gives Critical and High findings to the NHS Service Builder, which fixes them before the next batch.
+Aim to finish a batch review within 30 minutes. The delivery team gives Critical and High findings to the NHS Service Builder, which fixes them before the next batch.
 
 ## Report
 

@@ -24,8 +24,8 @@ At the end of Day 2, your service should have evidence for:
 Day 2 issues are generated from your actual tech stack and codebase — not from static templates.
 
 1. In VS Code, switch to the **NHS Delivery Lead** agent
-2. Ask it to use `day2-issue-planning` to prepare the Day 2 issues
-3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in `docs/playbooks/workshop-2-day/day2-issues/`
+2. Ask it to use `alpha-readiness-issues` to prepare the Day 2 issues
+3. It reads `tech-stack.instructions.md`, the ADR, user stories, and your codebase to produce tailored issue files in [`docs/alpha-readiness-issues/`](../../alpha-readiness-issues/README.md)
 4. Review the generated files and confirm
 5. The agent creates the issues on GitHub using `gh` CLI — it does **not** assign them to Copilot
 

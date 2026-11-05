@@ -1,17 +1,24 @@
 ---
-name: day2-issue-planning
-description: 'Use at the start of Day 2 to plan GitHub issues from the actual NHS service, tech stack, architecture, and role-based agent/skill assignments, including the optional alerting and Azure SRE Agent issue.'
+name: alpha-readiness-issues
+description: 'Use when the service is built and you need to plan the hardening and assessment work as GitHub issues: CI/CD, tests, reviews, security, the optional alerting and Azure SRE Agent issue, runbook, clinical safety, DPIA and GDS evidence. Tailors each issue to the actual tech stack, architecture and code, and gives the role agent and skill for each issue.'
 ---
 
-# Day 2 Issue Planning
+# Alpha Readiness Issues
 
-Plan the GitHub issues for Day 2 of the NHS Alpha workshop. Each issue is tailored to the **actual tech stack, architecture, and service** built on Day 1 — never generic.
+Plan the GitHub issues that harden the alpha and collect the assessment evidence. Each issue is tailored to the **actual tech stack, architecture, and service** that the team built — never generic.
 
 You produce issue template files — you do **not** write application code, tests, or infrastructure.
 
+## Delivery mode
+
+Read `.github/instructions/delivery-mode.instructions.md`.
+
+- **`workshop-2-day`**: prepare all issues for Day 2 of the workshop. The team works through them in the order of the table.
+- **`multi-week`**: propose a sprint for each issue. Use the sprint length and keep the order of the table. Put issue 01 in the first hardening sprint. Show the proposal and wait for confirmation. Record the sprint in the Sprint section of each issue file.
+
 ## Prerequisites
 
-Day 1 must be complete:
+The design and build phases must be complete:
 - `.github/instructions/tech-stack.instructions.md` — tech stack choices
 - `.github/instructions/org-standards.instructions.md` — organisational policies (if defined)
 - `docs/adr/001-architecture.md` — agreed architecture
@@ -46,7 +53,7 @@ Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architec
 
 For each issue, read the role agent and skill listed above, then write acceptance criteria using **actual** tools, commands, file paths, and frameworks from the tech stack.
 
-Save each to `docs/playbooks/workshop-2-day/day2-issues/NN-short-slug.md`:
+Save each to `docs/alpha-readiness-issues/NN-short-slug.md`:
 
 ```markdown
 ## [Issue Title]
@@ -59,13 +66,16 @@ Save each to `docs/playbooks/workshop-2-day/day2-issues/NN-short-slug.md`:
 
 ### Labels
 `label1`, `label2`
+
+### Sprint
+[multi-week mode only: the proposed sprint]
 ```
 
 ### Step 3 — Present Summary and Create on GitHub
 
-Present the issue titles and role agent/skill assignments from above. **Wait for user confirmation** before creating on GitHub.
+Present the issue titles and role agent/skill assignments from above. In `multi-week` mode, also present the proposed sprint for each issue. **Wait for user confirmation** before creating on GitHub.
 
-Use `gh issue create --title "..." --body-file docs/playbooks/workshop-2-day/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
+Use `gh issue create --title "..." --body-file docs/alpha-readiness-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
 
 ### Issue 06 — Alerting & Azure SRE Agent (optional)
 
