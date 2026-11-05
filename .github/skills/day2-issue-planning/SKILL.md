@@ -46,7 +46,7 @@ Read `tech-stack.instructions.md`, `org-standards.instructions.md`, the architec
 
 For each issue, read the role agent and skill listed above, then write acceptance criteria using **actual** tools, commands, file paths, and frameworks from the tech stack.
 
-Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
+Save each to `docs/playbooks/workshop-2-day/day2-issues/NN-short-slug.md`:
 
 ```markdown
 ## [Issue Title]
@@ -65,7 +65,7 @@ Save each to `docs/workshop/day2-issues/NN-short-slug.md`:
 
 Present the issue titles and role agent/skill assignments from above. **Wait for user confirmation** before creating on GitHub.
 
-Use `gh issue create --title "..." --body-file docs/workshop/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
+Use `gh issue create --title "..." --body-file docs/playbooks/workshop-2-day/day2-issues/NN-slug.md --label "..."` for each issue in order (01–13). Do **not** use `--assignee` — the user will assign Copilot with the listed role agent on GitHub.
 
 ### Issue 06 — Alerting & Azure SRE Agent (optional)
 

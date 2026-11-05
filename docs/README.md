@@ -1,10 +1,8 @@
-# NHS Alpha — Copilot Workshop Template
+# NHS Delivery Kit for GitHub Copilot
 
-A pre-configured GitHub repository template for building NHS Alpha-phase digital services using GitHub Copilot agents. Used in a 2-day workshop format.
+This kit helps a team to design and build an NHS alpha-phase digital service with GitHub Copilot. It gives role agents, task skills, instructions and discovery prompt files. It contains **no application code**.
 
-## What's in this repo
-
-This repository contains **no application code**. It provides the Copilot configuration, agents, skills, instructions, and workshop guides that enable teams to build an NHS service from scratch using AI-assisted development.
+## What is in this repository
 
 ```
 .github/
@@ -16,30 +14,39 @@ discovery/
   prompts/            Prompt files for Microsoft 365 Copilot Chat (same methods as the skills)
   templates/          Blank templates for discovery logs and registers
 docs/
-  workshop/           Workshop guides and Day 2 issue templates
-AGENTS.md             Copilot Coding Agent context file
+  README.md           This overview
+  playbooks/          The phases, and one playbook for each delivery mode
+AGENTS.md             Copilot coding agent context file
 ```
 
-## Workshop guides
+## Two delivery modes
 
-- **[discovery/README.md](../../discovery/README.md)** — Pre-workshop: Discovery using the built-in discovery toolkit
-- **[day1-guide.md](day1-guide.md)** — Day 1: Design and Build with Copilot Agent Mode in VS Code
-- **[day2-guide.md](day2-guide.md)** — Day 2: Complete the Alpha with Copilot Coding Agent on GitHub
-- **[day2-issues/](day2-issues/)** — Prepared by the NHS Delivery Lead using the `day2-issue-planning` skill (empty until Day 2)
+The kit has one method and two schedules. The agents and skills are the method. The playbooks are the schedules. Use the same agents and skills in both modes.
 
-## Workshop overview
+| Mode | Use it when | Playbook |
+|---|---|---|
+| 2-day workshop | A team builds an alpha in a 2-day workshop, after a short discovery | [2-day workshop playbook](playbooks/workshop-2-day/README.md) |
+| Multi-week | A team runs discovery over several weeks, then builds in sprints | Multi-week playbook (to be added) |
 
-This workshop runs over two days using GitHub Copilot to build an NHS Alpha-phase digital service. **Use this template** to create a new repository for your team, then open it in GitHub Codespaces or VS Code with the provided Dev Container.
+The phases are the same in both modes: discovery, design, build, harden and assess. See [the phases](playbooks/README.md).
 
-**Prerequisites**: GitHub account with a Copilot seat, Azure subscription with Contributor access to UK South, and access to [M365 Copilot](https://m365.cloud.microsoft/chat/) with Researcher agent (for discovery). All other tools are pre-installed in the Dev Container.
+**Prerequisites**: a GitHub account with a Copilot seat, an Azure subscription with Contributor access to UK South, and access to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/) with the Researcher agent (for discovery). The Dev Container has all other tools.
 
-- **Pre-workshop — Discovery**: Complete the discovery phase in your new repo before the workshop — scenario, personas, and user journeys. See [discovery/README.md](../../discovery/README.md).
-- **Day 1 — Design and Build**: Design the architecture, generate user stories, group and prioritise them into a build backlog, scaffold the service, and build as many stories as possible using Copilot Agent Mode in VS Code. See [day1-guide.md](day1-guide.md).
-- **Day 2 — Complete the Alpha**: Harden, test, document, and demonstrate GDS readiness using Copilot Coding Agent on GitHub. See [day2-guide.md](day2-guide.md).
+## Phases
+
+| Phase | Goal | 2-day workshop | Multi-week |
+|---|---|---|---|
+| Discovery | Understand the problem, the users and the journeys | Pre-work | Discovery weeks |
+| Design | Agree the architecture, the stories and the backlog | Day 1 | Sprint 0 |
+| Build | Build the backlog, one journey at a time | Day 1 | Sprints |
+| Harden | Add tests, security, operations and compliance evidence | Day 2 | Sprints |
+| Assess | Collect the evidence for the GDS service assessment | Day 2 | Before the assessment |
+
+The [phases page](playbooks/README.md) gives the agents, skills and outputs for each phase. The [discovery guide](../discovery/README.md) gives the discovery steps.
 
 ## Tech stack
 
-See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructions/tech-stack.instructions.md) for the current stack, modify this as required. Summary:
+See [`.github/instructions/tech-stack.instructions.md`](../.github/instructions/tech-stack.instructions.md) for the current stack, modify this as required. Summary:
 
 | Layer | Technology |
 |---|---|
@@ -53,7 +60,7 @@ See [`.github/instructions/tech-stack.instructions.md`](../../.github/instructio
 
 ## Organisational standards
 
-Review [`.github/instructions/org-standards.instructions.md`](../../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. The defaults are based on NHS Architecture Principles and the NHS Cloud Security Good Practice Guide, but teams should tailor them to their organisation. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
+Review [`.github/instructions/org-standards.instructions.md`](../.github/instructions/org-standards.instructions.md) and update it with your organisation's policies — deployment strategy, backup requirements, coverage thresholds, secret scanning, coding standards, and security requirements. The defaults are based on NHS Architecture Principles and the NHS Cloud Security Good Practice Guide, but teams should tailor them to their organisation. If your team has no specific standards to enforce, you can delete the content body (keeping the frontmatter) and the toolkit will not apply any organisational standards.
 
 ## Agents
 
@@ -76,7 +83,7 @@ Review [`.github/instructions/org-standards.instructions.md`](../../.github/inst
 The agents and skills do not pin a model. Each agent uses the model that you select in VS Code, or the default model for the Copilot coding agent on GitHub. This means that you do not need to change the repository when models are added or retired.
 
 - Use a high-capability model for the NHS Service Builder and the NHS Architect. These roles do long, multi-step work.
-- Before the workshop, check which models your organisation's Copilot policy allows, and their premium request cost.
+- Before you start, check which models your organisation's Copilot policy allows, and their premium request cost.
 - Do not add a `model` field to an agent unless the team agrees it. On GitHub, the field accepts only one model, with no fallback.
 - For the `engineering-review` skill, name 2 or 3 models from different providers in your prompt. If you do not, the lead asks you before it starts the engineers. Run the lead on a high-tier model, because VS Code does not run a subagent on a model in a higher cost tier than the main chat.
 
@@ -124,7 +131,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `playback-pack` | Building the end-of-discovery playback and sign-off pack |
 | `marp-slides` | Making an NHS-style Marp deck from any Markdown document |
 
-The discovery skills have a matching prompt file in [`discovery/prompts/`](../../discovery/prompts/) or a blank template in [`discovery/templates/`](../../discovery/templates/). People with only Microsoft 365 Copilot can use these. See the [discovery guide](../../discovery/README.md).
+The discovery skills have a matching prompt file in [`discovery/prompts/`](../discovery/prompts/) or a blank template in [`discovery/templates/`](../discovery/templates/). People with only Microsoft 365 Copilot can use these. See the [discovery guide](../discovery/README.md).
 
 ## Azure naming convention
 
@@ -151,7 +158,7 @@ ai-{app_name}-{env}        Application Insights
 - [How the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works)
 - [How the alpha phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-alpha-phase-works)
 - [GDS Service Standard](https://www.gov.uk/service-manual/service-standard) (14 points)
-- [Discovery toolkit](../../discovery/README.md) — discovery skills and Microsoft 365 Copilot prompt files for scenarios, personas, user journeys and workshops
+- [Discovery toolkit](../discovery/README.md) — discovery skills and Microsoft 365 Copilot prompt files for scenarios, personas, user journeys and workshops
 - [NHS Design System](https://service-manual.nhs.uk/design-system)
 - [NHS Content Style Guide](https://service-manual.nhs.uk/content)
 - [NHS Accessibility Guidance](https://service-manual.nhs.uk/accessibility)

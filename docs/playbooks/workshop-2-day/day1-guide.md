@@ -4,12 +4,12 @@
 
 Day 1 assumes **discovery has already been completed** using the discovery toolkit in this repository. You should arrive with a scenario, personas, and user journeys already produced. Day 1 is about designing the architecture, generating user stories from the journeys, grouping and prioritising those stories into a build backlog, identifying and recording architectural decisions as ADRs, and then building as many stories as possible.
 
-> **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../discovery/README.md). You need:
+> **Prerequisites**: Complete discovery before the workshop using the [discovery guide](../../../discovery/README.md). You need:
 > - `discovery/scenarios/scenario.md` — scenario overview and problem statement
 > - `discovery/personas/persona-report.md` — researched NHS personas
 > - `discovery/user_journeys/data/journey-*.md` — detailed user journeys with Mermaid diagrams
 >
-> See the [discovery guide](../../discovery/README.md) for how to produce these artefacts.
+> See the [discovery guide](../../../discovery/README.md) for how to produce these artefacts.
 
 ## Setup (30 minutes)
 

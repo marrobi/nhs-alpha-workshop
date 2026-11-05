@@ -30,10 +30,10 @@ Ask the questions from Step 1 of the method with the ask questions tool, if it i
    - The problem and the people affected.
    - A short Mermaid diagram of the key workflow.
    - A link to `discovery/scenarios/scenario.md`.
-   - A link to `docs/workshop/README.md`.
+   - A link to `docs/README.md`.
    - A link to the `LICENSE`.
 
-   Do not keep the template content of this workshop in the project README.
+   Do not keep the template content of this kit in the project README.
 
 ## Validation
 

@@ -13,7 +13,7 @@ your service. If you have only Microsoft 365 Copilot, use the prompt file
 [discovery/prompts/problem-statement.md](discovery/prompts/problem-statement.md).
 
 See the [discovery guide](discovery/README.md) and
-[workshop guides](docs/workshop/README.md) for the full process.
+[kit overview](docs/README.md) for the full process.
 
 ## Licence
 
