@@ -21,7 +21,8 @@ Ask me for these inputs if I did not give them:
 1. The scenario and problem statement from `discovery/scenarios/scenario.md`.
 1. The persona report from `discovery/personas/persona-report.md`.
 1. The user journeys from `discovery/user_journeys/data/`.
-1. The decision log, the RAID log, the interface register and the access tracker from `discovery/`.
+1. The decision log, the RAID log, the open questions log, the interface register and the access tracker from `discovery/`.
+1. The discovery notes from `discovery/discovery-notes.md`: the constraints, the riskiest assumptions, the scope and the steer. If a row is `Draft`, or the steer is not `Agreed`, list it as a gap that can stop sign-off.
 1. Optional: the last status report from `discovery/status/`.
 1. Optional: the hazard log, the data protection impact assessment (DPIA) and the architecture decision records (ADRs), if they exist.
 1. The date and the parties of the playback.
@@ -83,7 +84,9 @@ Ask me for these inputs if I did not give them:
 
 ## 8. First slice
 
-[The scope, the journeys and the riskiest assumption that it tests]
+[The type (thin slice or journey slice), the scope, the journeys and the riskiest assumption that it tests. Who agreed the steer, and when]
+
+[The open questions that block the first slice, and the direction for each. The external systems that the first slice needs, and the alpha approach for each: real, sandbox, mock or not used]
 
 ## 9. Plan
 

@@ -6,7 +6,7 @@
 1. Copy all of this file below the line, and paste it into the chat.
 1. Paste the inputs that are listed in the "Inputs" section.
 1. Check the summary. Tell Copilot to continue, or give corrections.
-1. Add the "Notes summary" to the end of the workshop file `discovery/workshops/YYYY-MM-DD-<topic>.md` in the repository. Copy the new rows to `discovery/decision-log.md`, `discovery/raid-log.md`, `discovery/interface-register.md` and `discovery/access-tracker.md`. If you do not have access to the repository, give the output to a team member who has access.
+1. Add the "Notes summary" to the end of the workshop file `discovery/workshops/YYYY-MM-DD-<topic>.md` in the repository. Copy the new rows to `discovery/decision-log.md`, `discovery/raid-log.md`, `discovery/open-questions.md`, `discovery/interface-register.md` and `discovery/access-tracker.md`. If the workshop changed a constraint, a riskiest assumption, the scope or the steer, update `discovery/discovery-notes.md` and mark each changed row `Draft` for the team to review. If you do not have access to the repository, give the output to a team member who has access.
 
 GitHub Copilot users run the `workshop-to-actions` skill instead. The skill uses this method.
 
@@ -41,6 +41,7 @@ From the notes, find:
 1. **Risks, assumptions, issues and dependencies.**
 1. **Open questions.** Each with an owner and a date.
 1. **New facts** for the scenario, the use cases, the interface register and the access tracker.
+1. **Changes to the discovery notes**: constraints, riskiest assumptions, scope or the steer. Mark each change `Draft`. A person must review it.
 1. **Possible hazards.** Things that can cause harm to a patient if the data or the service is wrong, missing, late or for the wrong patient.
 1. **Data protection points.** New personal data, new recipients, new data flows or retention.
 

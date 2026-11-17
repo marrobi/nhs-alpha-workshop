@@ -55,3 +55,40 @@ Ask me for these inputs if I did not give them:
 - **Clinical safety**: [Yes or no, and why]
 - **Data protection**: [Yes or no, and why]
 ```
+
+## Collate mode: collect the open questions
+
+Use this mode at the end of discovery, before the design phase. Use it again after the user stories and after the second architecture pass. The output goes in `discovery/open-questions.md`. The columns agree with `discovery/templates/open-questions.md`.
+
+### Inputs for collate mode
+
+Ask me for these inputs if I did not give them:
+
+1. The "Open Questions" section of each user journey.
+1. The assumptions and the open items in the RAID log, if we have one.
+1. The open decisions in the decision log, if we have one.
+1. Notes from workshops, if we have them.
+1. The current open questions log, if we have one.
+1. The priority journey and the first slice candidate, if we know them.
+
+### Method for collate mode
+
+1. List each question from the inputs. Give the source of each question.
+1. Remove duplicates. If two questions are the same, keep one and list both sources.
+1. Do not add a question that is already in the open questions log. Give its `Q-` identifier instead.
+1. For each question, write what it blocks: a slice, a story, or "None".
+1. Sort the questions. Put the questions that block the first slice first.
+1. For each question, suggest who can give the direction. If you do not know, write "Owner needed".
+1. Ask me for a direction for each question that blocks the first slice. **Stop and wait for my answers.**
+1. If a direction is a large decision, tell me to record it in the decision log.
+
+### Output template for collate mode
+
+```markdown
+| ID | Question | Source | Blocks | Direction from | Date needed | Direction | Decided by | Linked decision | Status |
+|---|---|---|---|---|---|---|---|---|---|
+| Q-NNN | | | | | | | | | Open, Direction given, Assumed or Closed |
+
+- **Questions that block the first slice**: [count, and the IDs]
+- **Questions with no owner**: [the IDs]
+```

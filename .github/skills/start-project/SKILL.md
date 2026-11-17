@@ -38,7 +38,7 @@ If the user does not know an answer, use the default from the file. Write "Owner
 1. Update the table in `.github/instructions/delivery-mode.instructions.md`:
    - **Mode**: `workshop-2-day` or `multi-week`.
    - **Discovery length** and **Sprint length**: the answers.
-   - **Engineering review cadence**: in `workshop-2-day` mode, "After each batch (2 engineers), and at the end of each day (3 engineers)". In `multi-week` mode, "After each batch or pull request (2 engineers), and at the end of each sprint (3 engineers)".
+   - **Engineering review cadence**: in `workshop-2-day` mode, "After each slice (2 engineers), and at the end of each day (3 engineers)". In `multi-week` mode, "After each slice or pull request (2 engineers), and at the end of each sprint (3 engineers)".
    - **Governance records required**: optional in `workshop-2-day` mode. Required in `multi-week` mode.
    - **Owners**: the answers.
    - **Playbook**: a link to the playbook for the mode.

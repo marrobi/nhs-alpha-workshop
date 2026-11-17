@@ -36,3 +36,11 @@ Show the suggested journeys from Step 1 of the method. Ask the user to select th
 - Make sure that each open question has an owner and a date, or "Owner needed" and "Date needed".
 - Make sure that the files have no real patient data.
 - Give the report from Step 3 of the method. Tell the user to look at the failure paths with a possible clinical risk with the `dcb0129-hazard-log` skill.
+
+## Handoff
+
+Tell the user the next steps:
+
+1. Ask the NHS Discovery Analyst to draft `discovery/discovery-notes.md` from `discovery/templates/discovery-notes.md`, including the "Steer" section: the priority journey, the riskiest assumption and a candidate for the first slice. The team reviews the file, and the product owner agrees the steer.
+1. Collate the open questions with the `decision` skill in collate mode.
+1. Switch to the **NHS Architect** agent with the `nhs-architecture-design` skill. Do not go to the NHS Product Owner first. The stories need the architecture ADR.

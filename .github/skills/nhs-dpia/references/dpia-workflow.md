@@ -6,7 +6,7 @@ Read `.github/instructions/review-agent-pattern.instructions.md` for verificatio
 
 ## Output
 
-Create `docs/dpia/dpia.md` — do **not** edit files under `.github/`.
+Create `docs/dpia/dpia.md` if it does not exist. If it exists, update it in place — never rewrite it. Do **not** edit files under `.github/`.
 
 ### Step 1 — Identify the Need for a DPIA
 

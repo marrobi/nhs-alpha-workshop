@@ -267,7 +267,9 @@ This plan covers [N] weeks: [start date] to [end date]. At the end, all parties 
 Sprint 0 starts only when these are true:
 
 - [ ] Each party signed off the scope of the first release.
-- [ ] The first slice is agreed.
+- [ ] The first slice is agreed, with its type (thin slice or journey slice). The steer is `Agreed` in the "Steer" section of `discovery/discovery-notes.md`, and the team reviewed the rest of the file.
+- [ ] The open questions are collated in `discovery/open-questions.md`. Each question that blocks the first slice has a direction.
+- [ ] Each external system in the interface register has a draft alpha approach: real, sandbox, mock or not used.
 - [ ] The access for sprint 0 is available, or has a firm date.
 - [ ] Each open decision has an owner and a date.
 - [ ] The Clinical Safety Officer and the DPO or IG lead agreed the next steps.

@@ -7,8 +7,8 @@ Use this playbook when a team builds an alpha in a 2-day workshop. The team does
 | When | Phases | Tool | Guide |
 |---|---|---|---|
 | Before the workshop | Discovery | GitHub Copilot or Microsoft 365 Copilot | [Discovery guide](../../../discovery/README.md) |
-| Day 1 | Design and build | Copilot agent mode in VS Code | [Day 1 guide](day1-guide.md) |
-| Day 2 | Harden and assess | Copilot coding agent on GitHub, and VS Code for local activities | [Day 2 guide](day2-guide.md) |
+| Day 1 | Design, slice 0 and the first slice | Copilot agent mode in VS Code | [Day 1 guide](day1-guide.md) |
+| Day 2 | Foundation issues, the readiness loop for each slice, then assess | Copilot coding agent on GitHub, and VS Code for local activities | [Day 2 guide](day2-guide.md) |
 
 ## Prerequisites
 
@@ -22,5 +22,8 @@ Use this template to make a new repository for your team. Open it in GitHub Code
 
 1. Run the `start-project` skill. Choose the `workshop-2-day` mode. This mode is the default.
 1. Complete the discovery steps in the [discovery guide](../../../discovery/README.md).
+1. Collate the open questions with the `decision` skill in collate mode. Get a direction for each question that blocks the first slice.
+1. Agree the priority journey, the riskiest assumption and a first slice candidate. Hold a short alignment session with the people who decide. Record the steer in the "Steer" section of `discovery/discovery-notes.md` (from `discovery/templates/discovery-notes.md`). The NHS Discovery Analyst drafts the file. The team reviews it, and the product owner sets the steer to `Agreed`.
+1. List the external systems in `discovery/interface-register.md`, with a draft alpha approach for each: real, sandbox, mock or not used.
 1. Merge the discovery outputs to `main`.
 1. Check which models your organisation's Copilot policy allows. See [Models](../../README.md#models).

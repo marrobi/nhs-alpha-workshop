@@ -177,3 +177,11 @@ After the journeys, give me:
 - The failure paths that have a possible clinical risk.
 - The open questions.
 - A suggested order to build the journeys, riskiest assumption first.
+
+## Step 4: Next steps
+
+Tell me the next steps:
+
+1. Agree the priority journey and the riskiest assumption. Write them and a candidate for the first slice in the "Steer" section of the discovery notes.
+1. Collate the open questions. Use the method in the decision prompt file.
+1. Give the journeys to the architect. The architect designs the service before anyone writes user stories.

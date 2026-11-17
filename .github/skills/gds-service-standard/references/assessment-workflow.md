@@ -76,7 +76,7 @@ Use this workflow to prepare an NHS Alpha service for assessment. Map concrete e
 
 ## Output Format
 
-**Create a new file** at `docs/gds-assessment.md` — do **not** edit skill files (`.github/skills/`) or any file under `.github/`. The skill file is a reference for structure and guidance only.
+If `docs/gds-assessment.md` does not exist, create it. If it exists, **update it in place** — never rewrite it. It holds the evidence from earlier slices; follow "Updating the report" in the skill file. Do **not** edit skill files (`.github/skills/`) or any file under `.github/`. The skill file is a reference for structure and guidance only.
 
 Generate an assessment report in `docs/gds-assessment.md`:
 

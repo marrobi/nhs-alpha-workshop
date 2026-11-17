@@ -11,6 +11,16 @@ Use this skill to build GitHub Actions pipelines for NHS digital services. Pipel
 
 You create GitHub Actions workflow files, Dependabot configuration, and branch protection recommendations. You can run and test pipeline steps locally to validate them before committing.
 
+## Modes
+
+Use the mode that the task needs. The NHS Service Builder uses CI mode in slice 0a and deploy mode in slice 0b.
+
+| Mode | When | Creates | Needs Azure access |
+|---|---|---|---|
+| **CI mode** | Slice 0a, in the scaffold pull request | `ci.yml`, `dependabot.yml` | No |
+| **Deploy mode** | Slice 0b, after the Terraform is applied and OIDC is set up | `deploy.yml` | Yes: a federated credential and a GitHub environment |
+| **Hardening mode** | The "CI/CD hardening" alpha readiness issue (F01) | Workflow `environment:` and approval settings, Terraform for deployment slots or staged rollout, and the branch protection recommendation. An operator then applies the Terraform and sets the environment protection rules and branch protection | The pull request: no. The operator steps: yes, and repository admin rights |
+
 ## Pipeline Architecture
 
 NHS Alpha services need two core pipelines:
@@ -34,6 +44,7 @@ Read `tech-stack.instructions.md` to determine the backend language, frontend fr
 1. **Backend**: setup language runtime → install dependencies → lint → test with coverage (fail under 80%) → dependency audit (fail on critical/high)
 2. **Frontend**: setup runtime → install dependencies → lint → production build → unit tests (if configured)
 3. **IaC validation**: setup IaC tool → init (no backend) → validate → format check
+4. **Secret scanning**: scan the pull request for secrets with a pinned scanner (for example `gitleaks`). Fail the job if it finds a secret
 
 ### Principles
 
@@ -53,7 +64,7 @@ Read `tech-stack.instructions.md` for the hosting platform and build commands. G
 1. Authenticate to Azure using OpenID Connect (OIDC) — never use service principal secrets
 2. Setup language runtimes from tech stack
 3. Install dependencies and build frontend for production
-4. Package application for deployment
+4. Package application for deployment, and each external mock service listed in `docs/adr/002-dependency-strategy.md`
 5. Deploy using the platform CLI (e.g. `az webapp deploy`)
 6. Verify health endpoint returns 200
 
@@ -79,12 +90,13 @@ Generate `.github/dependabot.yml` with ecosystems matching `tech-stack.instructi
 
 ## Build Sequence
 
-1. Check if `.github/workflows/ci.yml` exists — create or update it
-2. Check if `.github/workflows/deploy.yml` exists — create or update it
-3. Check if `.github/dependabot.yml` exists — create it
-4. Validate workflow syntax: `actionlint` if available, or manual review of YAML
-5. Run a dry-run of CI steps locally to verify (ruff, pytest, terraform validate)
-6. Recommend branch protection rules to the team
+1. Read the mode (see Modes). In CI mode, do steps 2, 4, 5, 6 and 7. In deploy mode, do steps 3, 5 and 7. In hardening mode, do all steps
+2. Check if `.github/workflows/ci.yml` exists — create or update it
+3. Check if `.github/workflows/deploy.yml` exists — create or update it
+4. Check if `.github/dependabot.yml` exists — create it
+5. Validate workflow syntax: `actionlint` if available, or manual review of YAML
+6. Run a dry-run of CI steps locally to verify (ruff, pytest, terraform validate)
+7. Recommend branch protection rules to the team
 
 ## MCP Servers
 

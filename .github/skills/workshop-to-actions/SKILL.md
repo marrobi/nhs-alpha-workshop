@@ -33,7 +33,8 @@ After the user confirms:
 1. Add the decisions to `discovery/decision-log.md`.
 1. Add the RAID items to `discovery/raid-log.md`.
 1. Add the interfaces to `discovery/interface-register.md` and the access requests to `discovery/access-tracker.md`.
-1. Add the open questions to the "Open Questions" section of `discovery/scenarios/scenario.md`, if they are about the problem or the scope.
+1. Add the open questions to `discovery/open-questions.md` with the next free `Q-` identifier.
+1. If the workshop changed a constraint, a riskiest assumption, the scope or the steer, update `discovery/discovery-notes.md`. Mark each changed row `Draft` and add a row to its change history. Never set a row to `Reviewed` or `Agreed`. Tell the user which rows need review.
 1. If a log does not exist, copy it from `discovery/templates/` first.
 
 Use the next free identifier for each item. Do not use an identifier again.

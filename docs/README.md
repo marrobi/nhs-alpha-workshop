@@ -39,6 +39,8 @@ docs/
   README.md           This overview
   playbooks/          The phases, and one playbook for each delivery mode
   alpha-readiness-issues/  Hardening and assessment issue files (made by the `alpha-readiness-issues` skill)
+scripts/
+  export-diagrams.sh  Exports .drawio and .mmd diagrams to PNG (tools installed by the Dev Container)
 AGENTS.md             Copilot coding agent context file
 ```
 
@@ -62,9 +64,9 @@ Run the `start-project` skill to set the mode. The skill writes [`delivery-mode.
 | Phase | Goal | 2-day workshop | Multi-week |
 |---|---|---|---|
 | Discovery | Understand the problem, the users and the journeys | Pre-work | Discovery weeks |
-| Design | Agree the architecture, the stories and the backlog | Day 1 | Sprint 0 |
-| Build | Build the backlog, one journey at a time | Day 1 | Sprints |
-| Harden | Add tests, security, operations and compliance evidence | Day 2 | Sprints |
+| Design | Agree the architecture, the dependency strategy, the stories and the slices | Day 1 | Sprint 0 |
+| Build | Build slice 0 (scaffold, CI, deployment), then one slice at a time as a pull request | Day 1 | Sprints |
+| Harden | Foundation issues once, then a readiness loop after each slice | Day 2 | After each slice |
 | Assess | Collect the evidence for the GDS service assessment | Day 2 | Before the assessment |
 
 The [phases page](playbooks/README.md) gives the agents, skills and outputs for each phase. The [discovery guide](../discovery/README.md) gives the discovery steps.
@@ -92,11 +94,11 @@ Review [`.github/instructions/org-standards.instructions.md`](../.github/instruc
 | Agent | Purpose |
 |---|---|
 | **NHS Discovery Analyst** | Scenario and problem definition, M365 Researcher persona handoff, and user journeys |
-| **NHS Architect** | Architecture options, diagrams, and proposed ADRs. Leads multi-model Decide mode during architecture work |
-| **NHS Product Owner** | User stories, acceptance criteria, end-to-end journey coverage, and prioritised backlog |
+| **NHS Architect** | Architecture options and comparisons, the dependency strategy (what is real and what is mocked), diagrams exported to PNG, proposed ADRs, and the build context in each story. Leads multi-model Decide mode during architecture work |
+| **NHS Product Owner** | User stories, acceptance criteria, end-to-end journey coverage, recommended slices with their dependencies, and one GitHub issue for each slice |
 | **NHS Service Builder** | Scaffolds, builds, tests, and deploys the service using the selected stack, including alerting and the Azure SRE Agent. The only agent that implements stories. Leads Decide mode for hard design questions during the build |
-| **NHS Delivery Lead** | Project set-up, discovery plan, delivery records, alpha readiness issues and delivery sequencing |
-| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills. Leads multi-model Review mode after each batch, and at the end of each day (workshop) or sprint (multi-week) |
+| **NHS Delivery Lead** | Project set-up, discovery plan, delivery records, the alpha readiness loop (foundation and slice issues) and delivery sequencing |
+| **NHS Quality Engineer** | Selects the relevant testing, review, accessibility, performance, security, and GDS skills. Leads multi-model Review mode after each slice, and at the end of each day (workshop) or sprint (multi-week) |
 | **NHS Clinical Safety** | DCB0129 hazards and safety case; drafts only |
 | **NHS DPIA Advisor** | DPIA and data protection risks; the DPO or IG lead approves |
 | **NHS Content Designer** | Reviews and writes user-facing copy against NHS content guidance |
@@ -107,7 +109,8 @@ Review [`.github/instructions/org-standards.instructions.md`](../.github/instruc
 
 The agents and skills do not pin a model. Each agent uses the model that you select in VS Code, or the default model for the Copilot coding agent on GitHub. This means that you do not need to change the repository when models are added or retired.
 
-- Use a high-capability model for the NHS Service Builder and the NHS Architect. These roles do long, multi-step work.
+- Use a high-capability model for the NHS Architect, the NHS Product Owner and the reviews. These roles make the design decisions and write the build context in each story.
+- When each story in a slice is `Ready` with a complete build context, you can build the slice with a lower-cost model. The build context answers the design questions, so the build agent reasons less, works faster and uses fewer tokens. Use a high-capability model for the NHS Service Builder when the build context is incomplete, for slice 0, or for a hard design question.
 - Before you start, check which models your organisation's Copilot policy allows, and their premium request cost.
 - Do not add a `model` field to an agent unless the team agrees it. On GitHub, the field accepts only one model, with no fallback.
 - For the `engineering-review` skill, name 2 or 3 models from different providers in your prompt. If you do not, the lead asks you before it starts the engineers. Run the lead on a high-tier model, because VS Code does not run a subagent on a model in a higher cost tier than the main chat.
@@ -119,18 +122,18 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | Skill | Triggered When |
 |---|---|
 | `m365-researcher-personas` | Following the external M365 Copilot Researcher steps for persona research |
-| `nhs-architecture-design` | Turning discovery evidence into architecture options and diagrams |
+| `nhs-architecture-design` | Turning discovery evidence into architecture options, comparisons of candidate architectures, the dependency strategy, diagrams exported to PNG, and the build context in each story |
 | `nhs-adr-writer` | Recording proposed architectural decisions |
-| `nhs-product-backlog` | Decomposing journeys and prioritising build batches |
+| `nhs-product-backlog` | Decomposing journeys, recommending slices with their dependencies, and creating one GitHub issue for each slice |
 | `nhs-user-stories` | Writing user stories and acceptance criteria |
 | `fastapi-react-azure` | Scaffolding or building with the default tech stack |
 | `azure-nhs-deploy` | Deploying to Azure and configuring Terraform |
 | `azure-sre-agent` | Adding alerting and a read-only Azure SRE Agent as code, and rehearsing an incident |
-| `github-actions-pipeline` | Creating CI/CD and dependency update workflows |
+| `github-actions-pipeline` | Creating the CI workflow in slice 0a, the deploy workflow in slice 0b, and hardening them later |
 | `automated-testing` | Writing unit and integration tests |
 | `playwright-nhs-e2e` | Testing user journeys in a browser |
 | `code-quality-review` | Reviewing code quality and maintainability |
-| `engineering-review` | Multi-model Decide mode for hard design questions, and Review mode for built batches |
+| `engineering-review` | Multi-model Decide mode for hard design questions, and Review mode for built slices |
 | `security-review` | Reviewing application security |
 | `azure-infrastructure-review` | Reviewing Terraform and Azure infrastructure |
 | `accessibility-audit` | Auditing WCAG 2.2 AA accessibility |
@@ -141,7 +144,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `dcb0129-hazard-log` | Drafting clinical safety documentation |
 | `nhs-dpia` | Drafting the DPIA and checking implemented controls |
 | `nhs-synthetic-data` | Creating synthetic NHS data and test fixtures |
-| `alpha-readiness-issues` | Preparing tailored hardening and assessment issue files in `docs/alpha-readiness-issues/`, and proposing a sprint for each in multi-week mode |
+| `alpha-readiness-issues` | Preparing tailored hardening and assessment issue files: foundation issues once, and a readiness loop after each slice. Proposes a sprint for each in multi-week mode |
 | `start-project` | Setting the delivery mode, discovery length, sprint length and owners in `delivery-mode.instructions.md` |
 | `problem-statement` | Defining the scenario and problem statement in `discovery/scenarios/scenario.md` |
 | `personas` | Drafting the persona report when the team cannot use M365 Copilot Researcher |
@@ -150,7 +153,7 @@ Agents use task skills for repeatable procedures. Copilot can also load skills w
 | `discovery-plan` | Planning a discovery of several weeks in `discovery/plan.md`, with the weekly rhythm, checklists and the sign-off gate |
 | `workshop-prep` | Preparing a discovery workshop pack |
 | `workshop-to-actions` | Changing workshop notes into decisions, actions, RAID items and open questions |
-| `decision` | Recording a decision or an open decision in `discovery/decision-log.md` |
+| `decision` | Recording a decision or an open decision in `discovery/decision-log.md`, and collating the open questions in `discovery/open-questions.md` |
 | `raid-and-traceability` | Keeping the RAID log and the traceability table |
 | `interface-register` | Recording external systems and access lead times |
 | `access-tracker` | Tracking access requests and finding the ones to escalate |

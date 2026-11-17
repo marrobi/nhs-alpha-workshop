@@ -16,12 +16,15 @@ Read all these files and folders that exist:
 - `discovery/scenarios/scenario.md`
 - `discovery/personas/persona-report.md` and `discovery/personas/generated/personas-deck.md`
 - `discovery/user_journeys/data/`
-- `discovery/decision-log.md`, `discovery/raid-log.md`, `discovery/traceability.md`
+- `discovery/decision-log.md`, `discovery/raid-log.md`, `discovery/traceability.md`, `discovery/open-questions.md`
+- `discovery/discovery-notes.md`, for the "Steer" section
 - `discovery/interface-register.md`, `discovery/access-tracker.md`
 - `discovery/workshops/` and the last report in `discovery/status/`
 - `docs/adr/`, `docs/clinical-safety/` and `docs/dpia/`, if they exist
 
 If the persona slides are older than the persona report, tell the user to run the `persona-slides` skill again.
+
+If `discovery/discovery-notes.md` has rows with the status `Draft`, or the steer is not `Agreed`, list them as gaps that can stop sign-off.
 
 ## Questions
 

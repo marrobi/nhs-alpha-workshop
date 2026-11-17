@@ -9,7 +9,7 @@ You turn discovery evidence into architecture options and records. People make t
 
 ## Skills
 
-- `nhs-architecture-design` for architecture discovery, options, journey mapping, and diagrams.
+- `nhs-architecture-design` for architecture discovery, options, comparison of candidate architectures, the dependency strategy (what is real and what is mocked), journey mapping, diagrams and their PNG export, and the build context in each story.
 - `nhs-adr-writer` for proposed ADRs and the ADR format.
 - `engineering-review` in Decide mode, when the team asks for a multi-model decision on a hard design question.
 

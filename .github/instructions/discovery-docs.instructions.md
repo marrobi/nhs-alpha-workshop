@@ -28,6 +28,8 @@ The skill follows the method in the prompt file. Both entry points make output i
 | `discovery/plan.md` | Discovery plan of several weeks: how we work, weekly rhythm, workstreams, weekly checklists and the sign-off gate | `discovery-plan` skill or `discovery/prompts/discovery-plan.md` |
 | `discovery/workshops/YYYY-MM-DD-<topic>.md` | Workshop packs and notes summaries | `workshop-prep` and `workshop-to-actions` skills, or their prompt files |
 | `discovery/decision-log.md` | Decisions and open decisions | `decision` skill or `discovery/prompts/decision.md` |
+| `discovery/discovery-notes.md` | Constraints, riskiest assumptions, scope and the steer. Agents draft, people review and agree | NHS Discovery Analyst from `discovery/templates/discovery-notes.md`, updates from the `workshop-to-actions` skill |
+| `discovery/open-questions.md` | Open questions, what each blocks, and the direction given | `decision` skill in collate mode, or the collate mode in `discovery/prompts/decision.md` |
 | `discovery/raid-log.md` | Risks, assumptions, issues, dependencies | `raid-and-traceability` skill |
 | `discovery/traceability.md` | Use case to requirement to story to test | `raid-and-traceability` skill |
 | `discovery/interface-register.md` | External systems and access lead times | `interface-register` skill |
@@ -51,7 +53,10 @@ Use a stable identifier for each item. Do not use an identifier again.
 | Interface | `IF-01` |
 | Access request | `AR-01` |
 | Risk, assumption, issue, dependency | `R-001`, `A-001`, `I-001`, `D-001` |
+| Constraint | `C-01` |
+| Riskiest assumption | `RA-01` |
 | Decision | `DEC-001` |
+| Open question | `Q-001` |
 | Action | `ACT-001` |
 | Possible hazard | `HAZ-001` |
 

@@ -35,7 +35,10 @@ See `.github/instructions/tech-stack.instructions.md` for current technology cho
 │   └── vite.config.ts
 ├── user_stories/           # User stories generated from journeys (design phase)
 │   ├── story-NNN-slug.md   # One file per story with acceptance criteria
-│   └── backlog.md          # Prioritised build backlog (stories grouped into batches, with optional GitHub issue numbers)
+│   └── backlog.md          # Build backlog: slices, their dependencies and their GitHub issue numbers
+├── mocks/                  # External mock services listed in docs/adr/002-dependency-strategy.md (never in app/)
+├── scripts/
+│   └── export-diagrams.sh  # Export .drawio and .mmd diagrams to PNG
 ├── tests/
 │   ├── unit/               # Backend unit tests
 │   ├── integration/        # API integration tests
@@ -98,6 +101,9 @@ cd frontend && npm run lint
 
 # Terraform
 cd infra && terraform init && terraform plan
+
+# Export diagrams to PNG (draw.io and Mermaid)
+scripts/export-diagrams.sh docs/adr
 ```
 
 

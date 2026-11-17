@@ -29,6 +29,8 @@ The interface register lists each external system that the service connects to. 
 | Test environment | Yes or no, the name, and how to get access |
 | Onboarding steps | Forms, approvals, assurance and tests |
 | Lead time | The time from request to access, in weeks |
+| Alpha approach | Real, Sandbox, Mock or Not used. A mock is a separate mock service built from the published specification. The architect confirms this in `docs/adr/002-dependency-strategy.md` |
+| Reason | Why we use this approach in the alpha. Example: "Integration environment needs assurance. Lead time is after the alpha" |
 | Access request | The `AR-` identifier in `discovery/access-tracker.md` |
 | Needed by | The date or sprint that needs it |
 | Risk | The `R-` identifier, if the lead time is after the date that we need it |
@@ -48,9 +50,10 @@ Confirm each system in discovery. Do not assume it.
 - If the lead time is not known, write "Not known". Add an action to find out, with an owner and a date.
 - If the lead time is after the date that we need it, add a risk to the RAID log.
 - Add an access request to `discovery/access-tracker.md` for each interface that needs access.
+- Write a draft alpha approach for each interface before the design phase. If the system has no test environment that we can get before we need it, write "Mock". Add a risk to the RAID log for each mock.
 
 ## Interfaces
 
-| ID | System | Owner | Direction | Purpose | Protocol | Authentication | Network | Test environment | Onboarding steps | Lead time | Access request | Needed by | Risk | Status |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| IF-01 | Example: appointment booking system | Example Trust, digital team, contact to be named | Both | UC-01 | Not known | Not known | Not known | Not known | Not known | Not known | AR-01 | YYYY-MM-DD | | Open |
+| ID | System | Owner | Direction | Purpose | Protocol | Authentication | Network | Test environment | Onboarding steps | Lead time | Alpha approach | Reason | Access request | Needed by | Risk | Status |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| IF-01 | Example: appointment booking system | Example Trust, digital team, contact to be named | Both | UC-01 | Not known | Not known | Not known | Not known | Not known | Not known | Not known | Not known | AR-01 | YYYY-MM-DD | | Open |

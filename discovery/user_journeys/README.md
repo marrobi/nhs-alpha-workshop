@@ -115,17 +115,17 @@ Diagrams are embedded directly in the journey markdown files, so they render aut
 
 ### Exporting Diagrams
 
-To export individual diagrams as PNG/SVG:
+The Dev Container installs a pinned Mermaid CLI. To export every Mermaid diagram in a journey file to PNG, run this from the repository root:
 
-1. Copy the Mermaid code block from the markdown file
-2. Paste into https://mermaid.live
-3. Export as PNG/SVG from there
-
-Or install Mermaid CLI for batch exports:
 ```bash
-npm install -g @mermaid-js/mermaid-cli
-mmdc -i data/journey-name.md -o journey-name.png
+mkdir -p discovery/user_journeys/generated
+scripts/diagrams/node_modules/.bin/mmdc \
+  --puppeteerConfigFile scripts/diagrams/puppeteer-config.json --backgroundColor white \
+  --input discovery/user_journeys/data/journey-name.md \
+  --output discovery/user_journeys/generated/journey-name.png
 ```
+
+The command writes one file for each diagram: `journey-name-1.png`, `journey-name-2.png` and so on. For diagrams in `docs/`, use `scripts/export-diagrams.sh`. Do not paste diagrams into online tools.
 
 ## Example Journey Structure
 

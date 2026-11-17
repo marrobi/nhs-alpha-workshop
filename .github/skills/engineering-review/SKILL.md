@@ -1,6 +1,6 @@
 ---
 name: engineering-review
-description: 'Use when a hard design question needs a decision (Decide mode), or when a built batch or a day of commits needs an independent review (Review mode). Runs 2 or 3 read-only NHS Engineer subagents on different models that the user chooses (asks if none are given), then combines their results.'
+description: 'Use when a hard design question needs a decision (Decide mode), or when a built slice or a day of commits needs an independent review (Review mode). Runs 2 or 3 read-only NHS Engineer subagents on different models that the user chooses (asks if none are given), then combines their results.'
 ---
 
 # Engineering Review
@@ -15,8 +15,8 @@ The team does **not** implement user stories. The NHS Service Builder does that,
 |---|---|---|---|---|
 | A hard design question comes up during the build | Decide | **NHS Service Builder**. It stops editing until the decision is made. | 3 | The builder loads this skill and starts the engineers itself |
 | A hard design question comes up during architecture or ADR work | Decide | **NHS Architect** | 3 | The team asks the Architect: "Decide mode: …" |
-| A journey-aligned batch is built, tested and committed | Review | **NHS Quality Engineer** | 2 | The team asks the Quality Engineer: "Review mode: commits …" |
-| End of each day (workshop) or sprint (multi-week), or a batch that changed something many stories depend on | Review | **NHS Quality Engineer** | 3 | Same as above, with the commits of the day or sprint |
+| A slice is built, tested and committed (a pull request) | Review | **NHS Quality Engineer** | 2 | The team asks the Quality Engineer: "Review mode: commits …" |
+| End of each day (workshop) or sprint (multi-week), or a slice that changed something many stories depend on | Review | **NHS Quality Engineer** | 3 | Same as above, with the commits of the day or sprint |
 
 Read the review cadence in `.github/instructions/delivery-mode.instructions.md`.
 
@@ -35,7 +35,7 @@ Do not use the team for routine implementation choices.
 The repository does not pin models. Models change, and organisations allow different models. A person chooses the models each time the team runs:
 
 1. If the user names models in the request, use those models.
-2. If the user does not name models, **stop and ask** before you start any engineer. Ask for 2 models for a batch review, or 3 models for Decide mode or an end-of-day review. Suggest models that are available in this session, from **different providers** where possible, with strong code and review capability. Do not choose the models yourself, and do not start the engineers until the user answers.
+2. If the user does not name models, **stop and ask** before you start any engineer. Ask for 2 models for a slice review, or 3 models for Decide mode or an end-of-day review. Suggest models that are available in this session, from **different providers** where possible, with strong code and review capability. Do not choose the models yourself, and do not start the engineers until the user answers.
 3. If the user names fewer models than the mode needs, ask for the others. If the user agrees, you can use the same model for more than one engineer. Record this in the report.
 4. Start each engineer as an `NHS Engineer` subagent and pass its model as the model parameter of the subagent call. In VS Code, the lead can also ask in its prompt: "Use a subagent with <model name> …".
 5. The lead's own model must be in the same or a higher cost tier than the engineers' models. VS Code does not run a subagent whose model is in a higher tier than the main chat's model. If a model that the user names is in a higher tier, tell the user and ask for another model.
@@ -69,8 +69,8 @@ People make the final decision. Aim to finish within 30 minutes.
 
 ## Review mode
 
-1. **Fix the scope.** Record the base commit and every commit SHA in the batch. Make sure that the review checkout is at those commits and has no later builder changes.
-2. **Start the engineers.** Use 2 engineers for a batch review and 3 for an end-of-day review. Each engineer reviews the same commits independently.
+1. **Fix the scope.** Record the base commit and every commit SHA in the slice. Make sure that the review checkout is at those commits and has no later builder changes.
+2. **Start the engineers.** Use 2 engineers for a slice review and 3 for an end-of-day review. Each engineer reviews the same commits independently.
 3. **What to check.**
    - The acceptance criteria of the stories.
    - `AGENTS.md`, `.github/instructions/` and the ADRs.
@@ -78,10 +78,10 @@ People make the final decision. Aim to finish within 30 minutes.
    - Secrets and personal data in logs.
    - NHS Design System use and WCAG 2.2 AA.
    - Test coverage, including E2E and accessibility checks.
-   - No mocks of external services in integration tests.
+   - No mocks inside the application, and no in-process mocks of external services in integration tests. External mock services must be listed in `docs/adr/002-dependency-strategy.md`.
 4. **Combine the findings.** Remove duplicates. Check each disputed claim, and each claim from only one engineer, against the code yourself. Record disagreements and how you resolved them. Use the severity levels in `.github/instructions/review-agent-pattern.instructions.md`.
 
-Aim to finish a batch review within 30 minutes. The delivery team gives Critical and High findings to the NHS Service Builder, which fixes them before the next batch.
+Aim to finish a slice review within 30 minutes. The delivery team gives Critical and High findings to the NHS Service Builder, which fixes them before the slice is merged.
 
 ## Report
 

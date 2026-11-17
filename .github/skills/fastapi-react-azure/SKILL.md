@@ -105,7 +105,8 @@ cd frontend && npm run build && cd ..
 cd infra && terraform init && terraform plan -var="app_name=my-service" -out=tfplan
 terraform apply tfplan
 
-# Deploy to Azure
+# Deploy to Azure (slice 0b only, or when the team agreed to deploy from VS Code;
+# after slice 0b the deploy.yml workflow deploys on merge to main)
 zip -r app.zip app/ frontend/dist/ requirements.txt
 az webapp deploy \
   --resource-group "rg-${APP_NAME}-dev" \
