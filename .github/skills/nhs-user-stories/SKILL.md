@@ -57,6 +57,10 @@ Every story MUST include these categories:
 - PII is not exposed in URLs, logs, or error messages
 - Consent or lawful basis is documented
 
+## Build Context
+
+Each story file also has a **Build context** section. It answers the questions that an engineer would ask: dependencies, answered questions, out of scope, ADRs, API contract, data model, pages and components, files to change, external dependencies (real, sandbox or mock), synthetic data and validation commands. The NHS Product Owner fills the first fields and the NHS Architect completes the rest. The full template is in the `nhs-product-backlog` skill. A story is **ready** only when its build context is complete and no open question blocks it.
+
 ## Example
 
 ```

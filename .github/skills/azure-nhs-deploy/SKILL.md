@@ -81,6 +81,8 @@ terraform apply tfplan
 
 ### 5. Build Frontend & Deploy
 
+After slice 0b, the `deploy.yml` workflow does this step on each merge to `main` (see the `github-actions-pipeline` skill). Run it by hand only for the first deployment in slice 0b, or when the team agreed to deploy from VS Code because OIDC is not available.
+
 ```bash
 cd ../frontend && npm run build && cd ..
 zip -r app.zip app/ frontend/dist/ requirements.txt
@@ -129,6 +131,8 @@ curl "https://app-${APP_NAME}-dev.azurewebsites.net/api/health"
 - Plan review: always inspect `tfplan` before `apply`, summarise it for the user,
   and wait for confirmation — never apply a plan with unexpected `-` (destroy) or
   `-/+` (recreate) changes
+- External mock services: deploy each mock listed in `docs/adr/002-dependency-strategy.md` with the same network, identity and naming rules as the application (for example `app-${APP_NAME}-mock-<system>-dev`). Never expose a mock with real data — synthetic data only
+- Runbook: keep a "What is mocked in this alpha" section in `docs/runbook.md` that matches ADR-002
 
 ## References
 

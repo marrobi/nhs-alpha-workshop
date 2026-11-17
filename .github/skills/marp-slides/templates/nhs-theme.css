@@ -1,0 +1,134 @@
+/* NHS style for Marp decks. Use with "theme: default".
+   Paste these rules into the "style: |" block of the deck front matter. */
+
+section {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  color: #212b32;
+  padding: 50px 56px 46px;
+  background: #ffffff;
+  border-top: 8px solid #005eb8;
+}
+
+header {
+  top: 18px;
+  left: auto;
+  right: 56px;
+  background: #ffeb3b;
+  color: #212b32;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 3px 10px;
+}
+
+footer {
+  font-size: 13px;
+  color: #4c6272;
+  left: 56px;
+}
+
+section::after {
+  font-size: 13px;
+  color: #4c6272;
+}
+
+h1 {
+  color: #005eb8;
+  font-size: 44px;
+}
+
+h2 {
+  color: #005eb8;
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  color: #005eb8;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: #005eb8;
+}
+
+ul,
+ol {
+  line-height: 1.4;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+table {
+  font-size: 17px;
+  border-collapse: collapse;
+}
+
+th {
+  background: #005eb8;
+  color: #ffffff;
+}
+
+th,
+td {
+  padding: 6px 10px;
+  border: 1px solid #d8dde0;
+}
+
+blockquote {
+  margin: 10px 0 0;
+  padding: 6px 12px;
+  border-left: 4px solid #ffb81c;
+  background: #fff9e6;
+  color: #212b32;
+}
+
+/* Title slide: <!-- _class: title --> */
+section.title {
+  justify-content: center;
+  background: #005eb8;
+  color: #ffffff;
+  border-top: none;
+}
+
+section.title h1,
+section.title h2,
+section.title a {
+  color: #ffffff;
+}
+
+section.title p,
+section.title li {
+  font-size: 24px;
+}
+
+/* Section divider slide: <!-- _class: lead --> */
+section.lead {
+  justify-content: center;
+  text-align: center;
+}
+
+/* Source, date and status slide: <!-- _class: source --> */
+section.source {
+  background: #f0f4f5;
+}
+
+section.source table {
+  font-size: 18px;
+}
+
+/* Two columns: <!-- _class: columns --> and two <div> blocks */
+section.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 32px;
+}
+
+section.columns h2 {
+  grid-column: 1 / 3;
+}

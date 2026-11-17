@@ -24,10 +24,9 @@ user_journeys/
 ### Step 1: Generate Journey Suggestions
 
 1. Gather your **Scenario Overview**, **Problem Statement**, and **Personas**
-2. Open `.github/prompts/generate_user_journeys.prompt.md` in VS Code
-3. Invoke the prompt (using Copilot chat or prompt picker)
-4. Provide your scenario context
-5. Copilot will suggest 5-8 user journeys
+2. In GitHub Copilot Chat, run the `/user-journeys` skill. If you have only Microsoft 365 Copilot, paste [`../prompts/user-journeys.md`](../prompts/user-journeys.md) into Microsoft 365 Copilot Chat
+3. Provide your scenario and personas
+4. Copilot will suggest user journeys, including failure journeys
 
 ### Step 2: Select Journeys to Develop
 
@@ -67,9 +66,10 @@ Each journey file should follow this structure:
 ```markdown
 # Journey: [Title]
 
-**Primary Actor:** [Persona name]  
-**Duration:** [Estimated timeframe]  
-**Preconditions:** [What must be true before journey starts]  
+**Primary Actor:** [Persona name]\
+**Use cases:** [UC- identifiers]\
+**Duration:** [Estimated timeframe]\
+**Preconditions:** [What must be true before journey starts]\
 **Success Criteria:** [How we know the journey succeeded]
 
 ## Overview
@@ -80,6 +80,9 @@ Each journey file should follow this structure:
 
 ## Decision Points
 [Variations and alternative paths]
+
+## Failure Paths
+[What goes wrong, what happens, who fixes it, possible clinical risk]
 
 ## Touchpoints
 - Digital: [Apps, web interfaces, SMS, etc.]
@@ -94,6 +97,9 @@ Each journey file should follow this structure:
 
 ## Related Journeys
 [Other journeys that intersect with this one]
+
+## Open Questions
+[Question, owner, date]
 ```
 
 ## Viewing Journey Diagrams
@@ -109,17 +115,17 @@ Diagrams are embedded directly in the journey markdown files, so they render aut
 
 ### Exporting Diagrams
 
-To export individual diagrams as PNG/SVG:
+The Dev Container installs a pinned Mermaid CLI. To export every Mermaid diagram in a journey file to PNG, run this from the repository root:
 
-1. Copy the Mermaid code block from the markdown file
-2. Paste into https://mermaid.live
-3. Export as PNG/SVG from there
-
-Or install Mermaid CLI for batch exports:
 ```bash
-npm install -g @mermaid-js/mermaid-cli
-mmdc -i data/journey-name.md -o journey-name.png
+mkdir -p discovery/user_journeys/generated
+scripts/diagrams/node_modules/.bin/mmdc \
+  --puppeteerConfigFile scripts/diagrams/puppeteer-config.json --backgroundColor white \
+  --input discovery/user_journeys/data/journey-name.md \
+  --output discovery/user_journeys/generated/journey-name.png
 ```
+
+The command writes one file for each diagram: `journey-name-1.png`, `journey-name-2.png` and so on. For diagrams in `docs/`, use `scripts/export-diagrams.sh`. Do not paste diagrams into online tools.
 
 ## Example Journey Structure
 

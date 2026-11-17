@@ -14,7 +14,7 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 
 - Never share mutable state between tests
 - Never call real databases, APIs, or file systems in unit tests
-- Use synthetic NHS data only (e.g. NHS number `943 476 5919`)
+- Use synthetic NHS data only (e.g. NHS number `999 000 0018`). Use published PDS test numbers only with the PDS sandbox
 - All API routes must have at least one happy-path test
 - Error paths must be tested (invalid input, missing resource)
 - After making code changes, rebuild and restart the application before running tests — always verify tests run against the latest code, not a stale build
@@ -23,10 +23,11 @@ See `tech-stack.instructions.md` for the current test framework, file structure,
 
 - **Unit tests**: MAY mock external dependencies (databases, APIs, file systems) using `unittest.mock.patch` or `pytest-mock` — this is standard isolation practice
 - **Cloud services with no local emulator** (e.g. hosted AI/LLM APIs): unit tests MUST mock the SDK client using the test framework's mocking library (e.g. `unittest.mock.patch` for Python, `jest.mock` for JavaScript) — there is no alternative for local testing. An ADR authorising the integration is sufficient justification; a separate user story for the mock is not required. Integration tests should use the real service endpoint or be skipped with a clear reason if no sandbox exists
-- **Integration tests**: MUST use real services or real test instances (e.g. test database, Azure sandbox). Do not substitute with in-memory fakes unless there is an explicit user story for that mock
-- **E2E tests**: MUST hit the real running application and its real backing services — no service mocking at this layer
-- **Application code**: MUST never contain mock/stub implementations of external services. If a service client is needed, integrate with the real SDK and real configuration. If the real service is unavailable, the code must fail — not silently degrade
-- Do not create mock service implementations unless an explicit user story requests it, with the decision recorded in an ADR
+- **Integration tests**: MUST use real services, real test instances (e.g. test database, Azure sandbox, NHS sandbox), or an external mock service listed in `docs/adr/002-dependency-strategy.md`. Do not substitute with in-memory fakes
+- **E2E tests**: MUST hit the real running application and its real backing services, NHS sandboxes, or the external mock services listed in `docs/adr/002-dependency-strategy.md` — no in-process mocking at this layer
+- **Application code**: MUST never contain mock/stub implementations of external services. If a service client is needed, integrate with the real SDK and real configuration. Read the base URL of each external system from required configuration with no default value. If the real service is unavailable, the code must fail — not silently degrade
+- **External mock services**: create one only when `docs/adr/002-dependency-strategy.md` lists the dependency as a mock (typically an NHS national system that needs onboarding the team cannot complete in the alpha). Build it as a separate service in `mocks/<system>/` from the published OpenAPI or FHIR specification, with synthetic data only. Never mock Azure platform services, authorisation checks, NHS number validation, clinical logic under test or audit logging
+- **Local data stores**: run the real engine in a container. For parallel work, prefer one shared container with one database (or FHIR partition) for each worktree; the fallback and its reason are in `docs/adr/002-dependency-strategy.md`
 
 ## E2E Tests
 

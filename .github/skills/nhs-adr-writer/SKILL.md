@@ -89,7 +89,7 @@ Include NHS-specific constraints that influenced the decision.]
 
 ## Standard ADRs for NHS Alpha Services
 
-Every NHS Alpha built during the workshop should document at minimum:
+Every NHS Alpha should document at minimum:
 
 ### ADR-0001: Backend Framework — Python/FastAPI
 - **Context**: Need a lightweight, async-capable API framework with strong type validation

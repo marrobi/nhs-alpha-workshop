@@ -7,6 +7,8 @@ description: 'Use when drafting a Data Protection Impact Assessment (DPIA) for a
 
 This skill drafts DPIAs for NHS digital health services following [ICO guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/) and the [NHS Data Security and Protection Toolkit](https://www.dsptoolkit.nhs.uk/).
 
+For the detailed workflow and implementation-evidence checks, read [dpia-workflow.md](./references/dpia-workflow.md).
+
 ## When to Use
 
 - Starting a new NHS service that processes personal or health data
@@ -42,4 +44,8 @@ This skill drafts DPIAs for NHS digital health services following [ICO guidance]
 
 ## Output
 
-The agent must **create a new file** at `docs/dpia/dpia.md` following the ICO 8-step structure described above. Do **not** edit this skill file — it is a reference, not a template to fill in.
+If `docs/dpia/dpia.md` does not exist, create it, following the ICO 8-step structure described above. If it exists, **update it in place** (see "Update for a slice") — never rewrite it. Do **not** edit this skill file — it is a reference, not a template to fill in.
+
+### Update for a slice
+
+When an alpha readiness issue asks you to update the DPIA for slice N, and `docs/dpia/dpia.md` exists, **update it in place**. Do not rewrite it. Add the personal data, processing activities, recipients and processors that the slice adds. Add a note for each external mock service that the slice uses (see `docs/adr/002-dependency-strategy.md`): it holds synthetic data only, and the move to the real system needs a DPIA review. Record the slice number for each change.

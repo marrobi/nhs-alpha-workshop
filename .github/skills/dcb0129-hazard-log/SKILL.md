@@ -40,8 +40,12 @@ Risk levels: **1** = Acceptable, **2** = Acceptable with monitoring, **3** = Und
 
 ## Output
 
-The agent must **create new files**:
+If the files do not exist, create them. If they exist, **update them in place** (see "Update for a slice") — never rewrite them:
 - Hazard log: `docs/clinical-safety/hazard-log.md`
 - Clinical Safety Case Report: `docs/clinical-safety/safety-case-report.md`
 
 Use the structure described above as guidance. Do **not** edit this skill file — it is a reference, not a template to fill in.
+
+### Update for a slice
+
+When an alpha readiness issue asks you to update the hazard log for slice N, and the files exist, **update them in place**. Do not rewrite them. Add hazards for the slice's stories, pages, data and failure paths. Add a hazard for each external mock service that the slice uses (see `docs/adr/002-dependency-strategy.md`), for example "the alpha shows mock data from a national system". Review the existing hazards that the slice changes. Record the slice number in the source of each new or changed hazard. Update the safety case report to match.

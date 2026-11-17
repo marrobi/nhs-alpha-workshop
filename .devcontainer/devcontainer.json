@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "20"
+      "version": "24"
     },
     "ghcr.io/devcontainers/features/terraform:1": {
       "version": "latest"
@@ -18,7 +18,7 @@
       "moby": false
     }
   },
-  "postCreateCommand": "if [ -f requirements.txt ]; then pip install -r requirements.txt; fi",
+  "postCreateCommand": "bash .devcontainer/install-diagram-tools.sh && if [ -f requirements.txt ]; then pip install -r requirements.txt; fi",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -29,6 +29,7 @@
         "ms-playwright.playwright",
         "hashicorp.terraform",
         "marp-team.marp-vscode",
+        "hediet.vscode-drawio",
         "bierner.markdown-mermaid",
         "bierner.markdown-preview-github-styles",
         "yzhang.markdown-all-in-one",
